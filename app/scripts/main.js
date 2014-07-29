@@ -8,14 +8,14 @@ chuck(function(data) {
 });
 
 var randomizeRequest = function(){
-  var time =  Math.random() * 100000 + 3000;
-  setTimeout(function(){
+  chuck(function(data) {
+    var time =  Math.random() * 15000 + 3000 + data.value.joke.length + 100 ;
     console.log(time);
-    chuck(function(data) {
-      say(data.value.joke);
+    say(data.value.joke);
+    setTimeout(function(){
       randomizeRequest();
-    });
-  }, time);
+    }, time);
+  });
 };
 
 randomizeRequest();
