@@ -42,8 +42,8 @@ module.exports = function (grunt) {
         }
       },
       browserify: {
-        files: ["<%= yeoman.app %>/scripts/{,*/}*.js"],
-        tasks: ['browserify']
+        files: ['<%= config.app %>/scripts/**/*.js'],
+        tasks: ['browserify:scripts']
       },
       jstest: {
         files: ['test/spec/{,*/}*.js'],
@@ -136,10 +136,8 @@ module.exports = function (grunt) {
         reporter: require('jshint-stylish')
       },
       all: [
-        'Gruntfile.js',
         '<%= config.app %>/scripts/{,*/}*.js',
         '!<%= config.app %>/scripts/vendor/*',
-        'test/spec/{,*/}*.js'
       ]
     },
 
@@ -371,8 +369,8 @@ module.exports = function (grunt) {
 
     browserify: {
       scripts: {
-        src: "app/scripts/main.js",
-        dest: "./.tmp/scripts/scripts.js",
+        src: 'app/scripts/main.js',
+        dest: './.tmp/scripts/scripts.js',
         options: {
           bundleOptions: {
             debug: true
