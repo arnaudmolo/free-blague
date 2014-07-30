@@ -9,4 +9,5 @@ L'humour n'as qu'a bien se tenir
 
 ======
 Site à crawler :
-http://www.labanane.org/humourcarambar.xml
+- http://www.labanane.org/humourcarambar.xml
+- http://www.labonneblague.fr/feed
