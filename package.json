@@ -2,7 +2,9 @@
   "name": "blague",
   "version": "0.0.0",
   "dependencies": {
-    "xhr": "^1.13.0"
+    "xhr": "^1.13.0",
+    "detect-dom-ready": "^1.0.2",
+    "arrayify": "^1.0.0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

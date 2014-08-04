@@ -138,6 +138,7 @@ module.exports = function (grunt) {
       all: [
         '<%= config.app %>/scripts/{,*/}*.js',
         '!<%= config.app %>/scripts/vendor/*',
+        '!<%= config.app %>/scripts/string-2-color.js*'
       ]
     },
 

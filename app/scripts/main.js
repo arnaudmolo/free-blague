@@ -1,22 +1,35 @@
 'use strict';
 
-var chuck = require('./chuck');
-var say = require('./say');
-var hashStringToColor = require('./string-2-color');
+// var say            = require('./say');
+var chuck           = require('./chuck'),
+  hashStringToColor = require('./string-2-color'),
+  domReady          = require('detect-dom-ready'),
+  toArray           = require('arrayify'),
+  colorElements     = [],
+  invertColor       = require('./invert-color');
 
 var randomizeRequest = function(){
+  var time = '';
   chuck(function(data) {
     var joke = data.value.joke.replace('&quot;', '');
-    var time =  Math.random() * 150000 + 3000 + joke.length + 100 ;
+    time = Math.random() * 150000 + 3000 + joke.length + 100 ;
     console.log(joke);
-    say(joke);
+    // say(joke);
+    var partSize = joke.length / colorElements.length -1;
     document.body.style.backgroundColor = hashStringToColor(joke);
-    setTimeout(function(){
-      randomizeRequest();
-    }, time);
+
+    colorElements.forEach(function(element){
+      joke = joke.substr(partSize);
+      var color = hashStringToColor(joke);
+      element.style.backgroundColor = color;
+      element.style.color = invertColor(color);
+    });
+    setTimeout(randomizeRequest, time);
   });
 };
 
 randomizeRequest();
 
-console.log(hashStringToColor('kouk'));
+domReady(function(){
+  colorElements = toArray(document.getElementsByClassName('color'));
+});
