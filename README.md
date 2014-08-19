@@ -8,6 +8,10 @@ L'humour n'as qu'a bien se tenir
 ``` git clone git@github.com:onesime/blague.git && cd blague && npm i && bower i && grunt serve ```
 
 ======
+
+Du son dans une extension : https://chrome.google.com/webstore/detail/elmnts/bdnjmfaobmpknbamfbllaokfdcpcencp/related
+
+======
 Site à crawler :
 - http://www.labanane.org/humourcarambar.xml
 - http://www.labonneblague.fr/feed
