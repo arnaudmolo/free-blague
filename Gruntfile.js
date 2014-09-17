@@ -375,7 +375,10 @@ module.exports = function (grunt) {
         options: {
           bundleOptions: {
             debug: true
-          }
+          },
+          transform: [
+            'es6ify'
+          ]
         }
       }
     }

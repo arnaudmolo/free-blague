@@ -3,6 +3,7 @@
 module.exports = function (callback) {
   var url = 'http://api.icndb.com/jokes/random';
   var callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
+
   window[callbackName] = function(data) {
     delete window[callbackName];
     document.body.removeChild(script);
