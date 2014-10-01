@@ -3,7 +3,8 @@
   "private": true,
   "dependencies": {
     "modernizr": "~2.8.2",
-    "jquery": "~1.11.1"
+    "jquery": "~1.11.1",
+    "atomic": "https://github.com/toddmotto/atomic.git#~1.0.0"
   },
   "devDependencies": {}
 }

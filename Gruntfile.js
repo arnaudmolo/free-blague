@@ -36,7 +36,7 @@ module.exports = function (grunt) {
       },
       js: {
         files: ['<%= config.app %>/scripts/{,*/}*.js'],
-        tasks: ['jshint'],
+        // tasks: ['jshint'],
         options: {
           livereload: true
         }
@@ -376,9 +376,9 @@ module.exports = function (grunt) {
           bundleOptions: {
             debug: true
           },
-          transform: [
-            'es6ify'
-          ]
+          // transform: [
+          //   'es6ify'
+          // ]
         }
       }
     }

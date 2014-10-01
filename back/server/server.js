@@ -37,7 +37,15 @@ app.start = function() {
   });
 };
 
+
+require('./create-test-data')(app);
 // start the server if `$ node server.js`
 if (require.main === module) {
   app.start();
 }
+
+var ifaces;
+
+ifaces = require("os").networkInterfaces();
+
+// require('fs').writeFileSync('../app/scripts/api.json', JSON.stringify(ifaces['en0'][1].address));

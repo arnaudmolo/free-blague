@@ -19,5 +19,6 @@
   "validations": [],
   "relations": {},
   "acls": [],
-  "methods": []
+  "methods": [],
+  "public": true
 }
