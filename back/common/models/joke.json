@@ -10,6 +10,10 @@
     "date": {
       "type": "date",
       "required": true
+    },
+    "random": {
+      "type": "number",
+      "required": true
     }
   },
   "validations": [],

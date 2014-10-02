@@ -4,8 +4,10 @@ module.exports = function(Joke){
 
     Joke.count(function(err, res){
 
-      Joke.findById(Math.round(Math.random() * res), function(err, res){
+      console.log(Math.round(Math.random() * res));
 
+      Joke.findById(Math.round(Math.random() * res), function(err, res){
+        console.log(res);
         cb(null, res);
 
       });
@@ -17,7 +19,12 @@ module.exports = function(Joke){
   Joke.remoteMethod(
       'random',
       {
-        returns: {arg: 'joke', type: 'string'}
+        returns: {
+          arg: 'joke', type: 'string'
+        },
+        http: {
+          verb: 'get'
+        }
       }
   );
 };

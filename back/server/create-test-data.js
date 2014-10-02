@@ -1,5 +1,5 @@
 module.exports = function(app) {
-  var dataSource, Joke;
+  var dataSource, Joke, createJoke;
 
   dataSource = app.dataSource('db', {
     adapter: 'memory'
@@ -9,8 +9,8 @@ module.exports = function(app) {
 
   createJoke = function() {
     return Joke.create({
-      "title": "title",
       "content": "content",
+      "random": Math.random(),
       "date": new Date
     });
   };
