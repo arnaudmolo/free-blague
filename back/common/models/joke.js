@@ -2,16 +2,28 @@ module.exports = function(Joke){
 
   Joke.random = function(cb) {
 
-    Joke.count(function(err, res){
+    var rand = Math.random();
 
-      console.log(Math.round(Math.random() * res));
-
-      Joke.findById(Math.round(Math.random() * res), function(err, res){
-        console.log(res);
-        cb(null, res);
-
-      });
-
+    Joke.findOne({
+      where: {
+        random: {
+          gte: rand
+        }
+      }
+    }, function(err, res) {
+      if (res === null) {
+        Joke.findOne({
+          where: {
+            random: {
+              lte: rand
+            }
+          }
+        }, function(err, res) {
+          cb(null, res);
+        });
+        return;
+      }
+      cb(null, res);
     });
 
   };
