@@ -27,4 +27,16 @@ module.exports = function(Joke){
         }
       }
   );
+
+  /********************************/
+  /********  Validations  *********/
+  /********************************/
+
+  Joke.beforeSave = function(next, joke){
+    joke.date = new Date;
+    joke.random = Math.random();
+    next();
+    return undefined
+  }
+
 };

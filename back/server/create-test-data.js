@@ -8,15 +8,16 @@ module.exports = function(app) {
   Joke = dataSource.models.Joke;
 
   createJoke = function() {
+    console.log('??');
     return Joke.create({
       "content": "content",
-      "random": Math.random(),
-      "date": new Date
     });
   };
 
   // for (var i = 0; i < 100; i++) {
   //   createJoke();
   // };
+
+  // createJoke();
 
 };
