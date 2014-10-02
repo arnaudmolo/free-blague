@@ -29,6 +29,8 @@ app.use(loopback.urlNotFound());
 // The ultimate error handler.
 app.use(loopback.errorHandler());
 
+require('./create-test-data')(app);
+
 app.start = function() {
   // start the web server
   return app.listen(function() {
@@ -37,15 +39,7 @@ app.start = function() {
   });
 };
 
-
-require('./create-test-data')(app);
 // start the server if `$ node server.js`
 if (require.main === module) {
   app.start();
 }
-
-var ifaces;
-
-ifaces = require("os").networkInterfaces();
-
-// require('fs').writeFileSync('../app/scripts/api.json', JSON.stringify(ifaces['en0'][1].address));

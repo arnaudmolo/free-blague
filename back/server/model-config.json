@@ -5,9 +5,6 @@
       "./models"
     ]
   },
-  "joke": {
-    "dataSource": "db"
-  },
   "User": {
     "dataSource": "db"
   },
@@ -26,5 +23,9 @@
   "Role": {
     "dataSource": "db",
     "public": false
+  },
+  "Joke": {
+    "dataSource": "JokesDB",
+    "public": true
   }
 }

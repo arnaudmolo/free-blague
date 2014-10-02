@@ -1,11 +1,13 @@
-module.exports = function(app){
+module.exports = function(app) {
   var dataSource, Joke;
 
-  dataSource = app.dataSource('db', {adapter: 'memory'});
+  dataSource = app.dataSource('db', {
+    adapter: 'memory'
+  });
 
-  Joke = dataSource.models.joke;
+  Joke = dataSource.models.Joke;
 
-  createJoke = function(){
+  createJoke = function() {
     return Joke.create({
       "title": "title",
       "content": "content",
@@ -13,8 +15,8 @@ module.exports = function(app){
     });
   };
 
-  for (var i = 0; i < 100; i++) {
-     createJoke();
-  };
+  // for (var i = 0; i < 100; i++) {
+  //   createJoke();
+  // };
 
 };

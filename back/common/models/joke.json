@@ -1,12 +1,8 @@
 {
-  "name": "joke",
-  "plural": "joke",
+  "name": "Joke",
+  "plural": "Jokes",
   "base": "PersistedModel",
   "properties": {
-    "title": {
-      "type": "string",
-      "required": true
-    },
     "content": {
       "type": "string",
       "required": true
@@ -19,6 +15,5 @@
   "validations": [],
   "relations": {},
   "acls": [],
-  "methods": [],
-  "public": true
+  "methods": []
 }
