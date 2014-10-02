@@ -44,11 +44,11 @@ module.exports = function(Joke){
   /********  Validations  *********/
   /********************************/
 
-  Joke.beforeSave = function(next, joke){
-    joke.date = new Date;
-    joke.random = Math.random();
-    next();
-    return undefined
-  }
+  // Joke.beforeValidate = function(next, joke){
+  //   joke.date = new Date;
+  //   joke.random = Math.random();
+  //   console.log(joke, next);
+  //   return next(next, joke);
+  // }
 
 };
