@@ -1,8 +1,10 @@
 'use strict';
 
-var input, api;
+var input, api, say;
 
 api = require('../api');
+say = require('../say');
+
 
 input = document.getElementById('register');
 
@@ -14,12 +16,14 @@ input.addEventListener('keyup', function keyup (e) {
 
     api
       .saveJoke(input.value)
-      .success(function(){
+      .then(say)
+      .then(function(mes){
+        input.value = '';
         input.addEventListener('keyup', keyup);
       })
       .error(function(err){
-        console.log('error', err);
-      })
+        console.error(err);
+      });
 
   };
 }, false);
