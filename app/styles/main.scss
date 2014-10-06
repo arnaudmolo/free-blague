@@ -14,4 +14,7 @@ body {
   padding: 0.2em 0;
 }
 
+@import "variables";
 @import "style";
+@import "sidebar";
+@import "content";

@@ -1,13 +1,19 @@
 'use strict';
 
-var input, api, say;
+var input, api, say, content;
 
-api = require('../api');
-say = require('../say');
+api     = require('../api');
+say     = require('../say');
+content = document.getElementById('content');
+input   = document.getElementById('register');
 
-input = document.getElementById('register');
+// document.querySelector('.content').addEventListener('click', function(e){
+//   input.blur();
+// });
 
 input.addEventListener('keyup', function keyup (e) {
+
+  content.innerText = input.value;
 
   if (e.keyIdentifier === 'Enter') {
 
