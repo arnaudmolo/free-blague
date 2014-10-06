@@ -1,11 +1,15 @@
 'use strict';
 
-var hashStringToColor = require('./string-2-color'),
-    invertColor       = require('./invert-color');
+var hashStringToColor, invertColor;
+
+hashStringToColor = require('./string-2-color');
+invertColor       = require('./invert-color');
 
 module.exports = function(elements, joke){
-  var partSize = joke.length / elements.length -1,
-      color;
+
+  var partSize, color;
+
+  partSize = joke.length / elements.length -1;
 
   elements.forEach(function(element){
     joke = joke.substr(partSize);

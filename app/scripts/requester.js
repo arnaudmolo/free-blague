@@ -1,44 +1,57 @@
-var Promise = require('bluebird'),
-    exports = {},
-    isObject = require('lodash').isObject;
+'use strict';
 
-var parse = function (req) {
+var Promise, isObject, parse, XHR;
+
+Promise = require('bluebird');
+isObject = require('lodash').isObject;
+XHR = XMLHttpRequest || ActiveXObject;
+
+parse = function (req) {
+
   var result;
+
   try {
     result = JSON.parse(req.responseText);
   } catch (e) {
     result = req.responseText;
   }
+
   return [result, req];
+
 };
 
 var xhr = function(type, url, data){
 
+  var promise;
+
   if (isObject(data)) {
     data = JSON.stringify(data);
-  };
+  }
 
-  var promise;
   promise = new Promise(function(resolve, reject){
-    var XHR, request;
-    XHR      = XMLHttpRequest || ActiveXObject;
+
+    var request;
+
     request  = new XHR();
 
     request.open(type, url, true);
     request.setRequestHeader('Content-type', 'application/json');
 
     request.onreadystatechange = function(){
+
+      var res;
+
       if (request.readyState === 4) {
         res = parse(request)[0];
         if (res.joke === null) {
           reject('the joke is null');
-        };
+        }
         if (request.status === 200) {
           resolve(res);
         }else{
           reject(res);
-        };
-      };
+        }
+      }
     };
 
     request.send(data);

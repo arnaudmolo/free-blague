@@ -5,11 +5,10 @@ var input, api, say;
 api = require('../api');
 say = require('../say');
 
-
 input = document.getElementById('register');
 
 input.addEventListener('keyup', function keyup (e) {
-  // console.log("log", e.keyIdentifier);
+
   if (e.keyIdentifier === 'Enter') {
 
     input.removeEventListener('keyup', keyup);
@@ -17,13 +16,17 @@ input.addEventListener('keyup', function keyup (e) {
     api
       .saveJoke(input.value)
       .then(say)
-      .then(function(mes){
+      .then(function(res){
         input.value = '';
         input.addEventListener('keyup', keyup);
+        return res;
       })
       .error(function(err){
-        console.error(err);
+        console.error('error !', err);
       });
 
-  };
+  }
+
+  return;
+
 }, false);

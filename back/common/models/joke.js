@@ -1,8 +1,17 @@
+// var geoip = require('geoip-lite');
+var loopback = require('loopback');
+
 module.exports = function(Joke){
 
-  Joke.random = function(cb) {
+  Joke.definition.properties.date.default   = Date.now;
+  Joke.definition.properties.random.default = Math.random;
 
-    var rand = Math.random();
+  Joke.random = function(cb) {
+    var rand;
+
+    console.log('this', loopback.getCurrentContext);
+
+    rand = Math.random();
 
     Joke.findOne({
       where: {
@@ -39,16 +48,5 @@ module.exports = function(Joke){
         }
       }
   );
-
-  /********************************/
-  /********  Validations  *********/
-  /********************************/
-
-  // Joke.beforeValidate = function(next, joke){
-  //   joke.date = new Date;
-  //   joke.random = Math.random();
-  //   console.log(joke, next);
-  //   return next(next, joke);
-  // }
 
 };
