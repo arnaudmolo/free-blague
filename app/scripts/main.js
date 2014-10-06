@@ -1,10 +1,9 @@
 'use strict';
 
-var say, colorElements, chuck, toArray, domReady, colorize, api;
+var say, colorElements, toArray, domReady, colorize, api;
 
 say             = require('./say');
 colorElements   = [];
-chuck           = require('./chuck');
 toArray         = require('arrayify');
 domReady        = require('detect-dom-ready');
 colorize        = require('./colorize');
@@ -20,9 +19,9 @@ var randomizeRequest = function(){
       colorize(colorElements, res);
       return res;
     })
-    .then(say);
+    // .then(say);
 
-  setTimeout(randomizeRequest, 4000);
+  // setTimeout(randomizeRequest, 4000);
 
   return;
 

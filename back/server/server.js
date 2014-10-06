@@ -10,6 +10,10 @@ app.use(loopback.favicon());
 app.use(loopback.compress());
 
 // -- Add your pre-processing middleware here --
+app.use(function(req, res, next){
+  global.req = req;
+  next();
+});
 
 // boot scripts mount components like REST API
 boot(app, __dirname);

@@ -1,5 +1,8 @@
-// var geoip = require('geoip-lite');
-var loopback = require('loopback');
+'use strict';
+
+var geoip;
+
+geoip = require('geoip-lite');
 
 module.exports = function(Joke){
 
@@ -8,9 +11,6 @@ module.exports = function(Joke){
 
   Joke.random = function(cb) {
     var rand;
-
-    console.log('this', loopback.getCurrentContext);
-
     rand = Math.random();
 
     Joke.findOne({
@@ -48,5 +48,10 @@ module.exports = function(Joke){
         }
       }
   );
+
+  Joke.beforeValidate = function(next, joke){
+    joke.geo = geoip.lookup(global.req.headers.host.split(':')[0]);
+    next();
+  };
 
 };
