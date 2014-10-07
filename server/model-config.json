@@ -6,7 +6,7 @@
     ]
   },
   "User": {
-    "dataSource": "db"
+    "dataSource": "JokesDB"
   },
   "AccessToken": {
     "dataSource": "db",
