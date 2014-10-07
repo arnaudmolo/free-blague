@@ -1,9 +1,5 @@
 'use strict';
 
-var geoip;
-
-geoip = require('geoip-lite');
-
 module.exports = function(Joke){
 
   Joke.definition.properties.date.default   = Date.now;
@@ -53,7 +49,7 @@ module.exports = function(Joke){
   );
 
   Joke.beforeValidate = function(next, joke){
-    joke.geo = geoip.lookup(global.req.headers.host.split(':')[0]);
+    // joke.geo = geoip.lookup(global.req.headers.host.split(':')[0]);
     next();
   };
 
