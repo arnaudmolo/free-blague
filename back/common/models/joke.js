@@ -16,15 +16,18 @@ module.exports = function(Joke){
     Joke.findOne({
       where: {
         random: {
-          gte: rand
+          lte: rand
         }
       }
     }, function(err, res) {
+
+      console.log(rand);
+
       if (res === null) {
         Joke.findOne({
           where: {
             random: {
-              lte: rand
+              gte: rand
             }
           }
         }, function(err, res) {

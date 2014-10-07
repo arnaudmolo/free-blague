@@ -10,6 +10,7 @@ colorize        = require('./colorize');
 api             = require('./api');
 
 require('./register');
+// require('./utils/follow-cursor');
 
 var randomizeRequest = function(){
 
@@ -19,9 +20,9 @@ var randomizeRequest = function(){
       colorize(colorElements, res);
       return res;
     })
-    // .then(say);
+    .then(say);
 
-  // setTimeout(randomizeRequest, 4000);
+  setTimeout(randomizeRequest, 10000);
 
   return;
 
