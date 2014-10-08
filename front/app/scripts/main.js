@@ -10,6 +10,7 @@ colorize        = require('./colorize');
 api             = require('./api');
 
 require('./register');
+require('./create-user');
 // require('./utils/follow-cursor');
 
 var randomizeRequest = function(){
