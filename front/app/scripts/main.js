@@ -5,7 +5,7 @@ var say, colorElements, toArray, domReady, colorize, api, timeout;
 say             = require('./say');
 colorElements   = [];
 toArray         = require('arrayify');
-domReady        = require('detect-dom-ready');
+domReady        = require('./domReady');
 colorize        = require('./colorize');
 api             = require('./api');
 
@@ -30,29 +30,32 @@ var randomizeRequest = function(){
 
 randomizeRequest();
 
-(function(){
+domReady
+  .then(function(){
 
-  var muteButton, muted;
+    colorElements = toArray(document.getElementsByClassName('color'));
 
-  muted = false;
+    (function(){
 
-  muteButton = document.getElementById('mute');
+      var muteButton, muted;
 
-  muteButton.addEventListener('click', function(e){
-    if (muted) {
       muted = false;
-      muteButton.innerText = 'Mute';
-      return randomizeRequest();
-    };
-    muted = true;
-    muteButton.innerText = 'Unmute';
-    clearTimeout(timeout);
+
+      muteButton = document.getElementById('mute');
+
+      muteButton.addEventListener('click', function(e){
+        if (muted) {
+          muted = false;
+          muteButton.innerText = 'Mute';
+          return randomizeRequest();
+        }
+
+        muted = true;
+        muteButton.innerText = 'Unmute';
+        clearTimeout(timeout);
+      });
+
+    })();
+
+    return;
   });
-
-})()
-
-
-domReady(function(){
-  colorElements = toArray(document.getElementsByClassName('color'));
-  return;
-});
