@@ -1,6 +1,7 @@
 'use strict';
 
-var http, API_URL;
+var http, API_URL, TWO_WEEKS;
+TWO_WEEKS = 1000 * 60 * 60 * 24 * 7 * 2;
 
 http    = require('./requester');
 // API_URL = 'http://' + "arnaudmolo-blague.nodejitsu.com" + '/api';
@@ -18,6 +19,11 @@ module.exports = {
   },
   createUser: function(user){
     return http
-      .post(API_URL + '/Users', JSON.stringify(user));
+      .post(API_URL + '/Dudes', JSON.stringify(user));
+  },
+  loginUser: function(user){
+    user.ttl = TWO_WEEKS;
+    return http
+      .post(API_URL + '/Dudes', JSON.stringify(user));
   }
 };

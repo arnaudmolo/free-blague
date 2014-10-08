@@ -27,5 +27,9 @@
   "Joke": {
     "dataSource": "JokesDB",
     "public": true
+  },
+  "Dude": {
+    "dataSource": "db",
+    "public": true
   }
 }

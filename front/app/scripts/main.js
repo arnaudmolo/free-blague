@@ -9,8 +9,11 @@ domReady        = require('./domReady');
 colorize        = require('./colorize');
 api             = require('./api');
 
-require('./register');
-require('./create-user');
+domReady.then(function(){
+  require('./register');
+  require('./create-user');
+  require('./login-user');
+});
 // require('./utils/follow-cursor');
 
 var randomizeRequest = function(){

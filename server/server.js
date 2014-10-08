@@ -33,6 +33,9 @@ app.use(loopback.urlNotFound());
 // The ultimate error handler.
 app.use(loopback.errorHandler());
 
+// Use cookies for authentification
+app.use(loopback.token({model: app.models.accessToken}));
+
 require('./create-test-data')(app);
 
 app.start = function() {

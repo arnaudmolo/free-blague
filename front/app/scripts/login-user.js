@@ -2,7 +2,7 @@
 
 var form, api;
 
-form = document.getElementById('create-user');
+form = document.getElementById('login');
 api  = require('./api');
 
 form.onsubmit = function(e){
@@ -20,6 +20,8 @@ form.onsubmit = function(e){
   email.disabled = true
   password.disabled = true
 
-  api.createUser(user);
+  api.loginUser(user).then(function(res) {
+    console.log("log", res);
+  });
 
 };
