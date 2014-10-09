@@ -1,5 +1,10 @@
 {
   "name": "Dude",
   "plural": "Dudes",
-  "base": "User"
+  "base": "User",
+  "properties": {},
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
 }

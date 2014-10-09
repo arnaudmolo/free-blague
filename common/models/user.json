@@ -1,0 +1,16 @@
+{
+  "name": "user",
+  "plural": "users",
+  "base": "PersistedModel",
+  "properties": {},
+  "validations": [],
+  "relations": {
+    "jokes": {
+      "type": "hasMany",
+      "model": "Joke",
+      "foreignKey": ""
+    }
+  },
+  "acls": [],
+  "methods": []
+}
