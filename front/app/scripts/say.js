@@ -1,8 +1,9 @@
 'use strict';
 
-var Promise;
+var Promise, speechUtteranceChunker;
 
 Promise = require('bluebird');
+speechUtteranceChunker = require('../../bower_components/chunkify');
 
 var voicesLoaded = new Promise(function(resolve, reject){
   window.speechSynthesis.onvoiceschanged = function(){
@@ -15,11 +16,14 @@ module.exports = function(string){
   // voices[3] = espagne
   // voices[4] = france
   voicesLoaded.then(function(){
-    var voices, msg;
+    var voices, utterance;
     voices = window.speechSynthesis.getVoices();
-    msg = new window.SpeechSynthesisUtterance(string)
-    msg.voice = voices[4];
-    window.speechSynthesis.speak(msg);
+    utterance = new window.SpeechSynthesisUtterance(string)
+    utterance.voice = voices[4];
+    speechUtteranceChunker(utterance, {chunkLength: 300}, function(){
+      console.log("done");
+      speechSynthesis.cancel();
+    })
   });
 
   return string;
