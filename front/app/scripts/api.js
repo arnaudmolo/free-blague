@@ -22,8 +22,17 @@ module.exports = {
       .post(API_URL + '/users', JSON.stringify(user));
   },
   loginUser: function(user){
+    var localUser;
     user.ttl = TWO_WEEKS;
+    localUser = JSON.parse(localStorage.getItem('user'));
+    if (localUser.ttl) {
+      return new Promise(function(resolve){resolve(localUser)})
+    }
     return http
-      .post(API_URL + '/users/login', JSON.stringify(user));
+      .post(API_URL + '/users/login', JSON.stringify(user))
+      .then(function(res){
+        localStorage.setItem('user', JSON.stringify(res));
+        return res;
+      });
   }
 };
