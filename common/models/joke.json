@@ -21,7 +21,7 @@
     "user": {
       "type": "belongsTo",
       "model": "user",
-      "foreignKey": "ownerId"
+      "foreignKey": "userId"
     }
   },
   "acls": [],

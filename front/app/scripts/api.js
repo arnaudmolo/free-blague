@@ -19,11 +19,11 @@ module.exports = {
   },
   createUser: function(user){
     return http
-      .post(API_URL + '/Dudes', JSON.stringify(user));
+      .post(API_URL + '/users', JSON.stringify(user));
   },
   loginUser: function(user){
     user.ttl = TWO_WEEKS;
     return http
-      .post(API_URL + '/Dudes', JSON.stringify(user));
+      .post(API_URL + '/users/login', JSON.stringify(user));
   }
 };

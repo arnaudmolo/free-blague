@@ -20,6 +20,7 @@ module.exports = function(string){
     msg = new window.SpeechSynthesisUtterance(string)
     msg.voice = voices[4];
     window.speechSynthesis.speak(msg);
+    console.log("log", msg);
   });
 
   return string;

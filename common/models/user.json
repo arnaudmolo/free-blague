@@ -1,9 +1,8 @@
 {
   "name": "user",
   "plural": "users",
-  "base": "PersistedModel",
+  "base": "User",
   "properties": {},
-  "validations": [],
   "relations": {
     "jokes": {
       "type": "hasMany",
