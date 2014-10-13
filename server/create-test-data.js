@@ -5,6 +5,8 @@ module.exports = function(app) {
   var Role = app.models.Role;
   var RoleMapping = app.models.RoleMapping;
 
+  console.log(Object.keys(RoleMapping));
+
   User.create([
     {email: 'john@doe.com', password: 'opensesame'},
     {email: 'jane@doe.com', password: 'opensesame'},
@@ -31,5 +33,22 @@ module.exports = function(app) {
       if (er) return debug(er);
       debug(joke);
     });
+
+    Role.create({
+      name: 'admin'
+    }, function (err, role) {
+
+      console.log('role', role);
+      role.principals.create({
+        principalType: RoleMapping.USER,
+        principalId  : users[2].id
+      }, function(err, principal){
+
+        console.log('principal', principal);
+        return;
+      });
+    });
+
   });
+
 };

@@ -1,6 +1,4 @@
-'use strict';
-
-module.exports = function(color){
+var exports = function(color){
   color = color.substring(1);
   color = parseInt(color, 16);
   color = 0xFFFFFF ^ color;
@@ -9,3 +7,5 @@ module.exports = function(color){
   color = '#' + color;
   return color;
 };
+
+module.exports = exports;

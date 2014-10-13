@@ -1,25 +1,30 @@
-'use strict';
 
-var form, api;
+import api from './api';
 
-form = document.getElementById('create-user');
-api  = require('./api');
+var exports = function (){
 
-form.onsubmit = function(e){
-  var email, password, user;
-  e.preventDefault();
+  var form;
 
-  email = e.target[0];
-  password = e.target[1];
+  form = document.getElementById('create-user');
 
-  user = {
-    email: email.value,
-    password: password.value
+  form.onsubmit = function(e){
+    var email, password, user;
+    e.preventDefault();
+
+    email = e.target[0];
+    password = e.target[1];
+
+    user = {
+      email: email.value,
+      password: password.value
+    };
+
+    email.disabled = true;
+    password.disabled = true;
+
+    api.createUser(user);
+
   };
-
-  email.disabled = true
-  password.disabled = true
-
-  api.createUser(user);
-
 };
+
+module.exports = exports;

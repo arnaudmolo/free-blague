@@ -3,6 +3,7 @@
   "plural": "users",
   "base": "User",
   "properties": {},
+  "validations": [],
   "relations": {
     "jokes": {
       "type": "hasMany",
@@ -10,6 +11,19 @@
       "foreignKey": ""
     }
   },
-  "acls": [],
+  "acls": [
+    {
+      "accessType": "*",
+      "principalType": "ANY",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "*",
+      "principalType": "ROLE",
+      "principalId": "$owner",
+      "permission": "ALLOW"
+    }
+  ],
   "methods": []
 }

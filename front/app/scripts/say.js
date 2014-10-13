@@ -1,8 +1,8 @@
-'use strict';
 
-var Promise, speechUtteranceChunker;
+import Promise from 'bluebird';
 
-Promise = require('bluebird');
+var speechUtteranceChunker;
+
 speechUtteranceChunker = require('../../bower_components/chunkify');
 
 var voicesLoaded = new Promise(function(resolve, reject){
@@ -11,7 +11,7 @@ var voicesLoaded = new Promise(function(resolve, reject){
   }
 })
 
-module.exports = function(string){
+var exports = function(string){
   // voices[3] = espagne
   // voices[4] = france
   voicesLoaded.then(function(){
@@ -24,3 +24,5 @@ module.exports = function(string){
 
   return string;
 };
+
+module.exports = exports;

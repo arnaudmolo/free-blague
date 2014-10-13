@@ -1,7 +1,5 @@
-'use strict';
 
-module.exports = function(url, callback){
-
+var exports = function(url, callback){
   new window.Promise(function(resolve){
     var callbackName = 'jsonp_callback_' + Math.round(100000 * Math.random());
     window[callbackName] = function(data) {
@@ -15,3 +13,5 @@ module.exports = function(url, callback){
     document.body.appendChild(script);
   });
 };
+
+module.exports = exports;

@@ -1,9 +1,9 @@
-'use strict';
 
-var Promise, isObject, parse, XHR;
+import Promise from 'bluebird';
+import _       from 'lodash';
 
-Promise = require('bluebird');
-isObject = require('lodash').isObject;
+var parse, XHR, exports;
+
 XHR = XMLHttpRequest || ActiveXObject;
 
 parse = function (req) {
@@ -24,7 +24,7 @@ var xhr = function(type, url, data){
 
   var promise;
 
-  if (isObject(data)) {
+  if (_.isObject(data)) {
     data = JSON.stringify(data);
   }
 
@@ -60,7 +60,7 @@ var xhr = function(type, url, data){
   return promise;
 };
 
-module.exports = {
+exports = {
   get: function(src){
     return xhr('GET', src);
   },
@@ -74,3 +74,5 @@ module.exports = {
     return xhr('DELETE', url);
   }
 };
+
+module.exports = exports;
