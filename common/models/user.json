@@ -8,7 +8,7 @@
     "jokes": {
       "type": "hasMany",
       "model": "Joke",
-      "foreignKey": ""
+      "foreignKey": "userId"
     }
   },
   "acls": [
