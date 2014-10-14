@@ -7,23 +7,10 @@
   "relations": {
     "jokes": {
       "type": "hasMany",
-      "model": "Joke",
+      "model": "joke",
       "foreignKey": "userId"
     }
   },
-  "acls": [
-    {
-      "accessType": "*",
-      "principalType": "ANY",
-      "principalId": "$everyone",
-      "permission": "ALLOW"
-    },
-    {
-      "accessType": "*",
-      "principalType": "ROLE",
-      "principalId": "$owner",
-      "permission": "ALLOW"
-    }
-  ],
+  "acls": [],
   "methods": []
 }

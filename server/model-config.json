@@ -25,11 +25,11 @@
     "dataSource": "db",
     "public": false
   },
-  "Joke": {
+  "user": {
     "dataSource": "db",
     "public": true
   },
-  "user": {
+  "joke": {
     "dataSource": "db",
     "public": true
   }

@@ -14,22 +14,29 @@ module.exports = function(app) {
     if (er) return debug("$j", er);
     debug(users);
 
+    console.log(users[0]);
+
     //create joke 1 and make john the owner
     users[0].jokes.create([{
       content: 'joke1',
       date: new Date,
-      random: Math.random()
+      userId: users[0].id
     }, {
       content: 'joke2',
       date: new Date,
-      random: Math.random()
+      userId: users[0].id
     }, {
       content: 'joke3',
       date: new Date,
-      random: Math.random()
+      userId: users[0].id
     }], function(er, joke) {
       if (er) return debug(er);
       console.log('jokes', joke);
+
+      users[0].jokes.count(function(err, res){
+        console.log("log", res);
+      })
+
     });
 
     Role.create({
