@@ -1,6 +1,6 @@
 {
-  "name": "joke",
-  "plural": "jokes",
+  "name": "Joke",
+  "plural": "Jokes",
   "base": "PersistedModel",
   "properties": {
     "content": {

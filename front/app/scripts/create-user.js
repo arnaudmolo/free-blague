@@ -7,6 +7,11 @@ var exports = function (){
 
   form = document.getElementById('create-user');
 
+  if (form === null) {
+    return;
+  };
+
+
   form.onsubmit = function(e){
     var email, password, user;
     e.preventDefault();
@@ -22,7 +27,12 @@ var exports = function (){
     email.disabled = true;
     password.disabled = true;
 
-    api.createUser(user);
+    api
+      .createUser(user)
+      .then(function(res){
+        console.log('user created', res);
+        form.parentNode.removeChild(form);
+      });
 
   };
 };

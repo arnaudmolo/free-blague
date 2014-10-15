@@ -374,6 +374,7 @@ module.exports = function (grunt) {
         dest: './.tmp/scripts/scripts.js',
         options: {
           transform: [
+            'reactify',
             'es6ify'
           ]
         }

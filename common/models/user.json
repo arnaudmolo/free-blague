@@ -7,7 +7,7 @@
   "relations": {
     "jokes": {
       "type": "hasMany",
-      "model": "joke",
+      "model": "Joke",
       "foreignKey": "userId"
     }
   },

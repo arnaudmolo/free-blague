@@ -3,6 +3,7 @@ import http    from './requester';
 import _       from 'lodash';
 import Promise from 'bluebird';
 import myJokes from './my-jokes';
+import domReady from './domReady';
 
 var API_URL, TWO_WEEKS, localUser, access;
 
@@ -27,7 +28,12 @@ var exports = {
   },
   createUser: function(user){
     return http
-      .post(API_URL + '/users', JSON.stringify(user));
+      .post(API_URL + '/users', JSON.stringify(user))
+      .then(function(res){
+        return res;
+      }).then(function(){
+        return exports.loginUser(user);
+      });
   },
   loginUser: function(user){
 
@@ -39,21 +45,27 @@ var exports = {
         resolve(user);
       })
     } else {
+
       user.ttl = TWO_WEEKS;
 
       promise = http
         .post(API_URL + '/users/login', JSON.stringify(user))
         .then(function(res){
-          localUser = res;
-          localStorage.setItem('user', JSON.stringify(localUser));
-          console.log('logged', localUser);
           return res;
         });
     }
 
     promise.then(function(res){
+
+      var form;
+
       exports.getUserJokes();
-      console.log("log");
+      form = document.getElementById('login');
+      form.parentNode.removeChild(form);
+
+      form = document.getElementById('create-user');
+      form.parentNode.removeChild(form);
+
       return res
     })
 
