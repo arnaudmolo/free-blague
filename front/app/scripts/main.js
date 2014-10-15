@@ -44,6 +44,10 @@ mutation = function(muted){
     return randomizeRequest();
   }
 
+  while(speechSynthesis.speaking){
+    speechSynthesis.cancel();
+  }
+
   muteButton.innerText = 'Unmute';
   clearTimeout(timeout);
 
