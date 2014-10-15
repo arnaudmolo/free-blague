@@ -1,21 +1,28 @@
 
-import http from './requester';
+import http    from './requester';
+import _       from 'lodash';
+import Promise from 'bluebird';
+import myJokes from './my-jokes';
 
-var API_URL, TWO_WEEKS;
+var API_URL, TWO_WEEKS, localUser, access;
 
 TWO_WEEKS = 1000 * 60 * 60 * 24 * 7 * 2;
 
 // API_URL = 'http://' + "arnaudmolo-blague.nodejitsu.com" + '/api';
 API_URL = 'http://' + '127.0.0.1:3000' + '/api';
 
+access = function(){
+  return '?access_token=' + localUser.id;
+}
+
 var exports = {
   getRandomJoke: function(){
-    return http.get(API_URL + '/Jokes/random')
+    return http.get(API_URL + '/jokes/random')
       .then(function(res){return res.joke.content;});
   },
   saveJoke: function(joke){
     return http
-      .post(API_URL + '/Jokes', JSON.stringify({content: joke}))
+      .post(API_URL + '/users/' + localUser.userId + '/jokes' + access(), JSON.stringify({content: joke, date: new Date}))
       .then(function(res){return res.content;});
   },
   createUser: function(user){
@@ -23,18 +30,43 @@ var exports = {
       .post(API_URL + '/users', JSON.stringify(user));
   },
   loginUser: function(user){
-    var localUser;
-    user.ttl = TWO_WEEKS;
-    localUser = JSON.parse(localStorage.getItem('user'));
-    if (localUser.ttl) {
-      return new Promise(function(resolve){resolve(localUser);});
+
+    var promise;
+
+    if (user.id) {
+      promise = new Promise(function(resolve, reject){
+        localUser = user;
+        resolve(user);
+      })
+    } else {
+      user.ttl = TWO_WEEKS;
+
+      promise = http
+        .post(API_URL + '/users/login', JSON.stringify(user))
+        .then(function(res){
+          localUser = res;
+          localStorage.setItem('user', JSON.stringify(localUser));
+          console.log('logged', localUser);
+          return res;
+        });
     }
-    return http
-      .post(API_URL + '/users/login', JSON.stringify(user))
+
+    promise.then(function(res){
+      exports.getUserJokes();
+      console.log("log");
+      return res
+    })
+
+    return promise;
+
+  },
+  getUserJokes: function(){
+    http.get(API_URL + '/users/' + localUser.userId + '/jokes' + access())
       .then(function(res){
-        localStorage.setItem('user', JSON.stringify(res));
+        console.log('getUserJokes');
+        myJokes.render(res);
         return res;
-      });
+      })
   }
 };
 

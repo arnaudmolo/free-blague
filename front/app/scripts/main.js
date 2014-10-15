@@ -11,8 +11,6 @@ var colorElements, timeout, mutation, muteButton;
 
 muteButton = document.getElementById('mute');
 
-console.log(domReady);
-
 domReady.then(function(){
 
   register();
@@ -54,3 +52,9 @@ mutation = function(muted){
 };
 
 mutation(!(localStorage.getItem('muted') == 'true'));
+
+var user = JSON.parse(localStorage.getItem('user'));
+
+if (user) {
+  api.loginUser(JSON.parse(localStorage.getItem('user')));
+};
