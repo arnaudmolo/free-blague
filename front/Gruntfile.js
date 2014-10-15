@@ -373,10 +373,8 @@ module.exports = function (grunt) {
         src: 'app/scripts/main.js',
         dest: './.tmp/scripts/scripts.js',
         options: {
-          bundleOptions: {
-            debug: true
-          },
           transform: [
+            'reactify',
             'es6ify'
           ]
         }

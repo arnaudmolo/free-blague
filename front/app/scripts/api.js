@@ -1,29 +1,85 @@
-'use strict';
 
-var http, API_URL, TWO_WEEKS;
+import http    from './requester';
+import _       from 'lodash';
+import Promise from 'bluebird';
+import myJokes from './my-jokes';
+import domReady from './domReady';
+
+var API_URL, TWO_WEEKS, localUser, access;
+
 TWO_WEEKS = 1000 * 60 * 60 * 24 * 7 * 2;
 
-http    = require('./requester');
 // API_URL = 'http://' + "arnaudmolo-blague.nodejitsu.com" + '/api';
 API_URL = 'http://' + '127.0.0.1:3000' + '/api';
 
-module.exports = {
+access = function(){
+  return '?access_token=' + localUser.id;
+}
+
+var exports = {
   getRandomJoke: function(){
-    return http.get(API_URL + '/Jokes/random')
+    return http.get(API_URL + '/jokes/random')
       .then(function(res){return res.joke.content;});
   },
   saveJoke: function(joke){
     return http
-      .post(API_URL + '/Jokes', JSON.stringify({content: joke}))
+      .post(API_URL + '/users/' + localUser.userId + '/jokes' + access(), JSON.stringify({content: joke, date: new Date}))
       .then(function(res){return res.content;});
   },
   createUser: function(user){
     return http
-      .post(API_URL + '/Dudes', JSON.stringify(user));
+      .post(API_URL + '/users', JSON.stringify(user))
+      .then(function(res){
+        return res;
+      }).then(function(){
+        return exports.loginUser(user);
+      });
   },
   loginUser: function(user){
-    user.ttl = TWO_WEEKS;
-    return http
-      .post(API_URL + '/Dudes', JSON.stringify(user));
+
+    var promise;
+
+    if (user.id) {
+      promise = new Promise(function(resolve, reject){
+        localUser = user;
+        resolve(user);
+      })
+    } else {
+
+      user.ttl = TWO_WEEKS;
+
+      promise = http
+        .post(API_URL + '/users/login', JSON.stringify(user))
+        .then(function(res){
+          return res;
+        });
+    }
+
+    promise.then(function(res){
+
+      var form;
+
+      exports.getUserJokes();
+      form = document.getElementById('login');
+      form.parentNode.removeChild(form);
+
+      form = document.getElementById('create-user');
+      form.parentNode.removeChild(form);
+
+      return res
+    })
+
+    return promise;
+
+  },
+  getUserJokes: function(){
+    http.get(API_URL + '/users/' + localUser.userId + '/jokes' + access())
+      .then(function(res){
+        console.log('getUserJokes');
+        myJokes.render(res);
+        return res;
+      })
   }
 };
+
+module.exports = exports;

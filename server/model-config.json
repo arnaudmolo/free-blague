@@ -6,7 +6,8 @@
     ]
   },
   "User": {
-    "dataSource": "JokesDB"
+    "dataSource": "db",
+    "public": false
   },
   "AccessToken": {
     "dataSource": "db",
@@ -24,11 +25,11 @@
     "dataSource": "db",
     "public": false
   },
-  "Joke": {
-    "dataSource": "JokesDB",
+  "user": {
+    "dataSource": "db",
     "public": true
   },
-  "Dude": {
+  "Joke": {
     "dataSource": "db",
     "public": true
   }

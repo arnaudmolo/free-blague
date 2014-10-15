@@ -1,30 +1,34 @@
-'use strict';
 
-var say, colorElements, toArray, domReady, colorize, api, timeout;
+import say        from './say';
+import domReady   from './domReady';
+import api        from './api';
+import register   from './register';
+import createUser from './create-user';
+import loginUser  from './login-user';
+import write      from './write';
 
-say             = require('./say');
-colorElements   = [];
-toArray         = require('arrayify');
-domReady        = require('./domReady');
-colorize        = require('./colorize');
-api             = require('./api');
+var colorElements, timeout, mutation, muteButton;
+
+muteButton = document.getElementById('mute');
 
 domReady.then(function(){
-  require('./register');
-  require('./create-user');
-  require('./login-user');
+
+  register();
+  createUser();
+  loginUser();
+
+  muteButton.addEventListener('click', function(){
+    mutation(localStorage.getItem('muted') == 'true');
+    return;
+  });
 });
-// require('./utils/follow-cursor');
 
 var randomizeRequest = function(){
 
   api
     .getRandomJoke()
-    .then(function (res) {
-      colorize(colorElements, res);
-      return res;
-    })
-    .then(say);
+    .then(say)
+    .then(write);
 
   timeout = setTimeout(randomizeRequest, 10000);
 
@@ -32,34 +36,25 @@ var randomizeRequest = function(){
 
 };
 
-randomizeRequest();
+mutation = function(muted){
+  localStorage.setItem('muted', muted = !muted);
 
-domReady
-  .then(function(){
+  if (!muted) {
+    muteButton.innerText = 'Mute';
+    return randomizeRequest();
+  }
 
-    colorElements = toArray(document.getElementsByClassName('color'));
+  muteButton.innerText = 'Unmute';
+  clearTimeout(timeout);
 
-    (function(){
+  return;
 
-      var muteButton, muted;
+};
 
-      muted = false;
+mutation(!(localStorage.getItem('muted') == 'true'));
 
-      muteButton = document.getElementById('mute');
+var user = JSON.parse(localStorage.getItem('user'));
 
-      muteButton.addEventListener('click', function(e){
-        if (muted) {
-          muted = false;
-          muteButton.innerText = 'Mute';
-          return randomizeRequest();
-        }
-
-        muted = true;
-        muteButton.innerText = 'Unmute';
-        clearTimeout(timeout);
-      });
-
-    })();
-
-    return;
-  });
+if (user) {
+  api.loginUser(JSON.parse(localStorage.getItem('user')));
+};

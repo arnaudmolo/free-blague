@@ -1,35 +1,41 @@
-'use strict';
 
-var input, api, say, content, getById;
+import api from '../api';
+import say from '../say';
 
-api     = require('../api');
-say     = require('../say');
-getById = document.getElementById.bind(document),
-content = getById('content');
-input   = getById('register');
+var exports = function(){
 
-input.addEventListener('keyup', function keyup (e) {
+  var input, content, getById;
 
-  content.innerText = input.value;
+  getById = document.getElementById.bind(document),
+  content = getById('content');
+  input   = getById('register');
 
-  if (e.keyIdentifier === 'Enter') {
+  input.addEventListener('keyup', function keyup (e) {
 
-    input.removeEventListener('keyup', keyup);
+    content.innerText = input.value;
 
-    api
-      .saveJoke(input.value)
-      .then(say)
-      .then(function(res){
-        content.innerText = input.value = '';
-        input.addEventListener('keyup', keyup);
-        return res;
-      })
-      .error(function(err){
-        console.error('error !', err);
-      });
+    if (e.keyIdentifier === 'Enter') {
 
-  }
+      input.removeEventListener('keyup', keyup);
 
-  return;
+      api
+        .saveJoke(input.value)
+        .then(say)
+        .then(function(res){
+          content.innerText = input.value = '';
+          input.addEventListener('keyup', keyup);
+          return res;
+        })
+        .error(function(err){
+          console.error('error !', err);
+        });
 
-}, false);
+    }
+
+    return;
+
+  }, false);
+
+}
+
+module.exports = exports;

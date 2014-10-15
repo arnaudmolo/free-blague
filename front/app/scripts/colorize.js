@@ -1,11 +1,8 @@
-'use strict';
 
-var hashStringToColor, invertColor;
+import hashStringToColor from './string-2-color';
+import invertColor from './invert-color';
 
-hashStringToColor = require('./string-2-color');
-invertColor       = require('./invert-color');
-
-module.exports = function(elements, joke){
+var exports = function(elements, joke){
 
   var partSize, color;
 
@@ -18,3 +15,5 @@ module.exports = function(elements, joke){
     element.style.color = invertColor(color);
   });
 };
+
+module.exports = exports;

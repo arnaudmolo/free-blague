@@ -1,18 +1,17 @@
-'use strict';
 
-var Promise, speechUtteranceChunker;
+import Promise from 'bluebird';
 
-Promise = require('bluebird');
+var speechUtteranceChunker;
+
 speechUtteranceChunker = require('../../bower_components/chunkify');
 
 var voicesLoaded = new Promise(function(resolve, reject){
   window.speechSynthesis.onvoiceschanged = function(){
-    console.log('voicesLoaded');
     resolve();
   }
 })
 
-module.exports = function(string){
+var exports = function(string){
   // voices[3] = espagne
   // voices[4] = france
   voicesLoaded.then(function(){
@@ -20,11 +19,10 @@ module.exports = function(string){
     voices = window.speechSynthesis.getVoices();
     utterance = new window.SpeechSynthesisUtterance(string)
     utterance.voice = voices[4];
-    speechUtteranceChunker(utterance, {chunkLength: 300}, function(){
-      console.log("done");
-      speechSynthesis.cancel();
-    })
+    speechUtteranceChunker(utterance, {chunkLength: 300});
   });
 
   return string;
 };
+
+module.exports = exports;

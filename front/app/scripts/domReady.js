@@ -1,14 +1,9 @@
-'use strict';
 
-var domPromise, domReady, Promise;
+import domReady from 'detect-dom-ready';
+import Promise  from 'bluebird';
 
-domReady = require('detect-dom-ready');
-Promise  = require('bluebird');
-
-domPromise = new Promise(function(resolve, reject){
-  domReady(function(){
-    resolve()
-  });
+var domPromise = new Promise(function(resolve, reject){
+  domReady(resolve);
 });
 
 module.exports = domPromise;
