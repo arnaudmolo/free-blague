@@ -22,41 +22,58 @@ parse = function (req) {
 
 var xhr = function(type, url, data){
 
-  var promise;
+  var promise, request;
 
   if (_.isObject(data)) {
     data = JSON.stringify(data);
   }
 
-  promise = new Promise(function(resolve, reject){
+  request  = new XHR();
 
-    var request;
+  request.open(type, url, true);
+  request.setRequestHeader('Content-type', 'application/json');
 
-    request  = new XHR();
+  promise = {};
 
-    request.open(type, url, true);
-    request.setRequestHeader('Content-type', 'application/json');
+  promise = _.extend(promise, new Promise(function(resolve, reject){
 
-    request.onreadystatechange = function(){
+    promise.sent = new Promise(function(resolveSent){
 
-      var res;
+      promise.process = new Promise(function(resolveProcess){
 
-      if (request.readyState === 4) {
-        res = parse(request)[0];
-        if (res.joke === null) {
-          reject('the joke is null');
-        }
-        if (request.status === 200) {
-          resolve(res);
-        }else{
-          reject(res);
-        }
-      }
-    };
+        request.onreadystatechange = function(){
 
-    request.send(data);
+          var res;
 
-  });
+          if (request.readyState === 2) {
+
+            resolveSent(request.readyState);
+
+          }else if(request.readyState === 3){
+
+            resolveProcess(request.readyState);
+
+          }else if (request.readyState === 4) {
+
+            res = parse(request)[0];
+            if (res.joke === null) {
+              reject('the joke is null');
+            }
+            if (request.status === 200) {
+              resolve(res);
+            }else{
+              reject(res);
+            }
+
+          };
+          request.send(data);
+        };
+      });
+    });
+  }));
+
+  console.log(promise);
+
   return promise;
 };
 

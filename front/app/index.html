@@ -25,28 +25,9 @@
     <![endif]-->
 
     <div class="sidebar">
-      <nav>
-        <h1>register</h1>
-        <h1 id="next">next</h1>
-        <h1 id="other">other</h1>
-      </nav>
 
-      <nav>
-        <h1>login</h1>
-        <form method="post" id="login">
-          <input type="email"    placeholder="email">
-          <input type="password" placeholder="password">
-          <input type="submit">
-        </form>
-      </nav>
+      <nav id="login-view">
 
-      <nav>
-        <h1>Create</h1>
-        <form method="post" id="create-user">
-          <input type="email"    placeholder="email">
-          <input type="password" placeholder="password">
-          <input type="submit">
-        </form>
       </nav>
 
       <nav>
@@ -71,6 +52,7 @@
       ga('create', 'UA-55508291-1', 'auto');
       ga('send', 'pageview');
     </script>
+        <script src="scripts/runtime.js"></script>
         <!-- build:js({app,.tmp}) scripts/main.js -->
         <script src="scripts/scripts.js"></script>
         <!-- endbuild -->

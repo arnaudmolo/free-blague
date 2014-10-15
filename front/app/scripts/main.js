@@ -3,9 +3,9 @@ import say        from './say';
 import domReady   from './domReady';
 import api        from './api';
 import register   from './register';
-import createUser from './create-user';
-import loginUser  from './login-user';
+
 import write      from './write';
+import sidebar    from './sidebar';
 
 var colorElements, timeout, mutation, muteButton;
 
@@ -14,8 +14,6 @@ muteButton = document.getElementById('mute');
 domReady.then(function(){
 
   register();
-  createUser();
-  loginUser();
 
   muteButton.addEventListener('click', function(){
     mutation(localStorage.getItem('muted') == 'true');

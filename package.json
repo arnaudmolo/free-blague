@@ -1,6 +1,6 @@
 {
   "name": "blague",
-  "version": "0.0.0-1",
+  "version": "0.0.1",
   "main": "server/server.js",
   "dependencies": {
     "arrayify": "^1.0.0",
@@ -13,7 +13,8 @@
     "loopback-datasource-juggler": "^2.7.0",
     "loopback-connector-mongodb": "^1.4.4",
     "serve-favicon": "^2.0.1",
-    "react": "~0.10"
+    "react": "^0.11.2",
+    "react-form-data": "^0.1.0"
   },
   "scripts": {
     "start": "node server/server.js"

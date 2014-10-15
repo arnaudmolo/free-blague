@@ -9,8 +9,8 @@ var API_URL, TWO_WEEKS, localUser, access;
 
 TWO_WEEKS = 1000 * 60 * 60 * 24 * 7 * 2;
 
-API_URL = 'http://' + "arnaudmolo-blague.nodejitsu.com" + '/api';
-// API_URL = 'http://' + '127.0.0.1:3000' + '/api';
+// API_URL = 'http://' + "arnaudmolo-blague.nodejitsu.com" + '/api';
+API_URL = 'http://' + '127.0.0.1:3000' + '/api';
 
 access = function(){
   return '?access_token=' + localUser.id;
