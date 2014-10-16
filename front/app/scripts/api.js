@@ -1,7 +1,6 @@
 
 import http     from './requester';
 import Promise  from 'bluebird';
-import User     from './user/user';
 
 var API_URL, TWO_WEEKS, access;
 
@@ -11,17 +10,17 @@ TWO_WEEKS = 1000 * 60 * 60 * 24 * 7 * 2;
 API_URL = 'http://' + '127.0.0.1:3000' + '/api';
 
 access = function(){
-  return '?access_token=' + User.get('id');
+  return '?access_token=' + require('./models/user').get('id');
 }
 
-var exports = {
+module.exports = {
   getRandomJoke: function(){
     return http.get(API_URL + '/jokes/random')
       .then(function(res){return res.joke.content;});
   },
   saveJoke: function(joke){
     return http
-      .post(API_URL + '/users/' + User.get() + '/jokes' + access(), JSON.stringify({content: joke, date: new Date}))
+      .post(API_URL + '/users/' + require('./models/user').get('userId') + '/jokes' + access(), JSON.stringify({content: joke, date: new Date}))
       .then(function(res){return res.content;});
   },
   createUser: function(user){
@@ -54,5 +53,3 @@ var exports = {
       })
   }
 };
-
-module.exports = exports;

@@ -7,15 +7,25 @@ import api      from '../api';
 
 class Login {
 
-  componentDidMount(options) {
+  getInitialState() {
+    return {visible: true};
+  }
 
-    var user;
+  componentWillReceiveProps(nextProps) {
+    this.setState({visible: true});
+  }
+
+  componentDidMount() {
+
+    var user, self;
+
+    self = this;
 
     user = this.getModel();
 
     user
       .listenTo(user, 'change:logged', function() {
-        console.log('logged');
+        self.setState({visible: false});
       });
 
   }
@@ -34,11 +44,12 @@ class Login {
 
     user.set('email', this.refs.email.getDOMNode().value.trim());
     user.set('password', this.refs.password.getDOMNode().value.trim());
-    user.login();
+    return user.login();
   }
 
   render() {
-    return (
+    return this.state.visible
+    ?(
       <div>
         <h1>login</h1>
         <form method="post" onSubmit={this.handleSubmit}>
@@ -47,7 +58,7 @@ class Login {
           <input type="submit" />
         </form>
       </div>
-    );
+    ):(<span />);
   }
 
 }

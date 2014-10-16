@@ -6,11 +6,16 @@ import Backbone from 'backbone';
 import Login    from './login.view';
 import Register from './register.view';
 import JokeList from './JokeList.view';
-import User     from '../user/user';
+import User     from '../models/user';
 
 var jokesList = new Backbone.Collection([{joke: 'Hello world!'}, {joke: 'Hello world!'}, {joke: 'Hello world!'}]);
 
 class Sidebar {
+
+  componentDidMount() {
+
+  }
+
   render() {
     return (
       <div>

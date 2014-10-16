@@ -4,8 +4,6 @@ import Backbone from 'backbone';
 import JokeList from './joke-list';
 import api      from '../api';
 
-console.log('user', require('../api'));
-
 var { Model } = Backbone;
 
 class User extends Model {
@@ -26,15 +24,25 @@ class User extends Model {
 
     self = this;
 
-    console.log(api);
-
-    api
+    return api
       .loginUser({
         email: this.get('email'),
         password: this.get('password')
       }).then(function(){
-        self.logged = true;
-        console.log("logged");
+        self.set('logged', true);
+      });
+  }
+
+  register() {
+
+    return api
+      .createUser({
+        email: this.get('email'),
+        password: this.get('password')
+      })
+      .then(function(res){
+        console.log('user created', res);
+        return res;
       });
   }
 }

@@ -8,19 +8,17 @@ class Register {
 
   handleSubmit(event) {
 
-    var email, password, user;
+    var user;
 
     event.preventDefault();
 
-    return api
-      .createUser({
-        email: this.refs.email.getDOMNode().value.trim(),
-        password: this.refs.password.getDOMNode().value.trim()
-      })
-      .then(function(res){
-        console.log('user created', res);
-        return res;
-      });
+    user = this.getModel();
+
+    user.set('email', this.refs.email.getDOMNode().value.trim());
+    user.set('password', this.refs.password.getDOMNode().value.trim());
+
+    return user.register();
+
   }
 
   render() {
