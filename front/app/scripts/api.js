@@ -1,11 +1,9 @@
 
 import http     from './requester';
-import _        from 'lodash';
 import Promise  from 'bluebird';
-import myJokes  from './my-jokes';
-import domReady from './domReady';
+import User     from './user/user';
 
-var API_URL, TWO_WEEKS, localUser, access;
+var API_URL, TWO_WEEKS, access;
 
 TWO_WEEKS = 1000 * 60 * 60 * 24 * 7 * 2;
 
@@ -13,7 +11,7 @@ TWO_WEEKS = 1000 * 60 * 60 * 24 * 7 * 2;
 API_URL = 'http://' + '127.0.0.1:3000' + '/api';
 
 access = function(){
-  return '?access_token=' + localUser.id;
+  return '?access_token=' + User.get('id');
 }
 
 var exports = {
@@ -23,7 +21,7 @@ var exports = {
   },
   saveJoke: function(joke){
     return http
-      .post(API_URL + '/users/' + localUser.userId + '/jokes' + access(), JSON.stringify({content: joke, date: new Date}))
+      .post(API_URL + '/users/' + User.get() + '/jokes' + access(), JSON.stringify({content: joke, date: new Date}))
       .then(function(res){return res.content;});
   },
   createUser: function(user){
@@ -38,37 +36,10 @@ var exports = {
 
     var promise;
 
-    if (user.id) {
-      promise = new Promise(function(resolve, reject){
-        localUser = user;
-        resolve(user);
-      })
-    } else {
+    user.ttl = TWO_WEEKS;
 
-      user.ttl = TWO_WEEKS;
-
-      promise = http
-        .post(API_URL + '/users/login', JSON.stringify(user));
-
-      promise
-        .then(function(res){
-          return res;
-        });
-    }
-
-    promise.then(function(res){
-
-      var form;
-
-      exports.getUserJokes();
-      form = document.getElementById('login');
-      form.parentNode.removeChild(form);
-
-      form = document.getElementById('create-user');
-      form.parentNode.removeChild(form);
-
-      return res
-    })
+    promise = http
+      .post(API_URL + '/users/login', JSON.stringify(user));
 
     return promise;
 
@@ -79,7 +50,6 @@ var exports = {
     promise
       .then(function(res){
         console.log('getUserJokes');
-        myJokes.render(res);
         return res;
       })
   }

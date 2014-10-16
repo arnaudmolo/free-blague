@@ -1,51 +1,26 @@
 /** @jsx React.DOM */
 
-import React from 'react';
+import React    from 'react';
+import mixins   from 'backbone-react-component';
 
-class JokeList {
+import JokeView from './joke.view'
 
-  handleSubmit(e) {
-
-    var email, password;
-
-    console.log(this);
-
-    e.preventDefault();
-
-    // email = e.target[0];
-    // password = e.target[1];
-
-    // user = {
-    //   email: email.value.trim(),
-    //   password: password.value.trim()
-    // };
-
-    // email.disabled = true;
-    // password.disabled = true;
-
-    // return api
-    //   .loginUser(user)
-    //   .then(function(res) {
-    //     console.log("log", res);
-    //     return res;
-    //   });
-
-  }
+class JokeListView {
 
   render() {
 
-    var jokes;
+    var jokesList;
 
-    jokes = [];
-
-    for (var i = 0; i < 3; i++) {
-      jokes.push(<li> kouk </li>);
-    };
+    jokesList = this.getCollection().map(function(joke){
+      return (<JokeView model={joke} />);
+    });
 
     return (
-      <ul>{ jokes }</ul>
+      <ul>{ jokesList }</ul>
     );
   }
 }
 
-module.exports = React.createClass(JokeList.prototype);
+JokeListView.prototype.mixins = [mixins];
+
+module.exports = React.createClass(JokeListView.prototype);

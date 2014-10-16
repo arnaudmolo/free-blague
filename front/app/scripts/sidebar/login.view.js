@@ -1,28 +1,40 @@
 /** @jsx React.DOM */
 
 import React    from 'react';
-import FormData from 'react-form-data';
-import api      from '../api'
+import mixins   from 'backbone-react-component';
+
+import api      from '../api';
 
 class Login {
 
+  componentDidMount(options) {
+
+    var user;
+
+    user = this.getModel();
+
+    user
+      .listenTo(user, 'change:logged', function() {
+        console.log('logged');
+      });
+
+  }
+
   get mixins() {
-    return [FormData];
+    return [mixins];
   }
 
   handleSubmit(event) {
 
+    var user;
+
     event.preventDefault();
 
-    return api
-      .loginUser({
-        email: this.refs.email.getDOMNode().value.trim(),
-        password: this.refs.password.getDOMNode().value.trim()
-      })
-      .then(function(res) {
-        console.log("Login", res);
-        return res;
-      });
+    user = this.getModel();
+
+    user.set('email', this.refs.email.getDOMNode().value.trim());
+    user.set('password', this.refs.password.getDOMNode().value.trim());
+    user.login();
   }
 
   render() {
@@ -30,8 +42,8 @@ class Login {
       <div>
         <h1>login</h1>
         <form method="post" onSubmit={this.handleSubmit}>
-          <input type="email"    placeholder="email" ref="email"/>
-          <input type="password" placeholder="password" ref="password"/>
+          <input type="email"    value="john@doe.com" placeholder="email" ref="email"/>
+          <input type="password" value="opensesame" placeholder="password" ref="password"/>
           <input type="submit" />
         </form>
       </div>
@@ -40,6 +52,4 @@ class Login {
 
 }
 
-Login = React.createClass(Login.prototype);
-
-module.exports = Login;
+module.exports = React.createClass(Login.prototype);

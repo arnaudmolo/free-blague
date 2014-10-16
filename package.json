@@ -14,7 +14,9 @@
     "loopback-connector-mongodb": "^1.4.4",
     "serve-favicon": "^2.0.1",
     "react": "^0.11.2",
-    "react-form-data": "^0.1.0"
+    "react-form-data": "^0.1.0",
+    "backbone": "^1.1.2",
+    "backbone-react-component": "^0.7.0"
   },
   "scripts": {
     "start": "node server/server.js"

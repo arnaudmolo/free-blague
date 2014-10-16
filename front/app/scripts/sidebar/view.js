@@ -1,17 +1,22 @@
 /** @jsx React.DOM */
 
-import React    from 'react';
+import React from 'react';
+import Backbone from 'backbone';
+
 import Login    from './login.view';
 import Register from './register.view';
 import JokeList from './JokeList.view';
+import User     from '../user/user';
+
+var jokesList = new Backbone.Collection([{joke: 'Hello world!'}, {joke: 'Hello world!'}, {joke: 'Hello world!'}]);
 
 class Sidebar {
   render() {
     return (
       <div>
-        <Login />
+        <Login model={User} />
         <Register />
-        <JokeList />
+        <JokeList collection={jokesList} />
       </div>
     );
   }
