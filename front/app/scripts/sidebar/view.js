@@ -22,7 +22,7 @@ class Sidebar {
 
     User.listenTo(User, 'change:logged', function(){
       self.setState({visible: false});
-    })
+    });
 
   }
 

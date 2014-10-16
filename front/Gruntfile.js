@@ -132,8 +132,9 @@ module.exports = function (grunt) {
     // Make sure code styles are up to par and there are no obvious mistakes
     jshint: {
       options: {
-        jshintrc: '.jshintrc',
-        reporter: require('jshint-stylish')
+        jshintrc: './../.jshintrc',
+        reporter: require('jshint-stylish'),
+        convertJSX: true
       },
       all: [
         '<%= config.app %>/scripts/{,*/}*.js',
@@ -379,6 +380,12 @@ module.exports = function (grunt) {
             'envify'
           ]
         }
+      }
+    },
+    jsdoc : {
+      dist : {
+        src: ['app/scripts/**/*.js'],
+        dest: 'doc'
       }
     }
   });

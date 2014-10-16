@@ -11,7 +11,7 @@ API_URL = 'http://' + '127.0.0.1:3000' + '/api';
 
 access = function(tocken = require('./models/user').get('id')){
   return '?access_token=' + tocken;
-}
+};
 
 module.exports = {
   getRandomJoke: function(){
@@ -20,7 +20,12 @@ module.exports = {
   },
   saveJoke: function(joke){
     return http
-      .post(API_URL + '/users/' + require('./models/user').get('userId') + '/jokes' + access(), JSON.stringify({content: joke, date: new Date}))
+      .post(API_URL +
+        '/users/' +
+        require('./models/user').get('userId') +
+        '/jokes' +
+        access(),
+      JSON.stringify({content: joke, date: new Date()}))
       .then(function(res){return res.content;});
   },
   createUser: function(user){
@@ -44,13 +49,16 @@ module.exports = {
 
   },
   getUserJokes: function(id, tocken){
-    var promise = http.get(API_URL + '/users/' + id + '/jokes' + access(tocken));
+
+    var promise;
+
+    promise = http.get(API_URL + '/users/' + id + '/jokes' + access(tocken));
 
     promise
       .then(function(res){
         console.log('getUserJokes');
         return res;
-      })
+      });
     return promise;
   }
 };

@@ -1,3 +1,4 @@
+/*global _:false */
 
 import say        from './say';
 import domReady   from './dom-ready';
@@ -11,7 +12,7 @@ muteButton = document.getElementById('mute');
 
 domReady.then(function(){
   muteButton.addEventListener('click', function(){
-    mutation(localStorage.getItem('muted') == 'true');
+    mutation(localStorage.getItem('muted') === 'true');
     return;
   });
 });
@@ -48,4 +49,4 @@ mutation = function(muted){
 
 };
 
-mutation(!(localStorage.getItem('muted') == 'true'));
+mutation((localStorage.getItem('muted') !== 'true'));

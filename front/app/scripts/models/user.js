@@ -7,6 +7,7 @@ import api      from '../api';
 var { Model } = Backbone;
 
 class User extends Model {
+
   defaults() {
 
     var user, res;
