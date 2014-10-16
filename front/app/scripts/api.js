@@ -1,8 +1,8 @@
 
-import http    from './requester';
-import _       from 'lodash';
-import Promise from 'bluebird';
-import myJokes from './my-jokes';
+import http     from './requester';
+import _        from 'lodash';
+import Promise  from 'bluebird';
+import myJokes  from './my-jokes';
 import domReady from './domReady';
 
 var API_URL, TWO_WEEKS, localUser, access;
@@ -27,13 +27,12 @@ var exports = {
       .then(function(res){return res.content;});
   },
   createUser: function(user){
-    return http
-      .post(API_URL + '/users', JSON.stringify(user))
-      .then(function(res){
-        return res;
-      }).then(function(){
-        return exports.loginUser(user);
-      });
+
+    var promise;
+
+    promise = http.post(API_URL + '/users', JSON.stringify(user));
+
+    return promise;
   },
   loginUser: function(user){
 
@@ -49,7 +48,9 @@ var exports = {
       user.ttl = TWO_WEEKS;
 
       promise = http
-        .post(API_URL + '/users/login', JSON.stringify(user))
+        .post(API_URL + '/users/login', JSON.stringify(user));
+
+      promise
         .then(function(res){
           return res;
         });
@@ -73,7 +74,9 @@ var exports = {
 
   },
   getUserJokes: function(){
-    http.get(API_URL + '/users/' + localUser.userId + '/jokes' + access())
+    var promise = http.get(API_URL + '/users/' + localUser.userId + '/jokes' + access());
+
+    promise
       .then(function(res){
         console.log('getUserJokes');
         myJokes.render(res);

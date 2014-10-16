@@ -1,45 +1,35 @@
 /** @jsx React.DOM */
 
+import React      from 'react';
 import decodeUser from '../utils/form-parser';
-
-import React from 'react';
+import api        from '../api'
 
 class Register {
 
-  handleSubmit(e) {
+  handleSubmit(event) {
 
     var email, password, user;
 
-    e.preventDefault();
+    event.preventDefault();
 
-    // console.log("log");
-
-    // email = e.target[0];
-    // password = e.target[1];
-
-    // user = {
-    //   email: email.value,
-    //   password: password.value
-    // };
-
-    // email.disabled = true;
-    // password.disabled = true;
-
-    // api
-    //   .createUser(user)
-    //   .then(function(res){
-    //     console.log('user created', res);
-    //     form.parentNode.removeChild(form);
-    //   });
+    return api
+      .createUser({
+        email: this.refs.email.getDOMNode().value.trim(),
+        password: this.refs.password.getDOMNode().value.trim()
+      })
+      .then(function(res){
+        console.log('user created', res);
+        return res;
+      });
   }
 
   render() {
     return (
       <nav>
         <h1>Create</h1>
-        <form method="post" id="create-user" onSubmit={this.handleSubmit}>
-          <input type="email"    placeholder="email" />
-          <input type="password" placeholder="password" />
+        <form method="post" onSubmit={this.handleSubmit}>
+          <input type="email"    placeholder="email" ref="email" />
+          <input type="password" placeholder="password" ref="password" />
           <input type="submit" />
         </form>
       </nav>

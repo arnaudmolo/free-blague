@@ -22,7 +22,7 @@ parse = function (req) {
 
 var xhr = function(type, url, data){
 
-  var promise, request;
+  var promise, request, sent, process, resolveSent, resolveProcess;
 
   if (_.isObject(data)) {
     data = JSON.stringify(data);
@@ -30,49 +30,46 @@ var xhr = function(type, url, data){
 
   request  = new XHR();
 
+  sent = new Promise(function(resolve){
+    resolveSent = resolve;
+  });
+
+  process = new Promise(function(resolve){
+    resolveProcess = resolve;
+  });
+
   request.open(type, url, true);
   request.setRequestHeader('Content-type', 'application/json');
 
-  promise = {};
+  promise = new Promise(function(resolve, reject){
+    request.onreadystatechange = function(){
 
-  promise = _.extend(promise, new Promise(function(resolve, reject){
+      var res;
 
-    promise.sent = new Promise(function(resolveSent){
+      if (request.readyState === 2) {
+        resolveSent(2);
+      };
 
-      promise.process = new Promise(function(resolveProcess){
+      if (request.readyState === 3) {
+        resolveProcess(2);
+      };
 
-        request.onreadystatechange = function(){
+      if (request.readyState === 4) {
+        res = parse(request)[0];
+        if (request.status === 200) {
+          resolve(res);
+        }else{
+          reject(res);
+        }
+      }
+    };
 
-          var res;
+    request.send(data);
 
-          if (request.readyState === 2) {
+  });
 
-            resolveSent(request.readyState);
-
-          }else if(request.readyState === 3){
-
-            resolveProcess(request.readyState);
-
-          }else if (request.readyState === 4) {
-
-            res = parse(request)[0];
-            if (res.joke === null) {
-              reject('the joke is null');
-            }
-            if (request.status === 200) {
-              resolve(res);
-            }else{
-              reject(res);
-            }
-
-          };
-          request.send(data);
-        };
-      });
-    });
-  }));
-
-  console.log(promise);
+  promise.sent = sent;
+  promise.process = process;
 
   return promise;
 };
