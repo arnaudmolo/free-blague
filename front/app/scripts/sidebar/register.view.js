@@ -1,8 +1,7 @@
 /** @jsx React.DOM */
 
 import React      from 'react';
-import decodeUser from '../utils/form-parser';
-import api        from '../api'
+import api        from '../api';
 
 class Register {
 
@@ -27,7 +26,10 @@ class Register {
         <h1>Create</h1>
         <form method="post" onSubmit={this.handleSubmit}>
           <input type="email"    placeholder="email" ref="email" />
-          <input type="password" placeholder="password" ref="password" />
+          <input type="password"
+            placeholder="password"
+            ref="password"
+          />
           <input type="submit" />
         </form>
       </nav>

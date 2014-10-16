@@ -3,12 +3,12 @@
 import React    from 'react';
 import mixins   from 'backbone-react-component';
 
-import JokeView from './joke.view'
+import JokeView from './joke.view';
 
 class JokeListView {
 
   getInitialState() {
-    return {render: Math.random()}
+    return {render: Math.random()};
   }
 
   componentDidMount() {

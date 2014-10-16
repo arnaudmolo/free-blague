@@ -42,7 +42,7 @@ class User extends Model {
       if (user.logged) {
         self.set('logged', true);
         self.getJokes();
-      };
+      }
     });
 
     console.debug('initialize user');
@@ -88,7 +88,7 @@ class User extends Model {
             self.get('jokes').add(res);
 
             return res;
-          })
+          });
 
         return res;
       });
@@ -112,4 +112,4 @@ class User extends Model {
 
 }
 
-module.exports = new User;
+module.exports = new User();

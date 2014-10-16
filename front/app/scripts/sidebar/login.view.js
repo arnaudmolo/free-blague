@@ -30,8 +30,16 @@ class Login extends BaseClass {
       <div>
         <h1>login</h1>
         <form method="post" onSubmit={this.handleSubmit}>
-          <input type="email"    value="john@doe.com" placeholder="email" ref="email"/>
-          <input type="password" value="opensesame" placeholder="password" ref="password"/>
+          <input
+            type="email"
+            value="john@doe.com"
+            placeholder="email"
+            ref="email" />
+          <input
+            type="password"
+            value="opensesame"
+            placeholder="password"
+            ref="password"/>
           <input type="submit" />
         </form>
       </div>

@@ -35,7 +35,7 @@ class Sidebar {
             <Register model={User} />
           </div>
         );
-    };
+    }
 
     return (
       <div>

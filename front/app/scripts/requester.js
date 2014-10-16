@@ -48,11 +48,11 @@ var xhr = function(type, url, data){
 
       if (request.readyState === 2) {
         resolveSent(2);
-      };
+      }
 
       if (request.readyState === 3) {
         resolveProcess(2);
-      };
+      }
 
       if (request.readyState === 4) {
         res = parse(request)[0];
