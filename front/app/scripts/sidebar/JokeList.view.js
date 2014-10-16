@@ -7,6 +7,24 @@ import JokeView from './joke.view'
 
 class JokeListView {
 
+  getInitialState() {
+    return {render: Math.random()}
+  }
+
+  componentDidMount() {
+
+    var self, collection;
+
+    self = this;
+
+    collection = this.getCollection();
+
+    collection.listenTo(collection, 'add', function(){
+      self.setState({render: Math.random()});
+    });
+
+  }
+
   render() {
 
     var jokesList;

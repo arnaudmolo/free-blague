@@ -9,8 +9,8 @@ TWO_WEEKS = 1000 * 60 * 60 * 24 * 7 * 2;
 // API_URL = 'http://' + "arnaudmolo-blague.nodejitsu.com" + '/api';
 API_URL = 'http://' + '127.0.0.1:3000' + '/api';
 
-access = function(){
-  return '?access_token=' + require('./models/user').get('id');
+access = function(tocken = require('./models/user').get('id')){
+  return '?access_token=' + tocken;
 }
 
 module.exports = {
@@ -43,13 +43,14 @@ module.exports = {
     return promise;
 
   },
-  getUserJokes: function(){
-    var promise = http.get(API_URL + '/users/' + localUser.userId + '/jokes' + access());
+  getUserJokes: function(id, tocken){
+    var promise = http.get(API_URL + '/users/' + id + '/jokes' + access(tocken));
 
     promise
       .then(function(res){
         console.log('getUserJokes');
         return res;
       })
+    return promise;
   }
 };

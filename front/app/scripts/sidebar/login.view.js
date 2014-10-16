@@ -1,34 +1,12 @@
 /** @jsx React.DOM */
 
-import React    from 'react';
-import mixins   from 'backbone-react-component';
+import React     from 'react';
+import mixins    from 'backbone-react-component';
 
-import api      from '../api';
+import api       from '../api';
+import BaseClass from '../utils/react-class';
 
-class Login {
-
-  getInitialState() {
-    return {visible: true};
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({visible: true});
-  }
-
-  componentDidMount() {
-
-    var user, self;
-
-    self = this;
-
-    user = this.getModel();
-
-    user
-      .listenTo(user, 'change:logged', function() {
-        self.setState({visible: false});
-      });
-
-  }
+class Login extends BaseClass {
 
   get mixins() {
     return [mixins];
@@ -48,8 +26,7 @@ class Login {
   }
 
   render() {
-    return this.state.visible
-    ?(
+    return (
       <div>
         <h1>login</h1>
         <form method="post" onSubmit={this.handleSubmit}>
@@ -58,7 +35,7 @@ class Login {
           <input type="submit" />
         </form>
       </div>
-    ):(<span />);
+    );
   }
 
 }

@@ -1,6 +1,6 @@
 /** @jsx React.DOM */
 
-import React from 'react';
+import React    from 'react';
 import Backbone from 'backbone';
 
 import Login    from './login.view';
@@ -8,20 +8,38 @@ import Register from './register.view';
 import JokeList from './JokeList.view';
 import User     from '../models/user';
 
-var jokesList = new Backbone.Collection([{joke: 'Hello world!'}, {joke: 'Hello world!'}, {joke: 'Hello world!'}]);
-
 class Sidebar {
 
+  getInitialState() {
+    return {visible: true};
+  }
+
   componentDidMount() {
+
+    var self;
+
+    self = this;
+
+    User.listenTo(User, 'change:logged', function(){
+      self.setState({visible: false});
+    })
 
   }
 
   render() {
+
+    if (this.state.visible) {
+      return (
+          <div>
+            <Login model={User} />
+            <Register model={User} />
+          </div>
+        );
+    };
+
     return (
       <div>
-        <Login model={User} />
-        <Register />
-        <JokeList collection={jokesList} />
+        <JokeList collection={User.get('jokes')} />
       </div>
     );
   }

@@ -6,7 +6,7 @@ import mixins from 'backbone-react-component';
 class JokeView {
   render() {
     return (
-      <li> {this.getModel().get('joke')}</li>
+      <li><span>{this.getModel().get('content')}</span> | <a>x</a></li>
     );
   }
 }
