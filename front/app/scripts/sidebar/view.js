@@ -49,11 +49,16 @@ class Sidebar extends BaseClass {
     self = this;
 
     User.listenTo(User, 'change:logged', function(){
-      self.setState({visible: false});
+      self.setState({visible: !User.get('logged')});
     });
 
     return;
 
+  }
+
+  disconnect(event) {
+    event.preventDefault();
+    return User.logout();
   }
 
   render() {
@@ -70,6 +75,7 @@ class Sidebar extends BaseClass {
     return (
       <div>
         <JokeList collection={User.get('jokes')} />
+        <input type="submit" value="disconnect" onClick={this.disconnect} />
       </div>
     );
   }

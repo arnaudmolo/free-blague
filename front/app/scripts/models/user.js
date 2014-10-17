@@ -161,6 +161,22 @@ class User extends Model {
       });
   }
 
+  logout() {
+
+    var token;
+
+    token = this.get('id');
+
+    this.set('id', 0);
+    this.set('email', '');
+    this.set('userId', 0);
+    this.set('logged', false);
+    this.set('password', '');
+
+    return api
+      .logout(token)
+  }
+
   toString() {
     return JSON.stringify(this.attributes);
   }
