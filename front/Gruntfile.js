@@ -36,7 +36,7 @@ module.exports = function (grunt) {
       },
       js: {
         files: ['<%= config.app %>/scripts/{,*/}*.js'],
-        // tasks: ['jshint'],
+        tasks: ['jshint'],
         options: {
           livereload: true
         }
@@ -132,13 +132,15 @@ module.exports = function (grunt) {
     // Make sure code styles are up to par and there are no obvious mistakes
     jshint: {
       options: {
-        jshintrc: '.jshintrc',
-        reporter: require('jshint-stylish')
+        jshintrc: './../.jshintrc',
+        reporter: require('jshint-stylish'),
+        convertJSX: true
       },
       all: [
         '<%= config.app %>/scripts/{,*/}*.js',
         '!<%= config.app %>/scripts/vendor/*',
-        '!<%= config.app %>/scripts/string-2-color.js*'
+        '!<%= config.app %>/scripts/string-2-color.js*',
+        '!<%= config.app %>/scripts/runtime.js',
       ]
     },
 
@@ -379,6 +381,12 @@ module.exports = function (grunt) {
             'envify'
           ]
         }
+      }
+    },
+    jsdoc : {
+      dist : {
+        src: ['app/scripts/**/*.js'],
+        dest: 'doc'
       }
     }
   });

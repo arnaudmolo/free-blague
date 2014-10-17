@@ -1,22 +1,18 @@
+/*global _:false */
 
 import say        from './say';
-import domReady   from './domReady';
+import domReady   from './dom-ready';
 import api        from './api';
-import register   from './register';
-
 import write      from './write';
 import sidebar    from './sidebar';
 
-var colorElements, timeout, mutation, muteButton;
+var timeout, mutation, muteButton;
 
 muteButton = document.getElementById('mute');
 
 domReady.then(function(){
-
-  register();
-
   muteButton.addEventListener('click', function(){
-    mutation(localStorage.getItem('muted') == 'true');
+    mutation(localStorage.getItem('muted') === 'true');
     return;
   });
 });
@@ -53,10 +49,4 @@ mutation = function(muted){
 
 };
 
-mutation(!(localStorage.getItem('muted') == 'true'));
-
-var user = JSON.parse(localStorage.getItem('user'));
-
-if (user) {
-  api.loginUser(JSON.parse(localStorage.getItem('user')));
-};
+mutation((localStorage.getItem('muted') !== 'true'));

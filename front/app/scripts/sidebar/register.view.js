@@ -1,26 +1,42 @@
 /** @jsx React.DOM */
 
-import React      from 'react';
-import decodeUser from '../utils/form-parser';
-import api        from '../api'
+/**
+* @module Register.view
+* @exports <ReactClass>Register
+*/
 
-class Register {
+import React     from 'react';
+import mixins    from 'backbone-react-component';
+
+import api       from '../api';
+import BaseClass from '../utils/react-class';
+
+class Register extends BaseClass {
+
+  get mixins() {
+    return [mixins];
+  }
+
+  /**
+   * Tiggered when form is submitted
+   * Set the model's attributes and lanuch User#register()
+   *
+   * @return @see User#register
+   */
 
   handleSubmit(event) {
 
-    var email, password, user;
+    var user;
 
     event.preventDefault();
 
-    return api
-      .createUser({
-        email: this.refs.email.getDOMNode().value.trim(),
-        password: this.refs.password.getDOMNode().value.trim()
-      })
-      .then(function(res){
-        console.log('user created', res);
-        return res;
-      });
+    user = this.getModel();
+
+    user.set('email', this.refs.email.getDOMNode().value.trim());
+    user.set('password', this.refs.password.getDOMNode().value.trim());
+
+    return user.register();
+
   }
 
   render() {
@@ -29,7 +45,10 @@ class Register {
         <h1>Create</h1>
         <form method="post" onSubmit={this.handleSubmit}>
           <input type="email"    placeholder="email" ref="email" />
-          <input type="password" placeholder="password" ref="password" />
+          <input type="password"
+            placeholder="password"
+            ref="password"
+          />
           <input type="submit" />
         </form>
       </nav>

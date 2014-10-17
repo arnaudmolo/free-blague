@@ -1,51 +1,73 @@
 /** @jsx React.DOM */
 
-import React from 'react';
+/**
+* @module JokeList.view
+* @exports <ReactClass>JokeListView
+*/
 
-class JokeList {
+import React    from 'react';
+import mixins   from 'backbone-react-component';
 
-  handleSubmit(e) {
+import JokeView from './joke.view';
 
-    var email, password;
+/**
+ * @class JokeListView
+ * Extended from React Class
+ * Templates for Sidebar JokeList
+ */
 
-    console.log(this);
+class JokeListView {
 
-    e.preventDefault();
+  /**
+   * Set defaults values for the this.state.
+   * Random to force rerender
+   *
+   * @return {Object} The default's JokeListView this.state.
+   */
 
-    // email = e.target[0];
-    // password = e.target[1];
+  getInitialState() {
+    return {render: Math.random()};
+  }
 
-    // user = {
-    //   email: email.value.trim(),
-    //   password: password.value.trim()
-    // };
+  /**
+   * Invoked once, only on the client (not on the server),
+   * immediately after the initial rendering occurs.
+   * Listen to collections updates.
+   * Render when elements are added.
+   *
+   * @return {Object} undefined
+   */
 
-    // email.disabled = true;
-    // password.disabled = true;
+  componentDidMount() {
 
-    // return api
-    //   .loginUser(user)
-    //   .then(function(res) {
-    //     console.log("log", res);
-    //     return res;
-    //   });
+    var self, collection;
+
+    self = this;
+
+    collection = this.getCollection();
+
+    collection.listenTo(collection, 'add', function(){
+      self.setState({render: Math.random()});
+    });
+
+    return;
 
   }
 
   render() {
 
-    var jokes;
+    var jokesList;
 
-    jokes = [];
-
-    for (var i = 0; i < 3; i++) {
-      jokes.push(<li> kouk </li>);
-    };
+    jokesList = this.getCollection().map(function(joke){
+      return (<JokeView model={joke} />);
+    });
 
     return (
-      <ul>{ jokes }</ul>
+      <ul>{ jokesList }</ul>
     );
   }
 }
 
-module.exports = React.createClass(JokeList.prototype);
+JokeListView.prototype.mixins = [mixins];
+
+module.exports = React.createClass(JokeListView.prototype);

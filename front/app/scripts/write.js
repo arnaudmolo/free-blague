@@ -1,10 +1,11 @@
 
 var write, content;
 
-content = document.getElementById('content')
+content = document.getElementById('content');
 
 var exports = function(string){
-  return content.innerText = string;
-}
+  content.innerText = string;
+  return string;
+};
 
 module.exports = exports;

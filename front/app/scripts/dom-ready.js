@@ -1,3 +1,9 @@
+/**
+ * Resolve Promise when the dom is ready
+ *
+ * @module domReady
+ * @exports {Promise}
+ */
 
 import domReady from 'detect-dom-ready';
 import Promise  from 'bluebird';
