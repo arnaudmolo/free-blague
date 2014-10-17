@@ -1,5 +1,5 @@
 /**
-* @module Joke.model
+* @module User.model
 * @exports Instance of User
 */
 
@@ -20,7 +20,7 @@ var { Model } = Backbone;
 class User extends Model {
 
   /**
-   * Set defaults values for a Joke.
+   * Set defaults values for a User.
    * Default values cames from the LocalStorage
    *
    * @return {Object} The default's User attributes.
