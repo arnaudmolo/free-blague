@@ -22,18 +22,23 @@ class ContentView {
 
   componentDidMount() {
 
-    var content, self;
+    var content, self, testFunction;
 
     self = this;
     content = this.getModel();
 
-    content.listenTo(content, 'change:mute', function(){
+    testFunction = function(){
       if (content.get('mute')) {
         self.setState({wording: 'unmute'});
       }else{
         self.setState({wording: 'mute'});
       }
-    });
+    };
+
+    content.listenTo(content, 'change:mute', testFunction);
+    testFunction();
+
+    return;
 
   }
 

@@ -20,6 +20,10 @@ class Content extends Model {
 
   initialize() {
 
+    this.mute(localStorage.getItem('muted') === 'true');
+
+    console.log('la on est bon', localStorage.getItem('muted') === 'true');
+
   }
 
   mute(mute) {
