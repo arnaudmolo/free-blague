@@ -49,7 +49,7 @@ class Content extends Model {
 
     api
       .getRandomJoke()
-      // .then(say)
+      .then(say)
       .then(function(res){
         self.get('jokes').add({content: res});
       });
