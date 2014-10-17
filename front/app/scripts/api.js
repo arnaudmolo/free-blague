@@ -1,3 +1,7 @@
+/**
+* @module API
+* @exports {static class} API
+*/
 
 import http     from './requester';
 import Promise  from 'bluebird';
@@ -9,34 +13,68 @@ TWO_WEEKS = 1000 * 60 * 60 * 24 * 7 * 2;
 // API_URL = 'http://' + "arnaudmolo-blague.nodejitsu.com" + '/api';
 API_URL = 'http://' + '127.0.0.1:3000' + '/api';
 
-access = function(tocken = require('./models/user').get('id')){
-  return '?access_token=' + tocken;
+access = function(token = require('./models/user').get('id')){
+  return '?access_token=' + token;
 };
 
-module.exports = {
-  getRandomJoke: function(){
+/**
+ * @class API
+ * Deal with the API
+ */
+
+class API {
+
+  /**
+   * Get a random Joke from the server
+   *
+   * @return {Promise}(joke)
+   */
+
+  getRandomJoke() {
     return http.get(API_URL + '/jokes/random')
       .then(function(res){return res.joke.content;});
-  },
-  saveJoke: function(joke){
+  }
+
+  /**
+   * Save the joke
+   *
+   * @return {Promise}(joke)
+   */
+
+  saveJoke(joke) {
     return http
       .post(API_URL +
-        '/users/' +
-        require('./models/user').get('userId') +
-        '/jokes' +
-        access(),
-      JSON.stringify({content: joke, date: new Date()}))
+          '/users/' +
+          require('./models/user').get('userId') +
+          '/jokes' +
+          access(),
+        JSON.stringify({content: joke, date: new Date()}))
       .then(function(res){return res.content;});
-  },
-  createUser: function(user){
+  }
+
+  /**
+   * Create the user
+   *
+   * @return <Promise>(userId)
+   */
+
+  createUser(user) {
 
     var promise;
 
     promise = http.post(API_URL + '/users', JSON.stringify(user));
 
     return promise;
-  },
-  loginUser: function(user){
+  }
+
+  /**
+   * Auth the user.
+   * Update the TTL.
+   *
+   * @return <Promise>(AccessToken)
+   */
+
+  loginUser(user) {
 
     var promise;
 
@@ -46,19 +84,32 @@ module.exports = {
       .post(API_URL + '/users/login', JSON.stringify(user));
 
     return promise;
+  }
 
-  },
-  getUserJokes: function(id, tocken){
+  /**
+   * Get user's jokes
+   *
+   * @return <Promise>(jokes)
+   */
 
+  getUserJokes(id, token){
     var promise;
 
-    promise = http.get(API_URL + '/users/' + id + '/jokes' + access(tocken));
+    promise = http.get(API_URL + '/users/' + id + '/jokes' + access(token));
 
     promise
       .then(function(res){
         console.log('getUserJokes');
         return res;
       });
+
     return promise;
   }
-};
+
+}
+
+/**
+ * Export the prototype to use API as a static Class
+ */
+
+module.exports = API.prototype;

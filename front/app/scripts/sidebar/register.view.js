@@ -1,9 +1,28 @@
 /** @jsx React.DOM */
 
-import React      from 'react';
-import api        from '../api';
+/**
+* @module Register.view
+* @exports <ReactClass>Register
+*/
 
-class Register {
+import React     from 'react';
+import mixins    from 'backbone-react-component';
+
+import api       from '../api';
+import BaseClass from '../utils/react-class';
+
+class Register extends BaseClass {
+
+  get mixins() {
+    return [mixins];
+  }
+
+  /**
+   * Tiggered when form is submitted
+   * Set the model's attributes and lanuch User#register()
+   *
+   * @return @see User#register
+   */
 
   handleSubmit(event) {
 

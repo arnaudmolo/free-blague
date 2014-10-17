@@ -1,16 +1,34 @@
 /** @jsx React.DOM */
 
+/**
+* @module Login.view
+* @exports <ReactClass>Login
+*/
+
 import React     from 'react';
 import mixins    from 'backbone-react-component';
 
 import api       from '../api';
 import BaseClass from '../utils/react-class';
 
+/**
+ * @class Login
+ * Extended from React Class and BaseClass
+ * View for Sidebar JokeList
+ */
+
 class Login extends BaseClass {
 
   get mixins() {
     return [mixins];
   }
+
+  /**
+   * Tiggered when form is submitted
+   * Set the model's attributes and lanuch User#login()
+   *
+   * @return @see User#login
+   */
 
   handleSubmit(event) {
 

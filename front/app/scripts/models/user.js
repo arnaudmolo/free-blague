@@ -1,3 +1,7 @@
+/**
+* @module Joke.model
+* @exports Instance of User
+*/
 
 import Backbone from 'backbone';
 
@@ -6,7 +10,21 @@ import api      from '../api';
 
 var { Model } = Backbone;
 
+
+/**
+ * @class User
+ * Extended from Backbone Model
+ * Contains the User informations
+ */
+
 class User extends Model {
+
+  /**
+   * Set defaults values for a Joke.
+   * Default values cames from the LocalStorage
+   *
+   * @return {Object} The default's User attributes.
+   */
 
   defaults() {
 
@@ -14,7 +32,7 @@ class User extends Model {
 
     user = JSON.parse(localStorage.getItem('user'));
 
-    res = {
+    return {
       id: user.id,
       userId: user.userId,
       email: user.email,
@@ -22,9 +40,17 @@ class User extends Model {
       logged: false,
       jokes: new JokeList(user.jokes)
     };
-
-    return res;
   }
+
+  /**
+   * Listen to himself to update the localStorage.
+   * Set himself to logged if the Tocken isn't expired.
+   * Update JokeCollection.
+   *
+   * @constructor
+   * @this {User}
+   * @return {Object} undefined
+   */
 
   initialize() {
 
@@ -50,17 +76,34 @@ class User extends Model {
     return;
   }
 
+  /**
+   * Update the joke from the API and
+   * add them to the <JokeCollection>#this.jokes
+   *
+   * @this {User}
+   * @return <Promise>(jokes)
+   */
+
   getJokes() {
 
     var self = this;
 
-    api
+    return api
       .getUserJokes(this.get('userId'), this.get('id'))
       .then(function(res){
         self.get('jokes').add(res);
         return res;
       });
   }
+
+  /**
+   * Auth the user.
+   * Set the user's properties (email, password, logged, id, userId).
+   * Launch the this#getJokes
+   *
+   * @this {User}
+   * @return <Promise>(AccessToken)
+   */
 
   login() {
 
@@ -93,6 +136,14 @@ class User extends Model {
         return res;
       });
   }
+
+  /**
+   * Create the user on server.
+   * Launch the this#login
+   *
+   * @this {User}
+   * @return <Promise>(userId)
+   */
 
   register() {
 
