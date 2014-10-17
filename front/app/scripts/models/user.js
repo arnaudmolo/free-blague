@@ -33,12 +33,12 @@ class User extends Model {
     user = JSON.parse(localStorage.getItem('user'));
 
     return {
-      id: user.id,
-      userId: user.userId,
-      email: user.email,
-      password: user.password,
-      logged: false,
-      jokes: new JokeList(user.jokes)
+      id       : user.id,
+      userId   : user.userId,
+      email    : user.email,
+      password : user.password,
+      logged   : false,
+      jokes    : new JokeList(user.jokes)
     };
   }
 
@@ -67,11 +67,15 @@ class User extends Model {
     setTimeout(function(){
       if (user.logged) {
         self.set('logged', true);
-        self.getJokes();
+        self
+          .getJokes()
+          .error(function(res){
+            if (res.error.status === 401) {
+              return self.login();
+            };
+          });
       }
     });
-
-    console.debug('initialize user');
 
     return;
   }
@@ -125,7 +129,7 @@ class User extends Model {
       }).then(function(res){
 
         api
-          .getUserJokes()
+          .getUserJokes(self.get('userId'), self.get('id'))
           .then(function(res){
 
             self.get('jokes').add(res);
