@@ -1,10 +1,21 @@
+/**
+* @module Requester
+* @exports http static class
+*/
 
 import Promise from 'bluebird';
 import _       from 'lodash';
 
-var parse, XHR, exports;
+var {isObject} = _;
+
+var parse, XHR;
 
 XHR = XMLHttpRequest || ActiveXObject;
+
+/**
+* Handle the parsing of the http responses
+* @return {Array}(result, request)
+*/
 
 parse = function (req) {
 
@@ -20,26 +31,30 @@ parse = function (req) {
 
 };
 
+/**
+* Send an XHR request
+* @return {Promise}({Object}res)
+*   Contains {Promise}promise#sent & {Promise}promise#process
+*/
+
 var xhr = function(type, url, data){
 
   var promise, request, sent, process, resolveSent, resolveProcess;
 
-  if (_.isObject(data)) {
+  if (isObject(data)) {
     data = JSON.stringify(data);
   }
 
-  request  = new XHR();
-
-  sent = new Promise(function(resolve){
-    resolveSent = resolve;
-  });
-
-  process = new Promise(function(resolve){
-    resolveProcess = resolve;
-  });
+  request = new XHR();
+  sent    = new Promise(function(resolve){resolveSent = resolve;});
+  process = new Promise(function(resolve){resolveProcess = resolve;});
 
   request.open(type, url, true);
   request.setRequestHeader('Content-type', 'application/json');
+
+  /**
+   * Resolve the Promise when request res status is 200
+   */
 
   promise = new Promise(function(resolve, reject){
     request.onreadystatechange = function(){
@@ -74,19 +89,19 @@ var xhr = function(type, url, data){
   return promise;
 };
 
-exports = {
-  get: function(src){
-    return xhr('GET', src);
-  },
-  put: function(url, data){
+class http {
+  get(url) {
+    return xhr('GET', url);
+  }
+  put(url, data) {
     return xhr('PUT', url, data);
-  },
-  post: function(url, data){
+  }
+  post(url, data) {
     return xhr('POST', url, data);
-  },
-  delete: function(url){
+  }
+  delete(url) {
     return xhr('DELETE', url);
   }
-};
+}
 
-module.exports = exports;
+module.exports = http.prototype;
