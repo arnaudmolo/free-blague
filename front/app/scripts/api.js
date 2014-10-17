@@ -93,17 +93,16 @@ class API {
    */
 
   getUserJokes(id, token){
+
     var promise;
 
     promise = http.get(API_URL + '/users/' + id + '/jokes' + access(token));
 
-    promise
-      .then(function(res){
-        console.log('getUserJokes');
-        return res;
-      });
-
     return promise;
+  }
+
+  logout(token) {
+    return http.post(API_URL + '/users/logout' + access(token), {});
   }
 
 }

@@ -36,7 +36,7 @@ module.exports = function (grunt) {
       },
       js: {
         files: ['<%= config.app %>/scripts/{,*/}*.js'],
-        tasks: ['jshint'],
+        // tasks: ['jshint'],
         options: {
           livereload: true
         }
@@ -157,7 +157,8 @@ module.exports = function (grunt) {
     // Compiles Sass to CSS and generates necessary files if requested
     sass: {
       options: {
-        loadPath: 'bower_components'
+        loadPath: 'bower_components',
+        compass: true
       },
       dist: {
         files: [{

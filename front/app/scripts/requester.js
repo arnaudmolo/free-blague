@@ -53,7 +53,7 @@ var xhr = function(type, url, data){
   request.setRequestHeader('Content-type', 'application/json');
 
   /**
-   * Resolve the Promise when request res status is 200
+   * Resolve the Promise when request res status is 200 or 204
    */
 
   promise = new Promise(function(resolve, reject){
@@ -71,7 +71,7 @@ var xhr = function(type, url, data){
 
       if (request.readyState === 4) {
         res = parse(request)[0];
-        if (request.status === 200) {
+        if (request.status === 200 || request.status === 204) {
           resolve(res);
         }else{
           reject(res);
