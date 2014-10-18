@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "node server/server.js",
-    "test" : "jsxhint front/app/scripts/**/*.js --config .jshintrc"
+    "test" : "cd front && grunt jshint"
   },
   "devDependencies": {
     "jshint-stylish": "~0.1.5",
@@ -32,6 +32,5 @@
   "engines": {
     "node": ">=0.10.0"
   },
-  "jshintConfig": "./.jshintrc",
   "subdomain": "arnaudmolo-blague"
 }
