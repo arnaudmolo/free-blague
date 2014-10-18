@@ -20,7 +20,7 @@
   },
   "scripts": {
     "start": "node server/server.js",
-    "test" : "jshint front/app/scripts/**/*.js --config .jshintrc"
+    "test" : "jsxhint front/app/scripts/**/*.js --config .jshintrc"
   },
   "devDependencies": {
     "jshint-stylish": "~0.1.5",
