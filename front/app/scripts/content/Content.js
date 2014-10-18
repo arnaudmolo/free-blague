@@ -4,6 +4,7 @@
 */
 
 import Backbone from 'backbone';
+
 import JokeList from './../models/joke-list';
 import api      from './../api';
 import say      from './../say';
@@ -25,13 +26,13 @@ class Content extends Model {
     return;
   }
 
-  mute(mute) {
+  mute(muted) {
 
-    localStorage.setItem('muted', mute);
+    localStorage.setItem('muted', muted);
 
-    this.set('mute', mute);
+    this.set('mute', muted);
 
-    if (!mute) {
+    if (!muted) {
       return this.randomizeRequest();
     }
 
@@ -66,7 +67,7 @@ class Content extends Model {
     return {
       mute : false,
       jokes: new JokeList()
-    }
+    };
   }
 
 }

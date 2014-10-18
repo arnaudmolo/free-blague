@@ -1,12 +1,11 @@
 /** @jsx React.DOM */
 
 /**
-* @module Sidebar.view
-* @exports <ReactClass>Sidebar
-*/
+ * @module Sidebar.view
+ * @exports {ReactClass}Sidebar
+ */
 
 import React    from 'react';
-import Backbone from 'backbone';
 
 import Login     from './login.view';
 import Register  from './register.view';
@@ -74,8 +73,12 @@ class Sidebar extends BaseClass {
 
     return (
       <div>
-        <JokeList collection={User.get('jokes')} />
-        <input type="submit" value="disconnect" onClick={this.disconnect} />
+        <JokeList
+          collection={User.get('jokes')} />
+        <input
+          type="submit"
+          value="disconnect"
+          onClick={this.disconnect} />
       </div>
     );
   }

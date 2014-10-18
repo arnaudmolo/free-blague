@@ -49,7 +49,7 @@ class API {
           '/jokes' +
           access(),
         JSON.stringify({content: joke, date: new Date()}))
-      .then(function(res){return res.content;});
+      .then(function(res){return res;});
   }
 
   /**

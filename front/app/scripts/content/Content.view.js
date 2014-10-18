@@ -11,6 +11,7 @@ import mixins from 'backbone-react-component';
 import JokeCollection from '../models/joke-list';
 import JokeList       from '../sidebar/JokeList.view';
 import Content        from './Content';
+import Writing  from './Writing.view';
 
 /**
  * @class ContentView
@@ -49,7 +50,10 @@ class ContentView {
    */
 
   getInitialState() {
-    return {wording: 'mute'};
+    return {
+      wording: 'mute',
+      writing: false
+    };
   }
 
   get mixins() {
@@ -62,11 +66,33 @@ class ContentView {
 
   }
 
+  openWriter(event) {
+
+    event.preventDefault();
+
+    this.setState({writing: true});
+
+  }
+
   render() {
+
+    var partial;
+
+    if (this.state.writing) {
+      partial = <Writing />;
+    }
+
     return (
       <div>
-        <JokeList collection={this.getModel().get('jokes')} />
-        <input onClick={this.toggleMute} type="submit" value={this.state.wording} />
+        <JokeList
+          collection={this.getModel().get('jokes')} />
+        <input
+          onClick={this.toggleMute}
+          type="submit" value={this.state.wording} />
+        <a
+          href=""
+          onClick={this.openWriter}>Write a joke</a>
+        {partial}
       </div>
     );
   }
