@@ -5,7 +5,7 @@
 * @exports <ReactClass>JokeListView
 */
 
-import React    from 'react';
+import React    from 'react/addons';
 import mixins   from 'backbone-react-component';
 
 import JokeView from './joke.view';
@@ -17,6 +17,10 @@ import JokeView from './joke.view';
  */
 
 class JokeListView {
+
+  get mixins() {
+    return [mixins];
+  }
 
   /**
    * Set defaults values for the this.state.
@@ -63,11 +67,13 @@ class JokeListView {
     });
 
     return (
-      <ul>{ jokesList }</ul>
+      <ul>
+        { jokesList }
+      </ul>
     );
   }
 }
 
-JokeListView.prototype.mixins = [mixins];
-
 module.exports = React.createClass(JokeListView.prototype);
+
+module.exports.static = JokeListView;

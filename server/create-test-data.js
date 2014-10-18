@@ -35,7 +35,7 @@ module.exports = function(app) {
 
       users[0].jokes.count(function(err, res){
         console.log("log", res);
-      })
+      });
 
     });
 

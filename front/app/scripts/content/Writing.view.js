@@ -5,7 +5,7 @@
  * @exports {ReactClass}Writing
  */
 
-import React from 'react';
+import React from 'react/addons';
 
 import BaseClass from './../utils/react-class';
 import User      from './../models/user';

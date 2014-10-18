@@ -58,7 +58,7 @@ class User extends Model {
 
   initialize() {
 
-    var user, self;
+    var user, self, jokes;
 
     self = this;
 
@@ -67,6 +67,12 @@ class User extends Model {
     });
 
     user = JSON.parse(localStorage.getItem('user'));
+
+    jokes = this.get('jokes');
+
+    this.listenTo(jokes, 'add', function(){
+      localStorage.setItem('user', this);
+    });
 
     setTimeout(function(){
       if (user.logged) {

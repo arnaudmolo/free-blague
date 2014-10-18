@@ -19,8 +19,6 @@ class JokeView {
     return (
       <li>
         <span>{this.getModel().get('content')}</span>
-        &nbsp;|&nbsp;
-        <a>x</a>
       </li>
     );
   }
@@ -29,3 +27,5 @@ class JokeView {
 JokeView.prototype.mixins = [mixins];
 
 module.exports = React.createClass(JokeView.prototype);
+
+module.exports.static = JokeView;
