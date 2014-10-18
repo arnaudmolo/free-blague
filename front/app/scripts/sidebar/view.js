@@ -43,7 +43,7 @@ class Sidebar extends BaseClass {
 
   componentDidMount() {
 
-    var self
+    var self;
 
     self = this;
 
