@@ -104,6 +104,18 @@ class User extends Model {
       });
   }
 
+  createJoke(joke) {
+
+    self = this;
+
+    return api
+      .saveJoke(joke)
+      .then(function(joke){
+        self.get('jokes').add(joke);
+        return joke;
+      })
+  }
+
   /**
    * Auth the user.
    * Set the user's properties (email, password, logged, id, userId).

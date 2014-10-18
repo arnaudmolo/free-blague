@@ -4,6 +4,7 @@
 */
 
 import Backbone from 'backbone';
+
 import JokeList from './../models/joke-list';
 import api      from './../api';
 import say      from './../say';
