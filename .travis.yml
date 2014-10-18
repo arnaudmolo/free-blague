@@ -4,8 +4,7 @@ node_js:
 before_script:
   - npm install -g grunt-cli
   - npm install -g bower
+  - npm install -g jsxhint
   - npm install
   - cd front
-  - bower install
-  - npm install
   - cd ../
