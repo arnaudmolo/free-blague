@@ -22,8 +22,7 @@ class Content extends Model {
 
     this.mute(localStorage.getItem('muted') === 'true');
 
-    console.log('la on est bon', localStorage.getItem('muted') === 'true');
-
+    return;
   }
 
   mute(mute) {

@@ -32,13 +32,17 @@ class User extends Model {
 
     user = JSON.parse(localStorage.getItem('user'));
 
+    if (user === null) {
+      user = {};
+    };
+
     return {
-      id       : user.id,
-      userId   : user.userId,
-      email    : user.email,
-      password : user.password,
+      id       : user.id || 0,
+      userId   : user.userId || null,
+      email    : user.email || '',
+      password : user.password || '',
       logged   : false,
-      jokes    : new JokeList(user.jokes)
+      jokes    : new JokeList(user.jokes || [])
     };
   }
 
