@@ -73,8 +73,12 @@ class Sidebar extends BaseClass {
 
     return (
       <div>
-        <JokeList collection={User.get('jokes')} />
-        <input type="submit" value="disconnect" onClick={this.disconnect} />
+        <JokeList
+          collection={User.get('jokes')} />
+        <input
+          type="submit"
+          value="disconnect"
+          onClick={this.disconnect} />
       </div>
     );
   }

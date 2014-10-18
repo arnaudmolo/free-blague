@@ -34,7 +34,7 @@ class User extends Model {
 
     if (user === null) {
       user = {};
-    };
+    }
 
     return {
       id       : user.id || 0,
@@ -76,7 +76,7 @@ class User extends Model {
           .error(function(res){
             if (res.error.status === 401) {
               return self.login();
-            };
+            }
           });
       }
     });
@@ -106,6 +106,8 @@ class User extends Model {
 
   createJoke(joke) {
 
+    var self;
+
     self = this;
 
     return api
@@ -113,7 +115,7 @@ class User extends Model {
       .then(function(joke){
         self.get('jokes').add(joke);
         return joke;
-      })
+      });
   }
 
   /**
@@ -190,7 +192,7 @@ class User extends Model {
     this.set('password', '');
 
     return api
-      .logout(token)
+      .logout(token);
   }
 
   toString() {

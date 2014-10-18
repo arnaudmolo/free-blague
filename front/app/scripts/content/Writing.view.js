@@ -43,7 +43,7 @@ class Writing {
           type="submit" />
       </form>
     );
-  };
+  }
 
 }
 

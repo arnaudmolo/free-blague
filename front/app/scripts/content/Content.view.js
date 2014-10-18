@@ -79,14 +79,19 @@ class ContentView {
     var partial;
 
     if (this.state.writing) {
-      partial = <Writing />
-    };
+      partial = <Writing />;
+    }
 
     return (
       <div>
-        <JokeList collection={this.getModel().get('jokes')} />
-        <input onClick={this.toggleMute} type="submit" value={this.state.wording} />
-        <a href="" onClick={this.openWriter} >Write a joke</a>
+        <JokeList
+          collection={this.getModel().get('jokes')} />
+        <input
+          onClick={this.toggleMute}
+          type="submit" value={this.state.wording} />
+        <a
+          href=""
+          onClick={this.openWriter}>Write a joke</a>
         {partial}
       </div>
     );
