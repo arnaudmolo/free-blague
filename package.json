@@ -19,7 +19,6 @@
     "serve-favicon": "^2.0.1"
   },
   "scripts": {
-    "preinstall": "cd front && npm i && bower i",
     "start": "node server/server.js",
     "test" : "cd front && grunt jshint"
   },
