@@ -6,7 +6,43 @@
 
   @include background(radial-gradient(to bottom, #4b82b7, #3172ae))
 
-#register
-  height: 100%
-  width: 50%
-  opacity: 0
+.jokes-list
+  position: relative
+
+  font-family: Helvetica
+  font-weight: bolder
+
+  .joke
+    height: 205px
+    width: 285px
+
+    position: absolute
+
+    background-color: red
+    overflow: hidden
+
+    color: white
+    font-size: 30pt
+    text-align: left
+    font-style: italic
+
+    .wrapper
+      height: 255px
+      width: 345px
+
+      position: absolute
+
+      top: -15px
+      left: -15px
+
+      .shadow
+        background-color: red
+
+        position: absolute
+        top: 0
+        left: 0
+        right: 0
+        bottom: 0
+
+      p
+        transform: rotate(-5deg)

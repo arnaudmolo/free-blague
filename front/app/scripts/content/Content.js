@@ -60,13 +60,51 @@ class Content extends Model {
 
     this.timeout = setTimeout(function(){
       self.randomizeRequest.call(self);
-    }, 1000);
+    }, 30000);
   }
 
   defaults() {
     return {
       mute : false,
-      jokes: new JokeList()
+      jokes: new JokeList([
+  {
+    content: "joke1",
+    date: "2014-10-18T13:02:00.111Z",
+    id: 1,
+    userId: 1
+  }, {
+    content: "joke2",
+    date: "2014-10-18T13:02:00.111Z",
+    id: 2,
+    userId: 1
+  }, {
+    content: "Encore une super vanne",
+    date: "2014-10-18T16:58:28.347Z",
+    id: 4,
+    userId: 1
+  }, {
+    content: "hahaha haha hahaha on se tape des barres",
+    date: "2014-10-18T16:59:20.176Z",
+    id: 6,
+    userId: 1
+  }, {
+    content: "hahaha haha hahaha",
+    date: "2014-10-18T16:59:38.888Z",
+    id: 7,
+    userId: 1
+  }, {
+    content: "hein",
+    date: "2014-10-18T17:00:10.193Z",
+    id: 9,
+    userId: 1
+  }, {
+    content: "Je sais pas ce qu'il c'est passé, c'était chelou",
+    date: "2014-10-18T17:00:22.712Z",
+    id: 10,
+    userId: 1
+  }
+]
+)
     };
   }
 

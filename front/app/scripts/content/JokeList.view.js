@@ -33,10 +33,10 @@ class JokeListView extends JokeList.static {
     });
 
     return (
-      <ul>
+      <ul className="jokes-list" >
         { jokesList }
       </ul>
-      );
+    );
   }
 }
 

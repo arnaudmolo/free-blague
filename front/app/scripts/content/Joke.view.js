@@ -8,6 +8,8 @@
 import React  from 'react/addons';
 import mixins from 'backbone-react-component';
 
+import stringToColor from './../utils/string-to-color';
+
 /**
  * @class JokeView
  * Extended from React Class
@@ -15,10 +17,30 @@ import mixins from 'backbone-react-component';
  */
 
 class JokeView {
+
+  getInitialState() {
+    return {backgroundColor: '#00FF00'};
+  }
+
+  componentDidMount() {
+
+    this.setState({
+        backgroundColor: stringToColor(
+          this
+            .getModel()
+            .get('content')
+          )
+      });
+
+  }
+
   render() {
     return (
-      <li>
-        <span>{this.getModel().get('content')}</span>
+      <li className="joke" style={this.state}>
+        <div className="wrapper">
+          <p>{this.getModel().get('content')}</p>
+          <div className="shadow" style={this.state}></div>
+        </div>
       </li>
     );
   }
