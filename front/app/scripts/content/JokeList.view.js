@@ -17,7 +17,9 @@ class JokeListView extends JokeList.static {
   }
 
   get mixins(){
-    return this.__proto__.mixins;
+    // console.log
+      // ('ici', Object.getPrototypeOf(this).mixins, this.__proto__.mixins);
+    return Object.getPrototypeOf(this.mixins);
   }
 
   componentDidMount() {
