@@ -68,10 +68,16 @@ class JokeView {
     model = this.getModel();
 
     return (
-      <li className="joke" style={this.state.bg} key={this.props.key}>
+      <li
+        className="joke"
+        style={this.state.bg}
+        key={this.props.key} >
         <div className="wrapper">
           <p>{model.get('content')}</p>
-          <div className="shadow" style={this.state.gradient}></div>
+          <div
+            className="shadow"
+            style={this.state.gradient} >
+          </div>
         </div>
       </li>
     );
