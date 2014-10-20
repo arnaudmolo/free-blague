@@ -32,14 +32,9 @@ class JokeView {
     var startColor, endColor, color;
 
     color = stringToColor(this.getModel().get('content'));
-
     startColor = Color(color);
-
     endColor = startColor.clone().alpha(0.5);
-
     startColor = startColor.alpha(0);
-
-    console.log(startColor.alpha(), endColor.alpha());
 
     this.setState({
       bg: {

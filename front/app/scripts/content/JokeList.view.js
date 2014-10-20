@@ -28,13 +28,15 @@ class JokeListView extends JokeList.static {
 
     var jokesList;
 
-    jokesList = this.getCollection().map(function(joke){
-      return (<JokeView model={joke} />);
-    });
+    jokesList = this
+      .getCollection()
+      .map(function(joke){
+        return (<JokeView model={joke} />);
+      });
 
     return (
       <ul className="jokes-list" >
-        { jokesList }
+        { jokesList.reverse() }
       </ul>
     );
   }
