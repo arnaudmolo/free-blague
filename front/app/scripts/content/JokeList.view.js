@@ -17,9 +17,8 @@ class JokeListView extends JokeList.static {
   }
 
   get mixins(){
-    // console.log
-      // ('ici', Object.getPrototypeOf(this).mixins, this.__proto__.mixins);
-    return Object.getPrototypeOf(this.mixins);
+    // ('ici', Object.getPrototypeOf(this).mixins, this.__proto__.mixins);
+    return this.__proto__.mixins;
   }
 
   componentDidMount() {
@@ -32,13 +31,14 @@ class JokeListView extends JokeList.static {
 
     jokesList = this
       .getCollection()
-      .map(function(joke){
-        return (<JokeView model={joke} />);
-      });
+      .map(function(joke, index){
+        return (<JokeView key={index} model={joke} />);
+      })
+      .reverse();
 
     return (
       <ul className="jokes-list" >
-        { jokesList.reverse() }
+        { jokesList }
       </ul>
     );
   }

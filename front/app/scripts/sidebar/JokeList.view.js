@@ -63,7 +63,7 @@ class JokeListView {
     var jokesList;
 
     jokesList = this.getCollection().map(function(joke){
-      return (<JokeView model={joke} />);
+      return (<JokeView key={joke.get('id')} model={joke} />);
     });
 
     return (
