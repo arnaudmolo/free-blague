@@ -7,6 +7,7 @@
 
 import React  from 'react/addons';
 import mixins from 'backbone-react-component';
+import Color from 'Color';
 
 import stringToColor from './../utils/string-to-color';
 
@@ -28,16 +29,41 @@ class JokeView {
 
   componentDidMount() {
 
-    var color;
+    var startColor, endColor, color;
 
     color = stringToColor(this.getModel().get('content'));
+
+    startColor = Color(color);
+
+    endColor = startColor.clone().alpha(0.5);
+
+    startColor = startColor.alpha(0);
+
+    console.log(startColor.alpha(), endColor.alpha());
 
     this.setState({
       bg: {
         backgroundColor: color
       },
       gradient: {
-        background: 'linear-gradient(to bottom, ' + color + ', ' + color + ')'
+        background: 'linear-gradient(to bottom, rgba(' +
+            startColor.red() +
+            ', ' +
+            startColor.green() +
+            ', ' +
+            startColor.blue() +
+            ', ' +
+            startColor.alpha() +
+          '), rgba(' +
+            endColor.red() +
+            ', ' +
+            endColor.green() +
+            ', ' +
+            endColor.blue() +
+            ', ' +
+            endColor.alpha() +
+          ')' +
+        ')'
       }
     });
 

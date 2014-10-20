@@ -7,6 +7,7 @@
     "backbone": "^1.1.2",
     "backbone-react-component": "^0.7.0",
     "bluebird": "^2.3.4",
+    "color": "^0.7.3",
     "compression": "^1.0.3",
     "debug": "^2.1.0",
     "errorhandler": "^1.1.1",
@@ -20,7 +21,7 @@
   },
   "scripts": {
     "start": "node server/server.js",
-    "test" : "cd front && grunt jshint"
+    "test": "cd front && grunt jshint"
   },
   "devDependencies": {
     "jshint-stylish": "~0.1.5",
