@@ -19,27 +19,36 @@ import stringToColor from './../utils/string-to-color';
 class JokeView {
 
   getInitialState() {
-    return {backgroundColor: '#00FF00'};
+    return {
+      bg: {
+        backgroundColor: '#00FF00'
+      }
+    };
   }
 
   componentDidMount() {
 
+    var color;
+
+    color = stringToColor(this.getModel().get('content'));
+
     this.setState({
-        backgroundColor: stringToColor(
-          this
-            .getModel()
-            .get('content')
-          )
-      });
+      bg: {
+        backgroundColor: color
+      },
+      gradient: {
+        background: 'linear-gradient(to bottom, ' + color + ', ' + color + ')'
+      }
+    });
 
   }
 
   render() {
     return (
-      <li className="joke" style={this.state}>
+      <li className="joke" style={this.state.bg}>
         <div className="wrapper">
           <p>{this.getModel().get('content')}</p>
-          <div className="shadow" style={this.state}></div>
+          <div className="shadow" style={this.state.gradient}></div>
         </div>
       </li>
     );
