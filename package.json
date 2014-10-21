@@ -22,8 +22,7 @@
     "source": "0.0.3"
   },
   "scripts": {
-    "start": "node server/server.js",
-    "test": "cd front && grunt jshint"
+    "start": "node server/server.js"
   },
   "devDependencies": {
     "jshint-stylish": "~0.1.5",
