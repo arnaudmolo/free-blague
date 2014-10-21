@@ -5,7 +5,7 @@
 * @exports ReactClass JokeView
 */
 
-import React  from 'react';
+import React  from 'react/addons';
 import mixins from 'backbone-react-component';
 
 /**
@@ -16,9 +16,14 @@ import mixins from 'backbone-react-component';
 
 class JokeView {
   render() {
+
+    var model;
+
+    model = this.getModel();
+
     return (
       <li>
-        <span>{this.getModel().get('content')}</span>
+        <span>{model.get('content')}</span>
         &nbsp;|&nbsp;
         <a>x</a>
       </li>

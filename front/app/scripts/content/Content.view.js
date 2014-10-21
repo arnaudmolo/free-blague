@@ -5,13 +5,13 @@
 * @exports <ReactClass>ContentView
 */
 
-import React  from 'react';
+import React  from 'react/addons';
 import mixins from 'backbone-react-component';
 
-import JokeCollection from '../models/joke-list';
-import JokeList       from '../sidebar/JokeList.view';
 import Content        from './Content';
-import Writing  from './Writing.view';
+import Writing        from './Writing.view';
+import JokeCollection from '../models/joke-list';
+import JokeList       from './JokeList.view';
 
 /**
  * @class ContentView

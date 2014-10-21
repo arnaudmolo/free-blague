@@ -5,7 +5,7 @@
  * @exports {ReactClass}Sidebar
  */
 
-import React    from 'react';
+import React    from 'react/addons';
 
 import Login     from './login.view';
 import Register  from './register.view';

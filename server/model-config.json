@@ -30,7 +30,7 @@
     "public": true
   },
   "Joke": {
-    "dataSource": "db",
+    "dataSource": "JokesDB",
     "public": true
   }
 }
