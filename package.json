@@ -7,6 +7,7 @@
     "backbone": "^1.1.2",
     "backbone-react-component": "^0.7.0",
     "bluebird": "^2.3.4",
+    "browserify": "^6.1.0",
     "color": "^0.7.3",
     "compression": "^1.0.3",
     "debug": "^2.1.0",
@@ -17,7 +18,8 @@
     "loopback-connector-mongodb": "^1.4.4",
     "loopback-datasource-juggler": "^2.7.0",
     "react": "^0.10.0",
-    "serve-favicon": "^2.0.1"
+    "serve-favicon": "^2.0.1",
+    "source": "0.0.3"
   },
   "scripts": {
     "start": "node server/server.js",
