@@ -54,7 +54,6 @@ scripts = function(){
 
 gulp.task('scripts', scripts);
 
-
 gulp.task('compress', ['scripts'], function(){
   return gulp.src(dist + '/scripts/*.js')
     .pipe($.uglify())
