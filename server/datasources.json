@@ -2,5 +2,10 @@
   "db": {
     "name": "db",
     "connector": "memory"
-  }
+  },
+  "JokesDB": {
+    "url": "mongodb://nodejitsu:1accf49a8e5275b39b921ac88b11bf61@troup.mongohq.com:10025/nodejitsudb5427463396",
+    "name": "JokesDB",
+    "connector": "mongodb"
+   }
 }

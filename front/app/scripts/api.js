@@ -1,17 +1,18 @@
 /**
 * @module API
-* @exports {static class} API
+* @exports <static class> API
 */
 
-import http     from './requester';
 import Promise  from 'bluebird';
+
+import http     from './requester';
 
 var API_URL, TWO_WEEKS, access;
 
 TWO_WEEKS = 1000 * 60 * 60 * 24 * 7 * 2;
 
 API_URL = 'http://' + "arnaudmolo-blague.nodejitsu.com" + '/api';
-API_URL = 'http://' + '127.0.0.1:3000' + '/api';
+// API_URL = 'http://' + '127.0.0.1:3000' + '/api';
 
 access = function(token = require('./models/user').get('id')){
   return '?access_token=' + token;
@@ -27,7 +28,7 @@ class API {
   /**
    * Get a random Joke from the server
    *
-   * @return {Promise}(joke)
+   * @return <Promise>(joke)
    */
 
   getRandomJoke() {
@@ -38,7 +39,7 @@ class API {
   /**
    * Save the joke
    *
-   * @return {Promise}(joke)
+   * @return <Promise>(joke)
    */
 
   saveJoke(joke) {
