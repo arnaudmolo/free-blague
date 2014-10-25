@@ -32,6 +32,7 @@ function cleanSentence(sentence){
 
 function cleanJoke(joke_content){
 
+  joke_content = joke_content.replace(/[\.|\?|\!]$/, '.');
 	joke_content = joke_content.match( /[^\.!\?]+[\.!\?]+/g );
 	for(var i=0; i<joke_content.length;i++){
 	  joke_content[i] = cleanSentence(joke_content[i])
