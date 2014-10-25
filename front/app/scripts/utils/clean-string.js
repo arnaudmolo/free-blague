@@ -33,7 +33,7 @@ function cleanSentence(sentence){
 function cleanJoke(joke_content){
 
 	joke_content = joke_content.match( /[^\.!\?]+[\.!\?]+/g );
-	for(i=0; i<joke_content.length;i++){
+	for(var i=0; i<joke_content.length;i++){
 	  joke_content[i] = cleanSentence(joke_content[i])
 	}
 
