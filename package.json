@@ -1,6 +1,6 @@
 {
   "name": "blague",
-  "version": "0.0.1-3",
+  "version": "0.0.1-6",
   "main": "server/server.js",
   "domain":[
     "already.cool",

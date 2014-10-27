@@ -5,6 +5,7 @@ import _        from 'lodash';
 
 import JokeList from './../sidebar/JokeList.view';
 import JokeView from './Joke.view';
+import mixins from 'backbone-react-component';
 
 var ReactCSSTransitionGroup;
 
@@ -17,8 +18,7 @@ class JokeListView extends JokeList.static {
   }
 
   get mixins(){
-    // ('ici', Object.getPrototypeOf(this).mixins, this.__proto__.mixins);
-    return this.__proto__.mixins;
+    return [mixins];
   }
 
   componentDidMount() {
