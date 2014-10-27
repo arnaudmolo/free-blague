@@ -41,7 +41,7 @@ function cleanString(joke_content){
 
   joke_content = joke_content.match( /[^\.!\?]+[\.!\?]+/g );
   for(var i=0; i<joke_content.length;i++){
-    joke_content[i] = cleanSentence(joke_content[i])
+    joke_content[i] = cleanSentence(joke_content[i]);
   }
 
   joke_content = joke_content.join(' ');
