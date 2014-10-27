@@ -26,7 +26,7 @@ class JokeList extends Collection {
    * @param {Object} @see Backbone Collection params
    */
 
-  constructor(options) {
+  initialize(options) {
     super(options);
     this.model = Joke;
   }

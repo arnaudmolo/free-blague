@@ -33,12 +33,13 @@ class JokeListView extends JokeList.static {
       .getCollection()
       .map(function(joke, index){
         return (<JokeView key={index} model={joke} />);
-      })
-      .reverse();
+      }).reverse();
 
     return (
       <ul className="jokes-list" >
+        <ReactCSSTransitionGroup transitionName="joke-animation">
         { jokesList }
+        </ReactCSSTransitionGroup>
       </ul>
     );
   }

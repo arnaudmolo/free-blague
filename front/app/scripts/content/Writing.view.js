@@ -17,7 +17,6 @@ class Writing {
 
     var jokeDom;
 
-
     jokeDom = this.refs.joke.getDOMNode();
 
     event.preventDefault();

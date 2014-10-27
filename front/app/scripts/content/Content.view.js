@@ -36,9 +36,11 @@ class ContentView {
       }
     };
 
-    content.listenTo(content, 'change:mute', testFunction);
+    content.on('change:mute', testFunction);
+    content.listenTo(content.get('jokes'), 'add', function(joke){
+      self.launchWriting(joke.toString());
+    });
     testFunction();
-
     return;
 
   }
@@ -51,6 +53,7 @@ class ContentView {
 
   getInitialState() {
     return {
+      joke   : '',
       wording: 'mute',
       writing: false
     };
@@ -61,29 +64,51 @@ class ContentView {
   }
 
   toggleMute() {
+    return this.getModel().mute(!this.getModel().get('mute'));
+  }
 
-    this.getModel().mute(!this.getModel().get('mute'));
+  showInput(event) {
+
+    event.preventDefault();
+    this.setState({writing: true});
+
+    return;
 
   }
 
-  openWriter(event) {
+  launchWriting (joke) {
 
-    event.preventDefault();
+    var self, iteration, timeout, relaunch;
 
-    this.setState({writing: true});
+    self      = this;
+    iteration = 0;
 
+    relaunch = function(){
+      setTimeout(function(){
+        ++iteration;
+        console.log(joke.slice(0, iteration), iteration);
+        self.setState({joke: joke.slice(0, iteration)});
+        if (iteration <= joke.length) {
+          relaunch(joke);
+        };
+      }, 100);
+
+      relaunch();
+
+    }
   }
 
   render() {
 
-    var partial;
+    var wording, firstJoke;
 
     if (this.state.writing) {
-      partial = <Writing />;
+      wording = <Writing />;
     }
 
     return (
       <div>
+        <h1>{this.state.joke}</h1>
         <JokeList
           collection={this.getModel().get('jokes')} />
         <input
@@ -91,8 +116,8 @@ class ContentView {
           type="submit" value={this.state.wording} />
         <a
           href=""
-          onClick={this.openWriter}>Write a joke</a>
-        {partial}
+          onClick={this.showInput}>Write a joke</a>
+        {wording}
       </div>
     );
   }
