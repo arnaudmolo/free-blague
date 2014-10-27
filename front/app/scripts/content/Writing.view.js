@@ -8,7 +8,7 @@
 import React from 'react/addons';
 
 import BaseClass   from './../utils/react-class';
-import CleanString from './../utils/clean-string';
+import cleanString from './../utils/clean-string';
 import User        from './../models/user';
 import say         from './../say';
 
@@ -24,7 +24,7 @@ class Writing {
     event.preventDefault();
 
     User
-      .createJoke(cleanJoke(jokeDom.value))
+      .createJoke(cleanString(jokeDom.value))
       .then(function(res){
         jokeDom.value = '';
         say(res.content);
