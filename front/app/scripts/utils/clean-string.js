@@ -32,7 +32,8 @@ function cleanSentence(sentence){
 
 function cleanString(joke_content){
 
-  joke_content = joke_content.replace(/[\.|\?|\!]$/, '.');
+  need_punctuation = joke_content.match(/^([\.|\?|\!])$/, '.');
+  if(need_punctuation !== null) joke_content.= '.';
   joke_content = joke_content.match( /[^\.!\?]+[\.!\?]+/g );
   for(var i=0; i<joke_content.length;i++){
     joke_content[i] = cleanSentence(joke_content[i])
