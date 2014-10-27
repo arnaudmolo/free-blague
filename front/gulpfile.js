@@ -1,6 +1,6 @@
 'use strict';
 
-var gulp, del, path, $, es6ify, source, dist;
+var gulp, del, path, $, es6ify, source, dist, jshint;
 
 gulp = require('gulp');
 del  = require('del');
@@ -8,22 +8,23 @@ path = require('path');
 $    = require('gulp-load-plugins')();
 es6ify = require('es6ify');
 source = require('source');
+jshint = require('gulp-jshint');
 
 dist = './../client';
 
 // Styles
 gulp.task('styles', function () {
 
-    return gulp.src('app/styles/main.scss')
-        .pipe($.rubySass({
-            style: 'expanded',
-            precision: 10,
-            loadPath: ['./bower_components'],
-            compass: true
-        }))
-        // .pipe($.autoprefixer('last 1 version'))
-        .pipe(gulp.dest(dist + '/styles'))
-        .pipe($.size());
+  return gulp.src('app/styles/main.scss')
+    .pipe($.rubySass({
+      style: 'expanded',
+      precision: 10,
+      loadPath: ['./bower_components'],
+      compass: true
+    }))
+    // .pipe($.autoprefixer('last 1 version'))
+    .pipe(gulp.dest(dist + '/styles'))
+    .pipe($.size());
 
 });
 
@@ -110,6 +111,13 @@ gulp.task('serve', function(){
       livereload: true,
       port: 9000
     }))
+});
+
+gulp.task('jshint', function(){
+
+  return gulp.src('./app/scripts/**/*.js')
+    .pipe(jshint('./../.jshintrc'))
+    .pipe(jshint.reporter('jshint-stylish'));
 
 });
 

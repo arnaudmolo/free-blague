@@ -2,7 +2,7 @@
   "name": "blague",
   "version": "0.0.1-6",
   "main": "server/server.js",
-  "domain":[
+  "domain": [
     "already.cool",
     "www.already.cool"
   ],
@@ -10,18 +10,22 @@
     "arrayify": "^1.0.0",
     "backbone": "^1.1.2",
     "backbone-react-component": "^0.7.0",
-    "bluebird": "^2.3.4",
+    "bluebird": "^2.3.6",
     "browserify": "^6.1.0",
     "color": "^0.7.3",
     "compression": "^1.0.3",
     "debug": "^2.1.0",
+    "envify": "^3.0.0",
     "errorhandler": "^1.1.1",
+    "es6ify": "^1.5.1",
+    "jshint": "^2.5.6",
     "lodash": "^2.4.1",
     "loopback": "^2.0.0",
     "loopback-boot": "^2.0.0",
     "loopback-connector-mongodb": "^1.4.4",
     "loopback-datasource-juggler": "^2.7.0",
-    "react": "^0.10.0",
+    "react": "^0.11.2",
+    "reactify": "^0.14.0",
     "serve-favicon": "^2.0.1",
     "source": "0.0.3"
   },
