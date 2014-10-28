@@ -18,15 +18,15 @@ module.exports = function(app) {
 
     //create joke 1 and make john the owner
     users[0].jokes.create([{
-      content: 'joke1',
+      content: 'joke1.',
       date: new Date,
       userId: users[0].id
     }, {
-      content: 'joke2',
+      content: 'joke2.',
       date: new Date,
       userId: users[0].id
     }, {
-      content: 'joke3',
+      content: 'joke3.',
       date: new Date,
       userId: users[0].id
     }], function(er, joke) {

@@ -4,7 +4,7 @@
 */
 
 import Promise from 'bluebird';
-import _       from 'lodash';
+import _       from 'underscore';
 
 var {isObject} = _;
 
