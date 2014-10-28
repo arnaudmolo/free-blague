@@ -115,7 +115,7 @@ gulp.task('serve', function(){
 
 gulp.task('jshint', function(){
 
-  return gulp.src('./app/scripts/**/*.js')
+  return gulp.src(['./app/scripts/**/*.js', '!./app/scripts/utils/string-to-color.js'])
     .pipe($.react())
     .pipe(jshint('./../.jshintrc'))
     .pipe(jshint.reporter('jshint-stylish'));
