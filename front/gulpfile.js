@@ -1,16 +1,14 @@
 'use strict';
 
-var gulp, del, path, $, es6ify, source, dist, jshint;
+var gulp, del, path, $, es6ify, dist, jshint;
 
-gulp = require('gulp');
-del  = require('del');
-path = require('path');
-$    = require('gulp-load-plugins')();
+gulp   = require('gulp');
+del    = require('del');
+path   = require('path');
+$      = require('gulp-load-plugins')();
 es6ify = require('es6ify');
-source = require('source');
 jshint = require('gulp-jshint');
-
-dist = './../client';
+dist   = './../client';
 
 // Styles
 gulp.task('styles', function () {
@@ -91,12 +89,13 @@ gulp.task('clean', function(cb){
 
 // Bundle
 gulp.task('bundle', ['styles', 'scripts', 'bower'], function(){
-    return gulp.src('./app/*.html')
-      .pipe($.useref.assets())
-      .pipe($.useref.restore())
-      .pipe($.useref())
-      .pipe(gulp.dest(dist));
+  return gulp.src('./app/*.html')
+    .pipe($.useref.assets())
+    .pipe($.useref.restore())
+    .pipe($.useref())
+    .pipe(gulp.dest(dist));
 });
+
 // Build
 gulp.task('build', ['html', 'bundle', 'images', 'compress']);
 
@@ -110,12 +109,14 @@ gulp.task('serve', function(){
     .pipe($.webserver({
       livereload: true,
       port: 9000
-    }))
+    }));
+
 });
 
 gulp.task('jshint', function(){
 
   return gulp.src('./app/scripts/**/*.js')
+    .pipe($.react())
     .pipe(jshint('./../.jshintrc'))
     .pipe(jshint.reporter('jshint-stylish'));
 

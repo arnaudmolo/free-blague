@@ -90,12 +90,12 @@ class ContentView {
         self.setState({joke: joke.slice(0, iteration)});
         if (iteration <= joke.length) {
           relaunch(joke);
-        };
+        }
       }, 100);
 
       relaunch();
 
-    }
+    };
   }
 
   render() {
