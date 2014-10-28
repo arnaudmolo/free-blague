@@ -48,7 +48,8 @@
     "react-tools": "^0.11.2"
   },
   "scripts": {
-    "start": "node server/server.js"
+    "start": "node server/server.js",
+    "test": "cd front && gulp jshint"
   },
   "devDependencies": {
     "jshint-stylish": "~0.1.5",
