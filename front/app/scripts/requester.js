@@ -8,7 +8,7 @@ import _       from 'lodash';
 
 var {isObject} = _;
 
-var parse, XHR;
+var XHR;
 
 XHR = XMLHttpRequest || ActiveXObject;
 
@@ -17,7 +17,7 @@ XHR = XMLHttpRequest || ActiveXObject;
 * @return {Array}(result, request)
 */
 
-parse = function (req) {
+function parse(req) {
 
   var result;
 
@@ -29,7 +29,7 @@ parse = function (req) {
 
   return [result, req];
 
-};
+}
 
 /**
 * Send an XHR request
@@ -37,7 +37,7 @@ parse = function (req) {
 *   Contains {Promise}promise#sent & {Promise}promise#process
 */
 
-var xhr = function(type, url, data){
+function xhr(type, url, data){
 
   var promise, request, sent, process, resolveSent, resolveProcess;
 
@@ -87,7 +87,7 @@ var xhr = function(type, url, data){
   promise.process = process;
 
   return promise;
-};
+}
 
 class http {
   get(url) {
