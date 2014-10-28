@@ -23,12 +23,12 @@ class ContentView {
 
   componentDidMount() {
 
-    var content, self, testFunction;
+    var content, self;
 
     self = this;
     content = this.getModel();
 
-    testFunction = function(){
+    function testFunction(){
       if (content.get('mute')) {
         self.setState({wording: 'unmute'});
       }else{
@@ -78,12 +78,12 @@ class ContentView {
 
   launchWriting (joke) {
 
-    var self, iteration, timeout, relaunch;
+    var self, iteration, timeout;
 
     self      = this;
     iteration = 0;
 
-    relaunch = function(){
+    function relaunch(){
       setTimeout(function(){
         ++iteration;
         console.log(joke.slice(0, iteration), iteration);
@@ -100,7 +100,7 @@ class ContentView {
 
   render() {
 
-    var wording, firstJoke;
+    var wording;
 
     if (this.state.writing) {
       wording = <Writing />;
