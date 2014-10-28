@@ -8,7 +8,6 @@ var voicesLoaded = new Promise(function(resolve, reject){
   };
 });
 
-
 /**
 * Say a joke sentence by sentence.
 *
@@ -17,7 +16,7 @@ var voicesLoaded = new Promise(function(resolve, reject){
 */
 
 function sayOneSentence(voice, sentences){
-  
+
   var utterance;
 
   if(sentences.length <= 0){
@@ -27,7 +26,7 @@ function sayOneSentence(voice, sentences){
   utterance = new window.SpeechSynthesisUtterance(sentences.shift());
   utterance.voice = voice;
   utterance.remaining = sentences;
-  
+
   utterance.onend = function(event){
     sayOneSentence(this.voice, this.remaining);
   };
@@ -36,7 +35,7 @@ function sayOneSentence(voice, sentences){
 }
 
 
-var exports = function(string){
+function say(string){
   voicesLoaded.then(function(){
     var voices, sentences;
     voices = window.speechSynthesis.getVoices();
@@ -46,6 +45,6 @@ var exports = function(string){
   });
 
   return string;
-};
+}
 
-module.exports = exports;
+module.exports = say;

@@ -1,11 +1,10 @@
 /** @jsx React.DOM */
 
 import React    from 'react/addons';
-import _        from 'lodash';
 
 import JokeList from './../sidebar/JokeList.view';
 import JokeView from './Joke.view';
-import mixins from 'backbone-react-component';
+import mixins from  'backbone-react-component';
 
 var ReactCSSTransitionGroup;
 
@@ -33,12 +32,13 @@ class JokeListView extends JokeList.static {
       .getCollection()
       .map(function(joke, index){
         return (<JokeView key={index} model={joke} />);
-      })
-      .reverse();
+      }).reverse();
 
     return (
       <ul className="jokes-list" >
+        <ReactCSSTransitionGroup transitionName="joke-animation">
         { jokesList }
+        </ReactCSSTransitionGroup>
       </ul>
     );
   }
