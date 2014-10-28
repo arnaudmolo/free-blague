@@ -2,7 +2,7 @@
   "name": "blague",
   "version": "0.0.1-6",
   "main": "server/server.js",
-  "domain": [
+  "domains": [
     "already.cool",
     "www.already.cool"
   ],
