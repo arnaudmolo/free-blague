@@ -16,7 +16,7 @@ API_URL = 'http://' + '127.0.0.1:3000' + '/api';
 
 function access(token = require('./models/user').get('id')){
   return '?access_token=' + token;
-};
+}
 
 /**
  * @class API

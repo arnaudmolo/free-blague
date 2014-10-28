@@ -34,7 +34,7 @@ class ContentView {
       }else{
         self.setState({wording: 'mute'});
       }
-    };
+    }
 
     content.on('change:mute', testFunction);
     content.listenTo(content.get('jokes'), 'add', function(joke){
@@ -95,7 +95,7 @@ class ContentView {
 
       relaunch();
 
-    };
+    }
   }
 
   render() {

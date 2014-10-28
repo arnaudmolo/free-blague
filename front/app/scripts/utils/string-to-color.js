@@ -1,7 +1,5 @@
 
-var djb2;
-
-djb2 = function(str){
+function djb2(str){
 
   var hash;
 
@@ -13,7 +11,7 @@ djb2 = function(str){
   return hash;
 }
 
-module.exports = function(str) {
+function stringToColor(str) {
 
   var hash, r, g, b;
 
@@ -24,3 +22,6 @@ module.exports = function(str) {
 
   return '#' + ('0' + r.toString(16)).substr(-2) + ('0' + g.toString(16)).substr(-2) + ('0' + b.toString(16)).substr(-2);
 };
+
+
+module.exports = stringToColor;
