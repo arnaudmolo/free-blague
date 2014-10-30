@@ -1,5 +1,5 @@
 .content
-  width: calc(100% - 141px)
+  width: 100%
   height: 100%
   float: left
   text-align: center
@@ -9,11 +9,13 @@
 .jokes-list
   position: relative
 
+  width: 205px
+
   font-family: Helvetica
   font-weight: bolder
 
   position: fixed
-  top: 25%
+  top: 30%
   left: 50%
   transform: translate(-50%, -50%)
 
@@ -69,3 +71,33 @@
 
       p
         transform: rotate(-5deg)
+
+.button
+  text-decoration: none
+  text-transform: uppercase
+  border-radius: 6px
+  padding: 10px 40px
+  display: inline-block
+
+  font-weight: bolder
+
+  &:focus
+    margin-top: 3px
+    bottom: 47px
+
+  &.red
+    background-color: $red
+    color: white
+
+    box-shadow: 0px 5px 0px darken($red, 5%)
+
+    &:focus
+      box-shadow: 0px 2px 0px darken($red, 5%)
+
+.publish
+  position: fixed
+  bottom: 50px
+  left: 50%
+
+  transform: translate(-50%, -50%)
+

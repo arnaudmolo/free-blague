@@ -20,7 +20,6 @@ gulp.task('styles', function () {
       loadPath: ['./bower_components'],
       compass: true
     }))
-    // .pipe($.autoprefixer('last 1 version'))
     .pipe(gulp.dest(dist + '/styles'))
     .pipe($.size());
 

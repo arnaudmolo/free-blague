@@ -115,8 +115,9 @@ class ContentView {
           onClick={this.toggleMute}
           type="submit" value={this.state.wording} />
         <a
+          className="button red publish"
           href=""
-          onClick={this.showInput}>Write a joke</a>
+          onClick={this.showInput}>Publish my Joke</a>
         {wording}
       </div>
     );
