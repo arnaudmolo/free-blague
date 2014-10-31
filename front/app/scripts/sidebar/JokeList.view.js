@@ -8,7 +8,7 @@
 import React    from 'react/addons';
 import mixins   from 'backbone-react-component';
 
-import JokeView from './joke.view';
+import JokeView from './Joke.view';
 
 /**
  * @class JokeListView
