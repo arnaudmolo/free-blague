@@ -72,10 +72,25 @@
       p
         transform: rotate(-5deg)
 
-.mute
+.mute, .unmute
   position: absolute
   bottom: 50px
   right: 50px
+
+  border: none
+  height: 50px
+  width: 50px
+
+  background-color: transparent
+  background-image: url("/images/sound.svg")
+  background-size: 100px 50px
+  background-repeat: no-repeat
+  &:active
+    bottom: 47px
+
+.unmute
+  background-position: -52px 0
+
 
 .joke-container
   margin-top: 10%

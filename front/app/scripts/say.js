@@ -37,7 +37,9 @@ function sayOneSentence(voice, sentences){
 
 function say(string){
   voicesLoaded.then(function(){
+
     var voices, sentences;
+
     voices = window.speechSynthesis.getVoices();
 
     sentences = string.match( /[^\.!\?]+[\.!\?]+/g );

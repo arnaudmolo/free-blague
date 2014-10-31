@@ -132,9 +132,9 @@ class ContentView {
           collection={this.getModel().get('jokes')} />
         <input
           type="submit"
-          value={this.state.wording}
           onClick={this.toggleMute}
-          className="mute" />
+          value=""
+          className={this.state.wording} />
         <a
           className="button red publish"
           href=""
