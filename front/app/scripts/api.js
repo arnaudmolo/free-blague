@@ -12,7 +12,7 @@ var API_URL, TWO_WEEKS;
 TWO_WEEKS = 1000 * 60 * 60 * 24 * 7 * 2;
 
 API_URL = 'http://' + "arnaudmolo-blague.nodejitsu.com" + '/api';
-// API_URL = 'http://' + '127.0.0.1:3000' + '/api';
+API_URL = 'http://' + '127.0.0.1:3000' + '/api';
 
 function access(token = require('./models/user').get('id')){
   return '?access_token=' + token;
@@ -47,6 +47,13 @@ class API {
     var user, promise;
 
     user = require('./models/user');
+    joke = JSON.stringify(
+      {
+        content: joke,
+        date: new Date(),
+        language: navigator.language || 'unknown'
+      }
+    )
 
     if (user.get('logged')) {
       promise = http
@@ -55,11 +62,10 @@ class API {
             user.get('userId') +
             '/jokes' +
             access(),
-          JSON.stringify({content: joke, date: new Date()}));
+          joke);
     } else {
       promise = http
-        .post(API_URL + '/jokes',
-          JSON.stringify({content: joke, date: new Date()}));
+        .post(API_URL + '/jokes', joke);
     }
 
     return promise;
