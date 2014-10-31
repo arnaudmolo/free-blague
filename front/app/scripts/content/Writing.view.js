@@ -43,7 +43,7 @@ class Writing {
   render() {
 
     return (
-        <div className="writing" key={0} transitions={true}>
+        <div className="writing">
           <div className="close" onClick={this.close}>
             <span>x</span>
           </div>

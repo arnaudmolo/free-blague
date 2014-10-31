@@ -62,7 +62,7 @@ class API {
           JSON.stringify({content: joke, date: new Date()}));
     }
 
-    return promise.then(function(res){return res;});
+    return promise;
 
   }
 

@@ -66,7 +66,6 @@ class Content extends Model {
   defaults() {
     return {
       mute : false,
-      writing: false,
       jokes: new JokeList()
     };
   }

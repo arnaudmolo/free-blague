@@ -5,18 +5,18 @@
 * @exports <ReactClass>ContentView
 */
 
-import React  from 'react/addons';
-import mixins from 'backbone-react-component';
+import React    from 'react/addons';
+import mixins   from 'backbone-react-component';
+import Backbone from 'backbone';
 
 import Content        from './Content';
 import Writing        from './Writing.view';
 import JokeCollection from '../models/joke-list';
 import JokeList       from './JokeList.view';
-import Backbone       from 'backbone';
 
 var Events, ReactCSSTransitionGroup;
 
-Events = Backbone.Events;
+Events                  = Backbone.Events;
 ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 /**
@@ -43,11 +43,10 @@ class ContentView {
     }
 
     content.on('change:mute', testFunction);
+
     content.listenTo(content.get('jokes'), 'add', function(joke){
       self.launchWriting(joke.toString());
     });
-
-    testFunction();
 
     Events.on('joke:registered', function(){
       self.setState({writing: false});
@@ -56,6 +55,8 @@ class ContentView {
     Events.on('close', function(){
       self.setState({writing: false});
     });
+
+    testFunction();
 
     return;
 
