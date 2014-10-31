@@ -1,6 +1,6 @@
 module.exports = function(Joke){
 
-  Joke.definition.properties.date.default   = Date.now;
+  Joke.definition.properties.date.default = Date.now;
 
   Joke.random = function(cb) {
 

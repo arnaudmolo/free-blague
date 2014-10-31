@@ -12,7 +12,7 @@ var API_URL, TWO_WEEKS;
 TWO_WEEKS = 1000 * 60 * 60 * 24 * 7 * 2;
 
 API_URL = 'http://' + "arnaudmolo-blague.nodejitsu.com" + '/api';
-// API_URL = 'http://' + '127.0.0.1:3000' + '/api';
+API_URL = 'http://' + '127.0.0.1:3000' + '/api';
 
 function access(token = require('./models/user').get('id')){
   return '?access_token=' + token;
