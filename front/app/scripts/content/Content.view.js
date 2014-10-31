@@ -99,19 +99,20 @@ class ContentView {
 
     self      = this;
     iteration = 0;
+    this.setState({joke: joke});
 
-    function relaunch(){
-      setTimeout(function(){
-        ++iteration;
-        self.setState({joke: joke.slice(0, iteration)});
-        if (iteration <= joke.length) {
-          relaunch(joke);
-        }
-      }, 100);
+    // function relaunch(){
+    //   setTimeout(function(){
+    //     ++iteration;
+    //     self.setState({joke: joke.slice(0, iteration)});
+    //     if (iteration <= joke.length) {
+    //       relaunch(joke);
+    //     }
+    //   }, 100);
 
-      relaunch();
+    //   relaunch();
 
-    }
+    // }
   }
 
   render() {
@@ -124,12 +125,16 @@ class ContentView {
 
     return (
       <div>
-        <h1>{this.state.joke}</h1>
+        <div className="joke-container">
+          <h1>{this.state.joke}</h1>
+        </div>
         <JokeList
           collection={this.getModel().get('jokes')} />
         <input
+          type="submit"
+          value={this.state.wording}
           onClick={this.toggleMute}
-          type="submit" value={this.state.wording} />
+          className="mute" />
         <a
           className="button red publish"
           href=""

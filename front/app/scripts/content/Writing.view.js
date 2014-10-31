@@ -51,6 +51,7 @@ class Writing {
             <textarea
               ref="joke"
               rows="5"
+              maxlength="300"
               placeholder="Write your joke..."></textarea>
             <button
               type="submit"

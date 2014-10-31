@@ -31,7 +31,7 @@ function sayOneSentence(voice, sentences){
     sayOneSentence(this.voice, this.remaining);
   };
 
-  speechUtteranceChunker(utterance, {chunkLength: 300});
+  // speechUtteranceChunker(utterance, {chunkLength: 300});
 }
 
 
