@@ -14,6 +14,7 @@ dist   = './../client';
 gulp.task('styles', function () {
 
   return gulp.src('app/styles/main.scss')
+    .pipe($.plumber())
     .pipe($.rubySass({
       style: 'expanded',
       precision: 10,
@@ -33,6 +34,7 @@ scripts = function(){
     .pipe(gulp.dest(dist + '/scripts'));
 
   return gulp.src('app/scripts/main.js')
+    .pipe($.plumber())
     .pipe(
       $.browserify(
         {

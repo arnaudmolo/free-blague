@@ -12,6 +12,12 @@ import Content        from './Content';
 import Writing        from './Writing.view';
 import JokeCollection from '../models/joke-list';
 import JokeList       from './JokeList.view';
+import Backbone       from 'backbone';
+
+var Events, ReactCSSTransitionGroup;
+
+Events = Backbone.Events;
+ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 /**
  * @class ContentView
@@ -40,7 +46,17 @@ class ContentView {
     content.listenTo(content.get('jokes'), 'add', function(joke){
       self.launchWriting(joke.toString());
     });
+
     testFunction();
+
+    Events.on('joke:registered', function(){
+      self.setState({writing: false});
+    });
+
+    Events.on('close', function(){
+      self.setState({writing: false});
+    });
+
     return;
 
   }
@@ -86,7 +102,6 @@ class ContentView {
     function relaunch(){
       setTimeout(function(){
         ++iteration;
-        console.log(joke.slice(0, iteration), iteration);
         self.setState({joke: joke.slice(0, iteration)});
         if (iteration <= joke.length) {
           relaunch(joke);
@@ -100,10 +115,10 @@ class ContentView {
 
   render() {
 
-    var wording;
+    var writing;
 
     if (this.state.writing) {
-      wording = <Writing />;
+      writing = <Writing />;
     }
 
     return (
@@ -118,7 +133,10 @@ class ContentView {
           className="button red publish"
           href=""
           onClick={this.showInput}>Publish my Joke</a>
-        {wording}
+        <ReactCSSTransitionGroup
+          transitionName="writing-animation">
+          {writing}
+        </ReactCSSTransitionGroup>
       </div>
     );
   }
