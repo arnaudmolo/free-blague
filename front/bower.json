@@ -2,7 +2,8 @@
   "name": "blague",
   "private": true,
   "dependencies": {
-    "chunkify": "https://gist.githubusercontent.com/onesime/ef1f823a9bea20ef2354/raw/d2bd3b965265af8cbc80e883555fe556c436605c/chunkify.js"
+    "chunkify": "https://gist.githubusercontent.com/onesime/ef1f823a9bea20ef2354/raw/d2bd3b965265af8cbc80e883555fe556c436605c/chunkify.js",
+    "animate.css-scss": "~3.1.0"
   },
   "devDependencies": {}
 }

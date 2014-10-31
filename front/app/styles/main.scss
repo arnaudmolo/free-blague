@@ -3,6 +3,7 @@
 
 @import "compass/css3/images";
 @import "compass/css3/transform";
+@import "animate.css-scss/animate.scss";
 
 body {
   background: #fafafa;
@@ -17,11 +18,6 @@ body {
   padding: 0.2em 0;
 }
 
-// .with-compass {
-//   @include background(image-url("foo.png"),
-//                       linear-gradient(to bottom right, #333, #0c0),
-//                       radial-gradient(#c00, #fff 100px));
-// }
 
 @import "variables";
 @import "style";
