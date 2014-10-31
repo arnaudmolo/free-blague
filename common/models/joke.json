@@ -17,11 +17,13 @@
     },
     "positiv": {
       "type": "number",
-      "required": true
+      "required": true,
+      "default": 0
     },
     "negativ": {
       "type": "number",
-      "required": true
+      "required": true,
+      "default": 0
     }
   },
   "validations": [],

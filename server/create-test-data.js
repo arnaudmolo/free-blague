@@ -21,23 +21,17 @@ module.exports = function(app) {
       content: 'joke1.',
       date: new Date,
       userId: users[0].id,
-      language: 'fr',
-      positiv: 0,
-      negativ: 0
+      language: 'fr'
     }, {
       content: 'joke2.',
       date: new Date,
       userId: users[0].id,
-      language: 'fr',
-      positiv: 0,
-      negativ: 0
+      language: 'fr'
     }, {
       content: 'joke3.',
       date: new Date,
       userId: users[0].id,
-      language: 'fr',
-      positiv: 0,
-      negativ: 0
+      language: 'fr'
     }], function(er, joke) {
       if (er) return debug(er);
       console.log('jokes', joke);
