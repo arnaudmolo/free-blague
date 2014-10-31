@@ -13,7 +13,6 @@ module.exports = function(Joke){
         cb(null, res);
       });
     });
-
   };
 
   Joke.remoteMethod(

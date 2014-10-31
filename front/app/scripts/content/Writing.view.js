@@ -19,6 +19,10 @@ Events = Backbone.Events;
 
 class Writing {
 
+  getInitialState() {
+    return {value: ''};
+  }
+
   close() {
     Events.trigger('close');
   }
@@ -34,13 +38,21 @@ class Writing {
     User
       .createJoke(cleanString(jokeDom.value))
       .then(function(res){
-        jokeDom.value = '';
+        // jokeDom.value = '';
         say(res.content);
         Events.trigger('joke:registered');
       });
   }
 
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
   render() {
+
+    var value;
+
+    value = this.state.value;
 
     return (
         <div className="writing">
@@ -51,8 +63,11 @@ class Writing {
             <textarea
               ref="joke"
               rows="5"
-              maxlength="300"
+              maxLength="300"
+              value={value}
+              onChange={this.handleChange}
               placeholder="Write your joke..."></textarea>
+            <p className="compteur" >{300 - value.length}</p>
             <button
               type="submit"
               className="button red publish" > Publish my joke
