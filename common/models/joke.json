@@ -14,6 +14,14 @@
     "language": {
       "type": "string",
       "required": true
+    },
+    "positiv": {
+      "type": "number",
+      "required": true
+    },
+    "negativ": {
+      "type": "number",
+      "required": true
     }
   },
   "validations": [],

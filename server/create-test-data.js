@@ -20,15 +20,24 @@ module.exports = function(app) {
     users[0].jokes.create([{
       content: 'joke1.',
       date: new Date,
-      userId: users[0].id
+      userId: users[0].id,
+      language: 'fr',
+      positiv: 0,
+      negativ: 0
     }, {
       content: 'joke2.',
       date: new Date,
-      userId: users[0].id
+      userId: users[0].id,
+      language: 'fr',
+      positiv: 0,
+      negativ: 0
     }, {
       content: 'joke3.',
       date: new Date,
-      userId: users[0].id
+      userId: users[0].id,
+      language: 'fr',
+      positiv: 0,
+      negativ: 0
     }], function(er, joke) {
       if (er) return debug(er);
       console.log('jokes', joke);
