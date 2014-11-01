@@ -74,18 +74,18 @@ class User extends Model {
       localStorage.setItem('user', this);
     });
 
-    setTimeout(function(){
-      if (user.logged) {
-        self.set('logged', true);
-        self
-          .getJokes()
-          .error(function(res){
-            if (res.error.status === 401) {
-              return self.login();
-            }
-          });
-      }
-    });
+    // setTimeout(function(){
+    //   if (user.logged) {
+    //     self.set('logged', true);
+    //     self
+    //       .getJokes()
+    //       .error(function(res){
+    //         if (res.error.status === 401) {
+    //           return self.login();
+    //         }
+    //       });
+    //   }
+    // });
 
     return;
   }

@@ -1,5 +1,5 @@
 .content
-  width: calc(100% - 141px)
+  width: 100%
   height: 100%
   float: left
   text-align: center
@@ -9,11 +9,13 @@
 .jokes-list
   position: relative
 
+  width: 205px
+
   font-family: Helvetica
   font-weight: bolder
 
   position: fixed
-  top: 25%
+  top: 30%
   left: 50%
   transform: translate(-50%, -50%)
 
@@ -69,3 +71,29 @@
 
       p
         transform: rotate(-5deg)
+
+.mute, .unmute
+  position: absolute
+  bottom: 50px
+  right: 50px
+
+  border: none
+  height: 50px
+  width: 50px
+
+  background-color: transparent
+  background-image: url("/images/sound.svg")
+  background-size: 100px 50px
+  background-repeat: no-repeat
+  &:active
+    bottom: 47px
+
+.unmute
+  background-position: -52px 0
+
+
+.joke-container
+  margin-top: 10%
+  h1
+    color: white
+    font-size: 3em

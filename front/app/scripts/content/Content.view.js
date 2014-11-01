@@ -5,13 +5,19 @@
 * @exports <ReactClass>ContentView
 */
 
-import React  from 'react/addons';
-import mixins from 'backbone-react-component';
+import React    from 'react/addons';
+import mixins   from 'backbone-react-component';
+import Backbone from 'backbone';
 
 import Content        from './Content';
 import Writing        from './Writing.view';
 import JokeCollection from '../models/joke-list';
 import JokeList       from './JokeList.view';
+
+var Events, ReactCSSTransitionGroup;
+
+Events                  = Backbone.Events;
+ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 /**
  * @class ContentView
@@ -37,10 +43,21 @@ class ContentView {
     }
 
     content.on('change:mute', testFunction);
+
     content.listenTo(content.get('jokes'), 'add', function(joke){
       self.launchWriting(joke.toString());
     });
+
+    Events.on('joke:registered', function(){
+      self.setState({writing: false});
+    });
+
+    Events.on('close', function(){
+      self.setState({writing: false});
+    });
+
     testFunction();
+
     return;
 
   }
@@ -82,42 +99,50 @@ class ContentView {
 
     self      = this;
     iteration = 0;
+    this.setState({joke: joke});
 
-    function relaunch(){
-      setTimeout(function(){
-        ++iteration;
-        console.log(joke.slice(0, iteration), iteration);
-        self.setState({joke: joke.slice(0, iteration)});
-        if (iteration <= joke.length) {
-          relaunch(joke);
-        }
-      }, 100);
+    // function relaunch(){
+    //   setTimeout(function(){
+    //     ++iteration;
+    //     self.setState({joke: joke.slice(0, iteration)});
+    //     if (iteration <= joke.length) {
+    //       relaunch(joke);
+    //     }
+    //   }, 100);
 
-      relaunch();
+    //   relaunch();
 
-    }
+    // }
   }
 
   render() {
 
-    var wording;
+    var writing;
 
     if (this.state.writing) {
-      wording = <Writing />;
+      writing = <Writing />;
     }
 
     return (
       <div>
-        <h1>{this.state.joke}</h1>
+        <div className="joke-container">
+          <h1>{this.state.joke}</h1>
+        </div>
         <JokeList
           collection={this.getModel().get('jokes')} />
         <input
+          type="submit"
           onClick={this.toggleMute}
-          type="submit" value={this.state.wording} />
+          value=""
+          className={this.state.wording} />
         <a
+          className="button red publish"
           href=""
-          onClick={this.showInput}>Write a joke</a>
-        {wording}
+          onClick={this.showInput}>Publish my Joke</a>
+        <ReactCSSTransitionGroup
+          transitionName="writing-animation">
+          {writing}
+        </ReactCSSTransitionGroup>
       </div>
     );
   }

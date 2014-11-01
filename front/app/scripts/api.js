@@ -43,14 +43,33 @@ class API {
    */
 
   saveJoke(joke) {
-    return http
-      .post(API_URL +
-          '/users/' +
-          require('./models/user').get('userId') +
-          '/jokes' +
-          access(),
-        JSON.stringify({content: joke, date: new Date()}))
-      .then(function(res){return res;});
+
+    var user, promise;
+
+    user = require('./models/user');
+    joke = JSON.stringify(
+      {
+        content: joke,
+        date: new Date(),
+        language: navigator.language || 'unknown'
+      }
+    );
+
+    if (user.get('logged')) {
+      promise = http
+        .post(API_URL +
+            '/users/' +
+            user.get('userId') +
+            '/jokes' +
+            access(),
+          joke);
+    } else {
+      promise = http
+        .post(API_URL + '/jokes', joke);
+    }
+
+    return promise;
+
   }
 
   /**

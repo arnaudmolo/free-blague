@@ -24,6 +24,7 @@
     "speechSynthesis": false,
     "window": false,
     "XMLHttpRequest": false,
-    "ActiveXObject": false
+    "ActiveXObject": false,
+    "navigator": false
   }
 }

@@ -31,13 +31,14 @@ function sayOneSentence(voice, sentences){
     sayOneSentence(this.voice, this.remaining);
   };
 
-  speechUtteranceChunker(utterance, {chunkLength: 300});
+  // speechUtteranceChunker(utterance, {chunkLength: 300});
 }
-
 
 function say(string){
   voicesLoaded.then(function(){
+
     var voices, sentences;
+
     voices = window.speechSynthesis.getVoices();
 
     sentences = string.match( /[^\.!\?]+[\.!\?]+/g );
