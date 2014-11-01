@@ -40,7 +40,7 @@ module.exports = function(Joke){
       }
       joke.save(function(err, res){
         console.log(res);
-        cb(null, res);
+        cb(null,  res);
       });
     })
   };

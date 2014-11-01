@@ -43,12 +43,8 @@ class Sidebar extends BaseClass {
 
   componentDidMount() {
 
-    var self;
-
-    self = this;
-
-    User.listenTo(User, 'change:logged', function(){
-      self.setState({visible: !User.get('logged')});
+    User.listenTo(User, 'change:logged', () => {
+      this.setState({visible: !User.get('logged')});
     });
 
     return;

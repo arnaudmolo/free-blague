@@ -29,34 +29,33 @@ class ContentView {
 
   componentDidMount() {
 
-    var content, self;
+    var content;
 
-    self = this;
     content = this.getModel();
 
     function testFunction(){
       if (content.get('mute')) {
-        self.setState({wording: 'unmute'});
+        this.setState({wording: 'unmute'});
       }else{
-        self.setState({wording: 'mute'});
+        this.setState({wording: 'mute'});
       }
     }
 
-    content.on('change:mute', testFunction);
+    content.on('change:mute', testFunction.bind(this));
 
-    content.listenTo(content.get('jokes'), 'add', function(joke){
-      self.launchWriting(joke.toString());
+    content.listenTo(content.get('jokes'), 'add', (joke) => {
+      this.launchWriting(joke.toString());
     });
 
-    Events.on('joke:registered', function(){
-      self.setState({writing: false});
+    Events.on('joke:registered', () => {
+      this.setState({writing: false});
     });
 
-    Events.on('close', function(){
-      self.setState({writing: false});
+    Events.on('close', () => {
+      this.setState({writing: false});
     });
 
-    testFunction();
+    testFunction.bind(this)();
 
     return;
 
@@ -95,9 +94,8 @@ class ContentView {
 
   launchWriting (joke) {
 
-    var self, iteration, timeout;
+    var iteration, timeout;
 
-    self      = this;
     iteration = 0;
     this.setState({joke: joke});
 

@@ -44,14 +44,12 @@ class JokeListView {
 
   componentDidMount() {
 
-    var self, collection;
-
-    self = this;
+    var collection;
 
     collection = this.getCollection();
 
-    collection.listenTo(collection, 'add', function(){
-      self.setState({render: Math.random()});
+    collection.listenTo(collection, 'add', () => {
+      this.setState({render: Math.random()});
     });
 
     return;
