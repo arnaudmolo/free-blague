@@ -18,6 +18,9 @@ class Joke extends Model {
   initialize(options) {
     super(options);
     this.set('added', Date.now());
+    this.on('change', function(){
+      console.log('initialize onchange');
+    })
   }
 
   defaults() {
@@ -29,6 +32,10 @@ class Joke extends Model {
 
   toString() {
     return this.get('content');
+  }
+
+  hasChanged() {
+    console.log('hasChanged');
   }
 
 }

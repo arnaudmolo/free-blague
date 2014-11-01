@@ -5,11 +5,13 @@
 * @exports ReactClass JokeView
 */
 
-import React  from 'react/addons';
-import mixins from 'backbone-react-component';
-import Color  from 'Color';
+import React    from 'react/addons';
+import mixins   from 'backbone-react-component';
+import Color    from 'color';
 
 import stringToColor from './../utils/string-to-color';
+
+var events;
 
 /**
  * @class JokeView
@@ -19,24 +21,36 @@ import stringToColor from './../utils/string-to-color';
 
 class JokeView {
 
+  get mixins(){
+    return [mixins];
+  }
+
   getInitialState() {
     return {
       bg: {
         backgroundColor: '#00FF00'
-      }
+      },
+      voted: false
     };
   }
 
   componentDidMount() {
 
-    var startColor, endColor, color;
+    var self, startColor, endColor, color, model;
 
-    color = stringToColor(this.getModel().get('content'));
+    self       = this;
+    model      = this.getModel();
+    color      = stringToColor(model.get('content'));
     startColor = Color(color);
-    endColor = startColor.clone().alpha(0.5);
+    endColor   = startColor.clone().alpha(0.5);
     startColor = startColor.alpha(0);
 
+    model.on('change:vote', function(){
+      self.voted();
+    });
+
     this.setState({
+      voted: model.get('voted'),
       bg: {
         backgroundColor: color
       },
@@ -61,30 +75,51 @@ class JokeView {
 
   }
 
+  voted(){
+    this.setState({
+      voted: true
+    });
+  }
+
+  handleUpVote(event) {
+    this.getModel().set('vote', true);
+  }
+
+  handleDownVote(event) {
+    this.getModel().set('vote', false);
+  }
+
   render() {
 
-    var model;
+    var vote;
 
-    model = this.getModel();
+    // <div className="wrapper">
+    //   <p>{this.getModel().get('content')}</p>
+    //   <div
+    //     className="shadow"
+    //     style={this.state.gradient} >
+    //   </div>
+    // </div>
+
+    if (!this.state.voted) {
+      vote = (
+        <span>
+          <button onClick={this.handleUpVote}>+</button>
+          <button onClick={this.handleDownVote}>-</button>
+        </span>
+      );
+    };
 
     return (
       <li
         className="joke"
         style={this.state.bg}
-        key={this.props.key} >
-        <div className="wrapper">
-          <p>{model.get('content')}</p>
-          <div
-            className="shadow"
-            style={this.state.gradient} >
-          </div>
-        </div>
+        key={this.props.key}>
+        { vote }
       </li>
     );
   }
 }
-
-JokeView.prototype.mixins = [mixins];
 
 module.exports = React.createClass(JokeView.prototype);
 
