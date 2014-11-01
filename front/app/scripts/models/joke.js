@@ -25,21 +25,18 @@ class Joke extends Model {
     return {
       id: 0,
       content: '',
-      voted: false
+      voted: 0
     };
   }
 
   vote() {
-    if (!this.get('voted')) {
 
-      var self;
-
-      self = this;
+    if (this.get('voted') === 'up' || this.get('voted') === 'down') {
 
       api.updateJoke(this)
-        .then(function(res){
-          console.log(res);
-          self.set('voted', true)
+        .then((res) => {
+          this.set('voted', 2);
+          this.set(res.joke);
         });
     };
   }

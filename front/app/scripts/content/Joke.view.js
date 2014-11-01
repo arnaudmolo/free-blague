@@ -30,7 +30,7 @@ class JokeView {
       bg: {
         backgroundColor: '#00FF00'
       },
-      voted: false
+      voted: 0
     };
   }
 
@@ -45,8 +45,10 @@ class JokeView {
     endColor   = startColor.clone().alpha(0.5);
     startColor = startColor.alpha(0);
 
-    model.on('change:vote', function(){
-      self.voted();
+    model.on('change:voted', function(){
+      self.setState({
+        voted: 1
+      });
     });
 
     this.setState({
@@ -75,35 +77,15 @@ class JokeView {
 
   }
 
-  voted(){
-    this.setState({
-      voted: true
-    });
-  }
-
   handleUpVote(event) {
-
-    var model, count;
-
-    model = this.getModel();
-    count = model.get('positiv') + 1;
-
-    model.set({
-      vote   : true,
-      positiv: count
+    this.getModel().set({
+      voted  : 'up'
     });
   }
 
   handleDownVote(event) {
-
-    var model, count;
-
-    model = this.getModel();
-    count = model.get('negativ') + 1;
-
-    model.set({
-      vote   : false,
-      negativ: count
+    this.getModel().set({
+      voted  : 'down'
     });
   }
 

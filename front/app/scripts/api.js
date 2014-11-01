@@ -74,7 +74,15 @@ class API {
 
   updateJoke(joke) {
 
-    return http.put(API_URL + '/jokes/' + joke.get('id'), joke);
+    var voted;
+
+    if (joke.get('voted') === 'up') {
+      voted = true;
+    }else{
+      voted = false;
+    }
+
+    return http.get(API_URL + '/Jokes/vote?=' + voted + '?jokeId=' + joke.get('id'));
 
   }
 

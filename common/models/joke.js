@@ -38,7 +38,10 @@ module.exports = function(Joke){
       }else{
         ++joke.negativ;
       }
-      joke.save(cb);
+      joke.save(function(err, res){
+        console.log(res);
+        cb(null, res);
+      });
     })
   };
 
@@ -53,6 +56,10 @@ module.exports = function(Joke){
             arg: 'jokeId',
             type: 'string'
           }],
+        returns: {
+            arg: 'joke',
+            type: 'Object'
+        },
         http: {
           verb: 'get'
         }
