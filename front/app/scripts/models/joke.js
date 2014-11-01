@@ -31,8 +31,16 @@ class Joke extends Model {
 
   vote() {
     if (!this.get('voted')) {
-      console.log(this);
-      // api.saveJoke(this.get('content'))
+
+      var self;
+
+      self = this;
+
+      api.updateJoke(this)
+        .then(function(res){
+          console.log(res);
+          self.set('voted', true)
+        });
     };
   }
 

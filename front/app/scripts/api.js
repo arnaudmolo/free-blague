@@ -33,7 +33,7 @@ class API {
 
   getRandomJoke() {
     return http.get(API_URL + '/jokes/random')
-      .then(function(res){return res.joke.content;});
+      .then(function(res){return res.joke;});
   }
 
   /**
@@ -69,6 +69,12 @@ class API {
     }
 
     return promise;
+
+  }
+
+  updateJoke(joke) {
+
+    return http.put(API_URL + '/jokes/' + joke.get('id'), joke);
 
   }
 

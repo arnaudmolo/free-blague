@@ -29,9 +29,10 @@ class JokeList extends Collection {
   initialize(options) {
     super(options);
     this.model = Joke;
-    this.on('change', function(joke){
+    this.on('change', function(joke, obj){
+      console.log("log", joke);
       if (this.models[this.models.length - 1] === joke) {
-        joke.vote()
+        joke.vote();
       };
     });
   }

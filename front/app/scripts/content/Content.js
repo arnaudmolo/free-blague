@@ -53,9 +53,12 @@ class Content extends Model {
 
     api
       .getRandomJoke()
-      .then(say)
       .then(function(res){
-        self.get('jokes').add({content: res});
+        say(res.content);
+        return res
+      })
+      .then(function(res){
+        self.get('jokes').add(res);
       });
 
     this.timeout = setTimeout(function(){

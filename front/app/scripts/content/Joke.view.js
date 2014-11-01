@@ -82,11 +82,29 @@ class JokeView {
   }
 
   handleUpVote(event) {
-    this.getModel().set('vote', true);
+
+    var model, count;
+
+    model = this.getModel();
+    count = model.get('positiv') + 1;
+
+    model.set({
+      vote   : true,
+      positiv: count
+    });
   }
 
   handleDownVote(event) {
-    this.getModel().set('vote', false);
+
+    var model, count;
+
+    model = this.getModel();
+    count = model.get('negativ') + 1;
+
+    model.set({
+      vote   : false,
+      negativ: count
+    });
   }
 
   render() {
