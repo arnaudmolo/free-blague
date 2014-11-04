@@ -47,18 +47,20 @@ class Content extends Model {
 
   randomizeRequest() {
 
+    var self;
+
     api
       .getRandomJoke()
       .then((res) => {
         say(res.content);
         return res
       })
-      .then((res) => {
-        this.get('jokes').add(res);
+      .then(function(res){
+        self.get('jokes').add(res);
       });
 
-    this.timeout = setTimeout(() => {
-      this.randomizeRequest.call(this);
+    this.timeout = setTimeout(function(){
+      self.randomizeRequest.call(self);
     }, 30000);
   }
 

@@ -76,11 +76,7 @@ class API {
 
     var voted;
 
-    if (joke.get('voted') === 'up') {
-      voted = true;
-    }else{
-      voted = false;
-    }
+    voted = joke.get('voted') === 'up';
 
     return http.get(API_URL + '/Jokes/vote?=' + voted + '?jokeId=' + joke.get('id'));
 

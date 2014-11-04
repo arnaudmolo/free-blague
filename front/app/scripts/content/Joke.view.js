@@ -11,8 +11,6 @@ import Color    from 'color';
 
 import stringToColor from './../utils/string-to-color';
 
-var events;
-
 /**
  * @class JokeView
  * Extended from React Class

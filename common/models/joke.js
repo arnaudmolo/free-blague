@@ -38,10 +38,7 @@ module.exports = function(Joke){
       }else{
         ++joke.negativ;
       }
-      joke.save(function(err, res){
-        console.log(res);
-        cb(null,  res);
-      });
+      joke.save(cb);
     })
   };
 

@@ -29,8 +29,9 @@ class ContentView {
 
   componentDidMount() {
 
-    var content;
+    var content, self;
 
+    self    = this;
     content = this.getModel();
 
     function testFunction(){
@@ -41,21 +42,23 @@ class ContentView {
       }
     }
 
-    content.on('change:mute', testFunction.bind(this));
+    testFunction = testFunction.bind(this);
 
-    content.listenTo(content.get('jokes'), 'add', (joke) => {
-      this.launchWriting(joke.toString());
+    content.on('change:mute', testFunction);
+
+    content.listenTo(content.get('jokes'), 'add', function(joke){
+      self.launchWriting(joke.toString());
     });
 
-    Events.on('joke:registered', () => {
-      this.setState({writing: false});
+    Events.on('joke:registered', function(){
+      self.setState({writing: false});
     });
 
-    Events.on('close', () => {
-      this.setState({writing: false});
+    Events.on('close', function(){
+      self.setState({writing: false});
     });
 
-    testFunction.bind(this)();
+    testFunction();
 
     return;
 
