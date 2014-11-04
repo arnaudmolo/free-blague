@@ -34,16 +34,17 @@ class JokeView {
 
   componentDidMount() {
 
-    var startColor, endColor, color, model;
+    var self, startColor, endColor, color, model;
 
+    self       = this;
     model      = this.getModel();
     color      = stringToColor(model.get('content'));
     startColor = Color(color);
     endColor   = startColor.clone().alpha(0.5);
     startColor = startColor.alpha(0);
 
-    model.on('change:voted', () => {
-      this.setState({
+    model.on('change:voted', function(){
+      self.setState({
         voted: 1
       });
     });
