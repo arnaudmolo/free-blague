@@ -33,16 +33,16 @@ class Joke extends Model {
 
     if (this.get('voted') === 'up' || this.get('voted') === 'down') {
 
+      var self;
+
+      self = this;
+
       api.updateJoke(this)
-        .then((res) => {
-          this.set('voted', 2);
-          this.set(res.joke);
+        .then(function(res){
+          self.set('voted', 2);
+          self.set(res.joke);
         });
     };
-  }
-
-  hasChanged() {
-    console.log('hasChanged');
   }
 
   toString() {

@@ -49,9 +49,11 @@ class Content extends Model {
 
     var self;
 
+    self = this;
+
     api
       .getRandomJoke()
-      .then((res) => {
+      .then(function(res){
         say(res.content);
         return res
       })

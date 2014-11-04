@@ -98,20 +98,28 @@ class User extends Model {
 
   getJokes() {
 
+    var self;
+
+    self = this;
+
     return api
       .getUserJokes(this.get('userId'), this.get('id'))
-      .then((res) => {
-        this.get('jokes').add(res);
+      .then(function(res){
+        self.get('jokes').add(res);
         return res;
       });
   }
 
   createJoke(joke) {
 
+    var self;
+
+    self = this;
+
     return api
       .saveJoke(joke)
-      .then((joke) => {
-        this.get('jokes').add(joke);
+      .then(function(joke){
+        self.get('jokes').add(joke);
         return joke;
       });
   }
@@ -127,24 +135,28 @@ class User extends Model {
 
   login() {
 
+    var self;
+
+    self = this;
+
     return api
       .loginUser({
         email: this.get('email'),
         password: this.get('password')
-      }).then((res) => {
+      }).then(function(res){
 
-        this.set('logged', true);
-        this.set('id', res.id);
-        this.set('userId', res.userId);
+        self.set('logged', true);
+        self.set('id', res.id);
+        self.set('userId', res.userId);
 
         return res;
-      }).then((res) => {
+      }).then(funciton(res){
 
         api
-          .getUserJokes(this.get('userId'), this.get('id'))
-          .then((res) => {
+          .getUserJokes(self.get('userId'), self.get('id'))
+          .then(function(res){
 
-            this.get('jokes').add(res);
+            self.get('jokes').add(res);
 
             return res;
           });

@@ -63,9 +63,4 @@ module.exports = function(Joke){
       }
   );
 
-  // Joke.beforeValidate = function(next, joke){
-  //   // joke.geo = geoip.lookup(global.req.headers.host.split(':')[0]);
-  //   next();
-  // };
-
 };

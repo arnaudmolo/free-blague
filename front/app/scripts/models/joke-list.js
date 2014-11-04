@@ -29,7 +29,7 @@ class JokeList extends Collection {
   initialize(options) {
     super(options);
     this.on('change', function(joke){
-      if (this.models[this.models.length - 1] === joke) {
+      if (this.at(this.length - 1) === joke) {
         joke.vote();
       };
     });
