@@ -50,7 +50,7 @@ scripts = function(){
     .pipe(gulp.dest(dist + '/scripts'))
     .pipe($.size());
 
-}
+};
 
 gulp.task('scripts', scripts);
 
