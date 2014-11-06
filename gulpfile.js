@@ -122,7 +122,7 @@ gulp.task('jshint', function(){
          '!' + app + './scripts/utils/string-to-color.js',
          '!' + app + '/scripts/runtime.js'])
     .pipe($.react())
-    .pipe(jshint('./../.jshintrc'))
+    .pipe(jshint('./.jshintrc'))
     .pipe(jshint.reporter('jshint-stylish'));
 
 });
