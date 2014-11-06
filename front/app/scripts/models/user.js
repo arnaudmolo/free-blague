@@ -150,7 +150,7 @@ class User extends Model {
         self.set('userId', res.userId);
 
         return res;
-      }).then(funciton(res){
+      }).then(function(res){
 
         api
           .getUserJokes(self.get('userId'), self.get('id'))

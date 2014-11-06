@@ -39,7 +39,7 @@ module.exports = function(Joke){
         ++joke.negativ;
       }
       joke.save(cb);
-    })
+    });
   };
 
   Joke.remoteMethod(
