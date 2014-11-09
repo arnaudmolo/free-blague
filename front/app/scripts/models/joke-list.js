@@ -31,7 +31,7 @@ class JokeList extends Collection {
     this.on('change', function(joke){
       if (this.at(this.length - 1) === joke) {
         joke.vote();
-      };
+      }
     });
   }
 
