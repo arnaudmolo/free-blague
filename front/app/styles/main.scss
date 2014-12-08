@@ -1,9 +1,13 @@
 // bower:scss
 // endbower
 
+@import "compass/css3/images";
+@import "compass/css3/transform";
+@import "animate.css-scss/animate.scss";
+
 body {
   background: #fafafa;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #333;
 }
 
@@ -14,8 +18,10 @@ body {
   padding: 0.2em 0;
 }
 
+
 @import "variables";
 @import "style";
 @import "sidebar";
 @import "content";
-@import "follow-cursor";
+@import "writing";
+@import "buttons";

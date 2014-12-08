@@ -25,11 +25,15 @@
     "dataSource": "db",
     "public": false
   },
-  "Joke": {
-    "dataSource": "JokesDB",
+  "user": {
+    "dataSource": "db",
     "public": true
   },
+<<<<<<< HEAD
   "user": {
+=======
+  "Joke": {
+>>>>>>> master
     "dataSource": "db",
     "public": true
   }

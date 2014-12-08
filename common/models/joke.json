@@ -11,8 +11,8 @@
       "type": "date",
       "required": true
     },
-    "random": {
-      "type": "number",
+    "language": {
+      "type": "string",
       "required": true
     }
   },
@@ -21,16 +21,28 @@
     "user": {
       "type": "belongsTo",
       "model": "user",
-      "foreignKey": "ownerId"
+      "foreignKey": "userId"
     }
   },
   "acls": [
     {
-      "accessType": "*",
       "principalType": "ROLE",
       "principalId": "$everyone",
-      "permission": "ALLOW"
-    }
+      "permission": "ALLOW",
+      "property": "create"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "find"
+    },
+    {
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "random"
+   }
   ],
   "methods": []
 }

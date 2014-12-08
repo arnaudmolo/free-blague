@@ -2,20 +2,29 @@
   "node": true,
   "esnext": true,
   "bitwise": true,
-  "camelcase": true,
+  "camelcase": false,
   "eqeqeq": true,
   "eqnull": true,
   "immed": true,
   "indent": 2,
   "latedef": "nofunc",
-  "newcap": true,
+  "newcap": false,
   "nonew": true,
   "noarg": true,
-  "quotmark": "single",
+  "quotmark": false,
   "regexp": true,
   "undef": true,
   "unused": false,
   "trailing": true,
   "sub": true,
-  "maxlen": 80
+  "maxlen": 120,
+  "globals": {
+    "document": false,
+    "localStorage": false,
+    "speechSynthesis": false,
+    "window": false,
+    "XMLHttpRequest": false,
+    "ActiveXObject": false,
+    "navigator": false
+  }
 }

@@ -1,12 +1,23 @@
-'use strict';
+/**
+* @module Requester
+* @exports http static class
+*/
 
-var Promise, isObject, parse, XHR;
+import Promise from 'bluebird';
+import _       from 'underscore';
 
-Promise = require('bluebird');
-isObject = require('lodash').isObject;
+var {isObject} = _;
+
+var XHR;
+
 XHR = XMLHttpRequest || ActiveXObject;
 
-parse = function (req) {
+/**
+* Handle the parsing of the http responses
+* @return {Array}(result, request)
+*/
+
+function parse(req) {
 
   var result;
 
@@ -18,35 +29,49 @@ parse = function (req) {
 
   return [result, req];
 
-};
+}
 
-var xhr = function(type, url, data){
+/**
+* Send an XHR request
+* @return {Promise}({Object}res)
+*   Contains {Promise}promise#sent & {Promise}promise#process
+*/
 
-  var promise;
+function xhr(type, url, data){
+
+  var promise, request, sent, process, resolveSent, resolveProcess;
 
   if (isObject(data)) {
     data = JSON.stringify(data);
   }
 
+  request = new XHR();
+  sent    = new Promise(function(resolve){resolveSent = resolve;});
+  process = new Promise(function(resolve){resolveProcess = resolve;});
+
+  request.open(type, url, true);
+  request.setRequestHeader('Content-type', 'application/json');
+
+  /**
+   * Resolve the Promise when request res status is 200 or 204
+   */
+
   promise = new Promise(function(resolve, reject){
-
-    var request;
-
-    request  = new XHR();
-
-    request.open(type, url, true);
-    request.setRequestHeader('Content-type', 'application/json');
-
     request.onreadystatechange = function(){
 
       var res;
 
+      if (request.readyState === 2) {
+        resolveSent(2);
+      }
+
+      if (request.readyState === 3) {
+        resolveProcess(2);
+      }
+
       if (request.readyState === 4) {
         res = parse(request)[0];
-        if (res.joke === null) {
-          reject('the joke is null');
-        }
-        if (request.status === 200) {
+        if (request.status === 200 || request.status === 204) {
           resolve(res);
         }else{
           reject(res);
@@ -57,20 +82,26 @@ var xhr = function(type, url, data){
     request.send(data);
 
   });
-  return promise;
-};
 
-module.exports = {
-  get: function(src){
-    return xhr('GET', src);
-  },
-  put: function(url, data){
+  promise.sent = sent;
+  promise.process = process;
+
+  return promise;
+}
+
+class http {
+  get(url) {
+    return xhr('GET', url);
+  }
+  put(url, data) {
     return xhr('PUT', url, data);
-  },
-  post: function(url, data){
+  }
+  post(url, data) {
     return xhr('POST', url, data);
-  },
-  delete: function(url){
+  }
+  delete(url) {
     return xhr('DELETE', url);
   }
-};
+}
+
+module.exports = http.prototype;

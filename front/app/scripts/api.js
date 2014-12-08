@@ -1,29 +1,134 @@
-'use strict';
+/**
+* @module API
+* @exports {static class} API
+*/
 
-var http, API_URL, TWO_WEEKS;
+import Promise  from 'bluebird';
+
+import http     from './requester';
+
+var API_URL, TWO_WEEKS;
+
 TWO_WEEKS = 1000 * 60 * 60 * 24 * 7 * 2;
 
-http    = require('./requester');
-// API_URL = 'http://' + "arnaudmolo-blague.nodejitsu.com" + '/api';
+API_URL = 'http://' + "arnaudmolo-blague.nodejitsu.com" + '/api';
 API_URL = 'http://' + '127.0.0.1:3000' + '/api';
 
-module.exports = {
-  getRandomJoke: function(){
-    return http.get(API_URL + '/Jokes/random')
+function access(token = require('./models/user').get('id')){
+  return '?access_token=' + token;
+}
+
+/**
+ * @class API
+ * Deal with the API
+ */
+
+class API {
+
+  /**
+   * Get a random Joke from the server
+   *
+   * @return {Promise}(joke)
+   */
+
+  getRandomJoke() {
+    return http.get(API_URL + '/jokes/random')
       .then(function(res){return res.joke.content;});
-  },
-  saveJoke: function(joke){
-    return http
-      .post(API_URL + '/Jokes', JSON.stringify({content: joke}))
-      .then(function(res){return res.content;});
-  },
-  createUser: function(user){
-    return http
-      .post(API_URL + '/Dudes', JSON.stringify(user));
-  },
-  loginUser: function(user){
-    user.ttl = TWO_WEEKS;
-    return http
-      .post(API_URL + '/Dudes', JSON.stringify(user));
   }
-};
+
+  /**
+   * Save the joke
+   *
+   * @return {Promise}(joke)
+   */
+
+  saveJoke(joke) {
+
+    var user, promise;
+
+    user = require('./models/user');
+    joke = JSON.stringify(
+      {
+        content: joke,
+        date: new Date(),
+        language: navigator.language || 'unknown'
+      }
+    );
+
+    if (user.get('logged')) {
+      promise = http
+        .post(API_URL +
+            '/users/' +
+            user.get('userId') +
+            '/jokes' +
+            access(),
+          joke);
+    } else {
+      promise = http
+        .post(API_URL + '/jokes', joke);
+    }
+
+    return promise;
+
+  }
+
+  /**
+   * Create the user
+   *
+   * @return {Promise}(userId)
+   */
+
+  createUser(user) {
+
+    var promise;
+
+    promise = http.post(API_URL + '/users', JSON.stringify(user));
+
+    return promise;
+  }
+
+  /**
+   * Auth the user.
+   * Update the TTL.
+   *
+   * @return {Promise}(AccessToken)
+   */
+
+  loginUser(user) {
+
+    var promise;
+
+    user.ttl = TWO_WEEKS;
+
+    promise = http
+      .post(API_URL + '/users/login', JSON.stringify(user));
+
+    return promise;
+  }
+
+  /**
+   * Get user's jokes
+   *
+   * @return {Promise}(jokes)
+   */
+
+  getUserJokes(id, token){
+
+    var promise;
+
+    promise = http.get(API_URL + '/users/' + id + '/jokes' + access(token));
+
+    return promise;
+  }
+
+  logout(token) {
+    return http.post(API_URL + '/users/logout' + access(token), {});
+  }
+
+}
+
+/**
+ * Export the prototype to use API as a static Class
+ */
+
+module.exports = API.prototype;

@@ -33,10 +33,10 @@ app.use(loopback.urlNotFound());
 // The ultimate error handler.
 app.use(loopback.errorHandler());
 
+require('./create-test-data')(app);
+
 // Use cookies for authentification
 app.use(loopback.token({model: app.models.accessToken}));
-
-require('./create-test-data')(app);
 
 app.start = function() {
   // start the web server
