@@ -4,9 +4,6 @@
 */
 
 import Promise from 'bluebird';
-import _       from 'underscore';
-
-var {isObject} = _;
 
 var XHR;
 
@@ -41,7 +38,7 @@ function xhr(type, url, data){
 
   var promise, request, sent, process, resolveSent, resolveProcess;
 
-  if (isObject(data)) {
+  if (data) {
     data = JSON.stringify(data);
   }
 

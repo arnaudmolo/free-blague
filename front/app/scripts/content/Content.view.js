@@ -27,6 +27,14 @@ ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 class ContentView {
 
+  testFunction() {
+    if (this.getModel().get('mute')) {
+      this.setState({wording: 'unmute'});
+    } else {
+      this.setState({wording: 'mute'});
+    }
+  }
+
   componentDidMount() {
 
     var content, self;
@@ -34,15 +42,7 @@ class ContentView {
     self = this;
     content = this.getModel();
 
-    function testFunction(){
-      if (content.get('mute')) {
-        self.setState({wording: 'unmute'});
-      }else{
-        self.setState({wording: 'mute'});
-      }
-    }
-
-    content.on('change:mute', testFunction);
+    content.on('change:mute', this.testFunction);
 
     content.listenTo(content.get('jokes'), 'add', function(joke){
       self.launchWriting(joke.toString());
@@ -56,7 +56,7 @@ class ContentView {
       self.setState({writing: false});
     });
 
-    testFunction();
+    this.testFunction();
 
     return;
 
