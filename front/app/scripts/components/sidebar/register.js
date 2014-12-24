@@ -8,8 +8,8 @@
 import React     from 'react/addons';
 import mixins    from 'backbone-react-component';
 
-import api       from '../api';
-import BaseClass from '../utils/react-class';
+import api       from './../../api';
+import BaseClass from './../../utils/react-class';
 
 class Register extends BaseClass {
 

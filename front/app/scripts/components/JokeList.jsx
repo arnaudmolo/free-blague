@@ -1,10 +1,10 @@
 /** @jsx React.DOM */
 
 import React    from 'react/addons';
+import mixins   from  'backbone-react-component';
 
-import JokeList from './../sidebar/JokeList.view';
-import JokeView from './Joke.view';
-import mixins from  'backbone-react-component';
+import JokeList from './sidebar/JokeList';
+import JokeView from './Joke';
 
 var ReactCSSTransitionGroup;
 

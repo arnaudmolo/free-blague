@@ -7,9 +7,9 @@
 
 import React     from 'react/addons';
 
-import Login     from './login.view';
-import Register  from './register.view';
-import JokeList  from './JokeList.view';
+import Login     from './login';
+import Register  from './register';
+import JokeList  from './JokeList';
 import User      from '../models/user';
 import BaseClass from '../utils/react-class';
 
@@ -86,7 +86,7 @@ class Sidebar extends BaseClass {
 
 Sidebar = React.createClass(Sidebar.prototype);
 
-React.renderComponent(
+React.render(
   <Sidebar />,
   document.getElementsByClassName('sidebar')[0]
 );

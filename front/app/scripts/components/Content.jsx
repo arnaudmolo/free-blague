@@ -9,10 +9,9 @@ import React    from 'react/addons';
 import mixins   from 'backbone-react-component';
 import Backbone from 'backbone';
 
-import Content        from './Content';
-import Writing        from './Writing.view';
-import JokeCollection from '../models/joke-list';
-import JokeList       from './JokeList.view';
+import Writing        from './Writing';
+import JokeCollection from '/models/joke-list';
+import JokeList       from './JokeList';
 
 var Events, ReactCSSTransitionGroup;
 
@@ -149,10 +148,5 @@ class ContentView {
 }
 
 ContentView = React.createClass(ContentView.prototype);
-
-React.renderComponent(
-  <ContentView model={Content} />,
-  document.getElementsByClassName('content')[0]
-);
 
 module.exports = ContentView;
