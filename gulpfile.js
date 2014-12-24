@@ -31,8 +31,8 @@ var scripts;
 
 scripts = function(){
 
-  gulp.src(app + 'scripts/runtime.js')
-    .pipe(gulp.dest(dist + '/scripts'));
+  // gulp.src(app + 'scripts/runtime.js')
+  //   .pipe(gulp.dest(dist + '/scripts'));
 
   return gulp.src(app + 'scripts/main.js')
     .pipe($.plumber())
