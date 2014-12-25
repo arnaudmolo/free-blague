@@ -1,24 +1,21 @@
 'use strict';
 
-var gulp, del, path, $, dist, jshint, app, gulpMerge, react;
+var gulp, del, path, $, dist, app, browserify, reactify, to5Browserify, fs, envify;
 
-gulp      = require('gulp');
-del       = require('del');
-path      = require('path');
-$         = require('gulp-load-plugins')();
-jshint    = require('gulp-jshint');
+del           = require('del');
+fs            = require('fs');
+path          = require('path');
+gulp          = require('gulp');
 
-gulpMerge = require('gulp-merge');
-react     = require('gulp-react');
+$             = require('gulp-load-plugins')();
 
-dist      = './client';
-app       = './front/app/';
+browserify    = require('browserify');
+reactify      = require('reactify');
+to5Browserify = require('6to5ify');
+envify        = require('envify');
 
-var browserify = require('browserify');
-var reactify = require('reactify');
-var to5Browserify = require('6to5ify');
-var fs = require('fs');
-var envify = require('envify');
+dist          = './client';
+app           = './front/app/';
 
 // Styles
 gulp.task('styles', function () {
@@ -36,9 +33,7 @@ gulp.task('styles', function () {
 
 });
 
-var scripts;
-
-scripts = function(){
+function scripts(){
 
   return browserify({ debug: false })
     // .add(require.resolve("6to5/browser-polyfill"))
@@ -48,14 +43,17 @@ scripts = function(){
     .require(app + 'scripts/main.js', { entry: true })
     .bundle()
     .pipe(fs.createWriteStream(dist + '/scripts/main.js'));
+
 };
 
 gulp.task('scripts', scripts);
 
 gulp.task('compress', ['scripts'], function(){
+
   return gulp.src(dist + '/scripts/*.js')
     .pipe($.uglify())
     .pipe(gulp.dest(dist + '/scripts'));
+
 });
 
 
@@ -83,16 +81,20 @@ gulp.task('images', function(){
 
 // Clean
 gulp.task('clean', function(cb){
+
   del([dist], {force: true}, cb);
+
 });
 
 // Bundle
 gulp.task('bundle', ['styles', 'scripts', 'bower'], function(){
+
   return gulp.src(app + './*.html')
     .pipe($.useref.assets())
     .pipe($.useref.restore())
     .pipe($.useref())
     .pipe(gulp.dest(dist));
+
 });
 
 // Build
@@ -119,15 +121,17 @@ gulp.task('jshint', function(){
          '!' + app + './scripts/utils/string-to-color.js',
          '!' + app + '/scripts/runtime.js'])
     .pipe($.react())
-    .pipe(jshint('./.jshintrc'))
-    .pipe(jshint.reporter('jshint-stylish'));
+    .pipe($.jshint('./.jshintrc'))
+    .pipe($.jshint.reporter('jshint-stylish'));
 
 });
 
 // Bower
 gulp.task('bower', function(){
+
   gulp.src(app + 'bower_components/**/*.js', {base: app + 'bower_components'})
     .pipe(gulp.dest(dist + '/bower_components'));
+
 });
 
 gulp.task('watch', ['html', 'scripts', 'serve'], function(){

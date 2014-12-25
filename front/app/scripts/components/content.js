@@ -25,8 +25,8 @@ ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 class ContentView {
 
-  muteStateToggle() {
-    if (this.props.model.get('mute')) {
+  testFunction() {
+    if (this.getModel().get('mute')) {
       this.setState({wording: 'unmute'});
     } else {
       this.setState({wording: 'mute'});
@@ -35,13 +35,16 @@ class ContentView {
 
   componentDidMount() {
 
-    var content, self;
+    var model, self;
 
     self = this;
-    content = this.props.model;
+    model = this.getModel();
 
-    content.on('change:mute', this.muteStateToggle, this);
-    content.get('jokes').on('add', () => this.launchWriting(joke.toString()));
+    model.on('change:mute', this.testFunction);
+
+    model.listenTo(model.get('jokes'), 'add', function(joke){
+      self.launchWriting(joke.toString());
+    });
 
     Events.on('joke:registered', function(){
       self.setState({writing: false});
@@ -51,7 +54,7 @@ class ContentView {
       self.setState({writing: false});
     });
 
-    this.muteStateToggle();
+    this.testFunction();
 
     return;
 
@@ -76,7 +79,7 @@ class ContentView {
   }
 
   toggleMute() {
-    return this.props.model.mute(!this.props.model.get('mute'));
+    return this.getModel().mute(!this.getModel().get('mute'));
   }
 
   showInput(event) {
@@ -100,13 +103,15 @@ class ContentView {
       writing = <Writing />;
     }
 
+    console.log(this.props);
+
     return (
       <div>
         <div className="joke-container">
           <h1>{this.state.joke}</h1>
         </div>
         <JokeList
-          collection={this.props.model.get('jokes')} />
+          collection={this.getModel().get('jokes')} />
         <input
           type="submit"
           onClick={this.toggleMute}
