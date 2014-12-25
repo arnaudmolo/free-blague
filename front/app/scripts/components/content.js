@@ -5,17 +5,16 @@
 * @exports <ReactClass>ContentView
 */
 
-import React    from 'react/addons';
-import mixins   from 'backbone-react-component';
-import Backbone from 'backbone';
+import React      from 'react/addons';
+import mixins     from 'backbone-react-component';
+import { Events } from 'backbone';
 
 import Writing        from './Writing';
-import JokeCollection from '/models/joke-list';
+import JokeCollection from './../models/joke-list';
 import JokeList       from './JokeList';
 
-var Events, ReactCSSTransitionGroup;
+var ReactCSSTransitionGroup;
 
-Events                  = Backbone.Events;
 ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 /**

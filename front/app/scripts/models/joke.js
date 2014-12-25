@@ -3,9 +3,7 @@
 * @exports Class Joke
 */
 
-import Backbone from 'backbone';
-
-var { Model } = Backbone;
+import { Model } from 'Backbone';
 
 class Joke extends Model {
 

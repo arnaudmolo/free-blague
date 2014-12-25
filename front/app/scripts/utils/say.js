@@ -1,6 +1,6 @@
 
 import Promise from 'bluebird';
-import speechUtteranceChunker from '../../bower_components/chunkify';
+import speechUtteranceChunker from '../../../bower_components/chunkify';
 
 var voicesLoaded = new Promise(function(resolve, reject){
   window.speechSynthesis.onvoiceschanged = function(){

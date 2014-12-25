@@ -3,13 +3,11 @@
 * @exports Instance of User
 */
 
-import Backbone from 'backbone';
+import { Model } from 'backbone';
 
 import JokeList from './../models/joke-list';
 import api      from './../api';
-import say      from './../say';
-
-var { Model } = Backbone;
+import say      from './../utils/say';
 
 /**
  * @class Content

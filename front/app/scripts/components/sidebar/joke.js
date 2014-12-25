@@ -15,6 +15,15 @@ import mixins from 'backbone-react-component';
  */
 
 class JokeView {
+
+  constructor() {
+    this.mixins = [mixins];
+  }
+
+  componentDidMount() {
+    console.log(this);
+  }
+
   render() {
 
     var model;
@@ -30,7 +39,5 @@ class JokeView {
     );
   }
 }
-
-JokeView.prototype.mixins = [mixins];
 
 module.exports = React.createClass(JokeView.prototype);

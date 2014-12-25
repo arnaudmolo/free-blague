@@ -3,13 +3,10 @@
 * @exports Instance of User
 */
 
-import Backbone from 'backbone';
+import { Model } from 'backbone';
 
 import JokeList from './joke-list';
 import api      from '../api';
-
-var { Model } = Backbone;
-
 
 /**
  * @class User
@@ -33,16 +30,23 @@ class User extends Model {
     user = JSON.parse(localStorage.getItem('user'));
 
     if (user === null) {
-      user = {};
+      user = {
+        id       : 0,
+        userId   : null,
+        email    : '',
+        password : '',
+        logged   : false,
+        jokes    : []
+      };
     }
 
     return {
-      id       : user.id || 0,
-      userId   : user.userId || null,
-      email    : user.email || '',
-      password : user.password || '',
+      id       : user.id,
+      userId   : user.userId,
+      email    : user.email,
+      password : user.password,
       logged   : false,
-      jokes    : new JokeList(user.jokes || [])
+      jokes    : new JokeList(user.jokes)
     };
   }
 
@@ -58,15 +62,11 @@ class User extends Model {
 
   initialize() {
 
-    var user, self, jokes;
-
-    self = this;
+    var jokes;
 
     this.listenTo(this, 'change', function(){
       localStorage.setItem('user', this);
     });
-
-    user = JSON.parse(localStorage.getItem('user'));
 
     jokes = this.get('jokes');
 

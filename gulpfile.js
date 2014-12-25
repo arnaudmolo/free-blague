@@ -1,15 +1,24 @@
 'use strict';
 
-var gulp, del, path, $, es6ify, dist, jshint, app;
+var gulp, del, path, $, dist, jshint, app, gulpMerge, react;
 
-gulp   = require('gulp');
-del    = require('del');
-path   = require('path');
-$      = require('gulp-load-plugins')();
-es6ify = require('es6ify');
-jshint = require('gulp-jshint');
-dist   = './client';
-app    = './front/app/';
+gulp      = require('gulp');
+del       = require('del');
+path      = require('path');
+$         = require('gulp-load-plugins')();
+jshint    = require('gulp-jshint');
+
+gulpMerge = require('gulp-merge');
+react     = require('gulp-react');
+
+dist      = './client';
+app       = './front/app/';
+
+var browserify = require('browserify');
+var reactify = require('reactify');
+var to5Browserify = require('6to5ify');
+var fs = require('fs');
+var envify = require('envify');
 
 // Styles
 gulp.task('styles', function () {
@@ -19,7 +28,7 @@ gulp.task('styles', function () {
     .pipe($.rubySass({
       style: 'expanded',
       precision: 10,
-      loadPath: ['./../bower_components'],
+      loadPath: ['./front/bower_components'],
       compass: true
     }))
     .pipe(gulp.dest(dist + '/styles'))
@@ -31,26 +40,32 @@ var scripts;
 
 scripts = function(){
 
-  // gulp.src(app + 'scripts/runtime.js')
-  //   .pipe(gulp.dest(dist + '/scripts'));
+  return browserify({ debug: false })
+    // .add(require.resolve("6to5/browser-polyfill"))
+    .transform(reactify)
+    .transform(to5Browserify.configure({ modules: 'commonInterop' }))
+    .transform(envify)
+    .require(app + 'scripts/main.js', { entry: true })
+    .bundle()
+    .pipe(fs.createWriteStream(dist + '/scripts/main.js'));
 
-  return gulp.src(app + 'scripts/main.js')
-    .pipe($.plumber())
-    .pipe(
-      $.browserify(
-        {
-          insertGlobals: true,
-          transform: [
-            'reactify',
-            'es6ify',
-            'envify'
-          ]
-        }
-      )
-    )
-    .pipe(gulp.dest(dist + '/scripts'))
-    .pipe($.size());
-
+  // return gulp.src(app + 'scripts/main.js')
+  //   .pipe($.plumber())
+  //   .pipe(
+  //     $.browserify(
+  //       {
+  //         insertGlobals: true,
+  //         debug : true,
+  //         transform: [
+  //           'reactify',
+  //           '6to5ify',
+  //           'envify'
+  //         ]
+  //       }
+  //     )
+  //   )
+  //   .pipe(gulp.dest(dist + '/scripts'))
+  //   .pipe($.size());
 };
 
 gulp.task('scripts', scripts);

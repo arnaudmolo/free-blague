@@ -1,9 +1,10 @@
-// import sidebar  from './sidebar';
+import { render, createElement } from 'react/addons';
+
 import ContentView from './components/content';
 import Content     from './models/content';
 
-React.render(
-  <Content model={Content} />,
+render(
+  createElement(ContentView, {model: Content}),
   document.getElementsByClassName('content')[0]
 );
 
