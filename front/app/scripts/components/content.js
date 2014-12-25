@@ -25,8 +25,8 @@ ReactCSSTransitionGroup = React.addons.CSSTransitionGroup;
 
 class ContentView {
 
-  testFunction() {
-    if (this.getModel().get('mute')) {
+  muteStateToggle() {
+    if (this.props.model.get('mute')) {
       this.setState({wording: 'unmute'});
     } else {
       this.setState({wording: 'mute'});
@@ -38,13 +38,10 @@ class ContentView {
     var content, self;
 
     self = this;
-    content = this.getModel();
+    content = this.props.model;
 
-    content.on('change:mute', this.testFunction);
-
-    content.listenTo(content.get('jokes'), 'add', function(joke){
-      self.launchWriting(joke.toString());
-    });
+    content.on('change:mute', this.muteStateToggle, this);
+    content.get('jokes').on('add', () => this.launchWriting(joke.toString()));
 
     Events.on('joke:registered', function(){
       self.setState({writing: false});
@@ -54,7 +51,7 @@ class ContentView {
       self.setState({writing: false});
     });
 
-    this.testFunction();
+    this.muteStateToggle();
 
     return;
 
@@ -79,7 +76,7 @@ class ContentView {
   }
 
   toggleMute() {
-    return this.getModel().mute(!this.getModel().get('mute'));
+    return this.props.model.mute(!this.props.model.get('mute'));
   }
 
   showInput(event) {
@@ -91,26 +88,8 @@ class ContentView {
 
   }
 
-  launchWriting (joke) {
-
-    var self, iteration, timeout;
-
-    self      = this;
-    iteration = 0;
+  launchWriting () {
     this.setState({joke: joke});
-
-    // function relaunch(){
-    //   setTimeout(function(){
-    //     ++iteration;
-    //     self.setState({joke: joke.slice(0, iteration)});
-    //     if (iteration <= joke.length) {
-    //       relaunch(joke);
-    //     }
-    //   }, 100);
-
-    //   relaunch();
-
-    // }
   }
 
   render() {
@@ -127,7 +106,7 @@ class ContentView {
           <h1>{this.state.joke}</h1>
         </div>
         <JokeList
-          collection={this.getModel().get('jokes')} />
+          collection={this.props.model.get('jokes')} />
         <input
           type="submit"
           onClick={this.toggleMute}

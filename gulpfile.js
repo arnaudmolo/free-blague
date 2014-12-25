@@ -48,24 +48,6 @@ scripts = function(){
     .require(app + 'scripts/main.js', { entry: true })
     .bundle()
     .pipe(fs.createWriteStream(dist + '/scripts/main.js'));
-
-  // return gulp.src(app + 'scripts/main.js')
-  //   .pipe($.plumber())
-  //   .pipe(
-  //     $.browserify(
-  //       {
-  //         insertGlobals: true,
-  //         debug : true,
-  //         transform: [
-  //           'reactify',
-  //           '6to5ify',
-  //           'envify'
-  //         ]
-  //       }
-  //     )
-  //   )
-  //   .pipe(gulp.dest(dist + '/scripts'))
-  //   .pipe($.size());
 };
 
 gulp.task('scripts', scripts);

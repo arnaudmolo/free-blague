@@ -23,17 +23,6 @@ class JokeListView {
   }
 
   /**
-   * Set defaults values for the this.state.
-   * Random to force rerender
-   *
-   * @return {Object} The default's JokeListView this.state.
-   */
-
-  getInitialState() {
-    return {render: Math.random()};
-  }
-
-  /**
    * Invoked once, only on the client (not on the server),
    * immediately after the initial rendering occurs.
    * Listen to collections updates.
@@ -43,19 +32,7 @@ class JokeListView {
    */
 
   componentDidMount() {
-
-    var self, collection;
-
-    self = this;
-
-    collection = this.getCollection();
-
-    collection.listenTo(collection, 'add', function(){
-      self.setState({render: Math.random()});
-    });
-
-    return;
-
+    this.props.collection.on('add', () => { this.forceUpdate() });
   }
 
   render() {
@@ -74,6 +51,4 @@ class JokeListView {
   }
 }
 
-module.exports = React.createClass(JokeListView.prototype);
-
-module.exports.static = JokeListView;
+export default React.createClass(JokeListView.prototype);
