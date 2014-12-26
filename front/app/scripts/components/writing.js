@@ -57,7 +57,6 @@ class Writing {
         </div>
     );
   }
-
 }
 
-module.exports = React.createClass(Writing.prototype);
+export default React.createClass(Writing.prototype);

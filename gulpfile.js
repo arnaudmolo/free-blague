@@ -38,7 +38,7 @@ function scripts(){
   return browserify({ debug: false })
     // .add(require.resolve("6to5/browser-polyfill"))
     .transform(reactify)
-    .transform(to5Browserify.configure({ modules: 'commonInterop' }))
+    .transform(to5Browserify.configure({ modules: 'commonInterop', experimental: true}))
     .transform(envify)
     .require(app + 'scripts/main.js', { entry: true })
     .bundle()

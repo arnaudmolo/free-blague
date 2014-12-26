@@ -5,7 +5,7 @@
 
 import { Model } from 'Backbone';
 
-class Joke extends Model {
+export default class Joke extends Model {
 
   /**
    * Set defaults values for a Joke.
@@ -30,5 +30,3 @@ class Joke extends Model {
   }
 
 }
-
-module.exports = Joke;

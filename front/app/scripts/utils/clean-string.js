@@ -30,7 +30,7 @@ function cleanSentence(sentence){
 * @return {String} A clean multi sentence string.
 */
 
-function cleanString(joke_content){
+export default function cleanString(joke_content){
 
   var need_punctuation;
 
@@ -48,5 +48,3 @@ function cleanString(joke_content){
 
   return joke_content;
 }
-
-module.exports = cleanString;

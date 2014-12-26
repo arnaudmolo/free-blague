@@ -86,7 +86,7 @@ function xhr(type, url, data){
   return promise;
 }
 
-class http {
+export default new class http {
   get(url) {
     return xhr('GET', url);
   }
@@ -100,5 +100,3 @@ class http {
     return xhr('DELETE', url);
   }
 }
-
-module.exports = http.prototype;

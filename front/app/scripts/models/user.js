@@ -14,7 +14,7 @@ import api      from '../api';
  * Contains the User informations
  */
 
-class User extends Model {
+export default new class User extends Model {
 
   /**
    * Set defaults values for a User.
@@ -206,5 +206,3 @@ class User extends Model {
   }
 
 }
-
-module.exports = new User();

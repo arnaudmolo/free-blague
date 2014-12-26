@@ -34,7 +34,7 @@ function sayOneSentence(voice, sentences){
   // speechUtteranceChunker(utterance, {chunkLength: 300});
 }
 
-function say(string){
+export default function say(string){
   voicesLoaded.then(function(){
 
     var voices, sentences;
@@ -47,5 +47,3 @@ function say(string){
 
   return string;
 }
-
-module.exports = say;

@@ -23,7 +23,7 @@ function access(token = require('./models/user').get('id')){
  * Deal with the API
  */
 
-class API {
+export default new class API {
 
   /**
    * Get a random Joke from the server
@@ -112,7 +112,7 @@ class API {
    * @return {Promise}(jokes)
    */
 
-  getUserJokes(id, token){
+  static getUserJokes(id, token){
 
     var promise;
 
@@ -126,9 +126,3 @@ class API {
   }
 
 }
-
-/**
- * Export the prototype to use API as a static Class
- */
-
-module.exports = API.prototype;

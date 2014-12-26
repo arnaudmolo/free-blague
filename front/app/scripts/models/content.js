@@ -15,7 +15,7 @@ import say      from './../utils/say';
  * Contains the Content informations
  */
 
-class Content extends Model {
+export default new class Content extends Model {
 
   initialize() {
 
@@ -69,5 +69,3 @@ class Content extends Model {
   }
 
 }
-
-module.exports = new Content();

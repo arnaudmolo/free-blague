@@ -2,10 +2,8 @@
 
 import mixins   from 'backbone-react-component';
 
-class ReactClass {
+export default class ReactClass {
   get mixins() {
     return [mixins];
   }
 }
-
-module.exports = ReactClass;
