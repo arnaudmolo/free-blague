@@ -28,4 +28,22 @@ export default class JokeList extends Collection {
     super(options);
     this.model = Joke;
   }
+
+  dispatchCallback(payload) {
+
+    switch (payload.actionType) {
+
+      case 'add-remove':
+        return this.remove(payload.joke);
+
+      case 'add-joke':
+        return this.add(joke);
+
+      case 'delete-last-item':
+        return TodoStore.items.pop();
+
+    }
+
+  }
+
 }

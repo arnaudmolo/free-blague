@@ -6,7 +6,8 @@
 import { Model } from 'backbone';
 
 import JokeList from './joke-list';
-import api      from '../api';
+import api      from './../api';
+import appDispatcher from './../dispatcher/appDispatcher';
 
 /**
  * @class User
@@ -15,6 +16,15 @@ import api      from '../api';
  */
 
 export default new class User extends Model {
+
+  dispatchCallback(payload) {
+
+    switch(payload.actionType){
+      case 'add-joke':
+        this.createJoke(payload.joke);
+    }
+
+  }
 
   /**
    * Set defaults values for a User.
@@ -64,28 +74,17 @@ export default new class User extends Model {
 
     var jokes;
 
+    jokes = this.get('jokes');
+
+    this.dispatchToken = appDispatcher.register(this.dispatchCallback.bind(this));
+
     this.listenTo(this, 'change', function(){
       localStorage.setItem('user', this);
     });
 
-    jokes = this.get('jokes');
-
     this.listenTo(jokes, 'add', function(){
       localStorage.setItem('user', this);
     });
-
-    // setTimeout(function(){
-    //   if (user.logged) {
-    //     self.set('logged', true);
-    //     self
-    //       .getJokes()
-    //       .error(function(res){
-    //         if (res.error.status === 401) {
-    //           return self.login();
-    //         }
-    //       });
-    //   }
-    // });
 
     return;
   }
@@ -112,14 +111,10 @@ export default new class User extends Model {
 
   createJoke(joke) {
 
-    var self;
-
-    self = this;
-
     return api
       .saveJoke(joke)
-      .then(function(joke){
-        self.get('jokes').add(joke);
+      .then((joke) => {
+        this.get('jokes').add(joke);
         return joke;
       });
   }

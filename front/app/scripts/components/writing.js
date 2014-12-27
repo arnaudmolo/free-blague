@@ -12,6 +12,7 @@ import BaseClass   from './../utils/react-class';
 import cleanString from './../utils/clean-string';
 import User        from './../models/user';
 import say         from './../utils/say';
+import appDispatcher from './../dispatcher/appDispatcher';
 
 class Writing {
 
@@ -27,12 +28,10 @@ class Writing {
 
     event.preventDefault();
 
-    User
-      .createJoke(cleanString(jokeDom.value))
-      .then(function(res){
-        jokeDom.value = '';
-        say(res.content);
-        Events.trigger('joke:registered');
+    appDispatcher
+      .dispatch({
+        actionType: 'add-joke',
+        joke: cleanString(jokeDom.value)
       });
   }
 
@@ -47,7 +46,7 @@ class Writing {
             <textarea
               ref="joke"
               rows="5"
-              maxlength="300"
+              maxLength="300"
               placeholder="Write your joke..."></textarea>
             <button
               type="submit"

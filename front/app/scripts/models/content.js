@@ -8,6 +8,7 @@ import { Model } from 'backbone';
 import JokeList from './../models/joke-list';
 import api      from './../api';
 import say      from './../utils/say';
+import appDispatcher from './../dispatcher/appDispatcher';
 
 /**
  * @class Content
@@ -21,7 +22,19 @@ export default new class Content extends Model {
 
     this.mute(localStorage.getItem('muted') === 'true');
 
+    this.dispatchToken = appDispatcher.register(this.dispatchCallback.bind(this));
+
     return;
+  }
+
+  dispatchCallback(payload) {
+
+    switch(payload.actionType) {
+      case 'add-joke':
+        this.get('jokes').add(payload.joke);
+        console.log('rajoute une blague à mon content', this.get('jokes'));
+    }
+
   }
 
   mute(muted) {

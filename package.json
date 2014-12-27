@@ -20,6 +20,7 @@
     "envify": "^3.2.0",
     "errorhandler": "^1.1.1",
     "es6ify": "^1.6.0",
+    "flux": "^2.0.1",
     "gulp": "~3.8.8",
     "gulp-autoprefixer": "~1.0.1",
     "gulp-bower": "0.0.6",
