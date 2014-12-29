@@ -14,7 +14,9 @@ export default React.createClass(
     }
 
     componentDidMount() {
-      this.getCollection().on('all', this.forceUpdate, this);
+      this.getCollection().on('all', () => {
+        this.forceUpdate();
+      });
     }
 
     componentWillUnmount() {
@@ -26,8 +28,7 @@ export default React.createClass(
       var jokesList;
 
       jokesList = this
-        .props
-        .collection
+        .getCollection()
         .map(function(joke, index){
           return (<JokeView key={index} model={joke} />);
         }).reverse();

@@ -56,19 +56,15 @@ export default new class Content extends Model {
 
   randomizeRequest() {
 
-    var self;
-
-    self = this;
-
     api
       .getRandomJoke()
       .then(say)
-      .then(function(res){
-        self.get('jokes').add({content: res});
+      .then((res) => {
+        this.get('jokes').add({content: res});
       });
 
-    this.timeout = setTimeout(function(){
-      self.randomizeRequest.call(self);
+    this.timeout = setTimeout(() => {
+      this.randomizeRequest();
     }, 30000);
   }
 

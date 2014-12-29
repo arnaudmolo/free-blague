@@ -48,7 +48,9 @@ export default React.createClass(
 
       model = this.getModel();
 
-      model.on('all', () => { this.forceUpdate(); });
+      model.on('all', (e) => {
+        this.forceUpdate();
+      });
 
       return;
 
