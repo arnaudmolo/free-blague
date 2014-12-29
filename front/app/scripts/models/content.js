@@ -1,6 +1,6 @@
 /**
 * @module Joke.model
-* @exports Instance of User
+* @exports Instance of Content
 */
 
 import { Model } from 'backbone';

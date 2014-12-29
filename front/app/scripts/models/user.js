@@ -8,6 +8,7 @@ import { Model } from 'backbone';
 import JokeList from './joke-list';
 import api      from './../api';
 import appDispatcher from './../dispatcher/appDispatcher';
+import userDispatcher from './../dispatcher/userDispatcher';
 
 /**
  * @class User
@@ -33,7 +34,7 @@ export default new class User extends Model {
     if (user === null) {
       user = {
         id       : 0,
-        userId   : null,
+        userId   : undefined,
         email    : '',
         password : '',
         logged   : false,
@@ -67,20 +68,32 @@ export default new class User extends Model {
 
     jokes = this.get('jokes');
 
-    this.dispatchToken = appDispatcher.register(this.dispatchCallback.bind(this));
+    this.dispatchJokesToken = appDispatcher.register(this.dispatchJokes.bind(this));
+    this.dispatchUserToken  = userDispatcher.register(this.dispatchUser.bind(this));
 
-    this.listenTo(this, 'change', function(){
+    this.on('all', () => {
       localStorage.setItem('user', this);
     });
 
     return;
   }
 
-  dispatchCallback(payload) {
+  dispatchJokes(payload) {
 
     switch(payload.actionType){
       case 'add-joke':
         this.createJoke(payload.joke);
+    }
+
+  }
+
+  dispatchUser(payload) {
+
+    switch(payload.actionType){
+      case 'user-login':
+        this.login(payload.user);
+      case 'user-logout':
+        this.logout();
     }
 
   }
@@ -110,8 +123,17 @@ export default new class User extends Model {
     return api
       .saveJoke(joke)
       .then((joke) => {
+
         this.get('jokes').add(joke);
+
+        appDispatcher
+          .dispatch({
+            payload: 'show-writing',
+            value: false
+          });
+
         return joke;
+
       });
   }
 
@@ -124,35 +146,28 @@ export default new class User extends Model {
    * @return <Promise>(AccessToken)
    */
 
-  login() {
-
-    var self;
-
-    self = this;
+  login({email, password}) {
 
     return api
       .loginUser({
-        email: this.get('email'),
-        password: this.get('password')
-      }).then(function(res){
+        email: email,
+        password: password
+      }).then((res) => {
 
-        self.set('logged', true);
-        self.set('id', res.id);
-        self.set('userId', res.userId);
+        this.set({
+          id: res.id,
+          userId: res.userId,
+          logged: true,
+          email
+        });
 
-        return res;
-      }).then(function(res){
-
-        api
-          .getUserJokes(self.get('userId'), self.get('id'))
-          .then(function(res){
-
-            self.get('jokes').add(res);
-
+        return api
+          .getUserJokes(this.get('userId'), this.get('id'))
+          .then((res) => {
+            this.get('jokes').add(res);
             return res;
           });
 
-        return res;
       });
   }
 
@@ -166,12 +181,17 @@ export default new class User extends Model {
 
   register() {
 
+    var _user;
+
+    _user = {
+      email: this.get('email'),
+      password: this.get('password')
+    };
+
     return api
-      .createUser({
-        email: this.get('email'),
-        password: this.get('password')
-      })
-      .then(function(res){
+      .createUser(_user)
+      .then((res) => {
+        this.login(_user);
         return res;
       });
   }
@@ -182,14 +202,14 @@ export default new class User extends Model {
 
     token = this.get('id');
 
-    this.set('id', 0);
-    this.set('email', '');
-    this.set('userId', 0);
-    this.set('logged', false);
-    this.set('password', '');
+    this.set({
+      id: 0,
+      email: '',
+      userId: 0,
+      logged: false
+    });
 
-    return api
-      .logout(token);
+    return api.logout(token);
   }
 
   toString() {

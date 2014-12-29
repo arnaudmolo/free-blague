@@ -12,7 +12,8 @@ import { Events } from 'backbone';
 import Writing        from './Writing';
 import JokeCollection from './../models/joke-list';
 import JokeList       from './JokeList';
-import appDispatcher  from './../dispatcher/appDispatcher'
+import Sidebar        from './sidebar/sidebar';
+import appDispatcher  from './../dispatcher/appDispatcher';
 
 /**
  * @class ContentView
@@ -100,25 +101,30 @@ export default React.createClass(
 
       return (
         <div>
-          <div className="joke-container">
-            <h1>{this.state.joke}</h1>
+          <div className="side-bar">
+            <Sidebar />
           </div>
-          <JokeList
-            collection={this.getModel().get('jokes')} />
-          <input
-            type="submit"
-            onClick={this.toggleMute}
-            value=""
-            className={toggleClass} />
-            { toggleClass }
-          <a
-            className="button red publish"
-            href=""
-            onClick={this.showInput}>Publish my Joke</a>
-          <React.addons.CSSTransitionGroup
-            transitionName="writing-animation">
-            {writing}
-          </React.addons.CSSTransitionGroup>
+          <div>
+            <div className="joke-container">
+              <h1>{this.state.joke}</h1>
+            </div>
+            <JokeList
+              collection={this.getModel().get('jokes')} />
+            <input
+              type="submit"
+              onClick={this.toggleMute}
+              value=""
+              className={toggleClass} />
+              { toggleClass }
+            <a
+              className="button red publish"
+              href=""
+              onClick={this.showInput}>Publish my Joke</a>
+            <React.addons.CSSTransitionGroup
+              transitionName="writing-animation">
+              {writing}
+            </React.addons.CSSTransitionGroup>
+          </div>
         </div>
       );
     }

@@ -5,63 +5,65 @@
 * @exports <ReactClass>Login
 */
 
-import React     from 'react/addons';
-import mixins    from 'backbone-react-component';
+import React  from 'react/addons';
+import mixins from 'backbone-react-component';
 
-import api       from './../../api';
-import BaseClass from './../../utils/react-class';
+import api from './../../api';
+import userDispatcher from './../../dispatcher/userDispatcher';
 
 /**
  * @class Login
  * Extended from React Class and BaseClass
  * View for Sidebar JokeList
  */
+export default React.createClass(
 
-class Login extends BaseClass {
+  class Login {
 
-  get mixins() {
-    return [mixins];
-  }
+    get mixins() {
+      return [mixins];
+    }
 
-  /**
-   * Tiggered when form is submitted
-   * Set the model's attributes and lanuch User#login()
-   *
-   * @return @see User#login
-   */
+    /**
+     * Tiggered when form is submitted
+     * Set the model's attributes and lanuch User#login()
+     *
+     * @return @see User#login
+     */
 
-  handleSubmit(event) {
+    handleSubmit(event) {
 
-    var user;
+      event.preventDefault();
 
-    event.preventDefault();
+      userDispatcher
+        .dispatch({
+          actionType: 'user-login',
+          user: {
+            email: this.refs.email.getDOMNode().value.trim(),
+            password: this.refs.password.getDOMNode().value.trim()
+          }
+        });
 
-    user = this.getModel();
+        return;
+    }
 
-    user.set('email', this.refs.email.getDOMNode().value.trim());
-    user.set('password', this.refs.password.getDOMNode().value.trim());
-    return user.login();
-  }
-
-  render() {
-    return (
-      <div>
-        <h1>login</h1>
-        <form method="post" onSubmit={this.handleSubmit}>
-          <input
-            type="email"
-            placeholder="email"
-            ref="email" />
-          <input
-            type="password"
-            placeholder="password"
-            ref="password"/>
-          <input type="submit" />
-        </form>
-      </div>
-    );
-  }
-
-}
-
-module.exports = React.createClass(Login.prototype);
+    render() {
+      return (
+        <div>
+          <h1>login</h1>
+          <form method="post" onSubmit={this.handleSubmit}>
+            <input
+              type="email"
+              placeholder="email"
+              ref="email" />
+            <input
+              type="password"
+              placeholder="password"
+              ref="password"/>
+            <input type="submit" />
+          </form>
+        </div>
+      );
+    }
+  }.prototype
+);

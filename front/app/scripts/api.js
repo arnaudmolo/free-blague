@@ -112,7 +112,7 @@ export default new class API {
    * @return {Promise}(jokes)
    */
 
-  static getUserJokes(id, token){
+  getUserJokes(id, token){
 
     var promise;
 

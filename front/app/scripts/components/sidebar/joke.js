@@ -13,31 +13,34 @@ import mixins from 'backbone-react-component';
  * Extended from React Class
  * Templates for Sidebar Joke
  */
+export default React.createClass(
+  class JokeView {
 
-class JokeView {
+    get mixins() {
+      return [mixins];
+    }
 
-  constructor() {
-    this.mixins = [mixins];
-  }
+    componentDidMount() {
 
-  componentDidMount() {
-    console.log(this);
-  }
+      this.getModel().on('all', () => {
+        this.forceUpdate();
+      });
 
-  render() {
+    }
 
-    var model;
+    render() {
 
-    model = this.getModel();
+      var model;
 
-    return (
-      <li>
-        <span>{model.get('content')}</span>
-        &nbsp;|&nbsp;
-        <a>x</a>
-      </li>
-    );
-  }
-}
+      model = this.getModel();
 
-module.exports = React.createClass(JokeView.prototype);
+      return (
+        <li>
+          <span>{model.get('content')}</span>
+          &nbsp;|&nbsp;
+          <a>x</a>
+        </li>
+      );
+    }
+  }.prototype
+);

@@ -33,7 +33,7 @@ class JokeListView {
 
   componentDidMount() {
 
-    this.props.collection.on('add', () => {
+    this.getCollection().on('all', () => {
       this.forceUpdate();
     });
 
