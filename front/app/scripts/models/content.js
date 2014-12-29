@@ -21,7 +21,6 @@ export default new class Content extends Model {
   initialize() {
 
     this.mute(localStorage.getItem('muted') === 'true');
-
     this.dispatchToken = appDispatcher.register(this.dispatchCallback.bind(this));
 
     return;
@@ -30,9 +29,8 @@ export default new class Content extends Model {
   dispatchCallback(payload) {
 
     switch(payload.actionType) {
-      case 'add-joke':
-        this.get('jokes').add(payload.joke);
-        console.log('rajoute une blague à mon content', this.get('jokes'));
+      case 'show-writing':
+        this.set('showWriting', payload.value);
     }
 
   }
@@ -77,6 +75,7 @@ export default new class Content extends Model {
   defaults() {
     return {
       mute : false,
+      showWriting: false,
       jokes: new JokeList()
     };
   }

@@ -12,6 +12,7 @@ import { Events } from 'backbone';
 import Writing        from './Writing';
 import JokeCollection from './../models/joke-list';
 import JokeList       from './JokeList';
+import appDispatcher  from './../dispatcher/appDispatcher'
 
 /**
  * @class ContentView
@@ -20,46 +21,17 @@ import JokeList       from './JokeList';
  */
 
 export default React.createClass(
+
   class ContentView {
 
-    testFunction() {
-      if (this.getModel().get('mute')) {
-        this.setState({wording: 'unmute'});
-      } else {
-        this.setState({wording: 'mute'});
-      }
-    }
-
-    componentDidMount() {
-
-      var model;
-
-      model = this.getModel();
-
-      model.on('change:mute', this.testFunction, this);
-
-      model.get('jokes').on('add', function(joke){
-        this.launchWriting(joke.toString());
-      }, this);
-
-      Events.on('joke:registered', function(){
-        this.setState({writing: false});
-      }, this);
-
-      Events.on('close', function(){
-        this.setState({writing: false});
-      }, this);
-
-      this.testFunction();
-
-      return;
-
+    get mixins() {
+      return [mixins];
     }
 
     /**
-     * Set defaults values for the this.state.
+     * Set defaults values for the this.state
      *
-     * @return {Object} The default's JokeListView this.state.
+     * @return {Object} The default's JokeListView this.state
      */
 
     getInitialState() {
@@ -70,8 +42,20 @@ export default React.createClass(
       };
     }
 
-    get mixins() {
-      return [mixins];
+    componentDidMount() {
+
+      var model;
+
+      model = this.getModel();
+
+      model.on('all', () => { this.forceUpdate(); });
+
+      return;
+
+    }
+
+    componentWillUnmount() {
+      return this.getModel().off(null, null, this);
     }
 
     toggleMute() {
@@ -79,8 +63,17 @@ export default React.createClass(
     }
 
     showInput(event) {
+
       event.preventDefault();
-      this.setState({writing: true});
+
+      appDispatcher
+        .dispatch({
+          actionType: 'show-writing',
+          value: true
+        });
+
+      return
+
     }
 
     launchWriting (joke) {
@@ -89,11 +82,19 @@ export default React.createClass(
 
     render() {
 
-      var writing;
+      var writing, toggleClass, model;
 
-      if (this.state.writing) {
+      model = this.getModel();
+
+      if (model.get('showWriting')) {
         writing = <Writing />;
       }
+
+      if (model.get('mute')) {
+        toggleClass = 'unmute';
+      } else {
+        toggleClass = 'mute';
+      };
 
       return (
         <div>
@@ -106,7 +107,8 @@ export default React.createClass(
             type="submit"
             onClick={this.toggleMute}
             value=""
-            className={this.state.wording} />
+            className={toggleClass} />
+            { toggleClass }
           <a
             className="button red publish"
             href=""
@@ -119,4 +121,5 @@ export default React.createClass(
       );
     }
   }.prototype
+
 );

@@ -5,31 +5,41 @@ import mixins   from  'backbone-react-component';
 
 import JokeView from './Joke';
 
-class JokeListView {
+export default React.createClass(
 
-  componentDidMount() {
-    this.props.collection.on('add', () => { this.forceUpdate() });
-  }
+  class JokeListView {
 
-  render() {
+    get mixins() {
+      return [mixins];
+    }
 
-    var jokesList;
+    componentDidMount() {
+      this.getCollection().on('all', this.forceUpdate, this);
+    }
 
-    jokesList = this
-      .props
-      .collection
-      .map(function(joke, index){
-        return (<JokeView key={index} model={joke} />);
-      }).reverse();
+    componentWillUnmount() {
+      this.getCollection().off(null, null, this);
+    }
 
-    return (
-      <ul className="jokes-list" >
-        <React.addons.CSSTransitionGroup transitionName="joke-animation">
-        { jokesList }
-        </React.addons.CSSTransitionGroup>
-      </ul>
-    );
-  }
-}
+    render() {
 
-export default React.createClass(JokeListView.prototype);
+      var jokesList;
+
+      jokesList = this
+        .props
+        .collection
+        .map(function(joke, index){
+          return (<JokeView key={index} model={joke} />);
+        }).reverse();
+
+      return (
+        <ul className="jokes-list" >
+          <React.addons.CSSTransitionGroup transitionName="joke-animation">
+          { jokesList }
+          </React.addons.CSSTransitionGroup>
+        </ul>
+      );
+
+    }
+  }.prototype
+);

@@ -17,7 +17,11 @@ import appDispatcher from './../dispatcher/appDispatcher';
 class Writing {
 
   close() {
-    Events.trigger('close');
+    appDispatcher
+      .dispatch({
+        actionType: 'show-writing',
+        value: false
+      });
   }
 
   handleSubmit(event) {

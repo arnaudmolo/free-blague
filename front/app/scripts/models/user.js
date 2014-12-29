@@ -17,15 +17,6 @@ import appDispatcher from './../dispatcher/appDispatcher';
 
 export default new class User extends Model {
 
-  dispatchCallback(payload) {
-
-    switch(payload.actionType){
-      case 'add-joke':
-        this.createJoke(payload.joke);
-    }
-
-  }
-
   /**
    * Set defaults values for a User.
    * Default values cames from the LocalStorage
@@ -82,11 +73,16 @@ export default new class User extends Model {
       localStorage.setItem('user', this);
     });
 
-    this.listenTo(jokes, 'add', function(){
-      localStorage.setItem('user', this);
-    });
-
     return;
+  }
+
+  dispatchCallback(payload) {
+
+    switch(payload.actionType){
+      case 'add-joke':
+        this.createJoke(payload.joke);
+    }
+
   }
 
   /**
