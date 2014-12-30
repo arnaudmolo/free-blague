@@ -7,7 +7,7 @@
     "www.already.cool"
   ],
   "dependencies": {
-    "6to5": "^1.15.0",
+    "6to5": "^2.2.0",
     "6to5ify": "^2.0.0",
     "backbone": "^1.1.2",
     "backbone-react-component": "^0.7.0",
@@ -52,12 +52,14 @@
     "serve-favicon": "^2.0.1"
   },
   "scripts": {
-    "start": "node server/server.js --harmony",
-    "test": "cd front && gulp jshint"
+    "start": "node server/server.js",
+    "test": "jest"
   },
   "devDependencies": {
+    "gulp-jest": "^0.2.4",
     "gulp-plumber": "^0.6.6",
     "gulp-react": "^1.0.2",
+    "jest-cli": "^0.2.1",
     "jshint-stylish": "~0.1.5",
     "loopback-explorer": "^1.6.2",
     "reactify": "~0.14"
@@ -65,5 +67,11 @@
   "engines": {
     "node": ">=0.10.0"
   },
-  "subdomain": "arnaudmolo-blague"
+  "subdomain": "arnaudmolo-blague",
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/front/spec/preprocessor.js",
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react"
+    ]
+  }
 }
