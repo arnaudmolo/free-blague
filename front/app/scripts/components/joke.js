@@ -16,76 +16,75 @@ import stringToColor from './../utils/string-to-color';
  * Extended from React Class
  * Templates for Sidebar Joke
  */
+export default React.createClass(
+  class JokeView {
 
-class JokeView {
+    get mixins() {
+      return [mixins];
+    }
 
-  get mixins() {
-    return [mixins];
-  }
+    getInitialState() {
+      return {
+        bg: {
+          backgroundColor: '#00FF00'
+        }
+      };
+    }
 
-  getInitialState() {
-    return {
-      bg: {
-        backgroundColor: '#00FF00'
-      }
-    };
-  }
+    componentDidMount() {
 
-  componentDidMount() {
+      var startColor, endColor, color;
 
-    var startColor, endColor, color;
+      color = stringToColor(this.getModel().get('content'));
+      startColor = Color(color);
+      endColor = startColor.clone().alpha(0.5);
+      startColor = startColor.alpha(0);
 
-    color = stringToColor(this.getModel().get('content'));
-    startColor = Color(color);
-    endColor = startColor.clone().alpha(0.5);
-    startColor = startColor.alpha(0);
+      this.setState({
+        bg: {
+          backgroundColor: color
+        },
+        gradient: {
+          background:
+            `linear-gradient(
+              to bottom,
+              rgba(
+                ${startColor.red()},
+                ${startColor.green()},
+                ${startColor.blue()},
+                ${startColor.alpha()}
+              ), rgba(
+                ${endColor.red()},
+                ${endColor.green()},
+                ${endColor.blue()},
+                ${endColor.alpha()}
+              )
+            )`
+        }
+      });
 
-    this.setState({
-      bg: {
-        backgroundColor: color
-      },
-      gradient: {
-        background:
-          `linear-gradient(
-            to bottom,
-            rgba(
-              ${startColor.red()},
-              ${startColor.green()},
-              ${startColor.blue()},
-              ${startColor.alpha()}
-            ), rgba(
-              ${endColor.red()},
-              ${endColor.green()},
-              ${endColor.blue()},
-              ${endColor.alpha()}
-            )
-          )`
-      }
-    });
+    }
 
-  }
+    render() {
 
-  render() {
+      var model;
 
-    var model;
+      model = this.getModel();
 
-    model = this.getModel();
-
-    return (
-      <li
-        className="joke"
-        style={this.state.bg}
-        key={this.props.key} >
-        <div className="wrapper">
-          <p>{model.get('content')}</p>
-          <div
-            className="shadow"
-            style={this.state.gradient} >
+      return (
+        <li
+          className="joke"
+          style={this.state.bg}
+          key={this.props.key} >
+          <div className="wrapper">
+            <p>{model.get('content')}</p>
+            <div
+              className="shadow"
+              style={this.state.gradient} >
+            </div>
           </div>
-        </div>
-      </li>
-    );
-  }
-}
-
-export default React.createClass(JokeView.prototype);
+        </li>
+      );
+    }
+  }.prototype
+);

@@ -15,44 +15,43 @@ import JokeView from './Joke';
  * Extended from React Class
  * Templates for Sidebar JokeList
  */
+export default React.createClass(
+  class JokeListView {
 
-class JokeListView {
+    get mixins() {
+      return [mixins];
+    }
 
-  get mixins() {
-    return [mixins];
-  }
+    /**
+     * Invoked once, only on the client (not on the server),
+     * immediately after the initial rendering occurs.
+     * Listen to collections updates.
+     * Render when elements are added.
+     *
+     * @return {Object} undefined
+     */
 
-  /**
-   * Invoked once, only on the client (not on the server),
-   * immediately after the initial rendering occurs.
-   * Listen to collections updates.
-   * Render when elements are added.
-   *
-   * @return {Object} undefined
-   */
+    componentDidMount() {
 
-  componentDidMount() {
+      this.getCollection().on('all', () => {
+        this.forceUpdate();
+      });
 
-    this.getCollection().on('all', () => {
-      this.forceUpdate();
-    });
+    }
 
-  }
+    render() {
 
-  render() {
+      var jokesList;
 
-    var jokesList;
+      jokesList = this.getCollection().map(function(joke){
+        return (<JokeView key={joke.get('id')} model={joke} />);
+      });
 
-    jokesList = this.getCollection().map(function(joke){
-      return (<JokeView key={joke.get('id')} model={joke} />);
-    });
-
-    return (
-      <ul>
-        { jokesList }
-      </ul>
-    );
-  }
-}
-
-export default React.createClass(JokeListView.prototype);
+      return (
+        <ul>
+          { jokesList }
+        </ul>
+      );
+    }
+  }.prototype
+);

@@ -13,52 +13,52 @@ import User from './../models/user';
 import say from './../utils/say';
 import appDispatcher from './../dispatcher/appDispatcher';
 
-class Writing {
+export default React.createClass(
+  class Writing {
 
-  close() {
-    appDispatcher
-      .dispatch({
-        actionType: 'show-writing',
-        value: false
-      });
-  }
+    close() {
+      appDispatcher
+        .dispatch({
+          actionType: 'show-writing',
+          value: false
+        });
+    }
 
-  handleSubmit(event) {
+    handleSubmit(event) {
 
-    var jokeDom;
+      var jokeDom;
 
-    jokeDom = this.refs.joke.getDOMNode();
+      jokeDom = this.refs.joke.getDOMNode();
 
-    event.preventDefault();
+      event.preventDefault();
 
-    appDispatcher
-      .dispatch({
-        actionType: 'add-joke',
-        joke: cleanString(jokeDom.value)
-      });
-  }
+      appDispatcher
+        .dispatch({
+          actionType: 'add-joke',
+          joke: cleanString(jokeDom.value)
+        });
+    }
 
-  render() {
+    render() {
 
-    return (
-        <div className="writing">
-          <div className="close" onClick={this.close}>
-            <span>x</span>
+      return (
+          <div className="writing">
+            <div className="close" onClick={this.close}>
+              <span>x</span>
+            </div>
+            <form onSubmit={this.handleSubmit} >
+              <textarea
+                ref="joke"
+                rows="5"
+                maxLength="300"
+                placeholder="Write your joke..."></textarea>
+              <button
+                type="submit"
+                className="button red publish" > Publish my joke
+              </button>
+            </form>
           </div>
-          <form onSubmit={this.handleSubmit} >
-            <textarea
-              ref="joke"
-              rows="5"
-              maxLength="300"
-              placeholder="Write your joke..."></textarea>
-            <button
-              type="submit"
-              className="button red publish" > Publish my joke
-            </button>
-          </form>
-        </div>
-    );
-  }
-}
-
-export default React.createClass(Writing.prototype);
+      );
+    }
+  }.prototype
+);
