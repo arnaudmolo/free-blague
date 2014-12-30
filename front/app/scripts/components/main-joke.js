@@ -7,6 +7,8 @@
 import React from 'react/addons';
 import mixins from 'backbone-react-component';
 
+import Lettering from './lettering';
+
 /**
  * @class MainJoke
  * Templates for the main joke
