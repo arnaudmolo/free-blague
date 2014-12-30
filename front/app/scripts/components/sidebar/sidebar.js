@@ -49,7 +49,7 @@ export default React.createClass(
 
     componentDidMount() {
 
-      User.on('all', () => {
+      this.getModel().on('all', () => {
         this.forceUpdate();
       });
 
@@ -59,7 +59,7 @@ export default React.createClass(
 
     componentWillUnmount() {
 
-      User.off(null, null, this);
+      this.getModel().off(null, null, this);
 
     }
 
@@ -76,11 +76,15 @@ export default React.createClass(
 
     render() {
 
-      if (!User.get('logged')) {
+      var user;
+
+      user = this.getModel();
+
+      if (!user.get('logged')) {
         return (
             <div>
-              <Login model={User} />
-              <Register model={User} />
+              <Login model={user} />
+              <Register model={user} />
             </div>
           );
       }
@@ -88,7 +92,7 @@ export default React.createClass(
       return (
         <div>
           <JokeList
-            collection={User.get('jokes')} />
+            collection={user.get('jokes')} />
           <input
             type="submit"
             value="disconnect"

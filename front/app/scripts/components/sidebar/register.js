@@ -8,7 +8,6 @@
 import React from 'react/addons';
 import mixins from 'backbone-react-component';
 
-import api from './../../api';
 import userDispatcher from './../../dispatcher/userDispatcher';
 
 export default React.createClass(

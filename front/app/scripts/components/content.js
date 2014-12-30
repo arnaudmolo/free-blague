@@ -7,10 +7,8 @@
 
 import React from 'react/addons';
 import mixins from 'backbone-react-component';
-import { Events } from 'backbone';
 
 import Writing from './Writing';
-import JokeCollection from './../models/joke-list';
 import JokeList from './JokeList';
 import Sidebar from './sidebar/sidebar';
 import appDispatcher from './../dispatcher/appDispatcher';
@@ -102,7 +100,7 @@ export default React.createClass(
       return (
         <div>
           <div className="side-bar">
-            <Sidebar />
+            <Sidebar model={this.props.user}/>
           </div>
           <div>
             <div className="joke-container">
