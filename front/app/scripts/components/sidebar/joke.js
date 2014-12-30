@@ -22,21 +22,15 @@ export default React.createClass(
 
     componentDidMount() {
 
-      this.getModel().on('all', () => {
-        this.forceUpdate();
-      });
+      this.getModel().on('all', () => this.forceUpdate());
 
     }
 
     render() {
 
-      var model;
-
-      model = this.getModel();
-
       return (
         <li>
-          <span>{model.get('content')}</span>
+          <span>{this.getModel().get('content')}</span>
           &nbsp;|&nbsp;
           <a>x</a>
         </li>

@@ -33,9 +33,7 @@ export default React.createClass(
 
     componentDidMount() {
 
-      this.getCollection().on('all', () => {
-        this.forceUpdate();
-      });
+      this.getCollection().on('all', () => this.forceUpdate());
 
     }
 

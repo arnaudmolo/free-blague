@@ -8,14 +8,14 @@
 import React from 'react/addons';
 import mixins from 'backbone-react-component';
 
-import Writing from './Writing';
-import JokeList from './JokeList';
+import Writing from './writing';
+import JokeList from './jokeList';
+import MainJoke from './main-joke';
 import Sidebar from './sidebar/sidebar';
 import appDispatcher from './../dispatcher/appDispatcher';
 
 /**
  * @class ContentView
- * Extended from React Class
  * Templates for Content
  */
 
@@ -43,15 +43,7 @@ export default React.createClass(
 
     componentDidMount() {
 
-      var model;
-
-      model = this.getModel();
-
-      model.on('all', (e) => {
-        this.forceUpdate();
-      });
-
-      return;
+      this.getModel().on('all', () => this.forceUpdate());
 
     }
 
@@ -83,37 +75,32 @@ export default React.createClass(
 
     render() {
 
-      var writing, toggleClass, model;
+      var writing, toggleClass, model, jokes;
 
       model = this.getModel();
+
+      jokes = model.get('jokes');
 
       if (model.get('showWriting')) {
         writing = <Writing />;
       }
 
-      if (model.get('mute')) {
-        toggleClass = 'unmute';
-      } else {
-        toggleClass = 'mute';
-      };
+      toggleClass = model.get('mute')?'unmute':'mute';
 
       return (
         <div>
           <div className="side-bar">
-            <Sidebar model={this.props.user}/>
+
           </div>
           <div>
-            <div className="joke-container">
-              <h1>{this.state.joke}</h1>
-            </div>
+            <MainJoke collection={jokes} />
             <JokeList
-              collection={this.getModel().get('jokes')} />
+              collection={jokes} />
             <input
               type="submit"
               onClick={this.toggleMute}
               value=""
               className={toggleClass} />
-              { toggleClass }
             <a
               className="button red publish"
               href=""

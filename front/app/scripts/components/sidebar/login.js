@@ -34,14 +34,16 @@ export default React.createClass(
 
       event.preventDefault();
 
-      userDispatcher
-        .dispatch({
-          actionType: 'user-login',
-          user: {
-            email: this.refs.email.getDOMNode().value.trim(),
-            password: this.refs.password.getDOMNode().value.trim()
-          }
-        });
+      console.log(this);
+
+      // userDispatcher
+      //   .dispatch({
+      //     actionType: 'user-login',
+      //     user: {
+      //       email: this.refs.email.getDOMNode().value.trim(),
+      //       password: this.refs.password.getDOMNode().value.trim()
+      //     }
+      //   });
 
         return;
     }

@@ -32,6 +32,11 @@ module.exports = function(app) {
       date: new Date(),
       userId: users[0].id,
       language: 'fr'
+    }, {
+      content: 'C\'est l\'histoire d\'une blonde qui à voulu jouer à la roulette russe avec un "beretta 9mm". Elle est morte du premier coup.',
+      date: new Date(),
+      userId: users[0].id,
+      language: 'fr'
     }], function(er, joke) {
       console.log('error', er);
       if (er) return debug(er);
