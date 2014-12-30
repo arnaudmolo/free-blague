@@ -5,7 +5,7 @@
 * @exports <ReactClass>Login
 */
 
-import React  from 'react/addons';
+import React from 'react/addons';
 import mixins from 'backbone-react-component';
 
 import api from './../../api';

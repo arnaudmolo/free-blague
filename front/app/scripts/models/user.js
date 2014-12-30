@@ -6,11 +6,9 @@
 import { Model } from 'backbone';
 
 import JokeList from './joke-list';
-import api      from './../api';
+import api from './../api';
 import appDispatcher from './../dispatcher/appDispatcher';
 import userDispatcher from './../dispatcher/userDispatcher';
-
-var localStorage = (localStorage || undefined);
 
 /**
  * @class User
@@ -31,9 +29,7 @@ export default new class User extends Model {
 
     var user, res;
 
-    if (localStorage !== undefined) {
-      user = JSON.parse(localStorage.getItem('user'));
-    };
+    user = JSON.parse(localStorage.getItem('user'));
 
     if (user === null || user === undefined) {
       user = {
@@ -75,11 +71,9 @@ export default new class User extends Model {
     this.dispatchJokesToken = appDispatcher.register(this.dispatchJokes.bind(this));
     this.dispatchUserToken  = userDispatcher.register(this.dispatchUser.bind(this));
 
-    if (localStorage !== undefined) {
-      this.on('all', () => {
-        localStorage.setItem('user', this);
-      });
-    };
+    this.on('all', () => {
+      localStorage.setItem('user', this);
+    });
 
     return;
   }
@@ -97,9 +91,11 @@ export default new class User extends Model {
 
     switch(payload.actionType){
       case 'user-login':
-        this.login(payload.user);
+        return this.login(payload.user);
       case 'user-logout':
-        this.logout();
+        return this.logout();
+      case 'user-register':
+        return this.register(payload.user);
     }
 
   }
@@ -185,14 +181,11 @@ export default new class User extends Model {
    * @return <Promise>(userId)
    */
 
-  register() {
+  register({email, password}) {
 
     var _user;
 
-    _user = {
-      email: this.get('email'),
-      password: this.get('password')
-    };
+    _user = { email, password };
 
     return api
       .createUser(_user)

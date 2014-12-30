@@ -5,55 +5,58 @@
 * @exports <ReactClass>Register
 */
 
-import React     from 'react/addons';
-import mixins    from 'backbone-react-component';
+import React from 'react/addons';
+import mixins from 'backbone-react-component';
 
-import api       from './../../api';
-import BaseClass from './../../utils/react-class';
+import api from './../../api';
+import userDispatcher from './../../dispatcher/userDispatcher';
 
-class Register extends BaseClass {
+export default React.createClass(
 
-  get mixins() {
-    return [mixins];
-  }
+  class Register {
 
-  /**
-   * Tiggered when form is submitted
-   * Set the model's attributes and lanuch User#register()
-   *
-   * @return @see User#register
-   */
+    get mixins() {
+      return [mixins];
+    }
 
-  handleSubmit(event) {
+    /**
+     * Tiggered when form is submitted
+     * Set the model's attributes and lanuch User#register()
+     *
+     * @return @see User#register
+     */
 
-    var user;
+    handleSubmit(event) {
 
-    event.preventDefault();
+      event.preventDefault();
 
-    user = this.getModel();
+      userDispatcher
+        .dispatch({
+          actionType: 'user-register',
+          user: {
+            email: this.refs.email.getDOMNode().value.trim(),
+            password: this.refs.password.getDOMNode().value.trim()
+          }
+        });
 
-    user.set('email', this.refs.email.getDOMNode().value.trim());
-    user.set('password', this.refs.password.getDOMNode().value.trim());
+      return;
 
-    return user.register();
+    }
 
-  }
-
-  render() {
-    return (
-      <nav>
-        <h1>Create</h1>
-        <form method="post" onSubmit={this.handleSubmit}>
-          <input type="email"    placeholder="email" ref="email" />
-          <input type="password"
-            placeholder="password"
-            ref="password"
-          />
-          <input type="submit" />
-        </form>
-      </nav>
-    );
-  }
-}
-
-module.exports = React.createClass(Register.prototype);
+    render() {
+      return (
+        <nav>
+          <h1>Create</h1>
+          <form method="post" onSubmit={this.handleSubmit}>
+            <input type="email"    placeholder="email" ref="email" />
+            <input type="password"
+              placeholder="password"
+              ref="password"
+            />
+            <input type="submit" />
+          </form>
+        </nav>
+      );
+    }
+  }.prototype
+);

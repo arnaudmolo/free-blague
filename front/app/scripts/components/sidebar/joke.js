@@ -5,7 +5,7 @@
 * @exports ReactClass JokeView
 */
 
-import React  from 'react/addons';
+import React from 'react/addons';
 import mixins from 'backbone-react-component';
 
 /**

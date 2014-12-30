@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
-import React    from 'react/addons';
-import mixins   from  'backbone-react-component';
+import React from 'react/addons';
+import mixins from  'backbone-react-component';
 
 import JokeView from './Joke';
 

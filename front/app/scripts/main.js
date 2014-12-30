@@ -1,7 +1,7 @@
 import { render, createElement } from 'react/addons';
 
 import ContentView from './components/content';
-import Content     from './models/content';
+import Content from './models/content';
 
 render(
   createElement(ContentView, {model: Content}),

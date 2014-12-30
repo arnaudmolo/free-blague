@@ -5,9 +5,9 @@
 * @exports ReactClass JokeView
 */
 
-import React  from 'react/addons';
+import React from 'react/addons';
 import mixins from 'backbone-react-component';
-import Color  from 'Color';
+import Color from 'Color';
 
 import stringToColor from './../utils/string-to-color';
 

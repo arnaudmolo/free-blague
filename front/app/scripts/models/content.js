@@ -6,11 +6,9 @@
 import { Model } from 'backbone';
 
 import JokeList from './../models/joke-list';
-import api      from './../api';
-import say      from './../utils/say';
+import api from './../api';
+import say from './../utils/say';
 import appDispatcher from './../dispatcher/appDispatcher';
-
-var localStorage = (localStorage || undefined);
 
 /**
  * @class Content
@@ -22,9 +20,7 @@ export default new class Content extends Model {
 
   initialize() {
 
-    if (localStorage !== undefined) {
-      this.mute(localStorage.getItem('muted') === 'true');
-    };
+    this.mute(localStorage.getItem('muted') === 'true');
     this.dispatchToken = appDispatcher.register(this.dispatchCallback.bind(this));
 
     return;
@@ -41,9 +37,7 @@ export default new class Content extends Model {
 
   mute(muted) {
 
-    if (localStorage !== undefined) {
-      localStorage.setItem('muted', muted);
-    };
+    localStorage.setItem('muted', muted);
 
     this.set('mute', muted);
 

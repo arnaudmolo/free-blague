@@ -5,13 +5,13 @@
  * @exports {ReactClass}Sidebar
  */
 
-import React  from 'react/addons';
+import React from 'react/addons';
 import mixins from  'backbone-react-component';
 
-import Login    from './login';
+import Login from './login';
 import Register from './register';
 import JokeList from './JokeList';
-import User     from './../../models/user';
+import User from './../../models/user';
 import userDispatcher from './../../dispatcher/userDispatcher';
 
 /**

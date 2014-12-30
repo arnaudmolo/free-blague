@@ -5,13 +5,12 @@
  * @exports {ReactClass}Writing
  */
 
-import React      from 'react/addons';
+import React from 'react/addons';
 import { Events } from 'backbone';
 
-import BaseClass   from './../utils/react-class';
 import cleanString from './../utils/clean-string';
-import User        from './../models/user';
-import say         from './../utils/say';
+import User from './../models/user';
+import say from './../utils/say';
 import appDispatcher from './../dispatcher/appDispatcher';
 
 class Writing {

@@ -3,9 +3,9 @@
 * @exports {static class} API
 */
 
-import Promise  from 'bluebird';
+import Promise from 'bluebird';
 
-import http     from './requester';
+import http from './requester';
 
 var API_URL, TWO_WEEKS;
 
