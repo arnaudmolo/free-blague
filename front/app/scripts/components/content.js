@@ -75,17 +75,11 @@ export default React.createClass(
 
     render() {
 
-      var writing, toggleClass, model, jokes;
+      var model, jokes;
 
       model = this.getModel();
 
       jokes = model.get('jokes');
-
-      if (model.get('showWriting')) {
-        writing = <Writing />;
-      }
-
-      toggleClass = model.get('mute')?'unmute':'mute';
 
       return (
         <div>
@@ -100,14 +94,14 @@ export default React.createClass(
               type="submit"
               onClick={this.toggleMute}
               value=""
-              className={toggleClass} />
+              className={model.get('mute')?'unmute':'mute'} />
             <a
               className="button red publish"
               href=""
               onClick={this.showInput}>Publish my Joke</a>
             <React.addons.CSSTransitionGroup
               transitionName="writing-animation">
-              {writing}
+              {model.get('showWriting')?<Writing />:undefined}
             </React.addons.CSSTransitionGroup>
           </div>
         </div>

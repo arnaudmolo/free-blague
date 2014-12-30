@@ -34,7 +34,7 @@ export default React.createClass(
 
       if (joke !== undefined) {
         joke = joke.toString();
-      };
+      }
 
       return (
         <div className="joke-container">
