@@ -56,7 +56,6 @@
     "test": "jest"
   },
   "devDependencies": {
-    "gulp-jest": "^0.2.4",
     "gulp-plumber": "^0.6.6",
     "gulp-react": "^1.0.2",
     "jest-cli": "^0.2.1",
