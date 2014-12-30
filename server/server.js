@@ -3,6 +3,11 @@ var boot = require('loopback-boot');
 
 var app = module.exports = loopback();
 
+var isomorph = require('./isomorph')(function(){
+  var a = require('./../main.js');
+  console.log('ici', a);
+});
+
 // Set up the /favicon.ico
 app.use(loopback.favicon());
 

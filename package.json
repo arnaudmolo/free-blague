@@ -52,7 +52,7 @@
     "serve-favicon": "^2.0.1"
   },
   "scripts": {
-    "start": "node server/server.js",
+    "start": "node server/server.js --harmony",
     "test": "cd front && gulp jshint"
   },
   "devDependencies": {

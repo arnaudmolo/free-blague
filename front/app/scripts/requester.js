@@ -4,6 +4,7 @@
 */
 
 import Promise from 'bluebird';
+import { XMLHttpRequest } from 'xmlhttprequest';
 
 var XHR;
 

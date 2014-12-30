@@ -10,6 +10,8 @@ import api      from './../api';
 import appDispatcher from './../dispatcher/appDispatcher';
 import userDispatcher from './../dispatcher/userDispatcher';
 
+var localStorage = (localStorage || undefined);
+
 /**
  * @class User
  * Extended from Backbone Model
@@ -29,9 +31,11 @@ export default new class User extends Model {
 
     var user, res;
 
-    user = JSON.parse(localStorage.getItem('user'));
+    if (localStorage !== undefined) {
+      user = JSON.parse(localStorage.getItem('user'));
+    };
 
-    if (user === null) {
+    if (user === null || user === undefined) {
       user = {
         id       : 0,
         userId   : undefined,
@@ -71,9 +75,11 @@ export default new class User extends Model {
     this.dispatchJokesToken = appDispatcher.register(this.dispatchJokes.bind(this));
     this.dispatchUserToken  = userDispatcher.register(this.dispatchUser.bind(this));
 
-    this.on('all', () => {
-      localStorage.setItem('user', this);
-    });
+    if (localStorage !== undefined) {
+      this.on('all', () => {
+        localStorage.setItem('user', this);
+      });
+    };
 
     return;
   }

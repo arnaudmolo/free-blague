@@ -10,6 +10,8 @@ import api      from './../api';
 import say      from './../utils/say';
 import appDispatcher from './../dispatcher/appDispatcher';
 
+var localStorage = (localStorage || undefined);
+
 /**
  * @class Content
  * Extended from Backbone Model
@@ -20,7 +22,9 @@ export default new class Content extends Model {
 
   initialize() {
 
-    this.mute(localStorage.getItem('muted') === 'true');
+    if (localStorage !== undefined) {
+      this.mute(localStorage.getItem('muted') === 'true');
+    };
     this.dispatchToken = appDispatcher.register(this.dispatchCallback.bind(this));
 
     return;
@@ -37,7 +41,9 @@ export default new class Content extends Model {
 
   mute(muted) {
 
-    localStorage.setItem('muted', muted);
+    if (localStorage !== undefined) {
+      localStorage.setItem('muted', muted);
+    };
 
     this.set('mute', muted);
 
