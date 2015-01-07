@@ -9,7 +9,6 @@ import React from 'react/addons';
 import { Events } from 'backbone';
 
 import cleanString from './../utils/clean-string';
-import say from './../utils/say';
 import appDispatcher from './../dispatcher/appDispatcher';
 
 export default React.createClass(

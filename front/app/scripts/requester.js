@@ -77,6 +77,7 @@ function xhr(type, url, data){
     };
 
     request.send(data);
+    console.log('send');
 
   });
 

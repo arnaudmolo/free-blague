@@ -11,13 +11,15 @@ import mixins from 'backbone-react-component';
 import Writing from './writing';
 import JokeList from './jokeList';
 import MainJoke from './main-joke';
-import Sidebar from './sidebar/sidebar';
+// import Sidebar from './sidebar/sidebar';
 import appDispatcher from './../dispatcher/appDispatcher';
 
 /**
  * @class ContentView
  * Templates for Content
  */
+
+var {CSSTransitionGroup} = React.addons;
 
 export default React.createClass(
 
@@ -75,11 +77,20 @@ export default React.createClass(
 
     render() {
 
-      var model, jokes;
+      var model, jokes, jokeList;
 
       model = this.getModel();
 
       jokes = model.get('jokes');
+
+      if (jokes !== undefined) {
+        jokeList = (
+          <span>
+            <MainJoke collection={jokes} />
+            <JokeList collection={jokes} />
+          </span>
+        );
+      };
 
       return (
         <div>
@@ -87,9 +98,7 @@ export default React.createClass(
 
           </div>
           <div>
-            <MainJoke collection={jokes} />
-            <JokeList
-              collection={jokes} />
+            { jokeList }
             <input
               type="submit"
               onClick={this.toggleMute}
@@ -99,10 +108,10 @@ export default React.createClass(
               className="button red publish"
               href=""
               onClick={this.showInput}>Publish my Joke</a>
-            <React.addons.CSSTransitionGroup
+
+            <CSSTransitionGroup
               transitionName="writing-animation">
-              {model.get('showWriting')?<Writing />:undefined}
-            </React.addons.CSSTransitionGroup>
+            </CSSTransitionGroup>
           </div>
         </div>
       );

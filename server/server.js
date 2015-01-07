@@ -1,6 +1,6 @@
 var loopback = require('loopback');
 var boot = require('loopback-boot');
-require('./isomorph');
+require("6to5/register");
 
 var app = module.exports = loopback();
 
@@ -25,6 +25,11 @@ boot(app, __dirname);
 // Example:
 var path = require('path');
 app.use(loopback.static(path.resolve(__dirname, '../client')));
+
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'html');
+app.engine('html', require('ejs').renderFile);
+app.set('json spaces', 2); //pretty print json responses
 
 // Requests that get this far won't be handled
 // by any middleware. Convert them into a 404 error

@@ -98,7 +98,7 @@ gulp.task('bundle', ['styles', 'scripts', 'bower'], function(){
 });
 
 // Build
-gulp.task('build', ['html', 'bundle', 'images', 'compress']);
+gulp.task('build', ['html', 'bundle', 'images']);
 
 // Default
 gulp.task('default', ['clean', 'build']);

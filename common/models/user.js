@@ -1,5 +1,5 @@
 'use strict';
 
-module.exports = function(User) {
-  console.log(User.login);
+export default function(User) {
+  // console.log(User.login);
 };

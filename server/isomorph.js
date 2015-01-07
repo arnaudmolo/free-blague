@@ -1,12 +1,33 @@
-var transpiler = require('es6-module-transpiler');
-var Container = transpiler.Container;
-var FileResolver = transpiler.FileResolver;
-var BundleFormatter = transpiler.formatters.bundle;
+import React from 'React/addons';
+import { Model, Collection } from 'backbone';
+import Joke from './../front/app/scripts/models/joke';
+import JokeList from './../front/app/scripts/models/joke-list';
 
-var container = new Container({
-  resolvers: [new FileResolver(['./../front/app/scripts/components'])],
-  formatter: new BundleFormatter()
+var jokeList, Content, content;
+
+class Content extends Model {
+
+  defaults() {
+    return {
+      mute : false,
+      showWriting: false
+    };
+  }
+
+};
+
+jokeList = new JokeList();
+jokeList.add({
+  'content': 'Bienvenue sur le jeu de la blague !',
+  'id': 0
 });
 
-container.getModule('content');
-container.write('out/mylib.js');
+content = new Content();
+content.set('jokes', jokeList);
+
+export default function() {
+
+  var Content = require(__dirname + './../front/app/scripts/components/content');
+  return React.renderToString(Content({model: content}));
+
+}

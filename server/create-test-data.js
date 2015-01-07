@@ -13,9 +13,6 @@ module.exports = function(app) {
   ], function(er, users) {
     if (er) return debug("$j", er);
     debug(users);
-
-    console.log(users[0]);
-
     //create joke 1 and make john the owner
     users[0].jokes.create([{
       content: 'joke1.',
@@ -38,14 +35,7 @@ module.exports = function(app) {
       userId: users[0].id,
       language: 'fr'
     }], function(er, joke) {
-      console.log('error', er);
       if (er) return debug(er);
-      console.log('jokes', joke);
-
-      users[0].jokes.count(function(err, res){
-        console.log("log", res);
-      });
-
     });
 
     Role.create({
