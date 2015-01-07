@@ -11,7 +11,7 @@ import mixins from 'backbone-react-component';
 import Writing from './writing';
 import JokeList from './jokeList';
 import MainJoke from './main-joke';
-// import Sidebar from './sidebar/sidebar';
+import Sidebar from './sidebar/sidebar';
 import appDispatcher from './../dispatcher/appDispatcher';
 
 /**
@@ -95,7 +95,7 @@ export default React.createClass(
       return (
         <div>
           <div className="side-bar">
-
+            <Sidebar />
           </div>
           <div>
             { jokeList }

@@ -11,7 +11,6 @@ import mixins from  'backbone-react-component';
 import Login from './login';
 import Register from './register';
 import JokeList from './JokeList';
-import User from './../../models/user';
 import userDispatcher from './../../dispatcher/userDispatcher';
 
 /**

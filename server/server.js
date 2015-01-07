@@ -1,8 +1,9 @@
-var loopback = require('loopback');
-var boot = require('loopback-boot');
-require("6to5/register");
+import loopback from 'loopback';
+import boot from 'loopback-boot';
 
-var app = module.exports = loopback();
+var app, path;
+
+app = loopback();
 
 // Set up the /favicon.ico
 app.use(loopback.favicon());
@@ -23,7 +24,7 @@ boot(app, __dirname);
 // All static middleware should be registered at the end, as all requests
 // passing the static middleware are hitting the file system
 // Example:
-var path = require('path');
+path = require('path');
 app.use(loopback.static(path.resolve(__dirname, '../client')));
 
 app.set('views', path.join(__dirname, 'views'));
@@ -52,7 +53,6 @@ app.start = function() {
   });
 };
 
-// start the server if `$ node server.js`
-if (require.main === module) {
-  app.start();
-}
+app.start();
+
+export default app;

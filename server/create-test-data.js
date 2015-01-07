@@ -1,9 +1,12 @@
 var debug = require('debug')('boot:create-model-instances');
 
-module.exports = function(app) {
-  var User = app.models.user;
-  var Role = app.models.Role;
-  var RoleMapping = app.models.RoleMapping;
+export default function(app) {
+
+  var User, Role, RoleMapping;
+
+  User = app.models.user;
+  Role = app.models.Role;
+  RoleMapping = app.models.RoleMapping;
 
   User.create([
     {email: 'john@doe.com', password: 'opensesame'},
