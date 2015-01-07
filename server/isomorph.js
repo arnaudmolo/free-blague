@@ -1,24 +1,12 @@
-var fs            = require('fs');
-var browserify    = require('browserify');
-var reactify      = require('reactify');
-var to5Browserify = require('6to5ify');
-var envify        = require('envify');
+var transpiler = require('es6-module-transpiler');
+var Container = transpiler.Container;
+var FileResolver = transpiler.FileResolver;
+var BundleFormatter = transpiler.formatters.bundle;
 
-module.exports = function(cb) {
+var container = new Container({
+  resolvers: [new FileResolver(['./../front/app/scripts/components'])],
+  formatter: new BundleFormatter()
+});
 
-  var stream = fs.createWriteStream('./main.js');
-
-  stream.on('close', function(){
-    cb();
-    console.log('AZIUEGUYZAVBDLEIZUA FVUBU FYVBEZUFGYB');
-  });
-
-  browserify({debug: false})
-    .transform(reactify)
-    .transform(to5Browserify.configure({ modules: 'commonInterop', experimental: true}))
-    .transform(envify)
-    .require(__dirname + '/../front/app/scripts/components/content.js', { entry: true })
-    .bundle()
-    .pipe(stream);
-
-}
+container.getModule('content');
+container.write('out/mylib.js');

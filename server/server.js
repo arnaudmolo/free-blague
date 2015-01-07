@@ -1,5 +1,6 @@
 var loopback = require('loopback');
 var boot = require('loopback-boot');
+require('./isomorph');
 
 var app = module.exports = loopback();
 

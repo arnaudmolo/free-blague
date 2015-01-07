@@ -34,13 +34,11 @@ export default React.createClass(
 
       joke = this.getCollection().last();
 
-      if (joke !== undefined) {
-        joke = joke.toString();
-      }
-
       return (
         <div className="joke-container">
-          <h1>{ joke }</h1>
+          <h1>
+            <Lettering string={ joke!==undefined?joke.toString():'' } />
+          </h1>
         </div>
       );
 
