@@ -26,7 +26,7 @@ boot(app, __dirname);
 // passing the static middleware are hitting the file system
 // Example:
 path = require('path');
-app.use(monorouterModdleware(require('./router')));
+app.use(monorouterModdleware(require('./router')(app)));
 app.use(loopback.static(path.resolve(__dirname, '../client')));
 
 app.set('views', path.join(__dirname, 'views'));
