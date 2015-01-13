@@ -16,6 +16,15 @@ class Content extends Model {
 
 };
 
+Content = Model.extend({
+  defaults() {
+    return {
+      mute : false,
+      showWriting: false
+    };
+  }
+});
+
 jokeList = new JokeList();
 jokeList.add({
   'content': 'Bienvenue sur le jeu de la blague !',

@@ -39,9 +39,6 @@ export default class JokeList extends Collection {
       case 'add-joke':
         return this.add(joke);
 
-      case 'delete-last-item':
-        return TodoStore.items.pop();
-
     }
 
   }

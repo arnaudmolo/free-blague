@@ -215,4 +215,4 @@ export default new class User extends Model {
     return JSON.stringify(this.attributes);
   }
 
-}
+};

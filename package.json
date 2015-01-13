@@ -41,7 +41,6 @@
     "gulp-util": "~3.0.1",
     "gulp-webserver": "^0.8.3",
     "jshint": "^2.5.6",
-    "jshint-stylish": "~0.1.5",
     "lodash": "^2.4.1",
     "loopback": "^2.0.0",
     "loopback-boot": "^2.0.0",
@@ -49,22 +48,18 @@
     "loopback-datasource-juggler": "^2.7.0",
     "react": "^0.12.2",
     "react-tools": "^0.12.2",
-    "reactify": "^0.17.1",
     "serve-favicon": "^2.0.1"
   },
   "scripts": {
-    "start": "node server/bootstrap.js",
+    "start": "node server/bootstrap.js --harmony",
     "test": "jest"
   },
   "devDependencies": {
     "es6-module-loader": "^0.11.1",
     "gulp-plumber": "^0.6.6",
-    "gulp-react": "^1.0.2",
     "jest-cli": "^0.2.1",
     "jshint-stylish": "~0.1.5",
-    "loopback-explorer": "^1.6.2",
-    "node-jsx": "^0.12.4",
-    "reactify": "~0.14"
+    "loopback-explorer": "^1.6.2"
   },
   "engines": {
     "node": ">=0.10.0"

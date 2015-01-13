@@ -76,4 +76,4 @@ export default new class Content extends Model {
     };
   }
 
-}
+};

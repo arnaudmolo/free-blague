@@ -76,9 +76,7 @@ function xhr(type, url, data){
       }
     };
 
-    request.send(data);
-    console.log('send');
-
+    return request.send(data);
   });
 
   promise.sent = sent;
@@ -87,17 +85,17 @@ function xhr(type, url, data){
   return promise;
 }
 
-export default new class http {
+export default {
   get(url) {
     return xhr('GET', url);
-  }
+  },
   put(url, data) {
     return xhr('PUT', url, data);
-  }
+  },
   post(url, data) {
     return xhr('POST', url, data);
-  }
+  },
   delete(url) {
     return xhr('DELETE', url);
   }
-}
+};

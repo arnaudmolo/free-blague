@@ -44,9 +44,7 @@ export default React.createClass(
     }
 
     componentDidMount() {
-
       this.getModel().on('all', () => this.forceUpdate());
-
     }
 
     componentWillUnmount() {
@@ -58,7 +56,6 @@ export default React.createClass(
     }
 
     showInput(event) {
-
       event.preventDefault();
 
       appDispatcher
@@ -66,13 +63,11 @@ export default React.createClass(
           actionType: 'show-writing',
           value: true
         });
-
-      return
-
+      return;
     }
 
     launchWriting (joke) {
-      this.setState({joke: joke});
+      this.setState({joke});
     }
 
     render() {

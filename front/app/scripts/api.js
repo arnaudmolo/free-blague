@@ -23,7 +23,7 @@ function access(token = require('./models/user').get('id')){
  * Deal with the API
  */
 
-export default {
+export default new class API {
 
   /**
    * Get a random Joke from the server
@@ -33,8 +33,8 @@ export default {
 
   getRandomJoke() {
     return http.get(API_URL + '/jokes/random')
-      .then( res => res.joke.content);
-  },
+      .then(function(res){return res.joke.content;});
+  }
 
   /**
    * Save the joke
@@ -70,7 +70,7 @@ export default {
 
     return promise;
 
-  },
+  }
 
   /**
    * Create the user
@@ -85,7 +85,7 @@ export default {
     promise = http.post(API_URL + '/users', JSON.stringify(user));
 
     return promise;
-  },
+  }
 
   /**
    * Auth the user.
@@ -104,7 +104,7 @@ export default {
       .post(API_URL + '/users/login', JSON.stringify(user));
 
     return promise;
-  },
+  }
 
   /**
    * Get user's jokes
@@ -119,10 +119,10 @@ export default {
     promise = http.get(API_URL + '/users/' + id + '/jokes' + access(token));
 
     return promise;
-  },
+  }
 
   logout(token) {
     return http.post(API_URL + '/users/logout' + access(token), {});
   }
 
-}
+};
