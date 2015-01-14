@@ -3,13 +3,12 @@
 * @exports Instance of User
 */
 
-import Backbone from 'backbone';
+import { Model } from 'backbone';
 
 import JokeList from './joke-list';
-import api      from '../api';
-
-var { Model } = Backbone;
-
+import api from './../api';
+import appDispatcher from './../dispatcher/appDispatcher';
+import userDispatcher from './../dispatcher/userDispatcher';
 
 /**
  * @class User
@@ -17,7 +16,7 @@ var { Model } = Backbone;
  * Contains the User informations
  */
 
-class User extends Model {
+export default new class User extends Model {
 
   /**
    * Set defaults values for a User.
@@ -32,17 +31,24 @@ class User extends Model {
 
     user = JSON.parse(localStorage.getItem('user'));
 
-    if (user === null) {
-      user = {};
+    if (user === null || user === undefined) {
+      user = {
+        id       : 0,
+        userId   : undefined,
+        email    : '',
+        password : '',
+        logged   : false,
+        jokes    : []
+      };
     }
 
     return {
-      id       : user.id || 0,
-      userId   : user.userId || null,
-      email    : user.email || '',
-      password : user.password || '',
-      logged   : false,
-      jokes    : new JokeList(user.jokes || [])
+      id       : user.id,
+      userId   : user.userId,
+      email    : user.email,
+      password : user.password,
+      logged   : user.logged,
+      jokes    : new JokeList(user.jokes)
     };
   }
 
@@ -58,36 +64,40 @@ class User extends Model {
 
   initialize() {
 
-    var user, self, jokes;
-
-    self = this;
-
-    this.listenTo(this, 'change', function(){
-      localStorage.setItem('user', this);
-    });
-
-    user = JSON.parse(localStorage.getItem('user'));
+    var jokes;
 
     jokes = this.get('jokes');
 
-    this.listenTo(jokes, 'add', function(){
+    this.dispatchJokesToken = appDispatcher.register(this.dispatchJokes.bind(this));
+    this.dispatchUserToken  = userDispatcher.register(this.dispatchUser.bind(this));
+
+    this.on('all', () => {
       localStorage.setItem('user', this);
     });
 
-    // setTimeout(function(){
-    //   if (user.logged) {
-    //     self.set('logged', true);
-    //     self
-    //       .getJokes()
-    //       .error(function(res){
-    //         if (res.error.status === 401) {
-    //           return self.login();
-    //         }
-    //       });
-    //   }
-    // });
-
     return;
+  }
+
+  dispatchJokes(payload) {
+
+    switch(payload.actionType){
+      case 'add-joke':
+        this.createJoke(payload.joke);
+    }
+
+  }
+
+  dispatchUser(payload) {
+
+    switch(payload.actionType){
+      case 'user-login':
+        return this.login(payload.user);
+      case 'user-logout':
+        return this.logout();
+      case 'user-register':
+        return this.register(payload.user);
+    }
+
   }
 
   /**
@@ -112,15 +122,20 @@ class User extends Model {
 
   createJoke(joke) {
 
-    var self;
-
-    self = this;
-
     return api
       .saveJoke(joke)
-      .then(function(joke){
-        self.get('jokes').add(joke);
+      .then((joke) => {
+
+        this.get('jokes').add(joke);
+
+        appDispatcher
+          .dispatch({
+            payload: 'show-writing',
+            value: false
+          });
+
         return joke;
+
       });
   }
 
@@ -133,35 +148,28 @@ class User extends Model {
    * @return <Promise>(AccessToken)
    */
 
-  login() {
-
-    var self;
-
-    self = this;
+  login({email, password}) {
 
     return api
       .loginUser({
-        email: this.get('email'),
-        password: this.get('password')
-      }).then(function(res){
+        email: email,
+        password: password
+      }).then((res) => {
 
-        self.set('logged', true);
-        self.set('id', res.id);
-        self.set('userId', res.userId);
+        this.set({
+          id: res.id,
+          userId: res.userId,
+          logged: true,
+          email
+        });
 
-        return res;
-      }).then(function(res){
-
-        api
-          .getUserJokes(self.get('userId'), self.get('id'))
-          .then(function(res){
-
-            self.get('jokes').add(res);
-
+        return api
+          .getUserJokes(this.get('userId'), this.get('id'))
+          .then((res) => {
+            this.get('jokes').add(res);
             return res;
           });
 
-        return res;
       });
   }
 
@@ -173,14 +181,16 @@ class User extends Model {
    * @return <Promise>(userId)
    */
 
-  register() {
+  register({email, password}) {
+
+    var _user;
+
+    _user = { email, password };
 
     return api
-      .createUser({
-        email: this.get('email'),
-        password: this.get('password')
-      })
-      .then(function(res){
+      .createUser(_user)
+      .then((res) => {
+        this.login(_user);
         return res;
       });
   }
@@ -191,20 +201,18 @@ class User extends Model {
 
     token = this.get('id');
 
-    this.set('id', 0);
-    this.set('email', '');
-    this.set('userId', 0);
-    this.set('logged', false);
-    this.set('password', '');
+    this.set({
+      id: 0,
+      email: '',
+      userId: 0,
+      logged: false
+    });
 
-    return api
-      .logout(token);
+    return api.logout(token);
   }
 
   toString() {
     return JSON.stringify(this.attributes);
   }
 
-}
-
-module.exports = new User();
+};

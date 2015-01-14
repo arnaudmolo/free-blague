@@ -1,4 +1,4 @@
-module.exports = function(Joke){
+export default function(Joke){
 
   Joke.definition.properties.date.default = Date.now;
 
@@ -25,10 +25,5 @@ module.exports = function(Joke){
         }
       }
   );
-
-  Joke.beforeValidate = function(next, joke){
-    // joke.geo = geoip.lookup(global.req.headers.host.split(':')[0]);
-    next();
-  };
 
 };

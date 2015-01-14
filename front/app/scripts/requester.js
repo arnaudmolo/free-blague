@@ -4,9 +4,6 @@
 */
 
 import Promise from 'bluebird';
-import _       from 'underscore';
-
-var {isObject} = _;
 
 var XHR;
 
@@ -41,7 +38,7 @@ function xhr(type, url, data){
 
   var promise, request, sent, process, resolveSent, resolveProcess;
 
-  if (isObject(data)) {
+  if (data) {
     data = JSON.stringify(data);
   }
 
@@ -79,8 +76,7 @@ function xhr(type, url, data){
       }
     };
 
-    request.send(data);
-
+    return request.send(data);
   });
 
   promise.sent = sent;
@@ -89,19 +85,17 @@ function xhr(type, url, data){
   return promise;
 }
 
-class http {
+export default {
   get(url) {
     return xhr('GET', url);
-  }
+  },
   put(url, data) {
     return xhr('PUT', url, data);
-  }
+  },
   post(url, data) {
     return xhr('POST', url, data);
-  }
+  },
   delete(url) {
     return xhr('DELETE', url);
   }
-}
-
-module.exports = http.prototype;
+};

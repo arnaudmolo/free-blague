@@ -3,11 +3,9 @@
 * @exports Class JokeList
 */
 
-import Backbone from 'backbone';
+import { Collection } from 'backbone';
 
-import Joke     from './joke';
-
-var { Collection } = Backbone;
+import Joke from './joke';
 
 /**
  * @class JokeList
@@ -15,7 +13,7 @@ var { Collection } = Backbone;
  * Contains the User jokes
  */
 
-class JokeList extends Collection {
+export default class JokeList extends Collection {
 
   /**
    * Creates an instance of Collection.
@@ -30,6 +28,19 @@ class JokeList extends Collection {
     super(options);
     this.model = Joke;
   }
-}
 
-module.exports = JokeList;
+  dispatchCallback(payload) {
+
+    switch (payload.actionType) {
+
+      case 'add-remove':
+        return this.remove(payload.joke);
+
+      case 'add-joke':
+        return this.add(joke);
+
+    }
+
+  }
+
+}

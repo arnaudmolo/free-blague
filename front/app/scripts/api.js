@@ -3,9 +3,9 @@
 * @exports {static class} API
 */
 
-import Promise  from 'bluebird';
+import Promise from 'bluebird';
 
-import http     from './requester';
+import http from './requester';
 
 var API_URL, TWO_WEEKS;
 
@@ -23,7 +23,7 @@ function access(token = require('./models/user').get('id')){
  * Deal with the API
  */
 
-class API {
+export default new class API {
 
   /**
    * Get a random Joke from the server
@@ -125,10 +125,4 @@ class API {
     return http.post(API_URL + '/users/logout' + access(token), {});
   }
 
-}
-
-/**
- * Export the prototype to use API as a static Class
- */
-
-module.exports = API.prototype;
+};

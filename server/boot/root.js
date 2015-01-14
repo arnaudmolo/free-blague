@@ -1,6 +1,8 @@
-module.exports = function(server) {
+export default function(server) {
+
+  var router;
   // Install a `/` route that returns server status
-  var router = server.loopback.Router();
+  router = server.loopback.Router();
   // router.get('/', server.loopback.status());
   server.use(router);
 };
