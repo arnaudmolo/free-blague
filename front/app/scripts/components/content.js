@@ -82,7 +82,6 @@ export default React.createClass(
 
       if (this.props.user) {
         logged = this.props.user.get('logged');
-        console.log(this.props.user.get('logged'));
       };
 
       if (jokes !== undefined) {
