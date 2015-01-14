@@ -47,7 +47,7 @@ export default new class User extends Model {
       userId   : user.userId,
       email    : user.email,
       password : user.password,
-      logged   : false,
+      logged   : user.logged,
       jokes    : new JokeList(user.jokes)
     };
   }

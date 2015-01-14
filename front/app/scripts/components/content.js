@@ -45,6 +45,9 @@ export default React.createClass(
 
     componentDidMount() {
       this.getModel().on('all', () => this.forceUpdate());
+      if (this.props.user) {
+        this.props.user.on('all', () => this.forceUpdate());
+      };
     }
 
     componentWillUnmount() {
@@ -72,11 +75,15 @@ export default React.createClass(
 
     render() {
 
-      var model, jokes, jokeList;
+      var model, jokes, jokeList, logged, sidebar;
 
       model = this.getModel();
-
       jokes = model.get('jokes');
+
+      if (this.props.user) {
+        logged = this.props.user.get('logged');
+        console.log(this.props.user.get('logged'));
+      };
 
       if (jokes !== undefined) {
         jokeList = (
@@ -87,11 +94,13 @@ export default React.createClass(
         );
       };
 
+      if (!logged) {
+        sidebar = (<div className="side-bar"><Sidebar></Sidebar></div>);
+      };
+
       return (
         <div>
-          <div className="side-bar">
-            <Sidebar />
-          </div>
+          {sidebar}
           <div>
             { jokeList }
             <input

@@ -9,4 +9,4 @@ render(
   document.getElementsByClassName('content')[0]
 );
 
-console.info('v0.0.2');
+console.info('v0.1.0');

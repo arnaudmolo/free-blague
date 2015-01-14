@@ -23,6 +23,13 @@ export default React.createClass(
       return [mixins];
     }
 
+    getInitialState() {
+      return {
+        email: 'aze@aze.com',
+        password: 'aze'
+      }
+    }
+
     /**
      * Tiggered when form is submitted
      * Set the model's attributes and lanuch User#login()
@@ -34,18 +41,16 @@ export default React.createClass(
 
       event.preventDefault();
 
-      console.log(this);
+      userDispatcher
+        .dispatch({
+          actionType: 'user-login',
+          user: {
+            email: this.state.email,
+            password: this.state.password
+          }
+        });
 
-      // userDispatcher
-      //   .dispatch({
-      //     actionType: 'user-login',
-      //     user: {
-      //       email: this.refs.email.getDOMNode().value.trim(),
-      //       password: this.refs.password.getDOMNode().value.trim()
-      //     }
-      //   });
-
-        return;
+      return;
     }
 
     render() {
@@ -54,10 +59,12 @@ export default React.createClass(
           <h1>login</h1>
           <form method="post" onSubmit={this.handleSubmit}>
             <input
+              defaultValue={this.state.email}
               type="email"
               placeholder="email"
               ref="email" />
             <input
+              defaultValue={this.state.password}
               type="password"
               placeholder="password"
               ref="password"/>

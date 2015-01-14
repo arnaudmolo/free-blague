@@ -7,10 +7,6 @@ export default React.createClass(
 
   class Index {
 
-    getRawData() {
-      return "function(){console.log('yay')}";
-    }
-
     render() {
       return (
 

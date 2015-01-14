@@ -24,10 +24,6 @@ export default new class Content extends Model {
 
     tempJoke = this.getTempJoke();
 
-    if (window) {
-      console.log(window);
-    };
-
     this.mute(localStorage.getItem('muted') === 'true');
     this.dispatchToken = appDispatcher.register(this.dispatchCallback.bind(this));
 
