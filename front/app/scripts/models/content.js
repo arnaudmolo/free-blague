@@ -32,11 +32,9 @@ export default new class Content extends Model {
     this.dispatchToken = appDispatcher.register(this.dispatchCallback.bind(this));
 
     if (tempJoke) {
-      console.log('?');
       this.get('jokes').add({
         content: tempJoke
       });
-      console.log(this.get('jokes').at(0));
     }
 
     return;
