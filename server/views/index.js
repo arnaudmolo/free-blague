@@ -6,6 +6,11 @@ var Content = require(__dirname + './../../front/app/scripts/components/content'
 export default React.createClass(
 
   class Index {
+
+    getRawData() {
+      return "function(){console.log('yay')}";
+    }
+
     render() {
       return (
 
@@ -23,6 +28,7 @@ export default React.createClass(
             <div className="content">
               <Content model={this.props.model}></Content>
             </div>
+            <script id="ici" dangerouslySetInnerHTML={{__html: 'window.tempJoke = "' + this.props.model.get('jokes').at(0) + '"'}}></script>
             <script src="/scripts/main.js"></script>
         </body>
         </html>

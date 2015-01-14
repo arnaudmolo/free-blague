@@ -20,8 +20,24 @@ export default new class Content extends Model {
 
   initialize() {
 
+    var tempJoke;
+
+    tempJoke = this.getTempJoke();
+
+    if (window) {
+      console.log(window);
+    };
+
     this.mute(localStorage.getItem('muted') === 'true');
     this.dispatchToken = appDispatcher.register(this.dispatchCallback.bind(this));
+
+    if (tempJoke) {
+      console.log('?');
+      this.get('jokes').add({
+        content: tempJoke
+      });
+      console.log(this.get('jokes').at(0));
+    }
 
     return;
   }
@@ -35,13 +51,28 @@ export default new class Content extends Model {
 
   }
 
+  getTempJoke() {
+
+    if (window) {
+      if (window.tempJoke) {
+        return tempJoke;
+      };
+    };
+
+    return undefined;
+  }
+
   mute(muted) {
+
+    var tempJoke;
+
+    tempJoke = this.getTempJoke();
 
     localStorage.setItem('muted', muted);
 
     this.set('mute', muted);
 
-    if (!muted) {
+    if (!muted && !tempJoke) {
       return this.randomizeRequest();
     }
 
