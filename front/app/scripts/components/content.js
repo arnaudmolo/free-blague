@@ -102,11 +102,10 @@ export default React.createClass(
           {sidebar}
           <div>
             { jokeList }
-            <input
-              type="submit"
+            <a
               onClick={this.toggleMute}
-              value=""
-              className={model.get('mute')?'unmute':'mute'} />
+              title={model.get('mute')?'unmute':'mute'}
+              className={model.get('mute')?'unmute':'mute'}></a>
             <a
               className="button red publish"
               href=""
