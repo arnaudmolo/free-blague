@@ -80,6 +80,7 @@ gulp.task('images', function(){
 gulp.task('clean', function(cb){
 
   del([dist], {force: true}, cb);
+  $.cache.clearAll();
 
 });
 
