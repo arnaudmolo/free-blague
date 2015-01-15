@@ -130,7 +130,8 @@ gulp.task('bower', function(){
 
 });
 
-gulp.task('watch', ['html', 'scripts', 'serve'], function(){
+// App watcher
+gulp.task('watch', ['html', 'scripts', 'images', 'styles', 'serve'], function(){
 
   // Watch .html files
   gulp.watch(app + '*.html', ['html']);
@@ -140,6 +141,6 @@ gulp.task('watch', ['html', 'scripts', 'serve'], function(){
 
   gulp.watch(app + 'scripts/**/*.js', ['scripts']);
 
-  gulp.watch(app + 'images**/*', ['images']);
+  gulp.watch(app + 'images/**/*', ['images']);
 
 });
