@@ -94,7 +94,7 @@ export default React.createClass(
       };
 
       if (!logged) {
-        sidebar = (<div className="side-bar"><Sidebar></Sidebar></div>);
+        sidebar = (<div className="sidebar"><Sidebar></Sidebar></div>);
       };
 
       return (
@@ -107,7 +107,7 @@ export default React.createClass(
               title={model.get('mute')?'unmute':'mute'}
               className={model.get('mute')?'unmute':'mute'}></a>
             <a
-              className="button red publish"
+              className="button isRed publish"
               href=""
               onClick={this.showInput}>Publish my Joke</a>
 
