@@ -41,9 +41,7 @@ export default class JokeList extends React.Component {
 
     return (
       <ul className="jokes-list">
-        <React.addons.CSSTransitionGroup transitionName="joke-animation">
         { jokes }
-        </React.addons.CSSTransitionGroup>
       </ul>
     );
   }

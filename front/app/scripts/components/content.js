@@ -1,5 +1,6 @@
 import React from 'react/addons';
 import JokeStore from './../stores/joke-store';
+import UserStore from './../stores/user-store';
 
 import appDispatcher from './../dispatcher/app-dispatcher';
 
