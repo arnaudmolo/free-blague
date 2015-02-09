@@ -5,20 +5,7 @@
 @import "compass/css3/transform";
 @import "animate.css-scss/animate.scss";
 
-body {
-  background: #fafafa;
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #333;
-}
-
-.browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
-}
-
-
+@import "mixins";
 @import "variables";
 @import "style";
 @import "sidebar";
@@ -26,3 +13,5 @@ body {
 @import "writing";
 @import "buttons";
 @import "lettering";
+@import "form";
+@import "input";

@@ -1,6 +1,4 @@
 import React from 'react/addons';
-import JokeStore from './../stores/joke-store';
-import UserStore from './../stores/user-store';
 
 import appDispatcher from './../dispatcher/app-dispatcher';
 
@@ -22,8 +20,6 @@ function getStateFromStores() {
  * @class Content
  * Templates for Content
  */
-
-var {CSSTransitionGroup} = React.addons;
 
 export default class Content extends React.Component {
 
@@ -57,12 +53,12 @@ export default class Content extends React.Component {
         <JokeList />
         <Mute />
         <a
-          className="button red publish"
+          className="button isRed publish"
           href=""
           onClick={this.showInput}>Publish my joke
         </a>
         {this.state.writing?<Writing />:undefined}
       </div>
-      );
+    );
   }
 }

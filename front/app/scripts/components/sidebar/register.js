@@ -31,20 +31,30 @@ export default class Register extends React.Component {
   render() {
     return (
       <nav>
-        <h1>Create</h1>
-        <form method="post" onSubmit={this.handleSubmit}>
-          <input
-            defaultValue={this.state.email}
-            type="email"
-            placeholder="email"
-            ref="email" />
-          <input
-            defaultValue={this.state.password}
-            type="password"
-            placeholder="password"
-            ref="password"
-          />
-          <input type="submit" />
+        <h2>Create</h2>
+        <form
+          method="post"
+          onSubmit={this.handleSubmit}
+          className="form isVertical" >
+          <div className="form__block">
+            <input
+              defaultValue={this.state.email}
+              type="email"
+              placeholder="email"
+              ref="email"
+              className="input isRounded isFullWidth" />
+          </div>
+          <div className="form__block">
+            <input
+              defaultValue={this.state.password}
+              type="password"
+              placeholder="password"
+              ref="password"
+              className="input isRounded isFullWidth" />
+          </div>
+          <div className="form__block">
+            <input type="submit" className="button isWhite isFullWidth" />
+          </div>
         </form>
       </nav>
     );

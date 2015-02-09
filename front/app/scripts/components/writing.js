@@ -49,23 +49,22 @@ export default class Writing extends React.Component {
   render() {
 
     return (
-        <div className="writing">
-          <div className="close" onClick={this.close}>
-            <span>x</span>
-          </div>
-          <form onSubmit={this.handleSubmit} >
-            <textarea
-              rows="5"
-              value={this.state.content}
-              onChange={this.handleContentText}
-              maxLength="300"
-              placeholder="Write your joke..."></textarea>
-            <button
-              type="submit"
-              className="button red publish" >Publish my joke</button>
-          </form>
+      <div className="writing">
+        <div className="close" onClick={this.close}>
+          <span>x</span>
         </div>
+        <form onSubmit={this.handleSubmit} >
+          <textarea
+            ref="joke"
+            rows="5"
+            maxLength="300"
+            placeholder="Write your joke..."></textarea>
+          <button
+            type="submit"
+            className="button isRed publish" > Publish my joke
+          </button>
+        </form>
+      </div>
     );
   }
-
 }
