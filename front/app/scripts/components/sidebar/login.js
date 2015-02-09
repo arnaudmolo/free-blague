@@ -34,34 +34,34 @@ export default class Login extends React.Component {
 
   render() {
     return (
-        <div>
-          <h2>Login</h2>
-          <form
-            method="post"
-            onSubmit={this.handleSubmit}
-            className="form isVertical">
-            <div className="form__block">
-              <input
-                defaultValue={this.state.email}
-                type="email"
-                placeholder="email"
-                ref="email"
-                className="input--rounded input--full-w" />
-            </div>
-            <div className="form__block">
-              <input
-                defaultValue={this.state.password}
-                type="password"
-                placeholder="password"
-                ref="password"
-                className="input--rounded input--full-w" />
-            </div>
-            <div className="form__block">
-              <input type="submit" className="button--white button--full-w" />
-            </div>
-          </form>
-        </div>
-      );
+      <div>
+        <h2>Login</h2>
+        <form
+          method="post"
+          onSubmit={this.handleSubmit}
+          className="form isVertical">
+          <div className="form__block">
+            <input
+              defaultValue={this.state.email}
+              type="email"
+              placeholder="email"
+              ref="email"
+              className="input--rounded input--full-w" />
+          </div>
+          <div className="form__block">
+            <input
+              defaultValue={this.state.password}
+              type="password"
+              placeholder="password"
+              ref="password"
+              className="input--rounded input--full-w" />
+          </div>
+          <div className="form__block">
+            <input type="submit" className="button--white button--full-w" />
+          </div>
+        </form>
+      </div>
+    );
   }
 
 }

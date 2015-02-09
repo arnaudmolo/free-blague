@@ -26,7 +26,6 @@ export default class JokeList extends React.Component {
   }
 
   _onChange() {
-    console.log('_onChange');
     this.setState(getStateFromStores());
   }
 
