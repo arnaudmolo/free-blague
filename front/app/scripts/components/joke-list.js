@@ -1,21 +1,15 @@
 import React from 'react/addons';
 
 import JokeStore from './../stores/joke-store';
-
-import Lettering from './lettering';
+import JokeView from './Joke';
 
 function getStateFromStores() {
   return {
-    joke: JokeStore.getLastJoke()
+    jokes: JokeStore.getAll()
   }
 }
 
-/**
- * @class MainJoke
- * Templates for the main joke
- */
-
-export default class MainJoke extends React.Component {
+export default class JokeList extends React.Component {
 
   constructor(props) {
     super(props);
@@ -27,24 +21,28 @@ export default class MainJoke extends React.Component {
     JokeStore.addChangeListener(this._onChange);
   }
 
-  componentWillUnount() {
+  componentWillUnmount() {
     JokeStore.removeChangeListener(this._onChange);
   }
 
-  _onChange(event) {
+  _onChange() {
     this.setState(getStateFromStores());
   }
 
   render() {
 
-    return (
-      <div className="joke-container">
-        <h1>
-          <Lettering string={this.state.joke.content} />
-        </h1>
-      </div>
-    );
+    var jokes;
 
+    jokes = Object.keys(this.state.jokes).map((d, i) => {
+      d = this.state.jokes[d];
+      return (<JokeView key={d.id} model={d} />);
+    }).sort(function(b, a) {return a.props.model.order - b.props.model.order});
+
+    return (
+      <ul className="jokes-list">
+        { jokes }
+      </ul>
+    );
   }
 
 }

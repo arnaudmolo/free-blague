@@ -1,0 +1,15 @@
+.form
+  display: block
+  +clearfix()
+
+  &.isHorizontal
+
+    .form__block
+      float: left
+
+      &+.form__block
+        margin-left: 10px
+
+  &.isVertical
+    .form__block
+      margin-bottom: 10px

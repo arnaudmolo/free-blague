@@ -6,98 +6,53 @@
  */
 
 import React from 'react/addons';
-import mixins from  'backbone-react-component';
+
+import UserStore from './../../stores/user-store';
 
 import Login from './login';
 import Register from './register';
-import JokeList from './JokeList';
-import userDispatcher from './../../dispatcher/userDispatcher';
+import JokeList from './joke-list';
 
 /**
  * @class Sidebar
  * Extended from React Class and BaseClass
  * View for Sidebar JokeList
  */
-export default React.createClass(
 
-  class Sidebar {
+function getStateFromStore() {
+  return {
+    visible: true,
+    user: UserStore.getUserData()
+  };
+}
 
-    get mixins() {
-      return [mixins];
-    }
+export default class Sidebar extends React.Component {
 
-    /**
-     * Set defaults values for the this.state.
-     * {Object}#visible decide if the login forms are visibles
-     *
-     * @return {Object} The default's SidebarView this.state.
-     */
+  constructor(props) {
+    super(props);
+    this.state = getStateFromStore();
+  }
 
-    getInitialState() {
-      return {visible: true};
-    }
-
-    /**
-     * Invoked once, only on the client (not on the server),
-     * immediately after the initial rendering occurs.
-     * Listen to the User's logged attribute.
-     * Hide forms when User is logged.
-     *
-     * @return {Object} undefined
-     */
-
-    componentDidMount() {
-
-      this.getModel().on('all', () => {
-        this.forceUpdate();
-      });
-
-      return;
-
-    }
-
-    componentWillUnmount() {
-
-      this.getModel().off(null, null, this);
-
-    }
-
-    disconnect(event) {
-
-      event.preventDefault();
-
-      userDispatcher
-        .dispatch({
-          actionType: 'user-logout'
-        });
-
-    }
-
-    render() {
-
-      var user;
-
-      user = this.getModel();
-
-      if (!user.get('logged')) {
-        return (
-            <div>
-              <Login model={user} />
-              <Register model={user} />
-            </div>
-          );
-      }
-
+  render() {
+    if (true) {
       return (
         <div>
-          <JokeList
-            collection={user.get('jokes')} />
-          <input
-            type="submit"
-            value="disconnect"
-            onClick={this.disconnect} />
+          <Login />
+          <Register />
         </div>
       );
-    }
-  }.prototype
-);
+    };
+
+    return (
+      <div>
+        <JokeList
+          collection={user.get('jokes')} />
+        <input
+          type="submit"
+          value="disconnect"
+          onClick={this.disconnect} />
+      </div>
+    );
+  }
+
+}

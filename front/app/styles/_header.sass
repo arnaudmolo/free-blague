@@ -1,0 +1,33 @@
+.header
+  position: relative
+  box-sizing: border-box
+  +clearfix()
+
+.header--main
+  @extend .header
+  height: $header_height
+  padding: $main-header-padding
+  text-align: center
+  color: $white
+
+  .header__logo
+    font-size: $header_height / 2
+
+  .header__settings
+    position: absolute
+    top: $main-header-padding
+    right: $main-header-padding
+
+    &.isLoggedIn
+      background-color: transparent
+
+    &.isLoggedOut
+      background-color: rgba(0,0,0,.4)
+
+  .header__settings__icon
+    position: absolute
+    left: 0
+    top: 50%
+    width: 100%
+    margin-top: -0.5em
+    font-size: 1.4em

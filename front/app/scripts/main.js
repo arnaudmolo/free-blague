@@ -1,12 +1,15 @@
-import { render, createElement } from 'react/addons';
+import * as to5 from '6to5/polyfill';
+
+import { createFactory } from 'react/addons';
 
 import ContentView from './components/content';
-import Content from './models/content';
-import User from './models/user';
+import router from './router';
 
-render(
-  createElement(ContentView, {model: Content, user: User}),
-  document.getElementsByClassName('content')[0]
-);
+ContentView = createFactory(ContentView);
 
-console.info('v0.1.0');
+router
+  .route('index', '/', function(req) {
+    this.render(ContentView);
+  })
+  .attach(document.getElementsByClassName('content')[0])
+  .captureClicks();

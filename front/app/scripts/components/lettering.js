@@ -1,53 +1,42 @@
-
-/**
-* @module Lettering
-* @exports <ReactClass>Lettering
-*/
-
 import React from 'react/addons';
-import mixins from 'backbone-react-component';
 
 /**
  * @class Lettering
  * Templates for the main joke
  */
 
-var animationDuration = 2000;
+let animationDuration = 2000;
 
-export default React.createClass(
+function getStateFromStores() {
+  return {
+    string: ''
+  }
+}
 
-  class Lettering {
+export default class Lettering extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = getStateFromStores();
+  }
+  render() {
 
-    get mixins() {
-      return [mixins];
-    }
+    let lettering;
 
-    getInitialState() {
-      return { string: ''};
-    }
+    lettering = [];
 
-    render() {
+    for (let i = 0; i <= this.props.string.length - 1; i++) {
+      lettering.push(<span key={Math.random()} style={
+        {
+          WebkitAnimationDelay: animationDuration / this.props.string.length * i + "ms"
+        }
+      }>{this.props.string[i]}</span>);
+    };
 
-      var lettering;
+    return (
+      <span className="lettering-container">
+        {lettering}
+      </span>
+    );
 
-      lettering = [];
-
-      for (var i = 0; i <= this.props.string.length - 1; i++) {
-        lettering.push(<span key={Math.random()} style={
-          {
-            WebkitAnimationDelay: animationDuration / this.props.string.length * i + "ms"
-          }
-        }>{this.props.string[i]}</span>);
-      };
-
-      return (
-        <span className="lettering-container">
-          {lettering}
-        </span>
-      );
-
-    }
-
-  }.prototype
-
-);
+  }
+}

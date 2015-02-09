@@ -5,24 +5,24 @@
 @import "compass/css3/transform";
 @import "animate.css-scss/animate.scss";
 
-body {
-  background: #fafafa;
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #333;
-}
-
-.browsehappy {
-  margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
-  padding: 0.2em 0;
-}
-
-
+@import "mixins";
 @import "variables";
-@import "style";
+@import "icomoon";
+@import "layout";
+
+// atoms
+@import "button";
+@import "image";
+@import "form";
+@import "input";
+@import "table";
+
+// molecules
+@import "form";
+
+// organisms
+@import "header";
 @import "sidebar";
 @import "content";
-@import "writing";
-@import "buttons";
 @import "lettering";
+@import "writing";

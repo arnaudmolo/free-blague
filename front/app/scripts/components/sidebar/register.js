@@ -1,74 +1,63 @@
-/** @jsx React.DOM */
-
-/**
-* @module Register.view
-* @exports <ReactClass>Register
-*/
-
 import React from 'react/addons';
-import mixins from 'backbone-react-component';
 
-import userDispatcher from './../../dispatcher/userDispatcher';
+import UserActions from './../../actions/user-actions';
 
-export default React.createClass(
+function getStateFromStore() {
+  return {
+    email: 'aze@aze.com',
+    password: 'aze'
+  }
+}
 
-  class Register {
+export default class Register extends React.Component {
 
-    get mixins() {
-      return [mixins];
-    }
+  constructor(props) {
+    super(props);
+    this.state = getStateFromStore();
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-    getInitialState() {
-      return {
-        email: 'aze@aze.com',
-        password: 'aze'
-      }
-    }
+  handleSubmit(event) {
 
-    /**
-     * Tiggered when form is submitted
-     * Set the model's attributes and lanuch User#register()
-     *
-     * @return @see User#register
-     */
+    event.preventDefault();
 
-    handleSubmit(event) {
+    UserActions
+      .register({
+        email: this.state.email,
+        password: this.state.password
+      });
+  }
 
-      event.preventDefault();
-
-      userDispatcher
-        .dispatch({
-          actionType: 'user-register',
-          user: {
-            email: this.refs.email.getDOMNode().value.trim(),
-            password: this.refs.password.getDOMNode().value.trim()
-          }
-        });
-
-      return;
-
-    }
-
-    render() {
-      return (
-        <nav>
-          <h1>Create</h1>
-          <form method="post" onSubmit={this.handleSubmit}>
+  render() {
+    return (
+      <nav>
+        <h2>Create</h2>
+        <form
+          method="post"
+          onSubmit={this.handleSubmit}
+          className="form isVertical" >
+          <div className="form__block">
             <input
               defaultValue={this.state.email}
               type="email"
               placeholder="email"
-              ref="email" />
+              ref="email"
+              className="input--rounded input--full-w" />
+          </div>
+          <div className="form__block">
             <input
               defaultValue={this.state.password}
               type="password"
               placeholder="password"
               ref="password"
-            />
-            <input type="submit" />
-          </form>
-        </nav>
-      );
-    }
-  }.prototype
-);
+              className="input--rounded input--full-w" />
+          </div>
+          <div className="form__block">
+            <input type="submit" className="button--white button--full-w" />
+          </div>
+        </form>
+      </nav>
+    );
+  }
+
+}

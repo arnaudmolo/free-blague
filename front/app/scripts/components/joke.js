@@ -1,41 +1,34 @@
-/** @jsx React.DOM */
-
-/**
-* @module Joke.view
-* @exports ReactClass JokeView
-*/
-
 import React from 'react/addons';
-import mixins from 'backbone-react-component';
 import Color from 'Color';
 
 import stringToColor from './../utils/string-to-color';
+
+function getStateFromStores() {
+  return {
+    bg: {
+      backgroundColor: '#00FF00'
+    }
+  }
+}
 
 /**
  * @class JokeView
  * Extended from React Class
  * Templates for Sidebar Joke
  */
-export default React.createClass(
-  class JokeView {
 
-    get mixins() {
-      return [mixins];
-    }
+export default class JokeView extends React.Component {
 
-    getInitialState() {
-      return {
-        bg: {
-          backgroundColor: '#00FF00'
-        }
-      };
-    }
+  constructor(props) {
+    super(props);
+    this.state = getStateFromStores();
+  }
 
-    componentDidMount() {
+  componentDidMount() {
 
       var startColor, endColor, color;
 
-      color = stringToColor(this.getModel().get('content'));
+      color = stringToColor(this.props.model.content);
       startColor = Color(color);
       endColor = startColor.clone().alpha(0.5);
       startColor = startColor.alpha(0);
@@ -65,26 +58,22 @@ export default React.createClass(
 
     }
 
-    render() {
+  render() {
 
-      var model;
-
-      model = this.getModel();
-
-      return (
-        <li
-          className="joke"
-          style={this.state.bg}
-          key={this.props.key} >
-          <div className="wrapper">
-            <p>{model.get('content')}</p>
-            <div
-              className="shadow"
-              style={this.state.gradient} >
-            </div>
+    return (
+      <li
+        className="joke"
+        style={this.state.bg}
+        key={this.props.key} >
+        <div className="wrapper">
+          <p>{this.props.model.content}</p>
+          <div
+            className="shadow"
+            style={this.state.gradient} >
           </div>
-        </li>
-      );
-    }
-  }.prototype
-);
+        </div>
+      </li>
+    );
+  }
+
+}

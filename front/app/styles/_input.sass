@@ -1,0 +1,14 @@
+.input
+  display: inline-block
+  line-height: 1em
+  padding: 8px 6px
+  border: none
+  +box-sizing(border-box)
+
+.input--rounded
+  @extend .input
+  +border-radius(6px)
+
+.input--full-w
+  @extend .input
+  width: 100%

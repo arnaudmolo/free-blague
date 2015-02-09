@@ -14,7 +14,10 @@ TWO_WEEKS = 1000 * 60 * 60 * 24 * 7 * 2;
 API_URL = 'http://' + "arnaudmolo-blague.nodejitsu.com" + '/api';
 API_URL = 'http://' + '127.0.0.1:3000' + '/api';
 
-function access(token = require('./models/user').get('id')){
+function access(token){
+  if (!token) {
+    console.error('no token');
+  };
   return '?access_token=' + token;
 }
 
@@ -33,7 +36,7 @@ export default new class API {
 
   getRandomJoke() {
     return http.get(API_URL + '/jokes/random')
-      .then(function(res){return res.joke.content;});
+      .then(function(res){return res.joke;});
   }
 
   /**
@@ -46,7 +49,7 @@ export default new class API {
 
     var user, promise;
 
-    user = require('./models/user');
+    // user = require('./models/user');
     joke = JSON.stringify(
       {
         content: joke,
@@ -69,6 +72,16 @@ export default new class API {
     }
 
     return promise;
+
+  }
+
+  updateJoke(joke) {
+
+    var voted;
+
+    voted = joke.get('voted') === 'up';
+
+    return http.get(API_URL + '/Jokes/vote?=' + voted + '?jokeId=' + joke.get('id'));
 
   }
 

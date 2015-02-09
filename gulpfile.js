@@ -32,6 +32,14 @@ gulp.task('styles', function () {
 
 });
 
+// Font
+gulp.task('fonts', function () {
+
+  return gulp.src(app + 'fonts/**/*')
+    .pipe(gulp.dest(dist + '/fonts'));
+
+});
+
 function scripts(){
 
   return browserify({ debug: false })
@@ -39,6 +47,10 @@ function scripts(){
     .transform(envify)
     .require(app + 'scripts/main.js', { entry: true })
     .bundle()
+    .on('error', function(err) {
+      console.log(err.message);
+      this.emit('end');
+    })
     .pipe(fs.createWriteStream(dist + '/scripts/main.js'));
 
 };
@@ -85,7 +97,7 @@ gulp.task('clean', function(cb){
 });
 
 // Bundle
-gulp.task('bundle', ['styles', 'scripts', 'bower'], function(){
+gulp.task('bundle', ['styles', 'images', 'fonts', 'scripts', 'bower'], function(){
 
   return gulp.src(app + './*.html')
     .pipe($.useref.assets())
@@ -96,7 +108,7 @@ gulp.task('bundle', ['styles', 'scripts', 'bower'], function(){
 });
 
 // Build
-gulp.task('build', ['html', 'bundle', 'images']);
+gulp.task('build', ['html', 'bundle']);
 
 // Default
 gulp.task('default', ['clean', 'build']);
@@ -132,7 +144,7 @@ gulp.task('bower', function(){
 });
 
 // App watcher
-gulp.task('watch', ['html', 'scripts', 'images', 'styles', 'serve'], function(){
+gulp.task('watch', ['html', 'scripts', 'images', 'fonts', 'styles', 'serve'], function(){
 
   // Watch .html files
   gulp.watch(app + '*.html', ['html']);
