@@ -8,11 +8,12 @@ import appDispatcher from './../dispatcher/app-dispatcher';
  * @exports {ReactClass}Writing
  */
 
- function getStateFromStores() {
+function getStateFromStores() {
   return {
-    content: ''
+    content: '',
+    writing: false
   }
- }
+}
 
 export default class Writing extends React.Component {
 
@@ -20,15 +21,19 @@ export default class Writing extends React.Component {
     super(props);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleContentText = this.handleContentText.bind(this);
+    this.showInput = this.showInput.bind(this);
+    this.closeInput = this.closeInput.bind(this);
     this.state = getStateFromStores();
   }
 
-  close() {
-    appDispatcher
-      .handleViewAction({
-        actionType: 'show-writing',
-        value: false
-      });
+  showInput(event) {
+    event.preventDefault();
+    this.setState({writing: true});
+  }
+
+  closeInput(event) {
+    event.preventDefault();
+    this.setState({writing: false});
   }
 
   handleContentText(event) {
@@ -36,9 +41,7 @@ export default class Writing extends React.Component {
   }
 
   handleSubmit(event) {
-
     event.preventDefault();
-
     console.log({
       actionType: 'add-joke',
       joke: cleanString(this.state.content)
@@ -47,9 +50,12 @@ export default class Writing extends React.Component {
 
   render() {
 
-    return (
+    let form;
+
+    if (this.state.writing) {
+      form = (
         <div className="writing">
-          <div className="close" onClick={this.close}>
+          <div className="close" onClick={this.closeInput}>
             <span>x</span>
           </div>
           <form onSubmit={this.handleSubmit} >
@@ -64,6 +70,17 @@ export default class Writing extends React.Component {
             </button>
           </form>
         </div>
+      );
+    }
+
+    return (
+      <div>
+        <a
+          className="button--red publish"
+          href=""
+          onClick={this.showInput}>Publish my joke</a>
+        { form }
+      </div>
     );
   }
 }

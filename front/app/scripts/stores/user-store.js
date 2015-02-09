@@ -9,6 +9,23 @@ CHANGE_EVENT = 'change';
 
 _user = {};
 
+if (process.env.NODE_ENV === 'development') {
+  _user = {
+    email: 'john@doe.com',
+    password: 'opensesame',
+    avatar: 'arnaud.jpg'
+  }
+};
+
+_user.logged = false;
+_user.jokes = [];
+
+function login(user) {
+  Object.assign(_user, user);
+  _user.logged = true;
+  Object.freeze(_user);
+}
+
 export default UserStore = Object.assign({}, EventEmitter.prototype, {
 
   getAuthInformations() {
@@ -22,8 +39,16 @@ export default UserStore = Object.assign({}, EventEmitter.prototype, {
     return _user;
   },
 
-  login() {
-    Object.freeze(_user);
+  emitChange() {
+    this.emit(CHANGE_EVENT);
+  },
+
+  addChangeListener(callback) {
+    this.on(CHANGE_EVENT, callback);
+  },
+
+  removeChangeListener(callback) {
+    this.removeListener(callback);
   }
 
 });
@@ -32,6 +57,16 @@ UserStore.dispatchToken = AppDispatcher.register(function(payload) {
 
   let action;
 
-  console.log(payload);
+  if (payload.source === PayloadSources.SERVER_ACTION) {
+
+    action = payload.action;
+
+    switch(action.type) {
+      case ActionTypes.AUTH_LOGIN:
+        login(action.user);
+        UserStore.emitChange();
+    }
+
+  };
 
 });

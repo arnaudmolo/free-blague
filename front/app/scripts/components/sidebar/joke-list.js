@@ -18,7 +18,7 @@ export default class JokeList extends React.Component {
 
     var jokesList;
 
-    jokesList = this.getCollection().map(function(joke){
+    jokesList = this.props.collection.map(function(joke){
       return (<JokeView key={joke.get('id')} model={joke} />);
     });
 

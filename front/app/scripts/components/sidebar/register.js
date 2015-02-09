@@ -1,12 +1,10 @@
 import React from 'react/addons';
 
 import UserActions from './../../actions/user-actions';
+import UserStore from './../../stores/user-store';
 
 function getStateFromStore() {
-  return {
-    email: 'aze@aze.com',
-    password: 'aze'
-  }
+  return UserStore.getUserData();
 }
 
 export default class Register extends React.Component {

@@ -14,21 +14,21 @@ export default class Settings extends React.Component {
 
   render() {
 
-    let user, settingsStyle, classes, avatar;
+    let user, settingsStyle, classes;
 
     user = this.props.user;
     settingsStyle = {};
 
     classes = cx({
       'header__settings img img--rounded img--small img--bg-img': true,
-      'isLoggedIn': true
-    })
+      'isLoggedIn': user.logged
+    });
 
-    // if (avatar = user.avatar) {
-    //   settingsStyle = {
-    //     backgroundImage: 'url(' + avatar + ')'
-    //   };
-    // }
+    if (user.avatar && user.logged) {
+      settingsStyle = {
+        backgroundImage: `url(/images/${user.avatar})`
+      };
+    }
 
     return (
       <div className={classes} style={settingsStyle}>
