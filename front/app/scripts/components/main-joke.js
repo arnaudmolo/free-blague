@@ -1,49 +1,50 @@
-
-/**
-* @module MainJoke.view
-* @exports <ReactClass>MainJoke
-*/
-
 import React from 'react/addons';
-import mixins from 'backbone-react-component';
+
+import JokeStore from './../stores/joke-store';
 
 import Lettering from './lettering';
+
+function getStateFromStores() {
+  return {
+    joke: JokeStore.getLastJoke()
+  }
+}
 
 /**
  * @class MainJoke
  * Templates for the main joke
  */
 
-export default React.createClass(
+export default class MainJoke extends React.Component {
 
-  class MainJoke {
+  constructor(props) {
+    super(props);
+    this.state = getStateFromStores();
+    this._onChange = this._onChange.bind(this);
+  }
 
-    get mixins() {
-      return [mixins];
-    }
+  componentDidMount() {
+    JokeStore.addChangeListener(this._onChange);
+  }
 
-    componentDidMount() {
+  componentWillUnount() {
+    JokeStore.removeChangeListener(this._onChange);
+  }
 
-      this.getCollection().on('all', () => this.forceUpdate());
+  _onChange(event) {
+    this.setState(getStateFromStores());
+  }
 
-    }
+  render() {
 
-    render() {
+    return (
+      <div className="joke-container">
+        <h1>
+          <Lettering string={this.state.joke.content} />
+        </h1>
+      </div>
+    );
 
-      var joke;
+  }
 
-      joke = this.getCollection().last();
-
-      return (
-        <div className="joke-container">
-          <h1>
-            <Lettering string={ joke!==undefined?joke.toString():'' } />
-          </h1>
-        </div>
-      );
-
-    }
-
-  }.prototype
-
-);
+}

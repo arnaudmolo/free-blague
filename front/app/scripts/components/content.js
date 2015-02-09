@@ -1,18 +1,20 @@
-/** @jsx React.DOM */
-
-/**
-* @module Content.view
-* @exports <ReactClass>ContentView
-*/
-
 import React from 'react/addons';
-import mixins from 'backbone-react-component';
+import JokeStore from './../stores/joke-store';
+
+import appDispatcher from './../dispatcher/app-dispatcher';
 
 import Writing from './writing';
-import JokeList from './jokeList';
+import JokeList from './joke-list';
 import MainJoke from './main-joke';
-import Sidebar from './sidebar/sidebar';
-import appDispatcher from './../dispatcher/appDispatcher';
+import Mute from './mute';
+
+function getStateFromStores() {
+  return {
+    wording: 'mute',
+    mute: false,
+    writing: false
+  };
+}
 
 /**
  * @class ContentView
@@ -21,104 +23,44 @@ import appDispatcher from './../dispatcher/appDispatcher';
 
 var {CSSTransitionGroup} = React.addons;
 
-export default React.createClass(
+export default class ContentView extends React.Component {
 
-  class ContentView {
+  constructor(props) {
+    super(props);
+    this.state = getStateFromStores();
+    this.showWriting = this.showWriting.bind(this);
+    this.showInput   = this.showInput.bind(this);
+  }
 
-    get mixins() {
-      return [mixins];
-    }
+  showWriting(event) {
+    event.preventDefault();
+    console.log('show input');
+  }
 
-    /**
-     * Set defaults values for the this.state
-     *
-     * @return {Object} The default's JokeListView this.state
-     */
+  showInput(event) {
+    event.preventDefault();
+    this.setState({
+      writing: !this.state.writting
+    });
+  }
 
-    getInitialState() {
-      return {
-        joke   : '',
-        wording: 'mute',
-        writing: false
-      };
-    }
+  launchWriting(joke) {
+    this.setState({joke});
+  }
 
-    componentDidMount() {
-      this.getModel().on('all', () => this.forceUpdate());
-      if (this.props.user) {
-        this.props.user.on('all', () => this.forceUpdate());
-      };
-    }
-
-    componentWillUnmount() {
-      return this.getModel().off(null, null, this);
-    }
-
-    toggleMute() {
-      return this.getModel().mute(!this.getModel().get('mute'));
-    }
-
-    showInput(event) {
-      event.preventDefault();
-
-      appDispatcher
-        .dispatch({
-          actionType: 'show-writing',
-          value: true
-        });
-      return;
-    }
-
-    launchWriting (joke) {
-      this.setState({joke});
-    }
-
-    render() {
-
-      var model, jokes, jokeList, logged, sidebar;
-
-      model = this.getModel();
-      jokes = model.get('jokes');
-
-      if (this.props.user) {
-        logged = this.props.user.get('logged');
-      };
-
-      if (jokes !== undefined) {
-        jokeList = (
-          <span>
-            <MainJoke collection={jokes} />
-            <JokeList collection={jokes} />
-          </span>
-        );
-      };
-
-      if (!logged) {
-        sidebar = (<div className="side-bar"><Sidebar></Sidebar></div>);
-      };
-
-      return (
-        <div>
-          {sidebar}
-          <div>
-            { jokeList }
-            <input
-              type="submit"
-              onClick={this.toggleMute}
-              value=""
-              className={model.get('mute')?'unmute':'mute'} />
-            <a
-              className="button red publish"
-              href=""
-              onClick={this.showInput}>Publish my Joke</a>
-
-            <CSSTransitionGroup
-              transitionName="writing-animation">
-            </CSSTransitionGroup>
-          </div>
-        </div>
+  render() {
+    return (
+      <div>
+        <MainJoke />
+        <JokeList />
+        <Mute />
+        <a
+          className="button red publish"
+          href=""
+          onClick={this.showInput}>Publish my joke
+        </a>
+        {this.state.writing?<Writing />:undefined}
+      </div>
       );
-    }
-  }.prototype
-
-);
+  }
+}

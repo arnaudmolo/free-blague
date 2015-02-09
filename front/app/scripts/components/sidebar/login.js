@@ -1,77 +1,57 @@
-/** @jsx React.DOM */
-
-/**
-* @module Login.view
-* @exports <ReactClass>Login
-*/
-
 import React from 'react/addons';
-import mixins from 'backbone-react-component';
-
-import userDispatcher from './../../dispatcher/userDispatcher';
 
 /**
  * @class Login
  * Extended from React Class and BaseClass
  * View for Sidebar JokeList
  */
-export default React.createClass(
 
-  class Login {
+getStateFromStores() {
+  return {
+    email: 'aze@aze.com',
+    password: 'aze'
+  }
+}
 
-    get mixins() {
-      return [mixins];
+export default class Login React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = getStateFromStores();
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+
+    let user = {
+      email: this.state.email,
+      password: this.state.password
     }
 
-    getInitialState() {
-      return {
-        email: 'aze@aze.com',
-        password: 'aze'
-      }
-    }
+    console.log(user);
 
-    /**
-     * Tiggered when form is submitted
-     * Set the model's attributes and lanuch User#login()
-     *
-     * @return @see User#login
-     */
+  }
 
-    handleSubmit(event) {
+  render() {
+    return (
+      <div>
+        <h1>login</h1>
+        <form method="post" onSubmit={this.handleSubmit}>
+          <input
+            defaultValue={this.state.email}
+            type="email"
+            placeholder="email"
+            ref="email" />
+          <input
+            defaultValue={this.state.password}
+            type="password"
+            placeholder="password"
+            ref="password"/>
+          <input type="submit" />
+        </form>
+      </div>
+    );
+  }
 
-      event.preventDefault();
-
-      userDispatcher
-        .dispatch({
-          actionType: 'user-login',
-          user: {
-            email: this.state.email,
-            password: this.state.password
-          }
-        });
-
-      return;
-    }
-
-    render() {
-      return (
-        <div>
-          <h1>login</h1>
-          <form method="post" onSubmit={this.handleSubmit}>
-            <input
-              defaultValue={this.state.email}
-              type="email"
-              placeholder="email"
-              ref="email" />
-            <input
-              defaultValue={this.state.password}
-              type="password"
-              placeholder="password"
-              ref="password"/>
-            <input type="submit" />
-          </form>
-        </div>
-      );
-    }
-  }.prototype
-);
+}

@@ -49,8 +49,8 @@
     "loopback-datasource-juggler": "^2.7.0",
     "monorouter": "^0.11.3",
     "monorouter-react": "^0.4.1",
-    "react": "^0.12.2",
-    "react-tools": "^0.12.2",
+    "react": "^0.13.0-beta.1",
+    "react-tools": "^0.13.0-beta.1",
     "serve-favicon": "^2.0.1"
   },
   "scripts": {
@@ -60,9 +60,13 @@
   "devDependencies": {
     "es6-module-loader": "^0.11.1",
     "gulp-plumber": "^0.6.6",
+    "immutable": "^3.6.2",
     "jest-cli": "^0.2.1",
     "jshint-stylish": "~0.1.5",
-    "loopback-explorer": "^1.6.2"
+    "keymirror": "^0.1.1",
+    "loopback-explorer": "^1.6.2",
+    "monorouter": "^0.11.3",
+    "monorouter-react": "^0.4.1"
   },
   "engines": {
     "node": ">=0.10.0"

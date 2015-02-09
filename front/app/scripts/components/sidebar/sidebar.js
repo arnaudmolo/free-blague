@@ -10,7 +10,7 @@ import mixins from  'backbone-react-component';
 
 import Login from './login';
 import Register from './register';
-import JokeList from './JokeList';
+import JokeList from './joke-list';
 import userDispatcher from './../../dispatcher/userDispatcher';
 
 /**

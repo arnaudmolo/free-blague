@@ -39,6 +39,10 @@ function scripts(){
     .transform(envify)
     .require(app + 'scripts/main.js', { entry: true })
     .bundle()
+    .on('error', function(err) {
+      console.log(err.message);
+      this.emit('end');
+    })
     .pipe(fs.createWriteStream(dist + '/scripts/main.js'));
 
 };

@@ -1,62 +1,71 @@
-/** @jsx React.DOM */
+import React from 'react/addons';
+
+import cleanString from './../utils/clean-string';
+import appDispatcher from './../dispatcher/app-dispatcher';
+import JokeAction from './../actions/joke-actions';
 
 /**
  * @module Writing.view
  * @exports {ReactClass}Writing
  */
 
-import React from 'react/addons';
-import { Events } from 'backbone';
+ function getStateFromStores() {
+  return {
+    content: ''
+  }
+ }
 
-import cleanString from './../utils/clean-string';
-import appDispatcher from './../dispatcher/appDispatcher';
+export default class Writing extends React.Component {
 
-export default React.createClass(
-  class Writing {
+  constructor(props) {
+    super(props);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleContentText = this.handleContentText.bind(this);
+    this.state = getStateFromStores();
+  }
 
-    close() {
-      appDispatcher
-        .dispatch({
-          actionType: 'show-writing',
-          value: false
-        });
-    }
+  close() {
+    appDispatcher
+      .handleViewAction({
+        actionType: 'show-writing',
+        value: false
+      });
+  }
 
-    handleSubmit(event) {
+  handleContentText(event) {
+    this.setState({content: event.target.value});
+  }
 
-      var jokeDom;
+  handleSubmit(event) {
 
-      jokeDom = this.refs.joke.getDOMNode();
+    event.preventDefault();
 
-      event.preventDefault();
+    console.log({
+      actionType: 'add-joke',
+      joke: cleanString(this.state.content)
+    });
+  }
 
-      appDispatcher
-        .dispatch({
-          actionType: 'add-joke',
-          joke: cleanString(jokeDom.value)
-        });
-    }
+  render() {
 
-    render() {
-
-      return (
-          <div className="writing">
-            <div className="close" onClick={this.close}>
-              <span>x</span>
-            </div>
-            <form onSubmit={this.handleSubmit} >
-              <textarea
-                ref="joke"
-                rows="5"
-                maxLength="300"
-                placeholder="Write your joke..."></textarea>
-              <button
-                type="submit"
-                className="button red publish" > Publish my joke
-              </button>
-            </form>
+    return (
+        <div className="writing">
+          <div className="close" onClick={this.close}>
+            <span>x</span>
           </div>
-      );
-    }
-  }.prototype
-);
+          <form onSubmit={this.handleSubmit} >
+            <textarea
+              rows="5"
+              value={this.state.content}
+              onChange={this.handleContentText}
+              maxLength="300"
+              placeholder="Write your joke..."></textarea>
+            <button
+              type="submit"
+              className="button red publish" >Publish my joke</button>
+          </form>
+        </div>
+    );
+  }
+
+}
