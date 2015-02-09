@@ -47,34 +47,26 @@ export default React.createClass(
      */
 
     componentDidMount() {
-
       this.getModel().on('all', () => {
         this.forceUpdate();
       });
-
       return;
-
     }
 
     componentWillUnmount() {
-
       this.getModel().off(null, null, this);
-
     }
 
     disconnect(event) {
-
       event.preventDefault();
 
       userDispatcher
         .dispatch({
           actionType: 'user-logout'
         });
-
     }
 
     render() {
-
       var user;
 
       user = this.getModel();

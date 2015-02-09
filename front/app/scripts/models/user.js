@@ -38,7 +38,8 @@ export default new class User extends Model {
         email    : '',
         password : '',
         logged   : false,
-        jokes    : []
+        jokes    : [],
+        avatar   : ''
       };
     }
 
@@ -48,7 +49,8 @@ export default new class User extends Model {
       email    : user.email,
       password : user.password,
       logged   : user.logged,
-      jokes    : new JokeList(user.jokes)
+      jokes    : new JokeList(user.jokes),
+      avatar   : user.avatar
     };
   }
 

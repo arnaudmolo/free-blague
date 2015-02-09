@@ -52,7 +52,7 @@ export default React.createClass(
                 placeholder="Write your joke..."></textarea>
               <button
                 type="submit"
-                className="button isRed publish" > Publish my joke
+                className="button--red publish" > Publish my joke
               </button>
             </form>
           </div>

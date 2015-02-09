@@ -12,6 +12,7 @@ import Writing from './writing';
 import JokeList from './jokeList';
 import MainJoke from './main-joke';
 import Sidebar from './sidebar/sidebar';
+import Header from './header/header';
 import appDispatcher from './../dispatcher/appDispatcher';
 
 /**
@@ -75,13 +76,14 @@ export default React.createClass(
 
     render() {
 
-      var model, jokes, jokeList, logged, sidebar;
+      var model, jokes, jokeList, logged, sidebar, user;
 
       model = this.getModel();
       jokes = model.get('jokes');
+      user = this.props.user;
 
-      if (this.props.user) {
-        logged = this.props.user.get('logged');
+      if (user) {
+        logged = user.get('logged');
       };
 
       if (jokes !== undefined) {
@@ -99,16 +101,19 @@ export default React.createClass(
 
       return (
         <div>
+          <Header user={user}></Header>
           {sidebar}
           <div>
-            { jokeList }
+            {jokeList}
             <a
               onClick={this.toggleMute}
               title={model.get('mute')?'unmute':'mute'}
-              className={model.get('mute')?'unmute':'mute'}></a>
+              className="toggle-sound"
+            >
+              <i className={model.get('mute')?'icon-sound-on':'icon-sound-off'}></i>
+            </a>
             <a
-              className="button isRed publish"
-              href=""
+              className="button--red publish"
               onClick={this.showInput}>Publish my Joke</a>
 
             <CSSTransitionGroup
