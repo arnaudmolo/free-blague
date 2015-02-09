@@ -7,7 +7,20 @@ let UserStore, CHANGE_EVENT, _user;
 
 CHANGE_EVENT = 'change';
 
+_user = {};
+
 export default UserStore = Object.assign({}, EventEmitter.prototype, {
+
+  getAuthInformations() {
+    return {
+      email: _user.email,
+      password: _user.password
+    }
+  },
+
+  login() {
+    Object.freeze(_user);
+  }
 
 });
 

@@ -1,19 +1,17 @@
 import React from 'react/addons';
 
+import UserActions from './../../actions/user-actions';
 /**
  * @class Login
  * Extended from React Class and BaseClass
  * View for Sidebar JokeList
  */
 
-getStateFromStores() {
-  return {
-    email: 'aze@aze.com',
-    password: 'aze'
-  }
+function getStateFromStores() {
+  return UserStore.getAuthInformations();
 }
 
-export default class Login React.Component {
+export default class Login extends React.Component {
 
   constructor(props) {
     super(props);
@@ -24,12 +22,11 @@ export default class Login React.Component {
   handleSubmit(event) {
     event.preventDefault();
 
-    let user = {
-      email: this.state.email,
-      password: this.state.password
-    }
-
-    console.log(user);
+    UserActions
+      .login({
+        email: this.state.email,
+        password: this.state.password
+      });
 
   }
 

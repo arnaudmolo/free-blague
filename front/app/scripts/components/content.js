@@ -8,6 +8,7 @@ import Writing from './writing';
 import JokeList from './joke-list';
 import MainJoke from './main-joke';
 import Mute from './mute';
+import Sidebar from './sidebar/sidebar';
 
 function getStateFromStores() {
   return {
@@ -18,13 +19,13 @@ function getStateFromStores() {
 }
 
 /**
- * @class ContentView
+ * @class Content
  * Templates for Content
  */
 
 var {CSSTransitionGroup} = React.addons;
 
-export default class ContentView extends React.Component {
+export default class Content extends React.Component {
 
   constructor(props) {
     super(props);

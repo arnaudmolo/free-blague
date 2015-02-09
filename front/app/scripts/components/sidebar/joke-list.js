@@ -8,8 +8,6 @@ import JokeView from './Joke';
  * Templates for Sidebar JokeList
  */
 
-
-
 export default class JokeList extends React.Component {
 
   componentDidMount() {
