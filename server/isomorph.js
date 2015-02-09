@@ -1,7 +1,6 @@
 import React from 'React/addons';
 import { Model, Collection } from 'backbone';
 import Joke from './../front/app/scripts/models/joke';
-import JokeList from './../front/app/scripts/models/joke-list';
 
 var jokeList, Content, content;
 

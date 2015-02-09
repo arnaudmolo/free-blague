@@ -21,7 +21,6 @@ import JokeList from './joke-list';
 
 function getStateFromStore() {
   return {
-    visible: true,
     user: UserStore.getUserData()
   };
 }
@@ -31,10 +30,28 @@ export default class Sidebar extends React.Component {
   constructor(props) {
     super(props);
     this.state = getStateFromStore();
+    this._onChange = this._onChange.bind(this);
+    this.disconnect = this.disconnect.bind(this);
+  }
+
+  disconnect() {
+    console.log('disconnect');
+  }
+
+  _onChange() {
+    this.setState(getStateFromStore());
+  }
+
+  componentDidMount() {
+    UserStore.addChangeListener(this._onChange);
+  }
+
+  componentWillUnmount() {
+    UserStore.removeChangeListener(this._onChange);
   }
 
   render() {
-    if (true) {
+    if (!this.state.user.logged) {
       return (
         <div>
           <Login />
@@ -46,7 +63,7 @@ export default class Sidebar extends React.Component {
     return (
       <div>
         <JokeList
-          collection={user.get('jokes')} />
+          collection={this.state.user.jokes} />
         <input
           type="submit"
           value="disconnect"
