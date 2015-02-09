@@ -7,6 +7,7 @@ import JokeList from './joke-list';
 import MainJoke from './main-joke';
 import Mute from './mute';
 import Sidebar from './sidebar/sidebar';
+import Header from './header/header';
 
 function getStateFromStores() {
   return {
@@ -49,15 +50,19 @@ export default class Content extends React.Component {
   render() {
     return (
       <div>
-        <MainJoke />
-        <JokeList />
-        <Mute />
-        <a
-          className="button isRed publish"
-          href=""
-          onClick={this.showInput}>Publish my joke
-        </a>
-        {this.state.writing?<Writing />:undefined}
+        <Header />
+        <Sidebar />
+        <div>
+          <MainJoke />
+          <JokeList />
+          <Mute />
+          <a
+            className="button--red publish"
+            href=""
+            onClick={this.showInput}>Publish my joke
+          </a>
+          {this.state.writing?<Writing />:undefined}
+        </div>
       </div>
     );
   }

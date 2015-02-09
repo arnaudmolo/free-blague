@@ -28,20 +28,23 @@
   &:focus
     outline: none
 
-  &.isRed
-    +button-color-dark($red)
+  &.publish
+    position: fixed
+    bottom: 50px
+    left: 50%
+    transform: translate(-50%, -50%)
+    font-weight: bolder
 
-  &.isWhite
-    +button-color-light($white)
+.button--red
+  @extend .button
+  +button-color-dark($red)
 
-  &.isFullWidth
-    padding-left: 0
-    padding-right: 0
-    width: 100%
+.button--white
+  @extend .button
+  +button-color-light($white)
 
-.publish
-  position: fixed
-  bottom: 50px
-  left: 50%
-  transform: translate(-50%, -50%)
-  font-weight: bolder
+.button--full-w
+  @extend .button
+  padding-left: 0
+  padding-right: 0
+  width: 100%

@@ -7,11 +7,22 @@
 
 @import "mixins";
 @import "variables";
-@import "style";
-@import "sidebar";
-@import "content";
-@import "writing";
-@import "buttons";
-@import "lettering";
+@import "icomoon";
+@import "layout";
+
+// atoms
+@import "button";
+@import "image";
 @import "form";
 @import "input";
+@import "table";
+
+// molecules
+@import "form";
+
+// organisms
+@import "header";
+@import "sidebar";
+@import "content";
+@import "lettering";
+@import "writing";

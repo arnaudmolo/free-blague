@@ -42,7 +42,7 @@ export default class Register extends React.Component {
               type="email"
               placeholder="email"
               ref="email"
-              className="input isRounded isFullWidth" />
+              className="input--rounded input--full-w" />
           </div>
           <div className="form__block">
             <input
@@ -50,10 +50,10 @@ export default class Register extends React.Component {
               type="password"
               placeholder="password"
               ref="password"
-              className="input isRounded isFullWidth" />
+              className="input--rounded input--full-w" />
           </div>
           <div className="form__block">
-            <input type="submit" className="button isWhite isFullWidth" />
+            <input type="submit" className="button--white button--full-w" />
           </div>
         </form>
       </nav>

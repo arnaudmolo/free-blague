@@ -2,7 +2,6 @@ import React from 'react/addons';
 
 import cleanString from './../utils/clean-string';
 import appDispatcher from './../dispatcher/app-dispatcher';
-import JokeAction from './../actions/joke-actions';
 
 /**
  * @module Writing.view
@@ -49,22 +48,22 @@ export default class Writing extends React.Component {
   render() {
 
     return (
-      <div className="writing">
-        <div className="close" onClick={this.close}>
-          <span>x</span>
+        <div className="writing">
+          <div className="close" onClick={this.close}>
+            <span>x</span>
+          </div>
+          <form onSubmit={this.handleSubmit} >
+            <textarea
+              ref="joke"
+              rows="5"
+              maxLength="300"
+              placeholder="Write your joke..."></textarea>
+            <button
+              type="submit"
+              className="button--red publish" > Publish my joke
+            </button>
+          </form>
         </div>
-        <form onSubmit={this.handleSubmit} >
-          <textarea
-            ref="joke"
-            rows="5"
-            maxLength="300"
-            placeholder="Write your joke..."></textarea>
-          <button
-            type="submit"
-            className="button isRed publish" > Publish my joke
-          </button>
-        </form>
-      </div>
     );
   }
 }

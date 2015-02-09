@@ -18,6 +18,10 @@ export default UserStore = Object.assign({}, EventEmitter.prototype, {
     }
   },
 
+  getUserData() {
+    return _user;
+  },
+
   login() {
     Object.freeze(_user);
   }

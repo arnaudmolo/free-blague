@@ -2,7 +2,9 @@ import React from 'react/addons';
 import JokeStore from './../stores/joke-store';
 import JokeActions from './../actions/joke-actions';
 
-let cx = React.addons.classSet;
+let cx;
+
+cx = React.addons.classSet;
 
 function getStateFromStore() {
   return {
@@ -25,17 +27,22 @@ export default class Mute extends React.Component {
 
   render() {
 
-    return (<input
-      type="submit"
-      onClick={this.toggleMute}
-      value=""
-      className={
-        cx({
-          'unmute': this.state.mute,
-          'mute': !this.state.mute
-        })
-      }
-    />);
+    let classes;
+
+    classes = cx({
+      'icon-sound-on': this.state.mute,
+      'icon-sound-off': !this.state.mute
+    });
+
+    return (
+      <a
+        onClick={this.toggleMute}
+        title={this.statemute?'unmute':'mute'}
+        className="toggle-sound"
+      >
+        <i className={classes}></i>
+      </a>
+    );
   }
 
 }

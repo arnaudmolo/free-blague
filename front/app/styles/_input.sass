@@ -5,8 +5,10 @@
   border: none
   +box-sizing(border-box)
 
-  &.isRounded
-    +border-radius(6px)
+.input--rounded
+  @extend .input
+  +border-radius(6px)
 
-  &.isFullWidth
-    width: 100%
+.input--full-w
+  @extend .input
+  width: 100%
