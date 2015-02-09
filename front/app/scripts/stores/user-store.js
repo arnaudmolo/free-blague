@@ -12,7 +12,8 @@ _user = {};
 if (process.env.NODE_ENV === 'development') {
   _user = {
     email: 'john@doe.com',
-    password: 'opensesame'
+    password: 'opensesame',
+    avatar: 'arnaud.jpg'
   }
 };
 

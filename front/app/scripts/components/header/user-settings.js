@@ -14,7 +14,7 @@ export default class Settings extends React.Component {
 
   render() {
 
-    let user, settingsStyle, classes, avatar;
+    let user, settingsStyle, classes;
 
     user = this.props.user;
     settingsStyle = {};
@@ -24,9 +24,9 @@ export default class Settings extends React.Component {
       'isLoggedIn': user.logged
     });
 
-    if (user.avatar) {
+    if (user.avatar && user.logged) {
       settingsStyle = {
-        backgroundImage: 'url(' + user.avatar + ')'
+        backgroundImage: `url(/images/${user.avatar})`
       };
     }
 
