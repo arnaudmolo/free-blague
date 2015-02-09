@@ -3,12 +3,10 @@
 * @exports Class Joke
 */
 
-import Backbone from 'backbone';
 import api      from './../api';
+import { Model } from 'Backbone';
 
-var { Model } = Backbone;
-
-class Joke extends Model {
+export default class Joke extends Model {
 
   /**
    * Set defaults values for a Joke.
@@ -50,5 +48,3 @@ class Joke extends Model {
   }
 
 }
-
-module.exports = Joke;

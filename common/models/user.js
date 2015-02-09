@@ -1,3 +1,5 @@
-module.exports = function(User) {
+'use strict';
+
+export default function(User) {
 
 };

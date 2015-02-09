@@ -28,7 +28,7 @@
   @for $i from 0 through 15
     .joke:nth-child(#{$i})
       z-index: 100 - $i
-      transform: rotate(3deg + -3deg * $i) translate(-50px * $i, 100px)
+      transform: rotate(3deg + -3deg * $i) translate(-30% * $i, 100px)
 
   @for $i from 0 through 10
     .joke:nth-child(#{$i})
@@ -93,7 +93,10 @@
 
 
 .joke-container
+  margin: 0 auto
   margin-top: 10%
+  width: 760px
+
   h1
     color: white
     font-size: 3em

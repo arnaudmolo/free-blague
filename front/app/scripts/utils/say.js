@@ -1,6 +1,7 @@
 
 import Promise from 'bluebird';
-import speechUtteranceChunker from '../../bower_components/chunkify';
+
+import speechUtteranceChunker from '../../../bower_components/chunkify';
 
 var voicesLoaded = new Promise(function(resolve, reject){
   window.speechSynthesis.onvoiceschanged = function(){
@@ -34,7 +35,7 @@ function sayOneSentence(voice, sentences){
   // speechUtteranceChunker(utterance, {chunkLength: 300});
 }
 
-function say(string){
+export default function say(string){
   voicesLoaded.then(function(){
 
     var voices, sentences;
@@ -47,5 +48,3 @@ function say(string){
 
   return string;
 }
-
-module.exports = say;

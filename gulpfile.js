@@ -1,15 +1,20 @@
 'use strict';
 
-var gulp, del, path, $, es6ify, dist, jshint, app;
+var gulp, del, path, $, dist, app, browserify, reactify, to5Browserify, fs, envify;
 
-gulp   = require('gulp');
-del    = require('del');
-path   = require('path');
-$      = require('gulp-load-plugins')();
-es6ify = require('es6ify');
-jshint = require('gulp-jshint');
-dist   = './client';
-app    = './front/app/';
+del           = require('del');
+fs            = require('fs');
+path          = require('path');
+gulp          = require('gulp');
+
+$             = require('gulp-load-plugins')();
+
+browserify    = require('browserify');
+to5Browserify = require('6to5ify');
+envify        = require('envify');
+
+dist          = './client';
+app           = './front/app/';
 
 // Styles
 gulp.task('styles', function () {
@@ -27,38 +32,25 @@ gulp.task('styles', function () {
 
 });
 
-var scripts;
+function scripts(){
 
-scripts = function(){
-
-  gulp.src(app + 'scripts/runtime.js')
-    .pipe(gulp.dest(dist + '/scripts'));
-
-  return gulp.src(app + 'scripts/main.js')
-    .pipe($.plumber())
-    .pipe(
-      $.browserify(
-        {
-          insertGlobals: true,
-          transform: [
-            'reactify',
-            'es6ify',
-            'envify'
-          ]
-        }
-      )
-    )
-    .pipe(gulp.dest(dist + '/scripts'))
-    .pipe($.size());
+  return browserify({ debug: false })
+    .transform(to5Browserify.configure({ modules: 'commonInterop', experimental: true}))
+    .transform(envify)
+    .require(app + 'scripts/main.js', { entry: true })
+    .bundle()
+    .pipe(fs.createWriteStream(dist + '/scripts/main.js'));
 
 };
 
 gulp.task('scripts', scripts);
 
 gulp.task('compress', ['scripts'], function(){
+
   return gulp.src(dist + '/scripts/*.js')
     .pipe($.uglify())
     .pipe(gulp.dest(dist + '/scripts'));
+
 });
 
 
@@ -86,20 +78,25 @@ gulp.task('images', function(){
 
 // Clean
 gulp.task('clean', function(cb){
+
   del([dist], {force: true}, cb);
+  $.cache.clearAll();
+
 });
 
 // Bundle
 gulp.task('bundle', ['styles', 'scripts', 'bower'], function(){
+
   return gulp.src(app + './*.html')
     .pipe($.useref.assets())
     .pipe($.useref.restore())
     .pipe($.useref())
     .pipe(gulp.dest(dist));
+
 });
 
 // Build
-gulp.task('build', ['html', 'bundle', 'images', 'compress']);
+gulp.task('build', ['html', 'bundle', 'images']);
 
 // Default
 gulp.task('default', ['clean', 'build']);
@@ -119,21 +116,23 @@ gulp.task('jshint', function(){
 
   return gulp.src(
     [app + './scripts/**/*.js',
-         '!' + app + './scripts/utils/string-to-color.js',
-         '!' + app + '/scripts/runtime.js'])
+         '!' + app + './scripts/utils/string-to-color.js'])
     .pipe($.react())
-    .pipe(jshint('./.jshintrc'))
-    .pipe(jshint.reporter('jshint-stylish'));
+    .pipe($.jshint('./.jshintrc'))
+    .pipe($.jshint.reporter('jshint-stylish'));
 
 });
 
 // Bower
 gulp.task('bower', function(){
+
   gulp.src(app + 'bower_components/**/*.js', {base: app + 'bower_components'})
     .pipe(gulp.dest(dist + '/bower_components'));
+
 });
 
-gulp.task('watch', ['html', 'scripts', 'serve'], function(){
+// App watcher
+gulp.task('watch', ['html', 'scripts', 'images', 'styles', 'serve'], function(){
 
   // Watch .html files
   gulp.watch(app + '*.html', ['html']);
@@ -143,6 +142,6 @@ gulp.task('watch', ['html', 'scripts', 'serve'], function(){
 
   gulp.watch(app + 'scripts/**/*.js', ['scripts']);
 
-  gulp.watch(app + 'images**/*', ['images']);
+  gulp.watch(app + 'images/**/*', ['images']);
 
 });

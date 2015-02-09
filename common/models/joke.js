@@ -1,4 +1,4 @@
-module.exports = function(Joke){
+export default function(Joke){
 
   Joke.definition.properties.date.default = Date.now;
   Joke.definition.properties.positiv.default = 0;

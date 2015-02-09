@@ -7,18 +7,22 @@
     "www.already.cool"
   ],
   "dependencies": {
-    "arrayify": "^1.0.0",
+    "6to5": "^2.2.0",
+    "6to5ify": "^2.0.0",
     "backbone": "^1.1.2",
     "backbone-react-component": "^0.7.0",
     "bluebird": "^2.3.6",
     "browserify": "^6.1.0",
     "color": "^0.7.3",
     "compression": "^1.0.3",
+    "connect-monorouter": "^0.4.0",
     "debug": "^2.1.0",
     "del": "~0.1.3",
-    "envify": "^3.0.0",
+    "ejs": "^2.0.8",
+    "envify": "^3.2.0",
     "errorhandler": "^1.1.1",
-    "es6ify": "^1.5.1",
+    "es6ify": "^1.6.0",
+    "flux": "^2.0.1",
     "gulp": "~3.8.8",
     "gulp-autoprefixer": "~1.0.1",
     "gulp-bower": "0.0.6",
@@ -28,6 +32,7 @@
     "gulp-jest": "~0.2.2",
     "gulp-jshint": "~1.8.5",
     "gulp-load-plugins": "~0.7.0",
+    "gulp-merge": "^0.1.0",
     "gulp-plumber": "^0.6.6",
     "gulp-react": "~1.0.2",
     "gulp-ruby-sass": "~0.7.1",
@@ -37,32 +42,36 @@
     "gulp-util": "~3.0.1",
     "gulp-webserver": "^0.8.3",
     "jshint": "^2.5.6",
-    "jshint-stylish": "~0.1.5",
     "lodash": "^2.4.1",
     "loopback": "^2.0.0",
     "loopback-boot": "^2.0.0",
     "loopback-connector-mongodb": "^1.4.4",
     "loopback-datasource-juggler": "^2.7.0",
-    "mcfly": "0.0.3",
-    "react": "^0.11.2",
-    "react-tools": "^0.11.2",
-    "reactify": "^0.14.0",
+    "monorouter": "^0.11.3",
+    "monorouter-react": "^0.4.1",
+    "react": "^0.12.2",
+    "react-tools": "^0.12.2",
     "serve-favicon": "^2.0.1"
   },
   "scripts": {
-    "start": "node server/server.js",
-    "test": "cd front && gulp jshint"
+    "start": "node server/bootstrap.js --harmony",
+    "test": "jest"
   },
   "devDependencies": {
-    "detect-dom-ready": "^1.0.2",
-    "es6ify": "^1.3.0",
+    "es6-module-loader": "^0.11.1",
     "gulp-plumber": "^0.6.6",
+    "jest-cli": "^0.2.1",
     "jshint-stylish": "~0.1.5",
-    "reactify": "~0.14",
-    "xhr": "^1.13.0"
+    "loopback-explorer": "^1.6.2"
   },
   "engines": {
     "node": ">=0.10.0"
   },
-  "subdomain": "arnaudmolo-blague"
+  "subdomain": "arnaudmolo-blague",
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/front/spec/preprocessor.js",
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react"
+    ]
+  }
 }
