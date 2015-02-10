@@ -8,10 +8,8 @@ export default function(Joke){
     random(cb) {
       Joke.count(function(err, res){
         let rand;
-        rand = Math.floor(Math.round(Math.random() * res));
-        Joke.findOne({skip: rand}, function(err, res){
-          cb(null, res);
-        });
+        rand = Math.floor(Math.round(Math.random() * (res - 1)));
+        Joke.findOne({skip: rand}, cb);
       });
     },
 

@@ -8,7 +8,7 @@ cx = React.addons.classSet;
 
 function getStateFromStore() {
   return {
-    mute: false
+    mute: JSON.parse(localStorage.getItem('mute'))
   }
 }
 
@@ -22,6 +22,7 @@ export default class Mute extends React.Component {
 
   toggleMute() {
     this.setState({mute: !this.state.mute});
+    localStorage.setItem('mute', this.state.mute)
     JokeActions.toggleMute(this.state.mute);
   }
 
@@ -30,8 +31,8 @@ export default class Mute extends React.Component {
     let classes;
 
     classes = cx({
-      'icon-sound-on': this.state.mute,
-      'icon-sound-off': !this.state.mute
+      'icon-sound-on': !this.state.mute,
+      'icon-sound-off': this.state.mute
     });
 
     return (

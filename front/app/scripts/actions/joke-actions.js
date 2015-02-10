@@ -7,30 +7,26 @@ let JokeActions, timeoutId;
 
 JokeActions = {
   launchRandom() {
+
+    let relaunch = (e) => {
+      if (e) {
+        console.error(SyntaxError(e));
+      };
+      timeoutId = setTimeout(() => {
+        this.launchRandom();
+      }, 30000);
+    }
+
     return API
       .getRandomJoke()
-      .error((er) => {
-
-        console.log('??????????????')
-        timeoutId = setTimeout(() => {
-          this.launchRandom();
-        }, 3000);
-
-        console.error('error !', er);
-        this.launchRandom();
-        return;
-      })
-      .done((rawJoke) => {
+      .then((rawJoke) => {
         AppDispatcher
           .handleServerAction({
             type: ActionTypes.ADD_RAW_JOKE,
             joke: rawJoke
           });
-
-        timeoutId = setTimeout(() => {
-          this.launchRandom();
-        }, 30000);
-      });
+          relaunch();
+      }, relaunch);
   },
   stopRandom() {
     AppDispatcher
