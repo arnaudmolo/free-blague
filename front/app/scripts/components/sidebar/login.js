@@ -19,6 +19,7 @@ export default class Login extends React.Component {
     super(props);
     this.state = getStateFromStores();
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   handleSubmit(event) {
@@ -33,6 +34,12 @@ export default class Login extends React.Component {
 
   }
 
+  handleInputChange(name) {
+    return (event) => {
+      this.setState({[name]: event.target.value});
+    }
+  }
+
   render() {
     return (
       <div>
@@ -44,6 +51,8 @@ export default class Login extends React.Component {
           <div className="form__block">
             <input
               defaultValue={this.state.email}
+              value={this.state.email}
+              onChange={this.handleInputChange('email')}
               type="email"
               placeholder="email"
               ref="email"
@@ -52,6 +61,8 @@ export default class Login extends React.Component {
           <div className="form__block">
             <input
               defaultValue={this.state.password}
+              value={this.state.password}
+              onChange={this.handleInputChange('password')}
               type="password"
               placeholder="password"
               ref="password"

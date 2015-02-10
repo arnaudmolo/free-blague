@@ -7,6 +7,13 @@ let UserStore, CHANGE_EVENT, _user;
 
 CHANGE_EVENT = 'change';
 
+function resetUser() {
+  return {
+    logged: false,
+    jokes: []
+  }
+}
+
 _user = {};
 
 if (process.env.NODE_ENV === 'development') {
@@ -23,7 +30,12 @@ _user.jokes = [];
 function login(user) {
   Object.assign(_user, user);
   _user.logged = true;
-  Object.freeze(_user);
+  localStorage.setItem('user', JSON.stringify(_user));
+}
+
+function logout() {
+  localStorage.removeItem('user');
+  _user = resetUser();
 }
 
 export default UserStore = Object.assign({}, EventEmitter.prototype, {
@@ -37,6 +49,18 @@ export default UserStore = Object.assign({}, EventEmitter.prototype, {
 
   getUserData() {
     return _user;
+  },
+
+  getUserToken() {
+    if (_user.logged) {
+      return _user.id;
+    }else{
+      console.error('No token');
+    }
+  },
+
+  getUserId() {
+    return _user.userId;
   },
 
   emitChange() {
@@ -65,8 +89,25 @@ UserStore.dispatchToken = AppDispatcher.register(function(payload) {
       case ActionTypes.AUTH_LOGIN:
         login(action.user);
         UserStore.emitChange();
+        break;
+
+      case ActionTypes.AUTH_LOGOUT:
+        logout();
+        UserStore.emitChange();
+        break;
+
+      case ActionTypes.ADD_RAW_JOKES_FROM_USER:
+        _user.jokes = action.jokes;
+        UserStore.emitChange();
+        break;
+
     }
 
   };
 
 });
+let _temp = JSON.parse(localStorage.getItem('user'));
+
+if (_temp !== null) {
+  login(_temp);
+};

@@ -8,6 +8,7 @@
 import React from 'react/addons';
 
 import UserStore from './../../stores/user-store';
+import UserActions from './../../actions/user-actions';
 
 import Login from './login';
 import Register from './register';
@@ -35,7 +36,8 @@ export default class Sidebar extends React.Component {
   }
 
   disconnect() {
-    console.log('disconnect');
+    UserActions
+      .disconnect();
   }
 
   _onChange() {
@@ -59,7 +61,6 @@ export default class Sidebar extends React.Component {
         </div>
       );
     };
-
     return (
       <div>
         <JokeList

@@ -23,6 +23,7 @@ function create(rawJoke) {
 
 function createAll(rawJokes) {
   rawJokes.forEach(create);
+  console.log('created');
 }
 
 function update(existingJoke) {
@@ -37,6 +38,10 @@ export default PostStore = Object.assign({}, EventEmitter.prototype, {
 
   getLastJoke() {
     return _last_joke;
+  },
+
+  getJokesByUserId(userId) {
+
   },
 
   emitChange() {
@@ -72,6 +77,10 @@ PostStore.dispatchToken = AppDispatcher.register(function(payload) {
         create(action.joke);
         PostStore.emitChange();
         break;
+
+      case ActionTypes.ADD_RAW_JOKES:
+        createAll(action.jokes);
+        PostStore.emitChange();
     }
 
   };

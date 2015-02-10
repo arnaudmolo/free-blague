@@ -36,7 +36,12 @@ export default new class API {
 
   getRandomJoke() {
     return http.get(API_URL + '/jokes/random')
-      .then(function(res){return res.joke;});
+      .then(function(res){
+        if (res.joke !== null) {
+          return res.joke;
+        }
+        throw new Error('No jokes provided by the API');
+      });
   }
 
   /**

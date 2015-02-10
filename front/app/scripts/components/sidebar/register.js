@@ -13,6 +13,7 @@ export default class Register extends React.Component {
     super(props);
     this.state = getStateFromStore();
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   handleSubmit(event) {
@@ -26,6 +27,12 @@ export default class Register extends React.Component {
       });
   }
 
+  handleInputChange(name) {
+    return (event) => {
+      this.setState({[name]: event.target.value});
+    }
+  }
+
   render() {
     return (
       <nav>
@@ -37,6 +44,8 @@ export default class Register extends React.Component {
           <div className="form__block">
             <input
               defaultValue={this.state.email}
+              value={this.state.email}
+              onChange={this.handleInputChange('email')}
               type="email"
               placeholder="email"
               ref="email"
@@ -45,6 +54,8 @@ export default class Register extends React.Component {
           <div className="form__block">
             <input
               defaultValue={this.state.password}
+              value={this.state.password}
+              onChange={this.handleInputChange('passwor')}
               type="password"
               placeholder="password"
               ref="password"

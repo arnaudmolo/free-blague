@@ -10,7 +10,7 @@ export default class JokeView extends React.Component {
   render() {
     return (
       <li>
-        <span>{this.model.content}</span>
+        <span>{this.props.model.content}</span>
           &nbsp;|&nbsp;
           <a>x</a>
       </li>

@@ -9,8 +9,18 @@ JokeActions = {
   launchRandom() {
     return API
       .getRandomJoke()
-      .then((rawJoke) => {
+      .error((er) => {
 
+        console.log('??????????????')
+        timeoutId = setTimeout(() => {
+          this.launchRandom();
+        }, 3000);
+
+        console.error('error !', er);
+        this.launchRandom();
+        return;
+      })
+      .done((rawJoke) => {
         AppDispatcher
           .handleServerAction({
             type: ActionTypes.ADD_RAW_JOKE,
