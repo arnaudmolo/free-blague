@@ -106,6 +106,7 @@ UserStore.dispatchToken = AppDispatcher.register(function(payload) {
   };
 
 });
+
 let _temp = JSON.parse(localStorage.getItem('user'));
 
 if (_temp !== null) {

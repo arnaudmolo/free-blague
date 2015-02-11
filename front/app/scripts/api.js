@@ -26,7 +26,7 @@ function access(token){
  * Deal with the API
  */
 
-export default new class API {
+export default Object.freeze(Object.assign({}, {
 
   /**
    * Get a random Joke from the server
@@ -42,7 +42,7 @@ export default new class API {
         }
         throw new Error('No jokes provided by the API');
       });
-  }
+  },
 
   /**
    * Save the joke
@@ -78,17 +78,11 @@ export default new class API {
 
     return promise;
 
-  }
+  },
 
-  updateJoke(joke) {
-
-    var voted;
-
-    voted = joke.get('voted') === 'up';
-
-    return http.get(API_URL + '/Jokes/vote?=' + voted + '?jokeId=' + joke.get('id'));
-
-  }
+  updateJoke(jokeId, voted) {
+    return http.get(API_URL + '/Jokes/vote?=' + voted + '?jokeId=' + jokeId);
+  },
 
   /**
    * Create the user
@@ -103,7 +97,7 @@ export default new class API {
     promise = http.post(API_URL + '/users', JSON.stringify(user));
 
     return promise;
-  }
+  },
 
   /**
    * Auth the user.
@@ -122,7 +116,7 @@ export default new class API {
       .post(API_URL + '/users/login', JSON.stringify(user));
 
     return promise;
-  }
+  },
 
   /**
    * Get user's jokes
@@ -137,10 +131,10 @@ export default new class API {
     promise = http.get(API_URL + '/users/' + id + '/jokes' + access(token));
 
     return promise;
-  }
+  },
 
   logout(token) {
     return http.post(API_URL + '/users/logout' + access(token), {});
   }
 
-};
+}));

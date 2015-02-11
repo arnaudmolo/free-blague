@@ -23,7 +23,6 @@ function create(rawJoke) {
 
 function createAll(rawJokes) {
   rawJokes.forEach(create);
-  console.log('created');
 }
 
 function update(existingJoke) {
@@ -63,7 +62,9 @@ create({
   'date': '2015-02-09T08:51:38.182Z',
   'language': 'fr',
   'id': 1,
-  'userId': 1
+  'userId': 1,
+  positiv: 100,
+  negativ: 0
 });
 
 PostStore.dispatchToken = AppDispatcher.register(function(payload) {

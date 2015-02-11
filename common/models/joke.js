@@ -28,7 +28,7 @@ export default function(Joke){
       });
     }
 
-  })
+  });
 
   Joke.remoteMethod(
       'random',

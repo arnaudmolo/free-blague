@@ -19,58 +19,7 @@
   left: 50%
   transform: translate(-50%, -50%)
 
-  .joke-animation-enter
-    transform: translate(500%, 100px) !important
 
-  .joke-animation-enter.joke-animation-enter-active
-    transform: translate(-50px, 100px) !important
-
-  @for $i from 0 through 15
-    .joke:nth-child(#{$i})
-      z-index: 100 - $i
-      transform: rotate(3deg + -3deg * $i) translate(-30% * $i, 100px)
-
-  @for $i from 0 through 10
-    .joke:nth-child(#{$i})
-      opacity: 1.1 - ($i/10)
-
-  .joke
-    height: 205px
-    width: 285px
-    -webkit-backface-visibility: hidden
-
-    position: absolute
-
-    overflow: hidden
-
-    opacity: 0
-    transition: all 1s ease
-
-    color: $white
-    font-size: 30pt
-    text-align: left
-    font-style: italic
-
-    border-radius: 5px
-
-    .wrapper
-      height: 255px
-      width: 345px
-
-      position: absolute
-
-      top: -15px
-      left: -15px
-
-      .shadow
-        position: absolute
-        top: 0
-        left: 0
-        right: 0
-        bottom: 0
-
-      p
-        transform: rotate(-5deg)
 
 .toggle-sound
   position: absolute

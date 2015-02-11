@@ -38,3 +38,10 @@ export default class Settings extends React.Component {
   }
 
 }
+
+Settings.propTypes = {
+  user: React.PropTypes.shape({
+    logged: React.PropTypes.bool.isRequired,
+    jokes: React.PropTypes.array.isRequired
+  })
+}

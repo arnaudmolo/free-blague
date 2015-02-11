@@ -28,6 +28,7 @@ JokeActions = {
           relaunch();
       }, relaunch);
   },
+
   stopRandom() {
     AppDispatcher
       .handleViewAction({
@@ -35,13 +36,33 @@ JokeActions = {
       });
     clearTimeout(timeoutId);
   },
+
   toggleMute(muteState) {
     if (muteState) {
       this.launchRandom();
     }else{
       this.stopRandom();
     }
+  },
+
+  voteDown(jokeId) {
+
+    AppDispatcher
+      .handleViewAction({
+        // type: ActionTypes.
+      })
+
+    API
+      .updateJoke(jokeId, false)
+      .done();
+  },
+
+  voteUp(jokeId) {
+    API
+      .updateJoke(jokeId, true)
+      .done();
   }
+
 }
 
 export default JokeActions;

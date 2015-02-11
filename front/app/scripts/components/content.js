@@ -21,17 +21,7 @@ function getStateFromStores() {
  * Templates for Content
  */
 
-export default class Content extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = getStateFromStores();
-  }
-
-  launchWriting(joke) {
-    this.setState({joke});
-  }
-
+export default class Content {
   render() {
     return (
       <div>
