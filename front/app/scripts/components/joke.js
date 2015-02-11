@@ -68,13 +68,13 @@ export default class JokeView extends React.Component {
 
   handleVoteDown(event) {
     JokeActions
-      .voteDown(this.props.model.id);
+      .voteDown(this.props.model);
     this.setState({voted: true});
   }
 
   handleVoteUp(event) {
     JokeActions
-      .voteUp(this.props.model.id);
+      .voteUp(this.props.model);
     this.setState({voted: true});
   }
 

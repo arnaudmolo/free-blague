@@ -3,6 +3,7 @@ import keyMirror from 'keymirror';
 export default Object.freeze({
   ActionTypes: keyMirror({
     'CREATE_JOKE': null,
+    'UPDATE_JOKE': null,
     'ADD_RAW_JOKE': null,
 
     'ADD_RAW_JOKES_FROM_USER': null,

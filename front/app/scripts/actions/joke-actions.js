@@ -45,21 +45,21 @@ JokeActions = {
     }
   },
 
-  voteDown(jokeId) {
+  voteDown(joke) {
 
     AppDispatcher
       .handleViewAction({
-        // type: ActionTypes.
+        type: ActionTypes.UPDATE_JOKE
       })
 
     API
-      .updateJoke(jokeId, false)
+      .updateJoke(joke.id, false)
       .done();
   },
 
-  voteUp(jokeId) {
+  voteUp(joke) {
     API
-      .updateJoke(jokeId, true)
+      .updateJoke(joke.id, true)
       .done();
   }
 
