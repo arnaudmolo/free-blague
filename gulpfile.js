@@ -43,7 +43,7 @@ gulp.task('fonts', function () {
 function scripts(){
 
   return browserify({ debug: false })
-    .transform(to5Browserify.configure({ modules: 'commonInterop', experimental: true}))
+    .transform(to5Browserify.configure({experimental: true}))
     .transform(envify)
     .require(app + 'scripts/main.js', { entry: true })
     .bundle()
