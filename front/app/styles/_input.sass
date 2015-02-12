@@ -1,14 +1,38 @@
+$input-padding-v: 8px
+$input-padding-big-v: 14px
+$input-state-border: 3px
+
+=input-state-padding($padding-v)
+  padding-top: $padding-v - $input-state-border
+  padding-bottom: $padding-v - $input-state-border
+
+
 .input
   display: inline-block
+  padding: $input-padding-v 6px
+  font-size: 16px
   line-height: 1em
-  padding: 8px 6px
   border: none
+  color: $black
+  background-color: $color-gallery
   +box-sizing(border-box)
+  +placeholder
+    font-style: italic
+
+  &.isInvalid
+    border: $input-state-border solid $color-alizarin-crimson
+    +input-state-padding($input-padding-v)
 
 .input--rounded
   @extend .input
-  +border-radius(6px)
+  +border-radius(20px)
 
 .input--full-w
   @extend .input
   width: 100%
+
+.input--big
+  padding: $input-padding-big-v 20px
+
+  &.isInvalid
+    +input-state-padding($input-padding-big-v)

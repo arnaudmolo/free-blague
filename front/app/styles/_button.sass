@@ -17,13 +17,15 @@
 
 .button
   display: inline-block
-  padding: 10px 40px
+  padding: 10px 40px 7px 40px
+  +box-sizing(border-box)
   text-decoration: none
   text-transform: uppercase
   border: none
   cursor: pointer
+  font-size: 16px
   font-weight: bold
-  +border-radius(6px)
+  +border-radius(20px)
 
   &:focus
     outline: none
@@ -35,7 +37,15 @@
     transform: translate(-50%, -50%)
     font-weight: bolder
 
-.button--red
+
+/////////////
+// Modifiers
+////////////
+
+// Colors
+
+.button--red,
+.button--important
   @extend .button
   +button-color-dark($red)
 
@@ -43,6 +53,13 @@
   @extend .button
   +button-color-light($white)
 
+
+// Sizes
+
+.button--big
+  padding: 14px 40px 11px 40px
+
+// Let it last of Sizes
 .button--full-w
   @extend .button
   padding-left: 0
