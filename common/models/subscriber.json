@@ -1,0 +1,17 @@
+{
+  "name": "Subscriber",
+  "plural": "Subscribers",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "properties": {
+    "email": {
+      "type": "string",
+      "required": true,
+      "index": {"unique": true}
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": []
+}

@@ -52,7 +52,7 @@
       "principalId": "$everyone",
       "permission": "ALLOW",
       "property": "random"
-   }
+    }
   ],
   "methods": []
 }

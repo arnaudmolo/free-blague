@@ -32,5 +32,9 @@
   "Joke": {
     "dataSource": "db",
     "public": true
+  },
+  "Subscriber": {
+    "dataSource": "db",
+    "public": true
   }
 }
