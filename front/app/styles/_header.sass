@@ -1,5 +1,6 @@
 .header
   position: relative
+  width: 100%
   box-sizing: border-box
   +clearfix()
 
@@ -31,7 +32,7 @@
     font-size: 1.4em
 
 .header--absolute
-  position: absolute
-  top: 0
-  left: 0
-  width: 100%
+  @media screen and (min-height: $phone-height)
+    position: absolute
+    top: 0
+    left: 0

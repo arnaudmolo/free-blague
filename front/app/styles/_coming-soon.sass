@@ -2,6 +2,7 @@
   width: 100%
   padding-bottom: 30px
   height: 100%
+  overflow: scroll
   text-align: center
   color: $white
   +background(radial-gradient(circle at bottom center, #564b90 20%, #433886 90%))
@@ -35,11 +36,15 @@
     margin-right: auto
 
 .coming-soon__container
-  padding-top: $main-header-height
+  @media screen and (min-height: $phone-height)
+    padding-top: $main-header-height
 
 .coming-soon__content
   padding-left: 20px
   padding-right: 20px
+  @media screen and (min-height: $phone-height)
+    display: table-cell
+    vertical-align: middle
   @media screen and (min-width: $tablet-height)
     padding-left: 60px
     padding-right: 60px
@@ -51,3 +56,6 @@
   max-width: 300px
   @media screen and (min-width: $phone-height)
     width: 80%
+
+  textarea
+    min-height: 100px
