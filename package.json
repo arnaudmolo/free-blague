@@ -38,6 +38,7 @@
     "gulp-useref": "~0.4.4",
     "gulp-util": "~3.0.1",
     "gulp-webserver": "^0.8.3",
+    "jed": "^1.1.0",
     "jshint": "^2.5.6",
     "lodash": "^2.4.1",
     "loopback": "^2.12",
