@@ -35,7 +35,7 @@ export default class ComingSoon extends React.Component {
     paragraph = "Pour être informé de l'ouverture de la plateforme et obtenir une invitation à la version bêta :";
 
     return (
-      <div className="table table--full-w table--full-h">
+      <div className="coming-soon__container table table--full-w table--full-h">
         <header className="header--main header--absolute">
           <i className="header__logo icon-already-cool"></i>
         </header>
