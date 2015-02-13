@@ -50,31 +50,21 @@ export default Object.freeze(Object.assign({}, {
    * @return {Promise}(joke)
    */
 
-  saveJoke(joke) {
+  saveJoke(joke, user) {
 
-    var user, promise;
+    var promise;
 
-    // user = require('./models/user');
     joke = JSON.stringify(
       {
         content: joke,
         date: new Date(),
-        language: navigator.language || 'unknown'
+        language: navigator.language || 'unknown',
+        subscriberId: user.id
       }
     );
 
-    if (user.get('logged')) {
-      promise = http
-        .post(API_URL +
-            '/users/' +
-            user.get('userId') +
-            '/jokes' +
-            access(),
-          joke);
-    } else {
-      promise = http
-        .post(API_URL + '/jokes', joke);
-    }
+    promise = http
+      .post(API_URL + '/jokes', joke);
 
     return promise;
 
@@ -135,6 +125,32 @@ export default Object.freeze(Object.assign({}, {
 
   logout(token) {
     return http.post(API_URL + '/users/logout' + access(token), {});
+  },
+
+  saveMail(email) {
+    return http.post(API_URL + '/Subscribers', {email});
+  },
+
+  newsletterSubscription(email, joke) {
+
+    let promise;
+
+    promise = this
+      .saveMail(email);
+
+    if (joke) {
+      promise = promise
+        .then(
+          (subscriber) => {
+          console.log('ici', subscriber);
+          return this
+            .saveJoke(joke, subscriber);
+          }
+        );
+    }
+
+    return promise;
+
   }
 
 }));

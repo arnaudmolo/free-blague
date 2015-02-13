@@ -1,41 +1,68 @@
 import React from 'react/addons';
 
 import appDispatcher from './../dispatcher/app-dispatcher';
+import inputChange from './../mixins/handle-input-change';
+import binder from './../mixins/binder';
 
+import API from './../api';
+
+let cx;
+
+cx = React.addons.classSet;
 
 /**
  * @class ComingSoon
  * Templates for ComingSoon
  */
 
+function getDefaultStates() {
+  return {
+    email: '',
+    joke: ''
+  };
+}
+
 export default class ComingSoon extends React.Component {
 
   constructor(props) {
     super(props);
-  }
-
-  nameChange(event) {
-    // CHANGE IT - just to see invalid look
-    event.target.classList.toggle("isInvalid");
-  }
-
-  emailChange(event) {
-    // CHANGE IT - just to see invalid look
-    event.target.classList.toggle("isInvalid");
+    this.state = getDefaultStates();
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(event) {
+
     event.preventDefault();
-    // do stuff
+
+    API
+      .newsletterSubscription(this.state.email, this.state.joke)
+      .then((joke) => {
+
+        let defaultStates = getDefaultStates();
+
+        defaultStates.posted = true;
+
+        this.setState(defaultStates);
+      })
+      .error((error) => {
+        console.warn(error);
+      });
+
   }
 
   render() {
-    var paragraph;
+
+    let paragraph;
 
     paragraph = "Pour être informé de l'ouverture de la plateforme et obtenir une invitation à la version bêta :";
 
     return (
-      <div className="coming-soon__container table table--full-w table--full-h">
+      <div className={
+        cx({
+          'coming-soon__container table table--full-w table--full-h': true,
+          isPosted: this.state.posted
+        })}
+      >
         <header className="header--main header--absolute">
           <i className="header__logo icon-already-cool"></i>
         </header>
@@ -43,12 +70,18 @@ export default class ComingSoon extends React.Component {
           <h2>Tribute to humour</h2>
           <h3>Coming soon.</h3>
           <p><strong>{paragraph}</strong></p>
-          <form noValidate="novalidate" className="coming-soon__form form isVertical" onSubmit={this.handleSubmit}>
+          <form className="coming-soon__form form isVertical" onSubmit={this.handleSubmit}>
             <div className="form__block">
-              <input className="input input--rounded input--big input--full-w" type="text" placeholder="Prénom" onChange={this.nameChange} />
+              <input
+                className="input input--rounded input--big input--full-w"
+                type="text"
+                placeholder="Envoyez votre meilleur blague !"
+                required
+                onChange={this.handleInputChange('joke')}
+                value={this.state.joke} />
             </div>
             <div className="form__block">
-              <input className="input input--rounded input--big input--full-w" type="email" placeholder="Email" onChange={this.emailChange} />
+              <input className="input input--rounded input--big input--full-w" type="email" placeholder="Email" required onChange={this.handleInputChange('email')} value={this.state.email}/>
             </div>
             <div className="form__block">
               <input type="submit" className="button button--big button--important button--full-w" value="Obtenir mon invitation" />
@@ -59,3 +92,5 @@ export default class ComingSoon extends React.Component {
     );
   }
 }
+
+Object.assign(ComingSoon.prototype, inputChange);
