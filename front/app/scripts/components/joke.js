@@ -1,5 +1,5 @@
 import React from 'react/addons';
-import Color from 'Color';
+import Color from 'color';
 
 import JokeActions from './../actions/joke-actions';
 
