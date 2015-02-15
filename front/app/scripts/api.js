@@ -5,12 +5,14 @@
 
 import http from './requester';
 
-var API_URL, TWO_WEEKS;
+var API_BASE, API_URL, TWO_WEEKS;
 
 TWO_WEEKS = 1000 * 60 * 60 * 24 * 7 * 2;
 
-API_URL = 'http://' + "arnaudmolo-blague.nodejitsu.com" + '/api';
-API_URL = 'http://' + '127.0.0.1:3000' + '/api';
+API_BASE = 'http://arnaudmolo-blague.nodejitsu.com';
+API_BASE = 'http://127.0.0.1:3000';
+
+API_URL = API_BASE + '/api';
 
 function access(token){
   if (!token) {
@@ -134,6 +136,10 @@ export default Object.freeze(Object.assign({}, {
 
     return promise;
 
+  },
+
+  getLanguageDefinition(lang) {
+    return http.get(API_BASE + '/lang/' + lang)
   }
 
 }));
