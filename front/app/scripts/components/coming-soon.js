@@ -25,6 +25,9 @@ function getDefaultStates() {
   };
 }
 
+TranslationActions
+  .changeDomain(navigator.language);
+
 export default class ComingSoon extends React.Component {
 
   constructor(props) {
@@ -74,9 +77,8 @@ export default class ComingSoon extends React.Component {
     }
   }
 
-  render() {
 
-    console.log('le render quand je click');
+  render() {
 
     return (
       <div className={
@@ -106,7 +108,7 @@ export default class ComingSoon extends React.Component {
               <input className="input input--rounded input--big input--full-w" type="email" placeholder="Email" required onChange={this.handleInputChange('email')} value={this.state.email}/>
             </div>
             <div className="form__block">
-              <input type="submit" className="button button--big button--important button--full-w" value={__("Obtenir mon invitation")} />
+              <input type="submit" className="button button--big button--important button--full-w" value={__("Get an invitation")} />
             </div>
           </form>
           <button onClick={this.handleLanguageChange('fr')}>Fr</button><button onClick={this.handleLanguageChange('en')}>En</button>

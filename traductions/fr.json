@@ -1,1 +1,40 @@
-{"domain":"messages","locale_data":{"messages":{"":{"domain":"messages","plural_forms":"nplurals=2; plural=(n > 1);","lang":"fr"},"Receive a mail when the beta opens !":["Pour être informé de l'ouverture de la plateforme et obtenir une invitation à la version bêta :"],"Send us your best joke !":["Envoyez votre meilleur blague !"]}}}
+{
+   "": {
+      "project-id-version": "Blague v0.0.1-6",
+      "pot-creation-date": "2015-02-15 22:04+0100",
+      "po-revision-date": "2015-02-15 22:08+0100",
+      "last-translator": "",
+      "language-team": "",
+      "language": "fr",
+      "mime-version": "1.0",
+      "content-type": "text/plain; charset=UTF-8",
+      "content-transfer-encoding": "8bit",
+      "x-generator": "Poedit 1.7.4",
+      "x-poedit-basepath": "./../front/app",
+      "plural-forms": "nplurals=2; plural=(n > 1);",
+      "x-poedit-sourcecharset": "UTF-8",
+      "x-poedit-keywordslist": "__;i18n.gettext;i18n.translate",
+      "x-poedit-searchpath-0": ".",
+      "x-poedit-searchpathexcluded-0": "./../node_modules"
+   },
+   "Tribute to humour": [
+      null,
+      "Tribute to humour"
+   ],
+   "Coming soon.": [
+      null,
+      "Bientôt"
+   ],
+   "Receive a mail when the beta opens !": [
+      null,
+      "Pour être informé de l'ouverture de la plateforme et obtenir une invitation à la version bêta :"
+   ],
+   "Send us your best joke !": [
+      null,
+      "Envoyez votre meilleur blague !"
+   ],
+   "Get an invitation": [
+      null,
+      "Obtenir mon invitation"
+   ]
+}
