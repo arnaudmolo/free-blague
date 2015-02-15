@@ -7,7 +7,7 @@ import Lettering from './lettering';
 function getStateFromStores() {
   return {
     joke: JokeStore.getLastJoke()
-  }
+  };
 }
 
 /**
@@ -31,7 +31,7 @@ export default class MainJoke extends React.Component {
     JokeStore.removeChangeListener(this._onChange);
   }
 
-  _onChange(event) {
+  _onChange() {
     this.setState(getStateFromStores());
   }
 

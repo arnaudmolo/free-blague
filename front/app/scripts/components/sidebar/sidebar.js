@@ -53,6 +53,7 @@ export default class Sidebar extends React.Component {
   }
 
   render() {
+
     if (!this.state.user.logged) {
       return (
         <div>
@@ -60,7 +61,8 @@ export default class Sidebar extends React.Component {
           <Register />
         </div>
       );
-    };
+    }
+
     return (
       <div>
         <JokeList

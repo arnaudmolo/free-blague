@@ -10,12 +10,12 @@ JokeActions = {
 
     let relaunch = (e) => {
       if (e) {
-        console.error(SyntaxError(e));
-      };
+        console.error(new SyntaxError(e));
+      }
       timeoutId = setTimeout(() => {
         this.launchRandom();
       }, 30000);
-    }
+    };
 
     return API
       .getRandomJoke()
@@ -50,7 +50,7 @@ JokeActions = {
     AppDispatcher
       .handleViewAction({
         type: ActionTypes.UPDATE_JOKE
-      })
+      });
 
     API
       .updateJoke(joke.id, false)
@@ -63,7 +63,7 @@ JokeActions = {
       .done();
   }
 
-}
+};
 
 export default JokeActions;
 

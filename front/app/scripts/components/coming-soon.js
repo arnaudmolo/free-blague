@@ -1,9 +1,7 @@
 import React from 'react/addons';
 import Jed from 'jed';
 
-import appDispatcher from './../dispatcher/app-dispatcher';
 import inputChange from './../mixins/handle-input-change';
-import binder from './../mixins/binder';
 
 import API from './../api';
 
@@ -65,7 +63,7 @@ export default class ComingSoon extends React.Component {
 
     API
       .newsletterSubscription(this.state.email, this.state.joke)
-      .then((joke) => {
+      .then(() => {
 
         let defaultStates = getDefaultStates();
 

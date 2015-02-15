@@ -10,7 +10,7 @@ let animationDuration = 2000;
 function getStateFromStores() {
   return {
     string: ''
-  }
+  };
 }
 
 export default class Lettering extends React.Component {
@@ -30,7 +30,7 @@ export default class Lettering extends React.Component {
           WebkitAnimationDelay: animationDuration / this.props.string.length * i + "ms"
         }
       }>{this.props.string[i]}</span>);
-    };
+    }
 
     return (
       <span className="lettering-container">

@@ -18,7 +18,7 @@ export default {
           });
 
         this
-          .getUserJokesFromServer()
+          .getUserJokesFromServer();
 
       });
   },
@@ -26,7 +26,7 @@ export default {
   register(user) {
     API
       .createUser(user)
-      .then((rawUser) => {
+      .then(() => {
         this
           .login(user);
       });
@@ -54,7 +54,7 @@ export default {
             jokes: rawJokes
           });
 
-      })
+      });
   }
 
-}
+};

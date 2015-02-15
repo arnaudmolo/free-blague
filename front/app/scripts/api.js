@@ -3,8 +3,6 @@
 * @exports {static class} API
 */
 
-import Promise from 'bluebird';
-
 import http from './requester';
 
 var API_URL, TWO_WEEKS;
@@ -17,7 +15,7 @@ API_URL = 'http://' + '127.0.0.1:3000' + '/api';
 function access(token){
   if (!token) {
     console.error('no token');
-  };
+  }
   return '?access_token=' + token;
 }
 
@@ -52,8 +50,6 @@ export default Object.freeze(Object.assign({}, {
 
   saveJoke(joke, user) {
 
-    var promise;
-
     joke = JSON.stringify(
       {
         content: joke,
@@ -63,10 +59,8 @@ export default Object.freeze(Object.assign({}, {
       }
     );
 
-    promise = http
+    return http
       .post(API_URL + '/jokes', joke);
-
-    return promise;
 
   },
 
@@ -81,12 +75,7 @@ export default Object.freeze(Object.assign({}, {
    */
 
   createUser(user) {
-
-    var promise;
-
-    promise = http.post(API_URL + '/users', JSON.stringify(user));
-
-    return promise;
+    return http.post(API_URL + '/users', JSON.stringify(user));
   },
 
   /**
@@ -115,12 +104,7 @@ export default Object.freeze(Object.assign({}, {
    */
 
   getUserJokes(id, token){
-
-    var promise;
-
-    promise = http.get(API_URL + '/users/' + id + '/jokes' + access(token));
-
-    return promise;
+    return http.get(API_URL + '/users/' + id + '/jokes' + access(token));
   },
 
   logout(token) {
@@ -140,8 +124,7 @@ export default Object.freeze(Object.assign({}, {
 
     if (joke) {
       promise = promise
-        .then(
-          (subscriber) => {
+        .then( (subscriber) => {
           console.log('ici', subscriber);
           return this
             .saveJoke(joke, subscriber);
