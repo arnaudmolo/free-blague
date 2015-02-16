@@ -6,6 +6,7 @@ import inputChange from './../mixins/handle-input-change';
 import binder from './../mixins/binder';
 
 import API from './../api';
+import Validate from '../utils/validate.js';
 
 let cx, i18n, translate_options;
 
@@ -63,7 +64,7 @@ export default class ComingSoon extends React.Component {
   handleSubmit(event) {
 
     event.preventDefault();
-
+    return;
     API
       .newsletterSubscription(this.state.email, this.state.joke)
       .then((joke) => {
@@ -121,6 +122,7 @@ export default class ComingSoon extends React.Component {
                 type="email"
                 placeholder="Email"
                 required="required"
+                pattern={Validate.emailPattern}
                 onChange={this.handleInputChange('email')}
                 value={this.state.email} />
             </div>
