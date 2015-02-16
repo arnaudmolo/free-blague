@@ -215,6 +215,7 @@
   -o-user-select: $select
   user-select: $select
 
+
 //------------------------------------//
 // Square element                     //
 //------------------------------------//
@@ -222,3 +223,34 @@
 =square($size)
   width: $size
   height: $size
+
+
+//------------------------------------//
+// Buttons                            //
+//------------------------------------//
+
+=button-color($bgcolor)
+  background-color: $bgcolor
+  +box-shadow(0px $button-shadow 0px darken($bgcolor, 5%))
+
+  &:active
+    margin-top: $button-shadow - $button-active-shadow
+    margin-bottom: - ($button-shadow - $button-active-shadow)
+    box-shadow: 0px $button-active-shadow 0px darken($bgcolor, 5%)
+
+=button-color-dark($bgcolor)
+  color: $white
+  +button-color($bgcolor)
+
+=button-color-light($bgcolor)
+  color: $black
+  +button-color($bgcolor)
+
+
+//------------------------------------//
+// Inputs                             //
+//------------------------------------//
+
+=input-state-padding($padding-v)
+  padding-top: $padding-v - $input-state-border
+  padding-bottom: $padding-v - $input-state-border

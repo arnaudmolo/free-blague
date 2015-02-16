@@ -1,10 +1,12 @@
-
 .coming-soon
   width: 100%
+  padding-bottom: 30px
   height: 100%
+  overflow: scroll
   text-align: center
   color: $white
-  @include background(radial-gradient(circle at bottom center, #564b90 20%, #433886 90%))
+  +background(radial-gradient(circle at bottom center, #564b90 20%, #433886 90%))
+  +box-sizing(border-box)
 
   h2,
   h3
@@ -15,15 +17,17 @@
     font-size: 1.5em
     line-height: 1em
     opacity: .5
-    @media screen and (min-width: 780px)
+    @media screen and (min-width: $tablet-height)
       font-size: 3em
 
   h3
-    margin-bottom: 50px
+    margin-bottom: 10px
     font-size: 3em
     line-height: .8em
     letter-spacing: -.05em
-    @media screen and (min-width: 780px)
+    @media screen and (min-width: $phone-width)
+      margin-bottom: 50px
+    @media screen and (min-width: $tablet-height)
       font-size: 6em
 
   p
@@ -31,16 +35,27 @@
     margin-left: auto
     margin-right: auto
 
+.coming-soon__container
+  @media screen and (min-height: $phone-height)
+    padding-top: $main-header-height
+
 .coming-soon__content
   padding-left: 20px
   padding-right: 20px
-  @media screen and (min-width: 780px)
+  @media screen and (min-height: $phone-height)
+    display: table-cell
+    vertical-align: middle
+  @media screen and (min-width: $tablet-height)
     padding-left: 60px
     padding-right: 60px
 
 .coming-soon__form
   margin-left: auto
   margin-right: auto
-  width: 80%
-  @media screen and (min-width: 780px)
-    width: 300px
+  width: 100%
+  max-width: 300px
+  @media screen and (min-width: $phone-height)
+    width: 80%
+
+  textarea
+    min-height: 100px

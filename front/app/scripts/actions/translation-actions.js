@@ -7,7 +7,7 @@ export default {
   changeDomain(domain) {
     API
       .getLanguageDefinition(domain)
-      .then((res) => {
+      .then(function(res){
 
         AppDispatcher
           .handleServerAction({

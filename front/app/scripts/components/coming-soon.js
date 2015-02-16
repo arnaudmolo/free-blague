@@ -1,5 +1,4 @@
 import React from 'react/addons';
-import Jed from 'jed';
 
 import inputChange from './../mixins/handle-input-change';
 import i18n from './../stores/translation-store';
@@ -33,9 +32,10 @@ export default class ComingSoon extends React.Component {
   constructor(props) {
     super(props);
     this.state = getDefaultStates();
+    this._onChange = this._onChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleLanguageChange = this.handleLanguageChange.bind(this);
-    this._onChange = this._onChange.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   componentDidMount() {
@@ -71,41 +71,56 @@ export default class ComingSoon extends React.Component {
   }
 
   handleLanguageChange(lang) {
-    return (event) => {
+    return function(){
       TranslationActions
         .changeDomain(lang);
-    }
+    };
   }
 
 
   render() {
 
+    let jokeLengthLimit, baseInputClass;
+
+    baseInputClass = "input input--rounded input--big input--full-w";
+    jokeLengthLimit = 350;
+
     return (
       <div className={
         cx({
-          'table table--full-w table--full-h': true,
+          'coming-soon__container table table--full-w table--full-h': true,
           isPosted: this.state.posted
-        })
-      }>
+        })}
+      >
         <header className="header--main header--absolute">
           <i className="header__logo icon-already-cool"></i>
         </header>
-        <section className="coming-soon__content table__cell table--align-middle">
+        <section className="coming-soon__content">
           <h2>{__("Tribute to humour")}</h2>
           <h3>{__("Coming soon.")}</h3>
           <p><strong>{__("Receive a mail when the beta opens !")}</strong></p>
           <form className="coming-soon__form form isVertical" onSubmit={this.handleSubmit}>
             <div className="form__block">
-              <input
-                className="input input--rounded input--big input--full-w"
-                type="text"
-                placeholder={__("Send us your best joke !")}
-                required
-                onChange={this.handleInputChange('joke')}
-                value={this.state.joke} />
+              <div className="input-limited">
+                <textarea
+                  className={baseInputClass + " input--resize-v input--optional"}
+                  type="text"
+                  placeholder={__("Send us your best joke !")}
+                  required="required"
+                  maxLength={jokeLengthLimit}
+                  onChange={this.handleInputChange('joke')}
+                  value={this.state.joke} />
+                <span className="input-limited__limit">{jokeLengthLimit - this.state.joke.length}</span>
+              </div>
             </div>
             <div className="form__block">
-              <input className="input input--rounded input--big input--full-w" type="email" placeholder="Email" required onChange={this.handleInputChange('email')} value={this.state.email}/>
+              <input
+                className={baseInputClass}
+                type="email"
+                placeholder="Email"
+                required="required"
+                onChange={this.handleInputChange('email')}
+                value={this.state.email} />
             </div>
             <div className="form__block">
               <input type="submit" className="button button--big button--important button--full-w" value={__("Get an invitation")} />
