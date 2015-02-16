@@ -100,6 +100,7 @@ gulp.task('clean', function(cb){
 gulp.task('bundle', ['styles', 'images', 'fonts', 'scripts', 'bower'], function(){
 
   return gulp.src(app + './*.html')
+    .pipe($.plumber())
     .pipe($.useref.assets())
     .pipe($.useref.restore())
     .pipe($.useref())

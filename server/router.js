@@ -14,8 +14,5 @@ export default function(App){
     res.json(require('./../traductions/' + req.params.lang + '.json'));
   });
 
-  return router
-    .route('/', function(req, res) {
-      this.render(Index, { model: {} });
-    });
+  return router;
 }
