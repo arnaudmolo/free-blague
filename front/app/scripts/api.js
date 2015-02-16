@@ -10,6 +10,7 @@ var API_BASE, API_URL, TWO_WEEKS;
 TWO_WEEKS = 1000 * 60 * 60 * 24 * 7 * 2;
 
 API_BASE = '';
+console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'development') {
   API_BASE = '//127.0.0.1:3000';
 }

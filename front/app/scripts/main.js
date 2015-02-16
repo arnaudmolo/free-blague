@@ -23,5 +23,5 @@ router
   .route('index', '/', function() {
     this.render(CommingSoonView);
   })
-  .attach(document.getElementsByClassName('coming-soon')[0])
+  .attach(document.getElementsByClassName('container')[0])
   .captureClicks();

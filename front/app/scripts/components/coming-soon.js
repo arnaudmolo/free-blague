@@ -20,7 +20,8 @@ __ = i18n.gettext;
 function getDefaultStates() {
   return {
     email: '',
-    joke: ''
+    joke: '',
+    posted: JSON.parse(localStorage.getItem('posted'))?true:false
   };
 }
 
@@ -61,6 +62,7 @@ export default class ComingSoon extends React.Component {
         let defaultStates = getDefaultStates();
 
         defaultStates.posted = true;
+        localStorage.setItem('posted', true);
 
         this.setState(defaultStates);
       })
@@ -80,54 +82,66 @@ export default class ComingSoon extends React.Component {
 
   render() {
 
-    let jokeLengthLimit, baseInputClass;
+    let jokeLengthLimit, baseInputClass, center;
 
     baseInputClass = "input input--rounded input--big input--full-w";
     jokeLengthLimit = 350;
 
-    return (
-      <div className={
-        cx({
-          'coming-soon__container table table--full-w table--full-h': true,
-          isPosted: this.state.posted
-        })}
-      >
-        <header className="header--main header--absolute">
-          <i className="header__logo icon-already-cool"></i>
-        </header>
-        <section className="coming-soon__content">
-          <h2>{__("Tribute to humour")}</h2>
-          <h3>{__("Coming soon.")}</h3>
-          <p><strong>{__("Receive a mail when the beta opens !")}</strong></p>
-          <form className="coming-soon__form form isVertical" onSubmit={this.handleSubmit}>
-            <div className="form__block">
-              <div className="input-limited">
-                <textarea
-                  className={baseInputClass + " input--resize-v input--optional"}
-                  type="text"
-                  placeholder={__("Send us your best joke !")}
-                  required="required"
-                  maxLength={jokeLengthLimit}
-                  onChange={this.handleInputChange('joke')}
-                  value={this.state.joke} />
-                <span className="input-limited__limit">{jokeLengthLimit - this.state.joke.length}</span>
-              </div>
-            </div>
-            <div className="form__block">
-              <input
-                className={baseInputClass}
-                type="email"
-                placeholder="Email"
+    if (this.state.posted) {
+      center = (
+        <div className="form__block">
+          <input type="submit" className="button button--big button--important button--full-w" value={__("Y'll got it :)")} />
+        </div>
+      );
+    }else{
+      center = (
+        <form className="coming-soon__form form isVertical" onSubmit={this.handleSubmit}>
+          <div className="form__block">
+            <div className="input-limited">
+              <textarea
+                className={baseInputClass + " input--resize-v input--optional"}
+                type="text"
+                placeholder={__("Send us your best joke !")}
                 required="required"
-                onChange={this.handleInputChange('email')}
-                value={this.state.email} />
+                maxLength={jokeLengthLimit}
+                onChange={this.handleInputChange('joke')}
+                value={this.state.joke} />
+              <span className="input-limited__limit">{jokeLengthLimit - this.state.joke.length}</span>
             </div>
-            <div className="form__block">
-              <input type="submit" className="button button--big button--important button--full-w" value={__("Get an invitation")} />
-            </div>
-          </form>
-          <button onClick={this.handleLanguageChange('fr')}>Fr</button><button onClick={this.handleLanguageChange('en')}>En</button>
-        </section>
+          </div>
+          <div className="form__block">
+            <input
+              className={baseInputClass}
+              type="email"
+              placeholder="Email"
+              required="required"
+              onChange={this.handleInputChange('email')}
+              value={this.state.email} />
+          </div>
+          <div className="form__block">
+            <input type="submit" className="button button--big button--important button--full-w" value={__("Get an invitation")} />
+          </div>
+        </form>
+      );
+    }
+
+    return (
+      <div className={cx({
+        'coming-soon': true,
+        isPosted: this.state.posted
+      })}>
+        <div className="coming-soon__container table table--full-w table--full-h">
+          <header className="header--main header--absolute">
+            <i className="header__logo icon-already-cool"></i>
+          </header>
+          <section className="coming-soon__content">
+            <h2>{__("Tribute to humour")}</h2>
+            <h3>{__("Coming soon.")}</h3>
+            <p><strong>{__("Receive a mail when the beta opens !")}</strong></p>
+            {center}
+            <button onClick={this.handleLanguageChange('fr')}>Fr</button><button onClick={this.handleLanguageChange('en')}>En</button>
+          </section>
+        </div>
       </div>
     );
   }
