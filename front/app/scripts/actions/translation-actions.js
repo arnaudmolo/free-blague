@@ -5,10 +5,9 @@ import API from './../api';
 
 export default {
   changeDomain(domain) {
-    API
+    return API
       .getLanguageDefinition(domain)
       .then(function(res){
-
         AppDispatcher
           .handleServerAction({
             type: ActionTypes.CHANGE_LANGUAGE,
