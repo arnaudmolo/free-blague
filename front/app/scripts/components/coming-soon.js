@@ -135,7 +135,7 @@ export default class ComingSoon extends React.Component {
             <i className="header__logo icon-already-cool"></i>
           </header>
           <section className="coming-soon__content">
-            <h2>{__("Tribute to humour")}</h2>
+            <h2 className="animation-target">{__("Tribute to humour")}</h2>
             <h3>{__("Coming soon.")}</h3>
             <p><strong>{__("Receive a mail when the beta opens !")}</strong></p>
             {center}

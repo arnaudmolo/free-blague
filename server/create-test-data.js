@@ -37,6 +37,11 @@ export default function(app) {
       date: new Date(),
       userId: users[0].id,
       language: 'fr'
+    }, {
+      content: 'An english joke',
+      date: new Date(),
+      userId: users[0].id,
+      language: 'en'
     }], function(er, joke) {
       if (er) return debug(er);
     });

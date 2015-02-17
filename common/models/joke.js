@@ -5,11 +5,17 @@ export default function(Joke){
   Joke.definition.properties.negativ.default = 0;
 
   Object.assign(Joke, {
-    random(cb) {
-      Joke.count(function(err, res){
+    random(lang, cb) {
+      Joke.count({language: lang}, function(err, res){
         let rand;
         rand = Math.floor(Math.round(Math.random() * (res - 1)));
-        Joke.findOne({skip: rand}, cb);
+        if (res === 0) {
+          let e = new Error('No joke found');
+          e.name = "No joke found";
+          e.status = 410;
+          return cb(e, null);
+        };
+        Joke.findOne({where: {language: lang}, skip: rand}, cb);
       });
     },
 
@@ -33,6 +39,10 @@ export default function(Joke){
   Joke.remoteMethod(
       'random',
       {
+        accepts: [{
+          arg: 'lang',
+          type: 'string'
+        }],
         returns: {
           arg: 'joke', type: 'string'
         },

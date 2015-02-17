@@ -37,7 +37,7 @@ export default Object.freeze(Object.assign({}, {
    */
 
   getRandomJoke() {
-    return http.get(API_URL + '/jokes/random')
+    return http.get(API_URL + '/jokes/random?lang=' + navigator.language)
       .then(function(res){
         if (res.joke !== null) {
           return res.joke;
