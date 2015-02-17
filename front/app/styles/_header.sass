@@ -1,17 +1,18 @@
 .header
   position: relative
+  width: 100%
   box-sizing: border-box
   +clearfix()
 
 .header--main
   @extend .header
-  height: $header_height
+  height: $main-header-height
   padding: $main-header-padding
   text-align: center
   color: $white
 
   .header__logo
-    font-size: $header_height / 2
+    font-size: $main-header-height / 2
 
   .header__settings
     position: absolute
@@ -31,7 +32,7 @@
     font-size: 1.4em
 
 .header--absolute
-  position: absolute
-  top: 0
-  left: 0
-  width: 100%
+  @media screen and (min-height: $phone-height)
+    position: absolute
+    top: 0
+    left: 0

@@ -20,8 +20,8 @@ import CommingSoonView from './components/coming-soon';
 CommingSoonView = createFactory(CommingSoonView);
 
 router
-  .route('index', '/', function(req) {
+  .route('index', '/', function() {
     this.render(CommingSoonView);
   })
-  .attach(document.getElementsByClassName('coming-soon')[0])
+  .attach(document.getElementsByClassName('container')[0])
   .captureClicks();

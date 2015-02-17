@@ -1,5 +1,4 @@
 import React from 'react/addons';
-import JokeStore from './../stores/joke-store';
 import JokeActions from './../actions/joke-actions';
 
 let cx;
@@ -9,7 +8,7 @@ cx = React.addons.classSet;
 function getStateFromStore() {
   return {
     mute: JSON.parse(localStorage.getItem('mute'))
-  }
+  };
 }
 
 export default class Mute extends React.Component {
@@ -22,7 +21,7 @@ export default class Mute extends React.Component {
 
   toggleMute() {
     this.setState({mute: !this.state.mute});
-    localStorage.setItem('mute', this.state.mute)
+    localStorage.setItem('mute', this.state.mute);
     JokeActions.toggleMute(this.state.mute);
   }
 

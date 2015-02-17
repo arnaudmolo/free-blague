@@ -11,7 +11,9 @@ export default Object.freeze({
     'STOP_RANDOM': null,
 
     'AUTH_LOGIN': null,
-    'AUTH_LOGOUT': null
+    'AUTH_LOGOUT': null,
+
+    'CHANGE_LANGUAGE': null
 
   }),
   PayloadSources: keyMirror({

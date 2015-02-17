@@ -11,6 +11,10 @@ _jokes = {};
 _last_joke = {};
 nb = 0;
 
+function update(existingJoke) {
+  existingJoke.order = ++nb;
+}
+
 function create(rawJoke) {
   if (_jokes[rawJoke.id]) {
     update(_jokes[rawJoke.id]);
@@ -25,10 +29,6 @@ function createAll(rawJokes) {
   rawJokes.forEach(create);
 }
 
-function update(existingJoke) {
-  existingJoke.order = ++nb;
-}
-
 export default PostStore = Object.assign({}, EventEmitter.prototype, {
 
   getAll() {
@@ -37,10 +37,6 @@ export default PostStore = Object.assign({}, EventEmitter.prototype, {
 
   getLastJoke() {
     return _last_joke;
-  },
-
-  getJokesByUserId(userId) {
-
   },
 
   emitChange() {
@@ -72,7 +68,9 @@ PostStore.dispatchToken = AppDispatcher.register(function(payload) {
   let action;
 
   if (payload.source === PayloadSources.SERVER_ACTION) {
+
     action = payload.action;
+
     switch(action.type) {
       case ActionTypes.ADD_RAW_JOKE:
         create(action.joke);
@@ -82,7 +80,8 @@ PostStore.dispatchToken = AppDispatcher.register(function(payload) {
       case ActionTypes.ADD_RAW_JOKES:
         createAll(action.jokes);
         PostStore.emitChange();
+        break;
     }
 
-  };
+  }
 });

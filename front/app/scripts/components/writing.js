@@ -1,7 +1,6 @@
 import React from 'react/addons';
 
 import cleanString from './../utils/clean-string';
-import appDispatcher from './../dispatcher/app-dispatcher';
 
 /**
  * @module Writing.view
@@ -12,7 +11,7 @@ function getStateFromStores() {
   return {
     content: '',
     writing: false
-  }
+  };
 }
 
 export default class Writing extends React.Component {

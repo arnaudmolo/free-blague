@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Blague v0.0.1-6\n"
 "POT-Creation-Date: 2015-02-15 22:04+0100\n"
-"PO-Revision-Date: 2015-02-15 22:08+0100\n"
+"PO-Revision-Date: 2015-02-15 22:12+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -23,21 +23,19 @@ msgstr ""
 
 #: scripts/components/coming-soon.js:91
 msgid "Coming soon."
-msgstr "Bientôt"
+msgstr ""
 
 #: scripts/components/coming-soon.js:92
 msgid "Receive a mail when the beta opens !"
 msgstr ""
-"Pour être informé de l'ouverture de la plateforme et obtenir une invitation "
-"à la version bêta :"
 
 #: scripts/components/coming-soon.js:98
 msgid "Send us your best joke !"
-msgstr "Envoyez votre meilleur blague !"
+msgstr ""
 
 #: scripts/components/coming-soon.js:107
 msgid "Get an invitation"
-msgstr "Obtenir mon invitation"
+msgstr ""
 
 #~ msgid "key_to_translate"
 #~ msgstr "clé traduite"

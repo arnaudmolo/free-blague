@@ -37,7 +37,11 @@ export default class Login extends React.Component {
   handleInputChange(name) {
     return (event) => {
       this.setState({[name]: event.target.value});
-    }
+    };
+  }
+
+  handleEmailChange(event) {
+    this.setState({email: event.target.value});
   }
 
   render() {
@@ -52,7 +56,7 @@ export default class Login extends React.Component {
             <input
               defaultValue={this.state.email}
               value={this.state.email}
-              onChange={this.handleInputChange('email')}
+              onChange={this.handleEmailChange}
               type="email"
               placeholder="email"
               ref="email"

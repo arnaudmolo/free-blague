@@ -19,6 +19,7 @@
 
 // molecules
 @import "form";
+@import "input-limited";
 
 // organisms
 @import "card";
@@ -28,3 +29,8 @@
 @import "lettering";
 @import "sidebar";
 @import "writing";
+
+.container {
+  width: 100%;
+  height: 100%;
+}

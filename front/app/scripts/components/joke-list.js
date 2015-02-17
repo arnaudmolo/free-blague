@@ -6,7 +6,7 @@ import JokeView from './Joke';
 function getStateFromStores() {
   return {
     jokes: JokeStore.getAll()
-  }
+  };
 }
 
 export default class JokeList extends React.Component {
@@ -33,10 +33,10 @@ export default class JokeList extends React.Component {
 
     var jokes;
 
-    jokes = Object.keys(this.state.jokes).map((d, i) => {
+    jokes = Object.keys(this.state.jokes).map((d) => {
       d = this.state.jokes[d];
       return (<JokeView key={d.id} model={d} />);
-    }).sort(function(b, a) {return a.props.model.order - b.props.model.order});
+    }).sort((b, a) => a.props.model.order - b.props.model.order);
 
     return (
       <ul className="jokes-list">

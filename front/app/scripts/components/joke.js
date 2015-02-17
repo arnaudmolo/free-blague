@@ -1,5 +1,5 @@
 import React from 'react/addons';
-import Color from 'Color';
+import color from 'color';
 
 import JokeActions from './../actions/joke-actions';
 
@@ -15,7 +15,7 @@ function getStateFromStores() {
       backgroundColor: '#00FF00'
     },
     voted: false
-  }
+  };
 }
 
 /**
@@ -35,16 +35,16 @@ export default class JokeView extends React.Component {
 
   componentDidMount() {
 
-    var startColor, endColor, color;
+    var startColor, endColor, colorString;
 
-    color = stringToColor(this.props.model.content);
-    startColor = Color(color);
+    colorString = stringToColor(this.props.model.content);
+    startColor = color(colorString);
     endColor = startColor.clone().alpha(0.5);
     startColor = startColor.alpha(0);
 
     this.setState({
       bg: {
-        backgroundColor: color
+        backgroundColor: colorString
       },
       gradient: {
         background:
@@ -66,13 +66,13 @@ export default class JokeView extends React.Component {
     });
   }
 
-  handleVoteDown(event) {
+  handleVoteDown() {
     JokeActions
       .voteDown(this.props.model);
     this.setState({voted: true});
   }
 
-  handleVoteUp(event) {
+  handleVoteUp() {
     JokeActions
       .voteUp(this.props.model);
     this.setState({voted: true});
@@ -96,8 +96,8 @@ export default class JokeView extends React.Component {
 
       style = {
         width: ((joke.positiv / divider * 50) + 50) + '%'
-      }
-    };
+      };
+    }
 
     return (
       <li

@@ -3,21 +3,23 @@
 * @exports {static class} API
 */
 
-import Promise from 'bluebird';
-
 import http from './requester';
 
-var API_URL, TWO_WEEKS;
+var API_BASE, API_URL, TWO_WEEKS;
 
 TWO_WEEKS = 1000 * 60 * 60 * 24 * 7 * 2;
 
-API_URL = 'http://' + "arnaudmolo-blague.nodejitsu.com" + '/api';
-API_URL = 'http://' + '127.0.0.1:3000' + '/api';
+API_BASE = '';
+console.log(process.env.NODE_ENV);
+if (process.env.NODE_ENV === 'development') {
+  API_BASE = '//127.0.0.1:3000';
+}
+API_URL = API_BASE + '/api';
 
 function access(token){
   if (!token) {
     console.error('no token');
-  };
+  }
   return '?access_token=' + token;
 }
 
@@ -35,7 +37,7 @@ export default Object.freeze(Object.assign({}, {
    */
 
   getRandomJoke() {
-    return http.get(API_URL + '/jokes/random')
+    return http.get(API_URL + '/jokes/random?lang=' + navigator.language)
       .then(function(res){
         if (res.joke !== null) {
           return res.joke;
@@ -52,8 +54,6 @@ export default Object.freeze(Object.assign({}, {
 
   saveJoke(joke, user) {
 
-    var promise;
-
     joke = JSON.stringify(
       {
         content: joke,
@@ -63,10 +63,8 @@ export default Object.freeze(Object.assign({}, {
       }
     );
 
-    promise = http
+    return http
       .post(API_URL + '/jokes', joke);
-
-    return promise;
 
   },
 
@@ -81,12 +79,7 @@ export default Object.freeze(Object.assign({}, {
    */
 
   createUser(user) {
-
-    var promise;
-
-    promise = http.post(API_URL + '/users', JSON.stringify(user));
-
-    return promise;
+    return http.post(API_URL + '/users', JSON.stringify(user));
   },
 
   /**
@@ -115,12 +108,7 @@ export default Object.freeze(Object.assign({}, {
    */
 
   getUserJokes(id, token){
-
-    var promise;
-
-    promise = http.get(API_URL + '/users/' + id + '/jokes' + access(token));
-
-    return promise;
+    return http.get(API_URL + '/users/' + id + '/jokes' + access(token));
   },
 
   logout(token) {
@@ -140,8 +128,7 @@ export default Object.freeze(Object.assign({}, {
 
     if (joke) {
       promise = promise
-        .then(
-          (subscriber) => {
+        .then( (subscriber) => {
           console.log('ici', subscriber);
           return this
             .saveJoke(joke, subscriber);
@@ -151,6 +138,10 @@ export default Object.freeze(Object.assign({}, {
 
     return promise;
 
+  },
+
+  getLanguageDefinition(lang) {
+    return http.get(API_BASE + '/lang/' + lang)
   }
 
 }));

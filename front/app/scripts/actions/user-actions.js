@@ -7,7 +7,7 @@ import API from './../API';
 
 export default {
   login(user) {
-    API
+    return API
       .loginUser(user)
       .then((rawUser) => {
 
@@ -18,22 +18,22 @@ export default {
           });
 
         this
-          .getUserJokesFromServer()
+          .getUserJokesFromServer();
 
       });
   },
 
   register(user) {
-    API
+    return API
       .createUser(user)
-      .then((rawUser) => {
+      .then(() => {
         this
           .login(user);
       });
   },
 
   disconnect() {
-    API
+    return API
       .logout(UserStore.getUserToken())
       .then(function() {
         AppDispatcher
@@ -44,7 +44,7 @@ export default {
   },
 
   getUserJokesFromServer() {
-    API
+    return API
       .getUserJokes(UserStore.getUserId(), UserStore.getUserToken())
       .then((rawJokes) => {
 
@@ -54,7 +54,7 @@ export default {
             jokes: rawJokes
           });
 
-      })
+      });
   }
 
-}
+};
