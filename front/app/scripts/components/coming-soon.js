@@ -55,7 +55,7 @@ export default class ComingSoon extends React.Component {
   handleSubmit(event) {
 
     event.preventDefault();
-    return;
+
     API
       .newsletterSubscription(this.state.email, this.state.joke)
       .then(() => {
@@ -79,7 +79,6 @@ export default class ComingSoon extends React.Component {
         .changeDomain(lang);
     };
   }
-
 
   render() {
 
