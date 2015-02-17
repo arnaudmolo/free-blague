@@ -6,6 +6,7 @@ import i18n from './../stores/translation-store';
 import TranslationActions from './../actions/translation-actions';
 
 import API from './../api';
+import Validate from '../utils/validate.js';
 
 let cx, __;
 
@@ -54,7 +55,7 @@ export default class ComingSoon extends React.Component {
   handleSubmit(event) {
 
     event.preventDefault();
-
+    return;
     API
       .newsletterSubscription(this.state.email, this.state.joke)
       .then(() => {
@@ -115,6 +116,7 @@ export default class ComingSoon extends React.Component {
               type="email"
               placeholder="Email"
               required="required"
+              pattern={Validate.emailPattern}
               onChange={this.handleInputChange('email')}
               value={this.state.email} />
           </div>
