@@ -11,7 +11,7 @@ function resetUser() {
   return {
     logged: false,
     jokes: []
-  }
+  };
 }
 
 _user = {};
@@ -21,8 +21,8 @@ if (process.env.NODE_ENV === 'development') {
     email: 'john@doe.com',
     password: 'opensesame',
     avatar: 'arnaud.jpg'
-  }
-};
+  };
+}
 
 _user.logged = false;
 _user.jokes = [];
@@ -44,7 +44,7 @@ export default UserStore = Object.assign({}, EventEmitter.prototype, {
     return {
       email: _user.email,
       password: _user.password
-    }
+    };
   },
 
   getUserData() {
@@ -103,7 +103,7 @@ UserStore.dispatchToken = AppDispatcher.register(function(payload) {
 
     }
 
-  };
+  }
 
 });
 
@@ -111,4 +111,4 @@ let _temp = JSON.parse(localStorage.getItem('user'));
 
 if (_temp !== null) {
   login(_temp);
-};
+}

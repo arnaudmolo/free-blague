@@ -44,4 +44,4 @@ Settings.propTypes = {
     logged: React.PropTypes.bool.isRequired,
     jokes: React.PropTypes.array.isRequired
   })
-}
+};

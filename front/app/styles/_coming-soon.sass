@@ -7,6 +7,9 @@
   color: $white
   +background(radial-gradient(circle at bottom center, #564b90 20%, #433886 90%))
   +box-sizing(border-box)
+  transition: all 1s ease
+  &.isPosted
+    +background(radial-gradient(circle at bottom center, #4b9068 20%, #398757 90%))
 
   h2,
   h3

@@ -30,7 +30,7 @@ export default class Register extends React.Component {
   handleInputChange(name) {
     return (event) => {
       this.setState({[name]: event.target.value});
-    }
+    };
   }
 
   render() {
