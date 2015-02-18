@@ -1,12 +1,9 @@
-
 import React from 'react/addons';
 
-var Content = require(__dirname + './../../front/app/scripts/components/content');
+var ComingSoon = require(__dirname + './../../front/app/scripts/components/coming-soon');
 
 export default React.createClass(
-
-  class Index {
-
+  {
     render() {
       return (
 
@@ -21,15 +18,13 @@ export default React.createClass(
             <link rel="stylesheet" href="/styles/main.css" />
           </head>
           <body>
-            <div className="content">
-              <Content model={this.props.model}></Content>
+            <div className="container">
+              <ComingSoon />
             </div>
-            <script id="ici" dangerouslySetInnerHTML={{__html: 'window.tempJoke = "' + this.props.model.get('jokes').at(0) + '"'}}></script>
             <script src="/scripts/main.js"></script>
         </body>
         </html>
-
       );
     }
-  }.prototype
+  }
 );

@@ -109,15 +109,12 @@
 //    Box Shadow                      //
 //------------------------------------//
 
-=box-shadow($shadow-1, $shadow-2: false, $shadow-3: false, $shadow-4: false, $shadow-5: false, $shadow-6: false, $shadow-7: false, $shadow-8: false, $shadow-9: false)
-
-  $full: compact($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9)
-
-  -webkit-box-shadow: $full
-  -moz-box-shadow: $full
-  -ms-box-shadow: $full
-  -o-box-shadow: $full
-  box-shadow: $full
+=box-shadow($shadow)
+  -webkit-box-shadow: $shadow
+  -moz-box-shadow: $shadow
+  -ms-box-shadow: $shadow
+  -o-box-shadow: $shadow
+  box-shadow: $shadow
 
 
 //------------------------------------//
@@ -231,12 +228,12 @@
 
 =button-color($bgcolor)
   background-color: $bgcolor
-  +box-shadow(0px $button-shadow 0px darken($bgcolor, 5%))
+  +box-shadow(0 $button-shadow 0 darken($bgcolor, 5%))
 
   &:active
     margin-top: $button-shadow - $button-active-shadow
     margin-bottom: - ($button-shadow - $button-active-shadow)
-    box-shadow: 0px $button-active-shadow 0px darken($bgcolor, 5%)
+    +box-shadow(0 $button-active-shadow 0 darken($bgcolor, 5%))
 
 =button-color-dark($bgcolor)
   color: $white

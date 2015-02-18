@@ -66,5 +66,3 @@ JokeActions = {
 };
 
 export default JokeActions;
-
-JokeActions.launchRandom();

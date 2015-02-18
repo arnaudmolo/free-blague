@@ -5,6 +5,8 @@ import i18n from './../stores/translation-store';
 
 import TranslationActions from './../actions/translation-actions';
 
+import { ExternalLinks } from './../constants/app-constants.js';
+
 import API from './../api';
 import Validate from '../utils/validate.js';
 
@@ -19,15 +21,21 @@ __ = i18n.gettext;
  */
 
 function getDefaultStates() {
+
+  let posted;
+
+  if (localStorage) {
+    posted = JSON.parse(localStorage.getItem('posted'))?true:false;
+  } else {
+    posted = false;
+  }
+
   return {
     email: '',
     joke: '',
-    posted: JSON.parse(localStorage.getItem('posted'))?true:false
+    posted: posted
   };
 }
-
-TranslationActions
-  .changeDomain(navigator.language);
 
 export default class ComingSoon extends React.Component {
 
@@ -55,7 +63,7 @@ export default class ComingSoon extends React.Component {
   handleSubmit(event) {
 
     event.preventDefault();
-    return;
+
     API
       .newsletterSubscription(this.state.email, this.state.joke)
       .then(() => {
@@ -63,11 +71,13 @@ export default class ComingSoon extends React.Component {
         let defaultStates = getDefaultStates();
 
         defaultStates.posted = true;
-        localStorage.setItem('posted', true);
+        if (localStorage) {
+          localStorage.setItem('posted', true);
+        };
 
         this.setState(defaultStates);
       })
-      .error((error) => {
+      .error(function(error){
         console.warn(error);
       });
 
@@ -80,18 +90,18 @@ export default class ComingSoon extends React.Component {
     };
   }
 
-
   render() {
 
-    let jokeLengthLimit, baseInputClass, center;
+    let jokeLengthLimit, center;
 
-    baseInputClass = "input input--rounded input--big input--full-w";
     jokeLengthLimit = 350;
 
     if (this.state.posted) {
       center = (
-        <div className="form__block">
-          <input type="submit" className="button button--big button--important button--full-w" value={__("Y'll got it :)")} />
+        <div className="coming-soon__form form isVertical">
+          <div className="form__block">
+            <input type="submit" className="button button--big button--important button--full-w button--pressed" value={__("Y'll got it :)")} />
+          </div>
         </div>
       );
     }else{
@@ -100,10 +110,9 @@ export default class ComingSoon extends React.Component {
           <div className="form__block">
             <div className="input-limited">
               <textarea
-                className={baseInputClass + " input--resize-v input--optional"}
+                className={"input input--rounded input--big input--full-w input--resize-v input--optional"}
                 type="text"
                 placeholder={__("Send us your best joke !")}
-                required="required"
                 maxLength={jokeLengthLimit}
                 onChange={this.handleInputChange('joke')}
                 value={this.state.joke} />
@@ -112,7 +121,7 @@ export default class ComingSoon extends React.Component {
           </div>
           <div className="form__block">
             <input
-              className={baseInputClass}
+              className={"input input--rounded input--big input--full-w"}
               type="email"
               placeholder="Email"
               required="required"
@@ -144,6 +153,14 @@ export default class ComingSoon extends React.Component {
             <button onClick={this.handleLanguageChange('fr')}>Fr</button><button onClick={this.handleLanguageChange('en')}>En</button>
           </section>
         </div>
+        <footer className="footer--main footer--absolute">
+          <a className="footer__icon" href={ExternalLinks.FACEBOOK_PAGE} target="_blank">
+            <i className="icon-facebook"></i>
+          </a>
+          <a className="footer__icon" href={ExternalLinks.TWITTER_PAGE} target="_blank">
+            <i className="icon-twitter"></i>
+          </a>
+        </footer>
       </div>
     );
   }
