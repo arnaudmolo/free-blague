@@ -4,10 +4,7 @@
 */
 
 import Promise from 'bluebird';
-
-var XHR;
-
-XHR = XMLHttpRequest || ActiveXObject;
+import XHR from 'xhr2';
 
 /**
 * Handle the parsing of the http responses
@@ -36,7 +33,7 @@ function parse(req) {
 
 function xhr(type, url, data){
 
-  var promise, request, sent, process, resolveSent, resolveProcess;
+  var promise, request, sent, processing, resolveSent, resolveProcess;
 
   if (data) {
     data = JSON.stringify(data);
@@ -44,7 +41,7 @@ function xhr(type, url, data){
 
   request = new XHR();
   sent    = new Promise(function(resolve){resolveSent = resolve;});
-  process = new Promise(function(resolve){resolveProcess = resolve;});
+  processing = new Promise(function(resolve){resolveProcess = resolve;});
 
   request.open(type, url, true);
   request.setRequestHeader('Content-type', 'application/json');
@@ -80,7 +77,7 @@ function xhr(type, url, data){
   });
 
   promise.sent = sent;
-  promise.process = process;
+  promise.process = processing;
 
   return promise;
 }

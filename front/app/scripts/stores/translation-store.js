@@ -39,6 +39,10 @@ export default TranslationStore = Object.assign({}, EventEmitter.prototype, {
 
   removeChangeListener(callback) {
     this.removeListener(callback);
+  },
+
+  executeOnce(callback) {
+    this.once(CHANGE_EVENT, callback);
   }
 
 });

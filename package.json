@@ -9,6 +9,7 @@
   "dependencies": {
     "6to5": "^3.5",
     "6to5ify": "^4.1",
+    "accept-language": "^2.0.13",
     "bluebird": "^2.3.6",
     "browserify": "^6.1.0",
     "color": "^0.7.3",
@@ -49,7 +50,8 @@
     "monorouter-react": "^0.4.1",
     "react": "^0.13.0-beta.1",
     "react-tools": "^0.13.0-beta.1",
-    "serve-favicon": "^2.0.1"
+    "serve-favicon": "^2.0.1",
+    "xhr2": "^0.1.2"
   },
   "scripts": {
     "start": "node server/bootstrap.js --harmony",
