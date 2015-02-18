@@ -19,5 +19,9 @@ export default Object.freeze({
   PayloadSources: keyMirror({
     SERVER_ACTION: null,
     VIEW_ACTION: null
-  })
+  }),
+  ExternalLinks: {
+    FACEBOOK_PAGE: "//www.facebook.com/377187282444916",
+    TWITTER_PAGE: "//twitter.com/lreadyCool"
+  }
 });

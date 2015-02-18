@@ -48,3 +48,11 @@
   padding-left: 0
   padding-right: 0
   width: 100%
+
+
+// States
+.button--pressed
+  margin-top: $button-shadow - $button-active-shadow
+  margin-bottom: - ($button-shadow - $button-active-shadow)
+  +box-shadow(none)
+  cursor: default
