@@ -21,15 +21,21 @@ __ = i18n.gettext;
  */
 
 function getDefaultStates() {
+
+  let posted;
+
+  if (localStorage) {
+    posted = JSON.parse(localStorage.getItem('posted'))?true:false;
+  } else {
+    posted = false;
+  }
+
   return {
     email: '',
     joke: '',
-    posted: JSON.parse(localStorage.getItem('posted'))?true:false
+    posted: posted
   };
 }
-
-TranslationActions
-  .changeDomain(navigator.language);
 
 export default class ComingSoon extends React.Component {
 
@@ -65,11 +71,13 @@ export default class ComingSoon extends React.Component {
         let defaultStates = getDefaultStates();
 
         defaultStates.posted = true;
-        localStorage.setItem('posted', true);
+        if (localStorage) {
+          localStorage.setItem('posted', true);
+        };
 
         this.setState(defaultStates);
       })
-      .error((error) => {
+      .error(function(error){
         console.warn(error);
       });
 
@@ -81,7 +89,6 @@ export default class ComingSoon extends React.Component {
         .changeDomain(lang);
     };
   }
-
 
   render() {
 

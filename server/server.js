@@ -2,7 +2,11 @@ import loopback from 'loopback';
 import boot from 'loopback-boot';
 import monorouterModdleware from 'connect-monorouter';
 
-var app, path;
+var app, path, noop;
+
+noop = function(){};
+
+global.localStorage = false;
 
 app = loopback();
 
