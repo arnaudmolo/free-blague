@@ -75,7 +75,7 @@ export default class ComingSoon extends React.Component {
 
         this.setState(defaultStates);
       })
-      .error((error) => {
+      .error(function(error){
         console.warn(error);
       });
 
