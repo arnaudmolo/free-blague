@@ -33,3 +33,7 @@
 
 .input--optional
   opacity: .5
+  +transition(opacity 0.5s cubic-bezier(.72,.24,.46,.89) 0s)
+
+  &:focus
+    opacity: 1
