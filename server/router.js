@@ -26,7 +26,7 @@ export default function(App){
     TranslationStore
       .executeOnce(function() {
         res.send(
-          React.renderToString(
+          React.renderToStaticMarkup(
             React.createElement(
               Index
             )
