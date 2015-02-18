@@ -9,10 +9,9 @@
  */
 
 import loopback from 'loopback';
-import bluebird from 'bluebird';
+import Promise from 'bluebird';
 
 let Joke = loopback.getModel('Joke');
-// Promise.promisifyAll(Joke);
 
 export default Object.freeze(Object.assign({}, {
 
@@ -24,20 +23,19 @@ export default Object.freeze(Object.assign({}, {
 
   getRandomJoke(lang) {
 
-    Joke.random(lang)
-      .then(function(res) {
-        console.log(res);
-        return res;
-      });
-
-    // return http.get(API_URL + '/jokes/random?lang=' + navigator.language)
-    //   .then(function(res){
-    //     if (res.joke !== null) {
-    //       return res.joke;
-    //     }
-    //     throw new Error('No jokes provided by the API');
-    //   });
+    return new Promise(function(resolve, rej) {
+      Joke.random(lang, function callback(err, res) {
+        if (err) {
+          return rej(err);
+        }
+        return resolve(res);
+      })
+    });
   },
+
+  /*
+   * Be careful : for the moment, only getRandomJoke & getLanuageDefinition are rightly interfaced @TODO
+   */
 
   /**
    * Save the joke
