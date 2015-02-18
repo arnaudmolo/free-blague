@@ -8,6 +8,7 @@ export default {
     return API
       .getLanguageDefinition(domain)
       .then(function(res){
+
         AppDispatcher
           .handleServerAction({
             type: ActionTypes.CHANGE_LANGUAGE,

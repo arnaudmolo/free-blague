@@ -25,7 +25,6 @@ export default function(App){
 
     TranslationStore
       .executeOnce(function() {
-
         res.send(
           React.renderToString(
             React.createElement(
@@ -33,7 +32,6 @@ export default function(App){
             )
           )
         );
-
       });
 
     if (acceptedLanguage) {
