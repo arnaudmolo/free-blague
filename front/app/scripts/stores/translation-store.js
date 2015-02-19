@@ -4,8 +4,6 @@ import { EventEmitter } from 'events';
 import AppDispatcher from './../dispatcher/app-dispatcher';
 import {ActionTypes, PayloadSources} from './../constants/app-constants';
 
-import translation from './../../../../traductions/en.json';
-
 function translationBuilder(locale_data) {
   return {
     domain: 'FR_fr',

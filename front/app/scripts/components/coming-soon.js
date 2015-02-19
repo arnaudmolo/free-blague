@@ -33,7 +33,7 @@ function getDefaultStates() {
   return {
     email: '',
     joke: '',
-    posted: posted
+    posted: false
   };
 }
 

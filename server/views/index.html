@@ -7,10 +7,8 @@
     <meta name="viewport" content="width=device-width">
     <link rel="shortcut icon" href="/favicon.ico">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-    <!-- build:css(.tmp) styles/main.css -->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:700italic,400,700,800' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="styles/main.css">
-    <!-- endbuild -->
+    <link rel="stylesheet" href="/styles/main.css" />
 
   </head>
   <body>
@@ -18,11 +16,10 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <div class="content">
-      <%- rdr %>
-    </div>
+    <div class="container"><%- rdr %></div>
 
     <script>
+      console.log('<%- rdr.toString() %>');
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -30,8 +27,6 @@
       ga('create', 'UA-55508291-1', 'auto');
       ga('send', 'pageview');
     </script>
-        <!-- build:js({app,.tmp}) scripts/main.js -->
-        <script src="scripts/main.js"></script>
-        <!-- endbuild -->
+    <script src="/scripts/main.js"></script>
 </body>
 </html>
