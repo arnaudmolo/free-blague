@@ -1,9 +1,8 @@
 let API;
 
-try {
-  window;
+if (window) {
   API = require('./front-api');
-} catch(e) {
+} else {
   API = require('./../../../server/utils/api-interface');
 }
 

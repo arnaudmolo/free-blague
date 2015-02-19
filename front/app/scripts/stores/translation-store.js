@@ -16,15 +16,25 @@ function translationBuilder(locale_data) {
   }
 }
 
-let TranslationStore, i18n, CHANGE_EVENT;
+let TranslationStore, i18n, CHANGE_EVENT, translation;
+
+translation = {"":{}};
+
+if (window) {
+  translation = window.translation;
+};
 
 CHANGE_EVENT = 'change';
 
-i18n = new Jed(translationBuilder({"": {}}));
+i18n = new Jed(translationBuilder(translation));
 
 export default TranslationStore = Object.assign({}, EventEmitter.prototype, {
   gettext(r) {
     return i18n.gettext(r);
+  },
+
+  getTranslation() {
+    return translation;
   },
 
   emitChange() {
@@ -55,7 +65,8 @@ TranslationStore.dispatchToken = AppDispatcher.register(function(payload) {
 
     switch(action.type) {
       case ActionTypes.CHANGE_LANGUAGE:
-        i18n = new Jed(translationBuilder(action.translation));
+        translation = action.translation;
+        i18n = new Jed(translationBuilder(translation));
         TranslationStore.emitChange();
     }
   }

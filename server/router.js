@@ -35,7 +35,7 @@ export default function(App){
             )
           );
 
-        res.render('index.html', {rdr: rdr});
+        res.render('index.html', {rdr: rdr, translation: TranslationStore.getTranslation()});
 
       });
 

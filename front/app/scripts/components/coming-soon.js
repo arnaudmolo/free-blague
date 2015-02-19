@@ -24,7 +24,7 @@ function getDefaultStates() {
 
   let posted;
 
-  if (localStorage) {
+  if (window) {
     posted = JSON.parse(localStorage.getItem('posted'))?true:false;
   } else {
     posted = false;
@@ -71,7 +71,7 @@ export default class ComingSoon extends React.Component {
         let defaultStates = getDefaultStates();
 
         defaultStates.posted = true;
-        if (localStorage) {
+        if (window) {
           localStorage.setItem('posted', true);
         };
 

@@ -7,7 +7,4 @@ import TranslationStore from './stores/translation-store';
 
 TranslationActions.changeDomain(navigator.language);
 
-TranslationStore
-  .executeOnce(function(){
-    React.render(<CommingSoonView />, document.getElementsByClassName('container')[0]);
-  });
+React.render(<CommingSoonView />, document.getElementsByClassName('container')[0]);
