@@ -21,7 +21,7 @@ let TranslationStore, i18n, CHANGE_EVENT, translation;
 translation = {"":{}};
 
 if (window) {
-  translation = window.translation;
+  translation = window.translation || translation;
 };
 
 CHANGE_EVENT = 'change';

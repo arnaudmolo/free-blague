@@ -1,7 +1,9 @@
 let API;
 
+import front from './front-api';
+
 if (window) {
-  API = require('./front-api');
+  API = front;
 } else {
   API = require('./../../../server/utils/api-interface');
 }

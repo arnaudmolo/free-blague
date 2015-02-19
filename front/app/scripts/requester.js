@@ -4,8 +4,11 @@
 */
 
 import Promise from 'bluebird';
-import XHR from 'xhr2';
 
+let XHR;
+if (window) {
+  XHR = XMLHttpRequest;
+};
 /**
 * Handle the parsing of the http responses
 * @return {Array}(result, request)

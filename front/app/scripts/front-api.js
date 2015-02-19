@@ -16,8 +16,6 @@ if (process.env.NODE_ENV === 'development') {
 }
 API_URL = API_BASE + '/api';
 
-console.log(process.env.NODE_ENV);
-
 function access(token){
   if (!token) {
     console.error('no token');

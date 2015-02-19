@@ -7,7 +7,7 @@ import TranslationActions from './../actions/translation-actions';
 
 import { ExternalLinks } from './../constants/app-constants.js';
 
-import API from './../api';
+import API from 'API';
 import Validate from '../utils/validate.js';
 
 let cx, __;
@@ -24,7 +24,7 @@ function getDefaultStates() {
 
   let posted;
 
-  if (window) {
+  if (process.env.BUILDER === 'front') {
     posted = JSON.parse(localStorage.getItem('posted'))?true:false;
   } else {
     posted = false;
