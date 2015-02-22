@@ -24,7 +24,7 @@ function getDefaultStates() {
 
   let posted;
 
-  if (process.env.BUILDER === 'front') {
+  if (window) {
     posted = JSON.parse(localStorage.getItem('posted'))?true:false;
   } else {
     posted = false;

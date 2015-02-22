@@ -8,8 +8,6 @@ var CommingSoonView = require(__dirname + './../front/app/scripts/components/com
 
 var router;
 
-console.log(CommingSoonView);
-
 router = monorouter();
 router.setup(reactRouting());
 
