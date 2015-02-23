@@ -6,13 +6,13 @@
     "already.cool",
     "www.already.cool"
   ],
+
   "dependencies": {
-    "6to5": "^3.5",
-    "6to5ify": "^4.1",
-    "accept-language": "^2.0.13",
+    "API": "file:./server/utils/",
+    "babel": "^4.4.5",
+    "babelify": "^5",
     "bluebird": "^2.3.6",
     "browserify": "^6.1.0",
-    "browserify-swap": "^0.2.1",
     "color": "^0.7.3",
     "compression": "^1.0.3",
     "connect-monorouter": "^0.4.0",
@@ -51,8 +51,7 @@
     "monorouter-react": "^0.4.1",
     "react": "^0.13.0-beta.1",
     "react-tools": "^0.13.0-beta.1",
-    "serve-favicon": "^2.0.1",
-    "API": "file:./server/utils/"
+    "serve-favicon": "^2.0.1"
   },
   "scripts": {
     "start": "node server/bootstrap.js --harmony",
