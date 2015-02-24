@@ -10,7 +10,7 @@ gulp          = require('gulp');
 $             = require('gulp-load-plugins')();
 
 browserify    = require('browserify');
-to5Browserify = require('6to5ify');
+to5Browserify = require('babelify');
 envify        = require('envify');
 aliasify      = require('aliasify').configure({
   aliases: {

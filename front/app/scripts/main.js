@@ -1,4 +1,4 @@
-import * as to5 from '6to5/polyfill';
+import * as to5 from 'babel/polyfill';
 
 import React from 'react/addons';
 import CommingSoonView from './components/coming-soon';
