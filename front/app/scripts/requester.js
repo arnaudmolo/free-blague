@@ -6,9 +6,8 @@
 import Promise from 'bluebird';
 
 let XHR;
-if (window) {
-  XHR = XMLHttpRequest;
-};
+
+XHR = XMLHttpRequest;
 /**
 * Handle the parsing of the http responses
 * @return {Array}(result, request)
