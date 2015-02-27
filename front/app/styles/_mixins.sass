@@ -21,22 +21,6 @@
   animation: $name $duration $timing-function $delay $iteration-count $direction $fill-mode
 
 
-// DEFINE ALL ANIMATIONS BELOW
-+keyframes(pop-in)
-  0%
-    opacity: 0.5
-    @include scale(0.95)
-  100%
-    opacity: 1
-    @include scale(1)
-
-+keyframes(drop)
-  0%
-    +transform(translateY(-100%))
-  100%
-    +transform(translateY(0))
-
-
 //------------------------------------//
 //    B & W                           //
 //------------------------------------//

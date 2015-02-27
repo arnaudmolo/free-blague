@@ -24,7 +24,7 @@ export default class Settings extends React.Component {
       'isLoggedIn': user.logged
     });
 
-    if (user.avatar && user.logged) {
+    if (user.logged && user.avatar) {
       settingsStyle = {
         backgroundImage: `url(/images/${user.avatar})`
       };

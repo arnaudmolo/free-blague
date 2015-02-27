@@ -13,8 +13,12 @@
   font-size: 20px
   text-align: center
   text-decoration: none
-  background-color: rgba(255,255,255,.5)
+  background-color: rgba(255,255,255,.75)
   +border-radius(50%)
+  +transition(background-color .75s ease-in-out 0s)
+
+  &:hover
+    background-color: rgba(255,255,255,1)
 
   [class^="icon-"],
   [class*=" icon-"]

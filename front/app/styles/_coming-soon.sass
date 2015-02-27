@@ -16,14 +16,13 @@
     font-style: italic
 
   h2
-    font-size: 1.5em
+    font-size: 1.2em
     line-height: 1em
     opacity: .5
     @media screen and (min-width: $tablet-height)
-      font-size: 3em
+      font-size: 2.5em
 
   h3
-    margin-bottom: 10px
     font-size: 3em
     line-height: .8em
     letter-spacing: -.05em
@@ -62,3 +61,59 @@
 
   textarea
     min-height: 100px
+
+
+///////////////////
+// Animations only
+/////////////////
+
+.coming-soon
+  h2
+    +transition(transform 2s cubic-bezier(.52,.4,.02,1.23))
+  h3
+    +transition(transform 2s cubic-bezier(.52,.4,.02,1.23) 1.25s)
+  p
+    +transition(opacity 1s ease-out 3.5s, transform 1s cubic-bezier(0,.66,.36,1) 3.5s)
+
+  .coming-soon__content_header
+    +transition(transform 1s cubic-bezier(0,.66,.36,1) 3.5s)
+
+  .coming-soon__form
+    .input-limited
+      +transition(opacity 1s ease-out 4s, transform 1s cubic-bezier(0,.66,.36,1) 4s)
+    input[type="email"]
+      +transition(opacity 1s ease-out 4.5s, transform 1s cubic-bezier(0,.66,.36,1) 4.5s)
+    .button--important
+      +transition(opacity 1s ease-out 5s, transform 1s cubic-bezier(0,.66,.36,1) 5s)
+
+  .language-buttons
+    +transition(opacity 1s ease-out 6s)
+
+  .footer__icon--facebook
+    +transition(opacity 3s ease-out 7s, transform 1.5s cubic-bezier(.52,.4,.02,1.23) 7s, background-color .75s ease-in-out 0s)
+  .footer__icon--twitter
+    +transition(opacity 3s ease-out 7.75s, transform 1.5s cubic-bezier(.52,.4,.02,1.23) 7.75s, background-color .75s ease-in-out 0s)
+
+  &.isHidden
+    h2
+      opacity: 0
+      +transform(scale(0))
+    h3
+      opacity: 0
+      +transform(scale(0))
+    p,
+    .coming-soon__form .input-limited,
+    .coming-soon__form input[type="email"],
+    .coming-soon__form .button--important
+      opacity: 0
+      +transform(translate3d(0, -100px, 0))
+
+    .coming-soon__content_header
+      +transform(translate3d(0, 200px, 0))
+
+    .language-buttons
+      opacity: 0
+
+    .footer__icon
+      opacity: 0
+      +transform(translate3d(0, 200px, 0))
