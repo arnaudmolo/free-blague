@@ -6,7 +6,6 @@ export default function(Joke){
 
   Object.assign(Joke, {
     random(lang, cb) {
-      console.log(lang);
       Joke.count({language: lang}, function(err, res){
         let rand;
         rand = Math.floor(Math.round(Math.random() * (res - 1)));
@@ -21,11 +20,11 @@ export default function(Joke){
     },
 
     vote(vote, jokeId, cb) {
-      Joke.findOne({
-        where: {
-          id: jokeId
+      Joke.findById(jokeId, function(err, joke){
+        if (err) {
+          console.log('the error', err);
+          return false;
         }
-      }, function(err, joke){
         if (vote) {
           ++joke.positiv;
         }else{
@@ -57,6 +56,7 @@ export default function(Joke){
   Joke.remoteMethod(
       'vote',
       {
+        description: 'Vote as you want to a joke',
         accepts: [
           {
             arg: 'vote',
@@ -66,8 +66,8 @@ export default function(Joke){
             type: 'string'
           }],
         returns: {
-            arg: 'joke',
-            type: 'Object'
+          arg: 'joke',
+          type: 'Object'
         },
         http: {
           verb: 'get'
