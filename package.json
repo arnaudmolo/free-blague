@@ -67,7 +67,8 @@
     "supertest": "^0.15.0"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=0.10.0",
+    "npm" : "~2.5"
   },
   "subdomain": "arnaudmolo-blague",
   "jest": {
