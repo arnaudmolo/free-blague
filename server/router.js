@@ -1,10 +1,10 @@
 import React from 'react/addons';
 import monorouter from 'monorouter';
 import reactRouting from 'monorouter-react';
-import Index from './views/index';
 
 var TranslationActions = require(__dirname + './../front/app/scripts/actions/translation-actions');
 var TranslationStore = require(__dirname + './../front/app/scripts/stores/translation-store');
+var CommingSoonView = require(__dirname + './../front/app/scripts/components/coming-soon');
 
 var router;
 
@@ -25,17 +25,20 @@ export default function(App){
 
     TranslationStore
       .executeOnce(function() {
-        res.send(
+
+        let rdr =
           React.renderToString(
             React.createElement(
-              Index
+              CommingSoonView
             )
-          )
-        );
+          );
+
+        res.render('index.html', {rdr: rdr, translation: TranslationStore.getTranslation()});
+
       });
 
     if (acceptedLanguage) {
-      TranslationActions.changeDomain('fr');
+      TranslationActions.changeDomain(acceptedLanguage);
     }else{
       TranslationStore.emitChange();
     }

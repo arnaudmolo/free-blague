@@ -1,6 +1,6 @@
 'use strict';
 
-var gulp, del, path, $, dist, app, browserify, reactify, to5Browserify, fs, envify;
+var gulp, del, path, $, dist, app, browserify, reactify, to5Browserify, fs, envify, aliasify;
 
 del           = require('del');
 fs            = require('fs');
@@ -10,8 +10,14 @@ gulp          = require('gulp');
 $             = require('gulp-load-plugins')();
 
 browserify    = require('browserify');
-to5Browserify = require('6to5ify');
+to5Browserify = require('babelify');
 envify        = require('envify');
+aliasify      = require('aliasify').configure({
+  aliases: {
+      "API": "./front/app/scripts/front-api.js"
+  },
+  configDir: __dirname
+});
 
 dist          = './client';
 app           = './front/app/';
@@ -42,9 +48,19 @@ gulp.task('fonts', function () {
 
 function scripts(){
 
-  return browserify({ debug: false })
+  var bundler = browserify({ debug: false })
     .transform(to5Browserify.configure({experimental: true}))
     .transform(envify)
+    .transform(aliasify);
+
+    if (process.env.NODE_ENV === 'production') {
+      bundler
+        .transform({
+          global: true
+        }, 'uglifyify');
+    };
+
+  return bundler
     .require(app + 'scripts/main.js', { entry: true })
     .bundle()
     .on('error', function(err) {

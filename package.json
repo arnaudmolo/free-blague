@@ -6,10 +6,11 @@
     "already.cool",
     "www.already.cool"
   ],
+
   "dependencies": {
-    "6to5": "^3.5",
-    "6to5ify": "^4.1",
-    "accept-language": "^2.0.13",
+    "API": "file:./server/utils/",
+    "babel": "^4.4.5",
+    "babelify": "^5",
     "bluebird": "^2.3.6",
     "browserify": "^6.1.0",
     "color": "^0.7.3",
@@ -50,22 +51,19 @@
     "monorouter-react": "^0.4.1",
     "react": "^0.13.0-beta.1",
     "react-tools": "^0.13.0-beta.1",
-    "serve-favicon": "^2.0.1",
-    "xhr2": "^0.1.2"
+    "serve-favicon": "^2.0.1"
   },
   "scripts": {
     "start": "node server/bootstrap.js --harmony",
     "test": "jest"
   },
   "devDependencies": {
-    "gulp-plumber": "^0.6.6",
+    "aliasify": "^1.5.1",
     "immutable": "^3.6.2",
     "jest-cli": "^0.2.1",
     "jshint-stylish": "~0.1.5",
     "keymirror": "^0.1.1",
-    "loopback-explorer": "^1.6.4",
-    "monorouter": "^0.11.3",
-    "monorouter-react": "^0.4.1"
+    "loopback-explorer": "^1.6.4"
   },
   "engines": {
     "node": ">=0.10.0"

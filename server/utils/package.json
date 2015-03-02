@@ -1,0 +1,12 @@
+{
+  "name": "API",
+  "version": "1.0.0",
+  "description": "server-utils",
+  "main": "api.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "babel ./api-interface.js -o ./api.js"
+  },
+  "author": "Arnaud Pichon",
+  "license": "ISC"
+}

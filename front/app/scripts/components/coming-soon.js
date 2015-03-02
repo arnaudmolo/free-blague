@@ -7,7 +7,7 @@ import TranslationActions from './../actions/translation-actions';
 
 import { ExternalLinks } from './../constants/app-constants.js';
 
-import API from './../api';
+import API from 'API';
 import Validate from '../utils/validate.js';
 
 let cx, __;
@@ -24,7 +24,7 @@ function getDefaultStates() {
 
   let posted;
 
-  if (localStorage) {
+  if (window) {
     posted = JSON.parse(localStorage.getItem('posted'))?true:false;
   } else {
     posted = false;
@@ -33,7 +33,8 @@ function getDefaultStates() {
   return {
     email: '',
     joke: '',
-    posted: posted
+    posted: false,
+    hidden: true
   };
 }
 
@@ -50,6 +51,7 @@ export default class ComingSoon extends React.Component {
 
   componentDidMount() {
     i18n.addChangeListener(this._onChange);
+    this.state.hidden = false;
   }
 
   componentWillUnmount() {
@@ -71,7 +73,7 @@ export default class ComingSoon extends React.Component {
         let defaultStates = getDefaultStates();
 
         defaultStates.posted = true;
-        if (localStorage) {
+        if (window) {
           localStorage.setItem('posted', true);
         };
 
@@ -104,7 +106,7 @@ export default class ComingSoon extends React.Component {
           </div>
         </div>
       );
-    }else{
+    } else{
       center = (
         <form className="coming-soon__form form isVertical" onSubmit={this.handleSubmit}>
           <div className="form__block">
@@ -139,25 +141,30 @@ export default class ComingSoon extends React.Component {
     return (
       <div className={cx({
         'coming-soon': true,
-        isPosted: this.state.posted
+        'isPosted': this.state.posted,
+        'isHidden': this.state.hidden
       })}>
         <div className="coming-soon__container table table--full-w table--full-h">
           <header className="header--main header--absolute">
             <i className="header__logo icon-already-cool"></i>
           </header>
           <section className="coming-soon__content">
-            <h2 className="animation-target">{__("Tribute to humour")}</h2>
-            <h3>{__("Coming soon.")}</h3>
+            <header className="coming-soon__content_header">
+              <h2>{__("Tribute to humour")}</h2>
+              <h3>{__("Coming soon.")}</h3>
+            </header>
             <p><strong>{__("Receive a mail when the beta opens !")}</strong></p>
             {center}
-            <button onClick={this.handleLanguageChange('fr')}>Fr</button><button onClick={this.handleLanguageChange('en')}>En</button>
+            <div className="language-buttons">
+              <button onClick={this.handleLanguageChange('fr')}>Fr</button><button onClick={this.handleLanguageChange('en')}>En</button>
+            </div>
           </section>
         </div>
         <footer className="footer--main footer--absolute">
-          <a className="footer__icon" href={ExternalLinks.FACEBOOK_PAGE} target="_blank">
+          <a className="footer__icon footer__icon--facebook" href={ExternalLinks.FACEBOOK_PAGE} target="_blank">
             <i className="icon-facebook"></i>
           </a>
-          <a className="footer__icon" href={ExternalLinks.TWITTER_PAGE} target="_blank">
+          <a className="footer__icon footer__icon--twitter" href={ExternalLinks.TWITTER_PAGE} target="_blank">
             <i className="icon-twitter"></i>
           </a>
         </footer>
