@@ -33,7 +33,7 @@ function getDefaultStates() {
   return {
     email: '',
     joke: '',
-    posted: false,
+    posted: posted,
     hidden: true
   };
 }
@@ -155,9 +155,6 @@ export default class ComingSoon extends React.Component {
             </header>
             <p><strong>{__("Receive a mail when the beta opens !")}</strong></p>
             {center}
-            <div className="language-buttons">
-              <button onClick={this.handleLanguageChange('fr')}>Fr</button><button onClick={this.handleLanguageChange('en')}>En</button>
-            </div>
           </section>
         </div>
         <footer className="footer--main footer--absolute">

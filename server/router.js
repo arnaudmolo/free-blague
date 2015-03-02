@@ -26,14 +26,14 @@ export default function(App){
     TranslationStore
       .executeOnce(function() {
 
-        let rdr =
+        let pageContent =
           React.renderToString(
             React.createElement(
               CommingSoonView
             )
           );
 
-        res.render('index.html', {rdr: rdr, translation: TranslationStore.getTranslation()});
+        res.render('index.html', {pageContent, translation: TranslationStore.getTranslation()});
 
       });
 

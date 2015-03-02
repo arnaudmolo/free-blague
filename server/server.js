@@ -46,6 +46,9 @@ app.use(loopback.urlNotFound());
 
 // The ultimate error handler.
 app.use(loopback.errorHandler());
+
+console.log('here', process.env.NODE_ENV);
+
 if (process.env.NODE_ENV === 'development') {
   require('./create-test-data')(app);
 }

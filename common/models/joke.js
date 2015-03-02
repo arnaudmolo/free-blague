@@ -12,7 +12,7 @@ export default function(Joke){
         if (res === 0) {
           let e = new Error('No joke found');
           e.name = "No joke found";
-          e.status = 410;
+          e.status = 404;
           return cb(e, null);
         };
         Joke.findOne({where: {language: lang}, skip: rand}, cb);
@@ -20,11 +20,11 @@ export default function(Joke){
     },
 
     vote(vote, jokeId, cb) {
-      Joke.findOne({
-        where: {
-          id: jokeId
+      Joke.findById(jokeId, function(err, joke){
+        if (err) {
+          console.log('the error', err);
+          return false;
         }
-      }, function(err, joke){
         if (vote) {
           ++joke.positiv;
         }else{
@@ -41,7 +41,8 @@ export default function(Joke){
       {
         accepts: [{
           arg: 'lang',
-          type: 'string'
+          type: 'string',
+          required: true
         }],
         returns: {
           arg: 'joke', type: 'string'
@@ -55,6 +56,7 @@ export default function(Joke){
   Joke.remoteMethod(
       'vote',
       {
+        description: 'Vote as you want to a joke',
         accepts: [
           {
             arg: 'vote',
@@ -64,8 +66,8 @@ export default function(Joke){
             type: 'string'
           }],
         returns: {
-            arg: 'joke',
-            type: 'Object'
+          arg: 'joke',
+          type: 'Object'
         },
         http: {
           verb: 'get'

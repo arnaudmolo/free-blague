@@ -1,6 +1,6 @@
 var debug = require('debug')('boot:create-model-instances');
 
-export default function(app) {
+export default function(app, callback) {
 
   var User, Role, RoleMapping;
 
@@ -43,6 +43,9 @@ export default function(app) {
       userId: users[0].id,
       language: 'en'
     }], function(er, joke) {
+      if (callback) {
+        callback();
+      };
       if (er) return debug(er);
     });
 

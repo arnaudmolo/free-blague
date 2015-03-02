@@ -1,5 +1,5 @@
 var ReactTools = require('react-tools');
-var to5 = require("6to5");
+var to5 = require("babel");
 
 module.exports = {
   process: function (src, filename) {

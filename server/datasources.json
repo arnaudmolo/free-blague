@@ -5,9 +5,6 @@
   },
   "JokesDB": {
     "name": "JokesDB",
-    "connector": "mongodb",
-    "host": "127.0.0.1",
-    "database": "devDB",
-    "port": 27017
+    "connector": "memory"
   }
 }
