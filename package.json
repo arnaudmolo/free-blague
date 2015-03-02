@@ -53,9 +53,9 @@
     "serve-favicon": "^2.0.1"
   },
   "scripts": {
-    "preinstall": "npm install -g gulp && npm install -g mocha && npm install -g  jest && npm install -g  babel && npm install -g  npm",
+    "preinstall": "npm install -g gulp && npm install -g mocha && npm install -g  jest && npm install -g  babel && npm install -g npm",
     "start": "node server/bootstrap.js --harmony",
-    "test": "jest && cd ./server && mocha --require babel/register --compilers js:babel/register"
+    "test": "npm -v && jest && cd ./server && mocha --require babel/register --compilers js:babel/register"
   },
   "devDependencies": {
     "aliasify": "^1.5.1",
