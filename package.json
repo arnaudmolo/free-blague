@@ -55,7 +55,7 @@
     "serve-favicon": "^2.0.1"
   },
   "scripts": {
-    "preinstall": "npm install -g npm && npm install -g jest-cli && npm install -g babel",
+    "preinstall": "npm install -g jest-cli && npm install -g babel",
     "start": "node server/bootstrap.js --harmony",
     "test": "npm -v && jest && cd ./server && mocha --require babel/register --compilers js:babel/register"
   },
