@@ -40,12 +40,14 @@
     "gulp-util": "~3.0.1",
     "gulp-webserver": "^0.8.3",
     "jed": "^1.1.0",
+    "jest-cli": "^0.4.0",
     "jshint": "^2.5.6",
     "lodash": "^2.4.1",
     "loopback": "^2.12",
     "loopback-boot": "^2.6",
     "loopback-connector-mongodb": "^1.7",
     "loopback-datasource-juggler": "^2.16",
+    "mocha": "^2.1.0",
     "monorouter": "^0.11.3",
     "monorouter-react": "^0.4.1",
     "react": "^0.13.0-beta.1",
@@ -53,7 +55,7 @@
     "serve-favicon": "^2.0.1"
   },
   "scripts": {
-    "preinstall": "npm install -g gulp && npm install -g mocha && npm install -g  jest && npm install -g  babel && npm install -g npm",
+    "preinstall": "npm install -g npm && npm install -g jest-cli && npm install -g babel",
     "start": "node server/bootstrap.js --harmony",
     "test": "npm -v && jest && cd ./server && mocha --require babel/register --compilers js:babel/register"
   },
@@ -69,7 +71,7 @@
   },
   "engines": {
     "node": ">=0.10.0",
-    "npm" : "~2.5"
+    "npm": "~2.5"
   },
   "subdomain": "arnaudmolo-blague",
   "jest": {
