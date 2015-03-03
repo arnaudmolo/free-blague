@@ -72,6 +72,7 @@ export default class ComingSoon extends React.Component {
         let defaultStates = getDefaultStates();
 
         defaultStates.posted = true;
+        defaultStates.hidden = false;
         if (window) {
           localStorage.setItem('posted', true);
         };
