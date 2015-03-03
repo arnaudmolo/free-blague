@@ -10,10 +10,9 @@ import { ExternalLinks } from './../constants/app-constants.js';
 import API from 'API';
 import Validate from '../utils/validate.js';
 
-let cx, __;
-
-cx = React.addons.classSet;
-__ = i18n.gettext;
+const cx = React.addons.classSet;
+const ReactTransitionGroup = React.addons.classSet;
+const __ = i18n.gettext;
 
 /**
  * @class ComingSoon
@@ -73,6 +72,7 @@ export default class ComingSoon extends React.Component {
         let defaultStates = getDefaultStates();
 
         defaultStates.posted = true;
+        defaultStates.hidden = false;
         if (window) {
           localStorage.setItem('posted', true);
         };
@@ -94,9 +94,8 @@ export default class ComingSoon extends React.Component {
 
   render() {
 
-    let jokeLengthLimit, center;
-
-    jokeLengthLimit = 350;
+    let center;
+    const jokeLengthLimit = 350;
 
     if (this.state.posted) {
       center = (
@@ -106,7 +105,7 @@ export default class ComingSoon extends React.Component {
           </div>
         </div>
       );
-    } else{
+    }else{
       center = (
         <form className="coming-soon__form form isVertical" onSubmit={this.handleSubmit}>
           <div className="form__block">
@@ -141,9 +140,12 @@ export default class ComingSoon extends React.Component {
     return (
       <div className={cx({
         'coming-soon': true,
-        'isPosted': this.state.posted,
         'isHidden': this.state.hidden
       })}>
+      <div className={cx({
+        'coming-soon__gradient-background': true,
+        'isPosted': this.state.posted
+      })}></div>
         <div className="coming-soon__container table table--full-w table--full-h">
           <header className="header--main header--absolute">
             <i className="header__logo icon-already-cool"></i>

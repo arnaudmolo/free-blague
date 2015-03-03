@@ -1,14 +1,27 @@
+.coming-soon__gradient-background
+  opacity: 0
+  width: 100%
+  height: 100%
+  position: absolute
+  z-index: 0
+  +transition(opacity 0.5s  cubic-bezier(.52,.4,.02,1.23))
+  +background(radial-gradient(circle at bottom center, #4b9068 20%, #398757 90%))
+  &.isPosted
+    opacity: 1
+
 .coming-soon
   width: 100%
   height: 100%
   overflow: scroll
   text-align: center
   color: $white
+
+  position: relative
+
   +background(radial-gradient(circle at bottom center, #564b90 20%, #433886 90%))
+
   +box-sizing(border-box)
   transition: all 1s ease
-  &.isPosted
-    +background(radial-gradient(circle at bottom center, #4b9068 20%, #398757 90%))
 
   h2,
   h3
@@ -37,6 +50,8 @@
     margin-right: auto
 
 .coming-soon__container
+  position: relative
+  z-index: 20
   @media screen and (min-height: $phone-height)
     padding-top: $main-header-height
     padding-bottom: $main-footer-height
