@@ -7,7 +7,7 @@ var app, path, noop;
 noop = function(){};
 
 global.localStorage = false;
-global.window = false;
+global.window = void 0;
 
 app = loopback();
 
