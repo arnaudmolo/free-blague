@@ -1,7 +1,7 @@
 import AppDispatcher from './../dispatcher/app-dispatcher';
 import { ActionTypes } from './../constants/app-constants';
 
-import API from './../api';
+import API from 'API';
 
 let JokeActions, timeoutId;
 

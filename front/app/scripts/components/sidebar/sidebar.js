@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 /**
  * @module Sidebar.view
  * @exports {ReactClass}Sidebar
@@ -74,5 +72,4 @@ export default class Sidebar extends React.Component {
       </div>
     );
   }
-
 }

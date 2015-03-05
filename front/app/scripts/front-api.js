@@ -141,7 +141,7 @@ export default Object.freeze(Object.assign({}, {
   },
 
   getLanguageDefinition(lang) {
-    return http.get(API_BASE + '/lang/' + lang)
+    return http.get(API_BASE + '/lang/' + lang);
   }
 
 }));

@@ -3,9 +3,9 @@ import { EventEmitter } from 'events';
 import AppDispatcher from './../dispatcher/app-dispatcher';
 import {ActionTypes, PayloadSources} from './../constants/app-constants';
 
-let PostStore, CHANGE_EVENT, _jokes, _last_joke, nb;
+let PostStore, _jokes, _last_joke, nb;
 
-CHANGE_EVENT = 'change';
+const CHANGE_EVENT = 'change';
 
 _jokes = {};
 _last_joke = {};
@@ -54,11 +54,11 @@ export default PostStore = Object.assign({}, EventEmitter.prototype, {
 });
 
 create({
-  'content': 'La balgue par défaut',
-  'date': '2015-02-09T08:51:38.182Z',
-  'language': 'fr',
-  'id': 1,
-  'userId': 1,
+  content: 'La balgue par défaut',
+  date: '2015-02-09T08:51:38.182Z',
+  language: 'fr',
+  id: 1,
+  userId: 1,
   positiv: 100,
   negativ: 0
 });

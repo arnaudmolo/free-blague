@@ -48,7 +48,9 @@ gulp.task('fonts', function () {
 
 function scripts(){
 
-  var bundler = browserify({ debug: false })
+  var bundler = browserify({
+      debug: false
+    })
     .transform(to5Browserify.configure({experimental: true}))
     .transform(envify)
     .transform(aliasify);

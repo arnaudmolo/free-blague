@@ -12,7 +12,7 @@ import Header from './header/header';
  * Templates for Content
  */
 
-export default class Content {
+export default React.createClass({
   render() {
     return (
       <div>
@@ -27,4 +27,4 @@ export default class Content {
       </div>
     );
   }
-}
+});

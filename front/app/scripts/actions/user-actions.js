@@ -3,7 +3,7 @@ import { ActionTypes } from './../constants/app-constants';
 
 import UserStore from './../stores/user-store';
 
-import API from './../API';
+import API from 'API';
 
 export default {
   login(user) {
