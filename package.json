@@ -8,7 +8,7 @@
   ],
   "dependencies": {
     "API": "file:./server/utils/",
-    "babel": "^4.4.5",
+    "babel": "^5.8.20",
     "babelify": "^5",
     "bluebird": "^2.9",
     "browserify": "^6.1.0",
