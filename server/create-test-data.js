@@ -9,6 +9,7 @@ export default function(app, callback) {
   RoleMapping = app.models.RoleMapping;
 
   User.create([
+    {email: 'arnaud@onesime.fr', password: 'admin'},
     {email: 'john@doe.com', password: 'opensesame'},
     {email: 'jane@doe.com', password: 'opensesame'},
     {email: 'jane@doe.com', password: 'opensesame'},
