@@ -49,7 +49,7 @@ app.use(loopback.errorHandler());
 
 console.log('here', process.env.NODE_ENV);
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV !== 'production') {
   require('./create-test-data')(app);
 }
 

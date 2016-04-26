@@ -17,7 +17,6 @@ export default class Content {
     return (
       <div>
         <Header />
-        <Sidebar />
         <div>
           <MainJoke />
           <JokeList />
