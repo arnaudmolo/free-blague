@@ -12,22 +12,18 @@ export const JokeContainer = styled.div`
   font-size: 30pt;
   text-align: left;
   font-style: italic;
-  width: 100%;
-  position: absolute;
-  top: 0;
+  height: 100%;
   background-color: #${props => props.bgColor};
   &.ok{
-    position: fixed;
-    height: 100vh;
+    position: absolute;
+    height: 100%;
     width: 100vw;
     top: 0;
     left: 0;
   }
 `
 
-// export const Container2 = styled.div`
-//   height: 150px;
-//   overflow: hidden;
+// export const JokeContainer = styled.div`
 //   color: white;
 //   font-size: 30pt;
 //   text-align: left;
@@ -86,8 +82,4 @@ export const Top = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-`
-
-export const Big = styled.div`
-  min-height: 1500px;
 `

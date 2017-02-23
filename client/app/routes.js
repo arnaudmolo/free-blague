@@ -37,7 +37,7 @@ export default function createRoutes(store) {
       path: 'joke/:id',
       name: 'joke',
       getComponent(location, cb) {
-        import('components/Joke')
+        import('containers/JokePage')
           .then(loadModule(cb))
           .catch(errorLoading);
       },
