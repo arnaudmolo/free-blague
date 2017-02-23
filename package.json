@@ -56,7 +56,7 @@
   },
   "scripts": {
     "preinstall": "npm install -g jest-cli && npm install -g babel",
-    "start": "node server/bootstrap.js --harmony",
+    "start": "NODE_ENV=development node server/bootstrap.js --harmony",
     "test": "npm -v && jest && cd ./server && mocha --require babel/register --compilers js:babel/register"
   },
   "devDependencies": {
@@ -78,6 +78,21 @@
     "scriptPreprocessor": "<rootDir>/front/spec/preprocessor.js",
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules/react"
+    ]
+  },
+  "standard": {
+    "globals": [
+      "jest",
+      "describe",
+      "it",
+      "expect",
+      "beforeAll"
+    ],
+    "parser": "babel-eslint",
+    "ignore": [
+      "/build",
+      "/dist",
+      "/internals/scripts"
     ]
   }
 }

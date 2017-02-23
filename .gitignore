@@ -1,6 +1,6 @@
 node_modules
 dist
-client
+_client
 .tmp
 .sass-cache
 bower_components
