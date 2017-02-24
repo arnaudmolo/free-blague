@@ -7,23 +7,17 @@
 import React from 'react'
 import styled from 'styled-components'
 import { branch, compose, lifecycle, renderComponent, withState } from 'recompose'
+import armand from './armand.jpg'
 
 export const Big = styled.div`
   min-height: 1500px;
 `
 
-class BigComponent extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
-  render (props = this.props) {
-    return (
-      <Big>
-        <h1>Big Component </h1>
-        {props.data.non_personalized.map(string => <p key={string}>{string}</p>)}
-      </Big>
-    )
-  }
-}
+const Grayscaled = styled.img`
+  filter: grayscale(${props => props.simple ? 100 : 0}%);
+`
 
-export default compose(
+const LoadedComponent = compose(
   withState('data', 'dataLoaded', false),
   lifecycle({
     componentDidMount () {
@@ -37,4 +31,18 @@ export default compose(
     props => !props.data,
     renderComponent(props => <h1>Loader</h1>)
   )
-)(BigComponent)
+)(props => <div>{props.data.non_personalized.map(string => <p key={string}>{string}</p>)}</div>)
+
+class BigComponent extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+  render (props = this.props) {
+    return (
+      <Big>
+        <h1>Big Component </h1>
+        <Grayscaled simple={props.simple} src={armand} />
+        <LoadedComponent />
+      </Big>
+    )
+  }
+}
+
+export default BigComponent

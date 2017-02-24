@@ -5,6 +5,7 @@
 */
 
 import React from 'react'
+import { Link } from 'react-router'
 
 import styled from 'styled-components'
 
@@ -16,7 +17,7 @@ const HeaderContainer = styled.div`
 class Header extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render () {
     return (
-      <HeaderContainer>Digital Content Interest Mapping</HeaderContainer>
+      <HeaderContainer><Link to='/'>Digital Content Interest Mapping</Link></HeaderContainer>
     )
   }
 }

@@ -15,6 +15,8 @@ import { compose, withState, withHandlers } from 'recompose'
 import styled from 'styled-components'
 import messages from './messages'
 import Joke from 'components/Joke'
+import BigComponent from 'components/BigComponent'
+import { Motion, spring } from 'react-motion'
 
 function getRandomColor () {
   const letters = '0123456789ABCDEF'
@@ -30,14 +32,9 @@ const jokes = Array(10).fill().map(getRandomColor)
 const State = compose(
   withState('fullscreen', 'set', false),
   withHandlers({
-    onClick: props => event => {
-      props.set(state => !state)
-    }
+    onClick: props => event => props.set(state => !state)
   })
 )
-
-import { Motion, spring as _spring } from 'react-motion'
-const spring = arg => _spring(arg)
 
 const Masque = styled.div`
 ${props => {
@@ -54,18 +51,29 @@ ${props => {
 }}
 `
 const translate = (x, y) => `translate(${x}px, ${y}px)`
+import { browserHistory } from 'react-router'
 
 const Animation = compose(
   State,
+  withHandlers({
+    onRest: props => _ =>
+      browserHistory.push('/joke/' + props.content)
+  }),
   Component => props => {
     if (!props.fullscreen) {
       return <Masque><Component {...props} /></Masque>
     }
-    console.log('là', props.fullscreen, props.distance)
     return (
-      <Motion defaultStyle={{top: props.distance + 65, bottom: props.distance + (65 + 140)}} style={{top: spring(0), bottom: spring(0)}}>
+      <Motion onRest={props.onRest} defaultStyle={{top: props.distance + 65, bottom: props.distance + (65 + 140)}} style={{top: spring(65), bottom: spring(window.innerHeight)}}>
         {i10 => {
-          return <Masque expanded style={{transform: translate(0, i10.top)}}><Component {...props} position={i10} expanded /></Masque>
+          return <Masque expanded style={{
+            transform: translate(0, i10.top),
+            clip: `rect(0px, 100vw, ${i10.bottom}px, 0)`
+          }}>
+            <Component {...props} position={i10} expanded>
+              <BigComponent simple />
+            </Component>
+          </Masque>
         }}
       </Motion>
     )
