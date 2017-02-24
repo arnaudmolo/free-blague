@@ -7,6 +7,7 @@ import messages from './messages'
 import Joke from 'components/Joke'
 import BigComponent from 'components/BigComponent'
 import Animation from './animations'
+import onEnterAnimation from './arrivage'
 
 function getRandomColor () {
   const letters = '0123456789ABCDEF'
@@ -17,9 +18,11 @@ function getRandomColor () {
   return color
 }
 
-const jokes = Array(10).fill().map(getRandomColor)
+const jokes = Array(99).fill().map(getRandomColor)
 
-const AnimatedJoke = compose(Animation, pure)(props =>
+const Min = styled.div`min-height: 800px;`
+
+const AnimatedJoke = compose(Animation)(props =>
   <div style={{background: '#' + props.content}}>
     <Joke content={props.content} onClick={props.onClick} />
     {props.animating && <BigComponent simple />}
@@ -28,7 +31,7 @@ const AnimatedJoke = compose(Animation, pure)(props =>
 
 const Hero = styled.div`min-height: 550px`
 
-export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render () {
     return (
       <div>
@@ -44,3 +47,5 @@ export default class HomePage extends React.PureComponent { // eslint-disable-li
     )
   }
 }
+
+export default onEnterAnimation(HomePage)

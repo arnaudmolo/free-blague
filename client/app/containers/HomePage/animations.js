@@ -9,16 +9,6 @@ import animationContainer from 'containers/Animation'
 
 const translate = (x, y) => `translate(${x}px, ${y}px)`
 
-const Masque = styled.div`
-${props =>
-  props.expanded &&
-    `position: fixed;
-    width: 100%;
-    height: 100%
-    top: 0;
-    left: 0;`
-}`
-
 function getBoundingClientRect (element) {
   const rect = element.getBoundingClientRect()
   return {
@@ -51,6 +41,16 @@ const State = compose(
 const onAnimationEnd = withHandlers({
   onRest: props => _ => props.stopAnimation()
 })
+
+const Masque = styled.div`
+${props =>
+  props.expanded &&
+    `position: fixed;
+    width: 100%;
+    height: 100%
+    top: 0;
+    left: 0;`
+}`
 
 const Animation = compose(
   animationContainer,

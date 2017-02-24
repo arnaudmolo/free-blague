@@ -12,18 +12,13 @@ import styled from 'styled-components'
 
 import { HEADER_HEIGHT } from 'components/Header'
 
-const Container = styled.div`
-  min-height: calc(100vh - ${HEADER_HEIGHT}px);
-`
-
+const Container = styled.div`min-height: calc(100vh - ${HEADER_HEIGHT}px);`
 const Fixed = styled.div`
   position: fixed;
   top: ${HEADER_HEIGHT}px;
   left: 0;
   right: 0;
-  z-index: 10;
-`
-
+  z-index: 10;`
 const Pose = styled.div`height: 140px`
 
 const FixedContainer = props =>

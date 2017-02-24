@@ -33,7 +33,6 @@ export default function createRoutes(store) {
     return importModules
   }
 
-
   const loadModule2 = cb => componentModule => {
     const Component = componentModule.default
     if (store.getState().get('animation').animating) {
