@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import { compose, withState, withHandlers } from 'recompose'
 
 import { browserHistory } from 'react-router'
+import { HEADER_HEIGHT } from 'components/Header'
+import animationContainer from 'containers/Animation'
 
 const translate = (x, y) => `translate(${x}px, ${y}px)`
 
@@ -39,16 +41,19 @@ const State = compose(
     onClick: props => event => {
       event.persist()
       props.setStyle(event)
+      props.startAnimation()
+      browserHistory.push('/joke/' + props.content)
       return props.set(state => !state)
     }
   })
 )
 
 const onAnimationEnd = withHandlers({
-  onRest: props => _ => browserHistory.push('/joke/' + props.content)
+  onRest: props => _ => props.stopAnimation()
 })
 
 const Animation = compose(
+  animationContainer,
   Style, State,
   onAnimationEnd,
   Component => props => {
@@ -63,7 +68,7 @@ const Animation = compose(
           bottom: props.innerStyle.bottom
         }}
         style={{
-          top: spring(65),
+          top: spring(HEADER_HEIGHT),
           bottom: spring(window.innerHeight)}}
         >
         {i10 => {

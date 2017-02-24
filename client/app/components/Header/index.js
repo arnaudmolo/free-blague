@@ -9,9 +9,11 @@ import { Link } from 'react-router'
 
 import styled from 'styled-components'
 
+export const HEADER_HEIGHT = 65
+
 const HeaderContainer = styled.div`
-  height: 65px;
-  line-height: 65px;
+  height: ${HEADER_HEIGHT}px;
+  line-height: ${HEADER_HEIGHT}px;
   a {color: white;}
 `
 

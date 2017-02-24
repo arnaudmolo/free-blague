@@ -5,8 +5,9 @@ import { compose, pure } from 'recompose'
 import styled from 'styled-components'
 import messages from './messages'
 import Joke from 'components/Joke'
+import BigComponent from 'components/BigComponent'
 import Animation from './animations'
-import { withLogger } from 'utils'
+
 function getRandomColor () {
   const letters = '0123456789ABCDEF'
   let color = ''
@@ -15,11 +16,10 @@ function getRandomColor () {
   }
   return color
 }
-import BigComponent from 'components/BigComponent'
 
 const jokes = Array(10).fill().map(getRandomColor)
 
-const AnimatedJoke = compose(Animation, pure, withLogger)(props =>
+const AnimatedJoke = compose(Animation, pure)(props =>
   <div style={{background: '#' + props.content}}>
     <Joke content={props.content} onClick={props.onClick} />
     {props.animating && <BigComponent simple />}

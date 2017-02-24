@@ -10,13 +10,15 @@ import Joke from 'components/Joke'
 import BigComponent from 'components/BigComponent'
 import styled from 'styled-components'
 
+import { HEADER_HEIGHT } from 'components/Header'
+
 const Container = styled.div`
-  min-height: calc(100vh - 65px);
+  min-height: calc(100vh - ${HEADER_HEIGHT}px);
 `
 
 const Fixed = styled.div`
   position: fixed;
-  top: 65px;
+  top: ${HEADER_HEIGHT}px;
   left: 0;
   right: 0;
   z-index: 10;
