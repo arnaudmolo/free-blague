@@ -21,8 +21,8 @@ const FixedContainer = styled.div`
   left: 0;
   right: 0;
   background: #00253F;
+  z-index: 10;
 `
-
 
 class Header extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render () {
@@ -34,10 +34,6 @@ class Header extends React.PureComponent { // eslint-disable-line react/prefer-s
       </HeaderContainer>
     )
   }
-}
-
-Header.propTypes = {
-
 }
 
 export default Header

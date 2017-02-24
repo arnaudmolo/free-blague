@@ -14,11 +14,27 @@ const Container = styled.div`
   min-height: calc(100vh - 65px);
 `
 
+const Fixed = styled.div`
+  position: fixed;
+  top: 65px;
+  left: 0;
+  right: 0;
+  z-index: 10;
+`
+
+const Pose = styled.div`height: 140px`
+
+const FixedContainer = props =>
+  <Pose>
+    <Fixed>{props.children}</Fixed>
+  </Pose>
+
 export class JokePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render (props = this.props) {
     return (
       <Container style={{background: '#' + props.content}}>
-        <Joke content={props.content}><BigComponent /></Joke>
+        <FixedContainer><Joke content={props.content} /></FixedContainer>
+        <BigComponent />
       </Container>
     )
   }
