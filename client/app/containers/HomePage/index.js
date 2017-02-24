@@ -1,22 +1,14 @@
-/*
- * HomePage
- *
- * This is the first thing users see of our App, at the '/' route
- *
- * NOTE: while this component should technically be a stateless functional
- * component (SFC), hot reloading does not currently support SFCs. If hot
- * reloading is not a necessity for you then you can refactor it and remove
- * the linting exception.
- */
 
 import React from 'react'
+import { findDOMNode } from 'react-dom'
 import { FormattedMessage } from 'react-intl'
-import { compose, withState, withHandlers } from 'recompose'
+import { compose, withState, withHandlers, lifecycle } from 'recompose'
 import styled from 'styled-components'
 import messages from './messages'
 import Joke from 'components/Joke'
 import BigComponent from 'components/BigComponent'
 import { Motion, spring } from 'react-motion'
+import { browserHistory } from 'react-router'
 
 function getRandomColor () {
   const letters = '0123456789ABCDEF'
@@ -29,68 +21,107 @@ function getRandomColor () {
 
 const jokes = Array(10).fill().map(getRandomColor)
 
-const State = compose(
-  withState('fullscreen', 'set', false),
-  withHandlers({
-    onClick: props => event => props.set(state => !state)
-  })
-)
-
 const Masque = styled.div`
 ${props => {
   if (props.expanded) {
     return `
-      position: absolute;
+      position: fixed;
       width: 100%;
       height: 100%
       top: 0;
       left: 0;
     `
   }
-  return ``
-}}
-`
+  return `
+    height: 20%;
+  `
+}}`
 const translate = (x, y) => `translate(${x}px, ${y}px)`
-import { browserHistory } from 'react-router'
+function getBoundingClientRect (element) {
+  const rect = element.getBoundingClientRect()
+  return {
+    top: rect.top,
+    bottom: rect.bottom
+  }
+}
+
+const Style = compose(
+  withState('innerStyle', 'setStyle', false),
+  withHandlers({
+    setStyle: props => event => {
+      const collapsed = getBoundingClientRect(event.target)
+      props.setStyle(collapsed)
+    }
+  }),
+  lifecycle({
+    componentDidMount () {
+      this.props.setStyle({target: findDOMNode(this)})
+    }
+  })
+)
+
+const State = compose(
+  withState('fullscreen', 'set', false),
+  withHandlers({
+    onClick: props => event => {
+      event.persist()
+      props.setStyle(event)
+      return props.set(state => !state)
+    }
+  })
+)
 
 const Animation = compose(
+  Style,
   State,
   withHandlers({
-    onRest: props => _ =>
-      browserHistory.push('/joke/' + props.content)
+    // onRest: props => _ => browserHistory.push('/joke/' + props.content)
   }),
   Component => props => {
     if (!props.fullscreen) {
-      return <Masque><Component {...props} /></Masque>
+      return <span><Masque><Component {...props} /></Masque></span>
     }
     return (
-      <Motion onRest={props.onRest} defaultStyle={{top: props.distance + 65, bottom: props.distance + (65 + 140)}} style={{top: spring(65), bottom: spring(window.innerHeight)}}>
+      <span><Motion
+        onRest={props.onRest}
+        defaultStyle={{
+          top: props.innerStyle.top,
+          bottom: props.innerStyle.bottom
+        }}
+        style={{
+          top: spring(65),
+          bottom: spring(window.innerHeight)}}
+        >
         {i10 => {
           return <Masque expanded style={{
             transform: translate(0, i10.top),
             clip: `rect(0px, 100vw, ${i10.bottom}px, 0)`
           }}>
-            <Component {...props} position={i10} expanded>
+            <Component {...props}>
               <BigComponent simple />
             </Component>
+            <Component {...props} />
           </Masque>
         }}
-      </Motion>
+      </Motion><Component {...props} /></span>
     )
   }
 )
 
 const AnimatedJoke = compose(Animation)(Joke)
+const Hero = styled.div`min-height: 550px`
 
 export default class HomePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   render () {
     return (
       <div>
-        <h1>
-          <FormattedMessage {...messages.header} />
-        </h1>
+        <Hero>
+          <h1>
+            <FormattedMessage {...messages.header} />
+          </h1>
+        </Hero>
         <div>
-          {jokes.map((j, k) => <AnimatedJoke key={j} content={j} distance={140 * k} />)}
+          {jokes.map((j, k) => <AnimatedJoke key={j} content={j} />)}
         </div>
       </div>
     )
